@@ -20,8 +20,8 @@
 				</li> -->
 			</ul>
 			<div class="feeds">
-				<a class="feed feed-xlweibo" href="https://github.com/seeyoui/kensite_base_full" target="_blank"><i></i>开源中国</a>
-				<a class="feed feed-txweibo" href="https://github.com/seeyoui/kensite_base_full" target="_blank"><i></i>github</a>
+				<a class="feed feed-xlweibo" href="https://github.com/seeyoui/kensite_cms" target="_blank"><i></i>开源中国</a>
+				<a class="feed feed-txweibo" href="https://github.com/seeyoui/kensite_cms" target="_blank"><i></i>github</a>
 				<a class="feed feed-rss" data-toggle="popover" data-trigger="hover" title="" data-html="true" data-content="&lt;img src=&#39;img/weixin.png&#39; alt=&#39;&#39;&gt;" href="javascript:;" target="_blank" data-original-title="微信扫一扫"><i></i>微信支付</a>
 				<a class="feed feed-weixin" data-toggle="popover" data-trigger="hover" title="" data-html="true" data-content="&lt;img src=&#39;img/zhifubao.png&#39; alt=&#39;&#39;&gt;" href="javascript:;" target="_blank" data-original-title="支付宝扫一扫"><i></i>支付宝</a>
 			</div>
