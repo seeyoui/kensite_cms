@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.dict.persistence.DictMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    T.ID AS "id",
+	    T.VALUE AS "value",
+	    T.LABEL AS "label",
+	    T.CATEGORY AS "category",
+	    T.DESCRIPTION AS "description",
+	    T.SEQUENCE AS "sequence",
+	    T.PARENT_ID AS "parentId"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				AND T.ID LIKE '%'||#{id}||'%'
+			</if>
+			<if test="value != null and value != ''">
+				AND T.VALUE LIKE '%'||#{value}||'%'
+			</if>
+			<if test="label != null and label != ''">
+				AND T.LABEL LIKE '%'||#{label}||'%'
+			</if>
+			<if test="category != null and category != ''">
+				AND T.CATEGORY LIKE #{category}
+			</if>
+			<if test="description != null and description != ''">
+				AND T.DESCRIPTION LIKE '%'||#{description}||'%'
+			</if>
+			<if test="sequence != null and sequence != ''">
+				AND T.SEQUENCE = #{sequence}
+			</if>
+			<if test="parentId != null and parentId != ''">
+				AND T.PARENT_ID LIKE #{parentId}
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY T.SEQUENCE ASC
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_DICT T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_DICT T
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_DICT T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) AS "total"
+		FROM SYS_DICT T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 获取数据用于生成TREE -->
+	<select id="findTree" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">  
+		SELECT 
+		<include refid="tableColumns" />
+		FROM SYS_DICT T 
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+		INSERT INTO SYS_DICT (
+	    	VALUE,
+	    	LABEL,
+	    	CATEGORY,
+	    	DESCRIPTION,
+	    	SEQUENCE,
+	    	PARENT_ID,
+		    ID
+		)
+		VALUES (
+			#{value,jdbcType=VARCHAR},
+			#{label,jdbcType=VARCHAR},
+			#{category,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR},
+			#{sequence,jdbcType=VARCHAR},
+			#{parentId,jdbcType=VARCHAR},
+		    #{id,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+		UPDATE SYS_DICT
+		<set>
+	    	<if test="value !=null and value !=''">
+			VALUE=#{value},
+			</if>
+	    	<if test="label !=null and label !=''">
+			LABEL=#{label},
+			</if>
+	    	<if test="category !=null and category !=''">
+			CATEGORY=#{category},
+			</if>
+	    	<if test="description !=null and description !=''">
+			DESCRIPTION=#{description},
+			</if>
+	    	<if test="sequence !=null and sequence !=''">
+			SEQUENCE=#{sequence},
+			</if>
+	    	<if test="parentId !=null and parentId !=''">
+			PARENT_ID=#{parentId},
+			</if>
+		    ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM SYS_DICT WHERE ID IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

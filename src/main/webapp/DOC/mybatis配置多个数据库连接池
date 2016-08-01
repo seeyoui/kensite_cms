@@ -1,0 +1,75 @@
+1.<!-- spring beans 组件扫描 -->  
+2.<context:component-scan base-package="com.test.tt"></context:component-scan>  
+3.  
+4.  
+5.  
+6.<!-- jdbc配置文件 -->  
+7.<context:property-placeholder location="classpath:jdbc.properties" />  
+8.  
+9.<!-- proxool连接池 -->  
+10.<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">  
+11.    <property name="alias" value="${alias}" />  
+12.    <property name="driver" value="${driver}" />  
+13.    <property name="driverUrl" value="${driverUrl}" />  
+14.    <property name="user" value="${user}" />  
+15.    <property name="password" value="${password}" />  
+16.    <property name="houseKeepingTestSql" value="${house-keeping-test-sql}" />  
+17.    <property name="maximumConnectionCount" value="${maximum-connection-count}" />  
+18.    <property name="minimumConnectionCount" value="${minimum-connection-count}" />  
+19.    <property name="prototypeCount" value="${prototype-count}" />  
+20.    <property name="simultaneousBuildThrottle" value="${simultaneous-build-throttle}" />  
+21.    <property name="trace" value="${trace}" />  
+22.</bean>  
+23.  
+24.<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+25.    <property name="dataSource" ref="dataSource" />  
+26.    <property name="configLocation" value="classpath:mybatis-config.xml"></property>  
+27.</bean>  
+28.  
+29.<bean id="transactionManager"  
+30.    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+31.    <property name="dataSource" ref="dataSource" />  
+32.</bean>  
+33.  
+34.<!-- 注解式事务管理 -->  
+35.<tx:annotation-driven transaction-manager="transactionManager" />  
+36.<!-- 自动扫描 mybatis mapper接口 -->  
+37.<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+38.    <property name="basePackage" value="com.test.tt.mapper" />  
+39.    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>  
+40.</bean>  
+41.<!-- 数据源2-->  
+42.  
+43.<!-- proxool连接池 -->  
+44.<bean id="dataSource_d2" class="org.logicalcobwebs.proxool.ProxoolDataSource">  
+45.    <property name="alias" value="${d2.alias}" />  
+46.    <property name="driver" value="${driver}" />  
+47.    <property name="driverUrl" value="${d2.driverUrl}" />  
+48.    <property name="user" value="${d2.user}" />  
+49.    <property name="password" value="${d2.password}" />  
+50.    <property name="houseKeepingTestSql" value="${house-keeping-test-sql}" />  
+51.    <property name="maximumConnectionCount" value="${maximum-connection-count}" />  
+52.    <property name="minimumConnectionCount" value="${minimum-connection-count}" />  
+53.    <property name="prototypeCount" value="${prototype-count}" />  
+54.    <property name="simultaneousBuildThrottle" value="${simultaneous-build-throttle}" />  
+55.    <property name="trace" value="${trace}" />  
+56.</bean>  
+57.  
+58.<bean id="sqlSessionFactory_d2" class="org.mybatis.spring.SqlSessionFactoryBean">  
+59.    <property name="dataSource" ref="dataSource_d2" />  
+60.    <property name="configLocation" value="classpath:mybatis-d2-config.xml"></property>  
+61.</bean>  
+62.<bean id="transactionManager_d2"  
+63.    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+64.    <property name="dataSource" ref="dataSource_d2" />  
+65.</bean>  
+66.  
+67.<!-- 注解式事务管理 -->  
+68.<tx:annotation-driven transaction-manager="transactionManager_d2" />  
+69.  
+70.  
+71.<!-- 自动扫描 mybatis mapper接口 -->  
+72.<bean name="mapperScannerConfigurer_d2"  class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+73.    <property name="basePackage" value="com.test.tt.d2mapper" />  
+74.    <property name="sqlSessionFactory" ref="sqlSessionFactory_d2"></property>  
+75.</bean> 

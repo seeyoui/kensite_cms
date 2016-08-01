@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysMenuMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id as "id",
+	    t.parent_id as "parentId",
+	    t.name as "name",
+	    t.url as "url",
+	    t.sequence as "sequence",
+	    t.icon as "icon",
+	    t.target as "target"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and t.id LIKE '%'||#{id}||'%'
+			</if>
+			<if test="parentId != null and parentId != ''">
+				and t.parent_id LIKE '%'||#{parentId}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				and t.name LIKE '%'||#{name}||'%'
+			</if>
+			<if test="url != null and url != ''">
+				and t.url LIKE '%'||#{url}||'%'
+			</if>
+			<if test="sequence != null and sequence != ''">
+				and t.sequence = #{sequence}
+			</if>
+			<if test="icon != null and icon != ''">
+				and t.icon LIKE '%'||#{icon}||'%'
+			</if>
+			<if test="target != null and target != ''">
+				and t.target LIKE '%'||#{target}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.sequence ASC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_MENU t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_MENU t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_MENU t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT COUNT(1)
+		FROM SYS_MENU t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据TREE -->
+	<select id="findTree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT 
+		<include refid="tableColumns"/>
+		from sys_user su
+		left join sys_user_role sur
+		on su.id = sur.user_id
+		left join sys_role sr
+		on sur.role_id = sr.id
+		left join sys_role_menu srm
+		on sr.id = srm.role_id
+		right join sys_menu t
+		on srm.menu_id = t.id
+		<where>
+			1=1
+			<if test="userName !=null and userName !=''">
+			and su.user_name=#{userName}
+			</if>
+		</where>
+		ORDER BY t.sequence ASC
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+		INSERT INTO SYS_MENU (
+	    	parent_id,
+	    	name,
+	    	url,
+	    	sequence,
+	    	icon,
+	    	target,
+		    id
+		)
+		VALUES (
+			#{parentId,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{url,jdbcType=VARCHAR},
+			#{sequence,jdbcType=NUMERIC},
+			#{icon,jdbcType=VARCHAR},
+			#{target,jdbcType=VARCHAR},
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+		UPDATE SYS_MENU
+		<set>
+	    	<if test="parentId !=null and parentId !=''">
+			parent_id=#{parentId},
+			</if>
+	    	<if test="name !=null and name !=''">
+			name=#{name},
+			</if>
+	    	<if test="url !=null and url !=''">
+			url=#{url},
+			</if>
+	    	<if test="sequence !=null and sequence !=''">
+			sequence=#{sequence},
+			</if>
+	    	<if test="icon !=null and icon !=''">
+			icon=#{icon},
+			</if>
+	    	<if test="target !=null and target !=''">
+			target=#{target},
+			</if>
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM SYS_MENU WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

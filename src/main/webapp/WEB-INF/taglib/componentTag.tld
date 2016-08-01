@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<short-name>ks</short-name>
+	<uri>/kensitetaglib</uri>
+	<tag>
+		<!-- 指定标签名 -->
+		<name>formTag</name>
+		<!-- 指定标签类文件的全路径 -->
+		<tag-class>com.seeyoui.kensite.common.taglib.FormTag</tag-class>
+		<!--如果不需要标签体则设置empty，反之设定jsp -->
+		<body-content>empty</body-content>
+		<!-- 设定属性(如果有的话) -->
+		<attribute>
+			<!-- 指定属性名 -->
+			<!-- 表名 -->
+			<name>table</name>
+			<!-- 是否是必须，如果非必须没设置则为空 -->
+			<required>false</required>
+			<!-- 是否可在属性中使用表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 列名 -->
+			<name>column</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<!-- 指定标签名 -->
+		<name>listTag</name>
+		<!-- 指定标签类文件的全路径 -->
+		<tag-class>com.seeyoui.kensite.common.taglib.ListTag</tag-class>
+		<!--如果不需要标签体则设置empty，反之设定jsp -->
+		<body-content>empty</body-content>
+		<!-- 设定属性(如果有的话) -->
+		<attribute>
+			<!-- 指定属性名 -->
+			<!-- 表名 -->
+			<name>table</name>
+			<!-- 是否是必须，如果非必须没设置则为空 -->
+			<required>false</required>
+			<!-- 是否可在属性中使用表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 列名 -->
+			<name>column</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<!-- 指定标签名 -->
+		<name>queryTag</name>
+		<!-- 指定标签类文件的全路径 -->
+		<tag-class>com.seeyoui.kensite.common.taglib.QueryTag</tag-class>
+		<!--如果不需要标签体则设置empty，反之设定jsp -->
+		<body-content>empty</body-content>
+		<!-- 设定属性(如果有的话) -->
+		<attribute>
+			<!-- 指定属性名 -->
+			<!-- 表名 -->
+			<name>table</name>
+			<!-- 是否是必须，如果非必须没设置则为空 -->
+			<required>false</required>
+			<!-- 是否可在属性中使用表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 列名 -->
+			<name>column</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<!-- 指定标签名 -->
+		<name>queryJsTag</name>
+		<!-- 指定标签类文件的全路径 -->
+		<tag-class>com.seeyoui.kensite.common.taglib.QueryJsTag</tag-class>
+		<!--如果不需要标签体则设置empty，反之设定jsp -->
+		<body-content>empty</body-content>
+		<!-- 设定属性(如果有的话) -->
+		<attribute>
+			<!-- 指定属性名 -->
+			<!-- 表名 -->
+			<name>table</name>
+			<!-- 是否是必须，如果非必须没设置则为空 -->
+			<required>false</required>
+			<!-- 是否可在属性中使用表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 列名 -->
+			<name>column</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

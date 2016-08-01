@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.cms.site.persistence.SiteMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.NAME AS "name",
+		T.TITLE AS "title",
+		IFNULL(T.LOGO, 'upload/none.jpg') AS "logo",
+		T.DOMAIN AS "domain",
+		T.DESCRIPTION AS "description",
+		T.KEYWORDS AS "keywords",
+		T.THEME AS "theme",
+		T.COPYRIGHT AS "copyright",
+		T.CUSTOM_VIEW AS "customView"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%${createUser}%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%${updateUser}%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%${remarks}%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%${delFlag}%'
+			</if>
+			<if test="name != null and name != ''">
+				AND T.NAME LIKE '%${name}%'
+			</if>
+			<if test="title != null and title != ''">
+				AND T.TITLE LIKE '%${title}%'
+			</if>
+			<if test="logo != null and logo != ''">
+				AND T.LOGO LIKE '%${logo}%'
+			</if>
+			<if test="domain != null and domain != ''">
+				AND T.DOMAIN LIKE '%${domain}%'
+			</if>
+			<if test="description != null and description != ''">
+				AND T.DESCRIPTION LIKE '%${description}%'
+			</if>
+			<if test="keywords != null and keywords != ''">
+				AND T.KEYWORDS LIKE '%${keywords}%'
+			</if>
+			<if test="theme != null and theme != ''">
+				AND T.THEME LIKE '%${theme}%'
+			</if>
+			<if test="copyright != null and copyright != ''">
+				AND T.COPYRIGHT LIKE '%${copyright}%'
+			</if>
+			<if test="customView != null and customView != ''">
+				AND T.CUSTOM_VIEW LIKE '%${customView}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			#{sort} #{order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.cms.site.domain.Site">
+		SELECT
+		<include refid="tableColumns" />
+		FROM CMS_SITE T
+		WHERE T.ID = #{id} OR T.DOMAIN = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.cms.site.domain.Site">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_SITE T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.cms.site.domain.Site">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_SITE T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_SITE T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_SITE T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.cms.site.domain.Site">
+		INSERT INTO CMS_SITE (
+			
+			
+			
+			
+			
+			REMARKS,
+			DEL_FLAG,
+			NAME,
+			TITLE,
+			LOGO,
+			DOMAIN,
+			DESCRIPTION,
+			KEYWORDS,
+			THEME,
+			COPYRIGHT,
+			CUSTOM_VIEW,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{title,jdbcType=VARCHAR},
+			#{logo,jdbcType=VARCHAR},
+			#{domain,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR},
+			#{keywords,jdbcType=VARCHAR},
+			#{theme,jdbcType=VARCHAR},
+			#{copyright,jdbcType=VARCHAR},
+			#{customView,jdbcType=VARCHAR},
+			#{createUser.userName},
+			now(),
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.cms.site.domain.Site">
+		UPDATE CMS_SITE
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+			<if test="name !=null and name !=''">
+			NAME=#{name},
+			</if>
+			<if test="title !=null and title !=''">
+			TITLE=#{title},
+			</if>
+			<if test="logo !=null and logo !=''">
+			LOGO=#{logo},
+			</if>
+			<if test="domain !=null and domain !=''">
+			DOMAIN=#{domain},
+			</if>
+			<if test="description !=null and description !=''">
+			DESCRIPTION=#{description},
+			</if>
+			<if test="keywords !=null and keywords !=''">
+			KEYWORDS=#{keywords},
+			</if>
+			<if test="theme !=null and theme !=''">
+			THEME=#{theme},
+			</if>
+			<if test="copyright !=null and copyright !=''">
+			COPYRIGHT=#{copyright},
+			</if>
+			<if test="customView !=null and customView !=''">
+			CUSTOM_VIEW=#{customView},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = now(),
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM CMS_SITE WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

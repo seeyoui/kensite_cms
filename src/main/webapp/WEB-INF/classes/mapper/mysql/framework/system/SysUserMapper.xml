@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysUserMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id as "id",
+	    t.user_name as "userName",
+	    t.password as "password",
+	    t.name as "name",
+	    t.department_id as "departmentId",
+	    t.state as "state",
+	    t.email as "email",
+	    t.phone as "phone",
+	    t.head_icon as "headIcon",
+	    d.id as "sysDepartment.id",
+	    d.name as "sysDepartment.name",
+	    d.code as "sysDepartment.code"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and t.id LIKE '%${id}%'
+			</if>
+			<if test="userName != null and userName != ''">
+				and t.user_name LIKE '%${userName}%'
+			</if>
+			<if test="password != null and password != ''">
+				and t.password LIKE '%${password}%'
+			</if>
+			<if test="name != null and name != ''">
+				and t.name LIKE '%${name}%'
+			</if>
+			<if test="departmentId != null and departmentId != ''">
+				and t.department_id LIKE '%${departmentId}%'
+			</if>
+			<if test="state != null and state != ''">
+				and t.state LIKE '%${state}%'
+			</if>
+			<if test="email != null and email != ''">
+				and t.email LIKE '%${email}%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and t.phone LIKE '%${phone}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="joinOn">
+		left join sys_department d on t.department_id=d.id
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.user_name 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_USER t
+		<include refid="joinOn" />
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 根据账号查询单条数据 -->
+	<select id="findByUserName" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_USER t
+		<include refid="joinOn" />
+		WHERE user_name = #{userName}
+	</select>
+	
+	<!-- 查询某个角色的所有用户 -->
+	<select id="findByRole" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns" />
+		from sys_user t
+		left join sys_user_role sur on t.id=sur.user_id
+		left join sys_role r on sur.role_id=r.id
+		WHERE r.id = #{roleId}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_USER t
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_USER t
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(id)total
+		FROM SYS_USER t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		INSERT INTO SYS_USER (
+	    	
+	    	user_name,
+	    	password,
+	    	name,
+	    	department_id,
+	    	state,
+	    	email,
+	    	phone,
+	    	head_icon,
+		    id
+		)
+		VALUES (
+			
+			#{userName,jdbcType=VARCHAR},
+			#{password,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{departmentId,jdbcType=VARCHAR},
+			#{state,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{phone,jdbcType=VARCHAR},
+			#{headIcon,jdbcType=VARCHAR},
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		UPDATE SYS_USER
+		<set>
+	    	<if test="name !=null and name !=''">
+			name=#{name},
+			</if>
+	    	<if test="departmentId !=null and departmentId !=''">
+			department_id=#{departmentId},
+			</if>
+	    	<if test="email !=null and email !=''">
+			email=#{email},
+			</if>
+	    	<if test="phone !=null and phone !=''">
+			phone=#{phone},
+			</if>
+	    	<if test="headIcon !=null and headIcon !=''">
+			head_icon=#{headIcon},
+			</if>
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 修改用户密码 -->
+	<update id="updatePassword" parameterType="SysUser">
+		UPDATE SYS_USER
+		set password = #{password}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 修改账号状态 -->
+	<update id="updateState" parameterType="SysUser">
+		UPDATE SYS_USER
+		set state = #{state}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM SYS_USER WHERE ID IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+		OR USER_NAME IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

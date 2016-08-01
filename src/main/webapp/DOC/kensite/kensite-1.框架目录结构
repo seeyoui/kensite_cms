@@ -1,0 +1,41 @@
+src				--项目JAVA源码
+	com.seeyoui.kensite
+		business		--业务实现
+			domain			--实体对象
+			persistence		--映射
+			service			--服务
+			controller		--控制器
+		framework		--系统框架
+			system			--系统核心模块
+				domain			--实体对象
+				persistence		--映射
+				service			--服务
+				controller		--控制器
+			module			--系统次级模块
+				domain			--实体对象
+				persistence		--映射
+				service			--服务
+				controller		--控制器
+			activiti		--流程模块
+			security		--安全组件
+			generator		--代码生成器
+		common			--
+			constants		--系统常量
+			exception		--系统异常
+			util			--系统工具
+resources		--项目资源配置文件
+	mapper
+		business		--业务模块
+		framework		--系统框架
+			system			--系统核心模块
+			module			--系统次级模块
+webapp			--项目WEB源码
+	DOC				--项目文档
+	PAGE			--项目通用
+	SCRIPT			--项目组件库
+	WEB-INF-view	--项目页面
+		business		--业务模块
+		common			--js页面通用include页面
+		error			--系统错误页面
+		skins			--框架皮肤
+		system			--系统模块

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysRoleMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id,
+	    t.name,
+	    t.shiro
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and t.id LIKE '%'||#{id}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				and t.name LIKE '%'||#{name}||'%'
+			</if>
+			<if test="shiro != null and shiro != ''">
+				and t.shiro LIKE '%'||#{shiro}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.system.domain.SysRole">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_ROLE t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.system.domain.SysRole">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_ROLE t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.system.domain.SysRole">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_ROLE t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询用户权限集合 -->
+	<select id="findSysUserList" resultType="com.seeyoui.kensite.framework.system.domain.SysRole" parameterType="SysUser">
+		select 
+		<include refid="tableColumns"/>			
+		from sys_user su
+		left join sys_user_role sur
+		on su.id = sur.user_id 
+		right join sys_role t
+		on sur.role_id = t.id
+		<where>
+			1=1
+			<if test="userName !=null and userName !=''">
+			and su.user_name = #{userName}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(id)total
+		FROM SYS_ROLE t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysRole">
+		INSERT INTO SYS_ROLE (
+	    	
+	    	name,
+	    	shiro,
+		    id
+		)
+		VALUES (
+			
+			#{name,jdbcType=VARCHAR},
+			#{shiro,jdbcType=VARCHAR},
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.system.domain.SysRole">
+		UPDATE SYS_ROLE
+		<set>
+	    	
+	    	<if test="name !=null and name !=''">
+			name=#{name},
+			</if>
+	    	<if test="shiro !=null and shiro !=''">
+			shiro=#{shiro},
+			</if>
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM SYS_ROLE WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,103 @@
+oracle转mysql总结
+
+主键生成策略
+创建一个专门记录序列的表sequence,记录有当前序列号,序列的间隔如+1
+
+创建记录当前序列的表
+DROP TABLE IF EXISTS sequence;
+CREATE TABLE sequence (
+name              VARCHAR(50) NOT NULL,
+current_value INT NOT NULL,
+increment       INT NOT NULL DEFAULT 1,
+PRIMARY KEY (name)
+) ENGINE=InnoDB;
+INSERT INTO sequence VALUES ('MovieSeq',3,5);
+创建一个获取当前序列的function
+DROP FUNCTION IF EXISTS currval;
+CREATE FUNCTION currval (seq_name VARCHAR(50))
+RETURNS INTEGER
+CONTAINS SQL
+BEGIN
+  DECLARE value INTEGER;
+  SET value = 0;
+  SELECT current_value INTO value
+  FROM sequence
+  WHERE name = seq_name;
+  RETURN value;
+END;
+获取下一个数值..先在sequence里面调用update当前最大数值+1然后再调用currval获得当前数值
+DROP FUNCTION IF EXISTS nextval;
+DELIMITER $
+CREATE FUNCTION nextval (seq_name VARCHAR(50))
+RETURNS INTEGER
+CONTAINS SQL
+BEGIN
+   UPDATE sequence
+   SET          current_value = current_value + increment
+   WHERE name = seq_name;
+   RETURN currval(seq_name);
+END$
+DELIMITER ;
+DROP FUNCTION IF EXISTS setval;
+DELIMITER $
+CREATE FUNCTION setval (seq_name VARCHAR(50), value INTEGER)
+RETURNS INTEGER
+CONTAINS SQL
+BEGIN
+   UPDATE sequence
+   SET          current_value = value
+   WHERE name = seq_name;
+   RETURN currval(seq_name);
+END$
+DELIMITER ;
+如果以上语句执行有异常请先执行这句：set global logbintrustfunctioncreators=TRUE;
+
+插入时的主键生成：
+mysql:  SELECT MMC.NEXTVAL('SEQ_MD_ENTITY_ATTRIBUTE')
+oracle: select MMC.SEQ_MD_ENTITY_ATTRIBUTE.nextval from dual
+日期处理
+mysql : DATE_FORMAT(NOW(),'%Y-%m-%d  %H:%i:%s')
+oracle:  TO_CHAR(SYSDATE,'YYYY-MM-DD hh24:mi:ss')
+nvl函数
+mysql: ifnull(A.USER_KPI,0)
+oracle: NVL(A.USER_KPI,0)
+to_number
+oracle 的 to_number
+mysql不需要
+关键字、保留字
+涉及到关键字,mysql关键字需要加上``号
+mysql:  PARA_VALUE as `KEY`  
+oracle : PARA_VALUE as KEY
+rownum
+Unknown column 'rownum' in 'where clause'
+oracle自定义sql中如果使用了rownum=1   mysql中可以写成limit 1
+大小写问题
+在oracle中一般情况下不区分大小写
+但在MySQL中，所使用操作系统的大小写敏感性决定了数据库名和表名的大小写敏感性。
+解决的办法是把mysql的数据库名和oracle的大小写保持一致，
+表名与应用程序中sql字符串中的表名保持一致，
+如果应用程序中字段名用了双引号，那请把sql中的字段名大小写与双引号里的字符保持一致。
+如果你的应用程序所引用的表名、字段没有统一大小写，那麻烦就大了。
+字符串截取
+mysql:  
+截取log_data从逗号开始之后的字符：
+SELECT substring_index(log_data,',',-1)
+  FROM nbts.log where event_id='150002' and log_id ='a2a421734c7e47dd8a8b';
+
+截取log_data从逗号开始之前的字符：
+SELECT substring_index(log_data,',',1)
+  FROM nbts.log where event_id='150002' and log_id ='a2a421734c7e47dd8a8b';
+
+oracle : 
+截取log_data从逗号开始之后的字符：
+SELECT SUBSTR(log_data, INSTR(log_data, ',', 1, 1) +1) AS app_ver_id
+  FROM nbts.log where event_id='150002' and log_id ='a2a421734c7e47dd8a8b';
+
+截取log_data从逗号开始之前的字符：
+SELECT SUBSTR(log_data,0,INSTR(log_data, ',', 1, 1) - 1) AS app_ver_id
+  FROM nbts.log where event_id='150002' and log_id ='a2a421734c7e47dd8a8b';
+字符串格式化
+mysql:CONCAT   
+oracle:TO_CHAR
+主键长度问题
+在迁移到mysql后可能会出现主键长度太短，需要增加长度。

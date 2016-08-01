@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.cms.comment.persistence.CommentMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.SITE_ID AS "siteId",
+		T.CATEGORY_ID AS "categoryId",
+		T.BASIC_ID AS "basicId",
+		T.SCORE AS "score",
+		T.CONTENT AS "content",
+		T.USER_ID AS "userId",
+		T.USER_NAME AS "userName",
+		T.IP AS "ip",
+		T.AUDIT_USER_ID AS "auditUserId",
+		T.AUDIT_USER_NAME AS "auditUserName",
+		T.AUDIT_DATE AS "auditDate",
+		T.AUDIT_STATE AS "auditState",
+		U.USER_NAME AS "commentator.userName",
+		IFNULL(U.NAME, '匿名') AS "commentator.name",
+		IFNULL(U.HEAD_ICON, 'headerIcon.png') AS "commentator.headIcon"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%${createUser}%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%${updateUser}%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%${remarks}%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%${delFlag}%'
+			</if>
+			<if test="siteId != null and siteId != ''">
+				AND T.SITE_ID LIKE '%${siteId}%'
+			</if>
+			<if test="categoryId != null and categoryId != ''">
+				AND T.CATEGORY_ID LIKE '%${categoryId}%'
+			</if>
+			<if test="basicId != null and basicId != ''">
+				AND T.BASIC_ID LIKE '%${basicId}%'
+			</if>
+			<if test="score != null and score != ''">
+				AND T.SCORE = #{score}
+			</if>
+			<if test="content != null and content != ''">
+				AND T.CONTENT LIKE '%${content}%'
+			</if>
+			<if test="userId != null and userId != ''">
+				AND T.USER_ID LIKE '%${userId}%'
+			</if>
+			<if test="userName != null and userName != ''">
+				AND T.USER_NAME LIKE '%${userName}%'
+			</if>
+			<if test="ip != null and ip != ''">
+				AND T.IP LIKE '%${ip}%'
+			</if>
+			<if test="auditUserId != null and auditUserId != ''">
+				AND T.AUDIT_USER_ID LIKE '%${auditUserId}%'
+			</if>
+			<if test="auditUserName != null and auditUserName != ''">
+				AND T.AUDIT_USER_NAME LIKE '%${auditUserName}%'
+			</if>
+			<if test="auditDate != null and auditDate != ''">
+				AND T.AUDIT_DATE = #{auditDate}
+			</if>
+			<if test="auditState != null and auditState != ''">
+				AND T.AUDIT_STATE LIKE '%${auditState}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			#{sort} #{order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	<sql id="joinOn">
+		LEFT JOIN SYS_USER U ON T.USER_ID=U.ID
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.cms.comment.domain.Comment">
+		SELECT
+		<include refid="tableColumns" />
+		FROM CMS_COMMENT T
+		<include refid="joinOn" />
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.cms.comment.domain.Comment">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_COMMENT T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.cms.comment.domain.Comment">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_COMMENT T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_COMMENT T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_COMMENT T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.cms.comment.domain.Comment">
+		INSERT INTO CMS_COMMENT (
+			
+			
+			
+			
+			
+			REMARKS,
+			DEL_FLAG,
+			SITE_ID,
+			CATEGORY_ID,
+			BASIC_ID,
+			SCORE,
+			CONTENT,
+			USER_ID,
+			USER_NAME,
+			IP,
+			AUDIT_USER_ID,
+			AUDIT_USER_NAME,
+			AUDIT_DATE,
+			AUDIT_STATE,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{siteId,jdbcType=VARCHAR},
+			#{categoryId,jdbcType=VARCHAR},
+			#{basicId,jdbcType=VARCHAR},
+			#{score,jdbcType=NUMERIC},
+			#{content,jdbcType=VARCHAR},
+			#{userId,jdbcType=VARCHAR},
+			#{userName,jdbcType=VARCHAR},
+			#{ip,jdbcType=VARCHAR},
+			#{auditUserId,jdbcType=VARCHAR},
+			#{auditUserName,jdbcType=VARCHAR},
+			#{auditDate,jdbcType=TIMESTAMP},
+			#{auditState,jdbcType=VARCHAR},
+			#{createUser.userName},
+			now(),
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.cms.comment.domain.Comment">
+		UPDATE CMS_COMMENT
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+			<if test="siteId !=null and siteId !=''">
+			SITE_ID=#{siteId},
+			</if>
+			<if test="categoryId !=null and categoryId !=''">
+			CATEGORY_ID=#{categoryId},
+			</if>
+			<if test="basicId !=null and basicId !=''">
+			BASIC_ID=#{basicId},
+			</if>
+			<if test="score !=null and score !=''">
+			SCORE=#{score},
+			</if>
+			<if test="content !=null and content !=''">
+			CONTENT=#{content},
+			</if>
+			<if test="userId !=null and userId !=''">
+			USER_ID=#{userId},
+			</if>
+			<if test="userName !=null and userName !=''">
+			USER_NAME=#{userName},
+			</if>
+			<if test="ip !=null and ip !=''">
+			IP=#{ip},
+			</if>
+			<if test="auditUserId !=null and auditUserId !=''">
+			AUDIT_USER_ID=#{auditUserId},
+			</if>
+			<if test="auditUserName !=null and auditUserName !=''">
+			AUDIT_USER_NAME=#{auditUserName},
+			</if>
+			<if test="auditDate !=null and auditDate !=''">
+			AUDIT_DATE=#{auditDate},
+			</if>
+			<if test="auditState !=null and auditState !=''">
+			AUDIT_STATE=#{auditState},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = now(),
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM CMS_COMMENT WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

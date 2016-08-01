@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.bussiness.demo.persistence.DemoMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.TREE_ID AS "treeId",
+		T.EXPRESSION AS "expression",
+		T.USER_NAME AS "userName",
+		T.USER_SEX AS "userSex",
+		T.USER_AGE AS "userAge",
+		T.USER_BIRTHDAY AS "userBirthday",
+		T.USER_ICON AS "userIcon",
+		T.USER_SUMMARY AS "userSummary",
+		T.DEPARTMENT_ID AS "departmentId",
+		T.MANAGER_ID AS "managerId"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = ${createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%${createUser}%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = ${updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%${updateUser}%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%${remarks}%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%${delFlag}%'
+			</if>
+			<if test="treeId != null and treeId != ''">
+				AND T.TREE_ID LIKE '%${treeId}%'
+			</if>
+			<if test="expression != null and expression != ''">
+				AND T.EXPRESSION LIKE '%${expression}%'
+			</if>
+			<if test="userName != null and userName != ''">
+				AND T.USER_NAME LIKE '%${userName}%'
+			</if>
+			<if test="userSex != null and userSex != ''">
+				AND T.USER_SEX LIKE '%${userSex}%'
+			</if>
+			<if test="userAge != null and userAge != ''">
+				AND T.USER_AGE = ${userAge}
+			</if>
+			<if test="userBirthday != null and userBirthday != ''">
+				AND T.USER_BIRTHDAY = ${userBirthday}
+			</if>
+			<if test="userIcon != null and userIcon != ''">
+				AND T.USER_ICON LIKE '%${userIcon}%'
+			</if>
+			<if test="userSummary != null and userSummary != ''">
+				
+			</if>
+			<if test="departmentId != null and departmentId != ''">
+				AND T.DEPARTMENT_ID LIKE '%${departmentId}%'
+			</if>
+			<if test="managerId != null and managerId != ''">
+				AND T.MANAGER_ID LIKE '%${managerId}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			${sort} ${order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
+		SELECT
+		<include refid="tableColumns" />
+		FROM BO_DEMO T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM BO_DEMO T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM BO_DEMO T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM BO_DEMO T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM BO_DEMO T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
+		INSERT INTO BO_DEMO (
+			
+			
+			
+			
+			
+			REMARKS,
+			DEL_FLAG,
+			TREE_ID,
+			EXPRESSION,
+			USER_NAME,
+			USER_SEX,
+			USER_AGE,
+			USER_BIRTHDAY,
+			USER_ICON,
+			USER_SUMMARY,
+			DEPARTMENT_ID,
+			MANAGER_ID,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{treeId,jdbcType=VARCHAR},
+			#{expression,jdbcType=VARCHAR},
+			#{userName,jdbcType=VARCHAR},
+			#{userSex,jdbcType=VARCHAR},
+			#{userAge,jdbcType=NUMERIC},
+			#{userBirthday,jdbcType=TIMESTAMP},
+			#{userIcon,jdbcType=VARCHAR},
+			#{userSummary,jdbcType=CLOB},
+			#{departmentId,jdbcType=VARCHAR},
+			#{managerId,jdbcType=VARCHAR},
+			#{createUser.userName},
+			now(),
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
+		UPDATE BO_DEMO
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+			<if test="treeId !=null and treeId !=''">
+			TREE_ID=#{treeId},
+			</if>
+			<if test="expression !=null and expression !=''">
+			EXPRESSION=#{expression},
+			</if>
+			<if test="userName !=null and userName !=''">
+			USER_NAME=#{userName},
+			</if>
+			<if test="userSex !=null and userSex !=''">
+			USER_SEX=#{userSex},
+			</if>
+			<if test="userAge !=null and userAge !=''">
+			USER_AGE=#{userAge},
+			</if>
+			<if test="userBirthday !=null and userBirthday !=''">
+			USER_BIRTHDAY=#{userBirthday},
+			</if>
+			<if test="userIcon !=null and userIcon !=''">
+			USER_ICON=#{userIcon},
+			</if>
+			<if test="userSummary !=null and userSummary !=''">
+			USER_SUMMARY=#{userSummary},
+			</if>
+			<if test="departmentId !=null and departmentId !=''">
+			DEPARTMENT_ID=#{departmentId},
+			</if>
+			<if test="managerId !=null and managerId !=''">
+			MANAGER_ID=#{managerId},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = now(),
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM BO_DEMO WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

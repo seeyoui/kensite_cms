@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.cms.tagcloud.persistence.TagcloudMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.SITE_ID AS "siteId",
+		T.NAME AS "name"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%${createUser}%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%${updateUser}%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%${remarks}%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%${delFlag}%'
+			</if>
+			<if test="siteId != null and siteId != ''">
+				AND T.SITE_ID LIKE '%${siteId}%'
+			</if>
+			<if test="name != null and name != ''">
+				AND T.NAME LIKE '%${name}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			#{sort} #{order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.cms.tagcloud.domain.Tagcloud">
+		SELECT
+		<include refid="tableColumns" />
+		FROM CMS_TAGCLOUD T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.cms.tagcloud.domain.Tagcloud">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_TAGCLOUD T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.cms.tagcloud.domain.Tagcloud">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_TAGCLOUD T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_TAGCLOUD T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_TAGCLOUD T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.cms.tagcloud.domain.Tagcloud">
+		INSERT INTO CMS_TAGCLOUD (
+			
+			
+			
+			
+			
+			REMARKS,
+			DEL_FLAG,
+			SITE_ID,
+			NAME,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{siteId,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{createUser.userName},
+			now(),
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.cms.tagcloud.domain.Tagcloud">
+		UPDATE CMS_TAGCLOUD
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+			<if test="siteId !=null and siteId !=''">
+			SITE_ID=#{siteId},
+			</if>
+			<if test="name !=null and name !=''">
+			NAME=#{name},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = now(),
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM CMS_TAGCLOUD WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

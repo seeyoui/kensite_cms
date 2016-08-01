@@ -1,0 +1,27 @@
+insert into sys_module values(Lower(sys_guid()),'sysMenu','sysMenu');
+
+select sr.shiro from sys_user su left join sys_user_role sur on su.id=sur.userid left join sys_role sr on sur.roleid=sr.id where su.username='system';
+
+select sm.shiro||':'||sp.id shiro from sys_role sr left join sys_role_module srm on sr.id=srm.roleid left join sys_module sm on srm.moduleid=sm.id left join sys_module_permission smp on sm.id=smp.moduleid left join sys_permission sp on smp.permissionid=sp.id where sr.shiro in ('sys');
+
+select m.id,p.id from sys_module m left join sys_permission p on 1=1;
+
+select * from sys_role_menu;
+select * from sys_role_module;
+select * from sys_module_permission;
+
+
+select r.id roleid,m.id menuid from sys_role r left join sys_menu m on 1=1;
+select r.id roleid,m.id moduleid from sys_role r left join sys_module m on 1=1;
+select m.id moduleid,p.id permissionid from sys_module m left join sys_permission p on 1=1;
+
+
+delete from sys_role_menu;
+delete from sys_role_module;
+delete from sys_module_permission;
+
+
+insert into sys_role_menu (select r.id roleid,m.id menuid from sys_role r left join sys_menu m on 1=1);
+insert into sys_role_module (select r.id roleid,m.id moduleid from sys_role r left join sys_module m on 1=1);
+insert into sys_module_permission (select m.id moduleid,p.id permissionid from sys_module m left join sys_permission p on 1=1);
+

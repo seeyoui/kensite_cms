@@ -1,0 +1,24 @@
+.user_menu ul li ul {
+	margin-top: -13px;
+}
+
+.user_menu ul li ul li ul {
+	margin-bottom: 5px;
+}
+
+.user_menu ul li ul li {
+	display: block;
+	font-size: 12px;
+	margin-top: -10px;
+	background-color:#F4F7FC;
+	
+}
+
+.user_menu ul li ul li a {
+	font-size: 11px;
+	height: 23px;
+	padding-left: 55px;
+	margin-top: 10px;
+	line-height: 25px;
+	background:none;
+}

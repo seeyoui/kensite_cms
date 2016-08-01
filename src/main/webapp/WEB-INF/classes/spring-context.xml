@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:cache="http://www.springframework.org/schema/cache" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+                        http://www.springframework.org/schema/cache
+                        http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+						
+	<!-- 属性文件读入 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:kensite.properties</value>
+			</list>
+		</property>
+	</bean>
+						
+	<!-- 它背后注册了很多用于解析注解的处理器,其中就包括<context:annotation-config/>配置的注解所使用的处理器 -->
+	<!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config> -->
+	<context:component-scan base-package="com.seeyoui.kensite">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" /> -->
+	</context:component-scan>
+	
+	<!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
+	<mvc:annotation-driven/>
+
+	<!-- json处理 -->
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
+	
+	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<!-- 基本属性 url、user、password -->
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="${jdbc.pool.init}" />
+		<property name="minIdle" value="${jdbc.pool.minIdle}" />
+		<property name="maxActive" value="${jdbc.pool.maxActive}" />
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="60000" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="validationQuery" value="${jdbc.testSql}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用） <property name="poolPreparedStatements" 
+			value="true" /> <property name="maxPoolPreparedStatementPerConnectionSize" 
+			value="20" /> -->
+		<!-- 配置监控统计拦截的filters -->
+		<property name="filters" value="stat" />
+	</bean>
+	
+	<bean id="dataBean" class="com.seeyoui.kensite.common.util.DBUtils">  
+        <property name="dataSource">  
+            <ref bean="dataSource"/>  
+        </property>  
+    </bean>  
+	
+	<!-- 创建SqlSessionFactory，同时指定数据源==org.mybatis.spring.SqlSessionFactoryBean== -->
+	<bean id="sqlSessionFactory" class="com.seeyoui.kensite.framework.system.mybatis.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.seeyoui.kensite" />
+		<property name="mapperLocations" value="classpath:mapper/${jdbc.type}/**/*.xml" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+	
+	<!-- 配置事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 配置 JSR303 Bean Validator 定义 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
+	<!-- scan mappers and let them be autowired -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.seeyoui.kensite" />
+	</bean>
+	
+	<!-- 拦截器配置 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/bootstrap/**"/>
+			<mvc:exclude-mapping path="/script/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/upload/**"/>
+			<mvc:exclude-mapping path="/portal/**"/>
+			<mvc:exclude-mapping path="/login/**"/>
+			<mvc:exclude-mapping path="/cms/**"/>
+			<mvc:exclude-mapping path="/sys/**"/>
+			<mvc:exclude-mapping path="/"/>
+			<bean class="com.seeyoui.kensite.common.interceptor.AuthorityInterceptor" />
+		</mvc:interceptor>
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/bootstrap/**"/>
+			<mvc:exclude-mapping path="/script/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/upload/**"/>
+			<mvc:exclude-mapping path="/portal/**"/>
+			<mvc:exclude-mapping path="/sys/**"/>
+			<mvc:exclude-mapping path="/information/**"/>
+			<mvc:exclude-mapping path="/"/>
+			<bean class="com.seeyoui.kensite.common.interceptor.LogInterceptor" />
+		</mvc:interceptor> -->
+	</mvc:interceptors>
+</beans>
