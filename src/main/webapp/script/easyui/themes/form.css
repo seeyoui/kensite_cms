@@ -1,0 +1,51 @@
+form{
+    margin:0;
+    padding:10px 30px;
+}
+.ftitle{
+    font-size:14px;
+    font-weight:bold;
+    padding:5px 0;
+    margin-bottom:10px;
+    border-bottom:1px solid #ccc;
+}
+.fitem{
+    margin-bottom:5px;
+}
+.fitem label{
+    display:inline-block;
+    width:80px;
+}
+.fitem input{
+    width:160px;
+}
+
+.date-input{
+	height:22px;
+	border:1px solid #ddd;
+}
+
+.fbody{
+	position:absolute;
+	top:20px;
+	left:20px;
+	right:20px;
+	bottom:45px;
+}
+
+.fbutton{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 33px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #eee;
+    color: #333;
+    font-size: 14px;
+    line-height: 33px;
+    overflow: hidden;
+    padding: 5px 80px 0 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
