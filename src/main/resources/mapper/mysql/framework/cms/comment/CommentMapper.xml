@@ -92,7 +92,7 @@
 	<sql id="orderBy">
 		ORDER BY 
 		<if test="sort != null and sort != ''">
-			#{sort} #{order},
+			${sort} ${order},
 		</if>
 		T.CREATE_DATE DESC 
 	</sql>
