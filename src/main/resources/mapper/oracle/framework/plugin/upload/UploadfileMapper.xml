@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.upload.persistence.UploadfileMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id,
+	    t.viewname,
+	    t.realname,
+	    t.url,
+	    t.realurl,
+	    t.suffix,
+	    t.filesize,
+	    t.createDate
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and t.id LIKE '%'||#{id}||'%'
+			</if>
+			<if test="viewname != null and viewname != ''">
+				and t.viewname LIKE '%'||#{viewname}||'%'
+			</if>
+			<if test="realname != null and realname != ''">
+				and t.realname LIKE '%'||#{realname}||'%'
+			</if>
+			<if test="url != null and url != ''">
+				and t.url LIKE '%'||#{url}||'%'
+			</if>
+			<if test="realurl != null and realurl != ''">
+				and t.realurl LIKE '%'||#{realurl}||'%'
+			</if>
+			<if test="suffix != null and suffix != ''">
+				and t.suffix LIKE '%'||#{suffix}||'%'
+			</if>
+			<if test="filesize != null and filesize != ''">
+				and t.filesize LIKE '%'||#{filesize}||'%'
+			</if>
+			<if test="createDate != null and createDate != ''">
+				and t.createDate = #{createDate}
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findUploadfileById" resultType="com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_UPLOADFILE t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findUploadfileList" resultType="com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_UPLOADFILE t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findUploadfileListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(id)total
+		FROM SYS_UPLOADFILE t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveUploadfile" parameterType="com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile">
+		INSERT INTO SYS_UPLOADFILE (
+	    	viewname,
+	    	realname,
+	    	url,
+	    	realurl,
+	    	suffix,
+	    	filesize,
+	    	createDate,
+		    id
+		)
+		VALUES (
+			#{viewname},
+			#{realname},
+			#{url},
+			#{realurl},
+			#{suffix},
+			#{filesize},
+			sysdate,
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteUploadfile">
+		DELETE FROM SYS_UPLOADFILE WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

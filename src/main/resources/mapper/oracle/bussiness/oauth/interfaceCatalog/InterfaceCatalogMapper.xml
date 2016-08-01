@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.bussiness.oauth.interfaceCatalog.persistence.InterfaceCatalogMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    T.ID AS "id",
+	    T.CREATE_DATE AS "createDate",
+	    T.CREATE_USER AS "createUser",
+	    T.UPDATE_DATE AS "updateDate",
+	    T.UPDATE_USER AS "updateUser",
+	    T.DEL_FLAG AS "delFlag",
+	    T.NAME AS "name",
+	    T.PARENT_ID AS "parentId",
+	    T.SEQUENCE AS "sequence"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				AND T.ID LIKE '%'||#{id}||'%'
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE &lt; #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%'||#{createUser}||'%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%'||#{updateUser}||'%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%'||#{delFlag}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND T.NAME LIKE '%'||#{name}||'%'
+			</if>
+			<if test="parentId != null and parentId != ''">
+				AND T.PARENT_ID LIKE '%'||#{parentId}||'%'
+			</if>
+			<if test="sequence != null and sequence != ''">
+				AND T.SEQUENCE LIKE '%'||#{sequence}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY SEQUENCE,T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.bussiness.oauth.interfaceCatalog.domain.InterfaceCatalog">
+		SELECT
+		<include refid="tableColumns" />
+		FROM BO_INTERFACE_CATALOG T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.bussiness.oauth.interfaceCatalog.domain.InterfaceCatalog">
+		select * from(select T.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM BO_INTERFACE_CATALOG T
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) T WHERE rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.bussiness.oauth.interfaceCatalog.domain.InterfaceCatalog">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM BO_INTERFACE_CATALOG T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM BO_INTERFACE_CATALOG T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.bussiness.oauth.interfaceCatalog.domain.InterfaceCatalog">
+		INSERT INTO BO_INTERFACE_CATALOG (
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	DEL_FLAG,
+	    	NAME,
+	    	PARENT_ID,
+	    	SEQUENCE,
+		    CREATE_USER,
+		    CREATE_DATE,
+		    ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{delFlag,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{parentId,jdbcType=VARCHAR},
+			#{sequence,jdbcType=VARCHAR},
+			#{createUser.userName},
+			sysdate,
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.bussiness.oauth.interfaceCatalog.domain.InterfaceCatalog">
+		UPDATE BO_INTERFACE_CATALOG
+		<set>
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+	    	<if test="name !=null and name !=''">
+			NAME=#{name},
+			</if>
+	    	<if test="parentId !=null and parentId !=''">
+			PARENT_ID=#{parentId},
+			</if>
+	    	<if test="sequence !=null and sequence !=''">
+			SEQUENCE=#{sequence},
+			</if>
+		    UPDATE_USER = #{updateUser.userName},
+		    UPDATE_DATE = sysdate,
+		    ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM BO_INTERFACE_CATALOG WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysModulePermissionMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.module_id as "moduleId",
+	    t.permission_id as "permissionId"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="moduleId != null and moduleId != ''">
+				and t.module_id LIKE '%${moduleId}%'
+			</if>
+			<if test="permissionId != null and permissionId != ''">
+				and t.permission_id LIKE '%${permissionId}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.module_id DESC 
+	</sql>
+	
+	<!-- 查询数据TREE -->
+	<select id="tree" resultType="com.seeyoui.kensite.framework.system.domain.SysPermission" parameterType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
+		SELECT 
+		t.id,
+		t.name,
+		case when sm.id is null then 'F' else 'T' end checked
+		from sys_permission t
+		left join sys_module_permission smp
+		on smp.permission_id = t.id and smp.module_id=#{moduleId}
+		left join sys_module sm
+		on sm.id = smp.module_id
+		ORDER BY t.sequence ASC
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
+		INSERT INTO SYS_MODULE_PERMISSION (
+	    	permission_id,
+	    	module_id
+		)
+		VALUES (
+			#{permissionId,jdbcType=VARCHAR},
+			#{moduleId,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM SYS_MODULE_PERMISSION WHERE module_id=#{moduleId} OR permission_id=#{moduleId}
+	</delete>
+</mapper>

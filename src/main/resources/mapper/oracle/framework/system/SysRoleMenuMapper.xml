@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysRoleMenuMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.role_id as "roleId",
+	    t.menu_id
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="roleId != null and roleId != ''">
+				and t.role_id LIKE '%'||#{roleId}||'%'
+			</if>
+			<if test="menuId != null and menuId != ''">
+				and t.menu_id LIKE '%'||#{menuId}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 查询数据TREE -->
+	<select id="tree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
+		SELECT 
+		t.id,
+	    t.parent_id as "parentId",
+	    t.name,
+	    t.url,
+	    t.sequence,
+	    t.icon,
+		case when sr.id is null then 'F' else 'T' end target
+		from sys_menu t
+	    left join sys_role_menu srm
+	   	on srm.menu_id = t.id and srm.role_id=#{roleId}
+    	left join sys_role sr
+    	on sr.id = srm.role_id
+    	ORDER BY t.sequence ASC
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
+		INSERT INTO SYS_ROLE_MENU (
+	    	role_id,
+	    	menu_id
+		)
+		VALUES (
+			#{roleId,jdbcType=VARCHAR},
+			#{menuId,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM SYS_ROLE_MENU WHERE role_id=#{roleId}
+	</delete>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.log.persistence.LogMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id,
+	    t.type,
+	    t.title,
+	    t.create_user as "createUser.userName",
+	    t.create_date as "createDate",
+	    t.remote_addr as "remoteAddr",
+	    t.user_agent as "userAgent",
+	    t.request_uri as "requestUri",
+	    t.method,
+	    t.params,
+	    t.exception,
+	    t.spend_time as "spendTime"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="type != null and type != ''">
+				and t.type LIKE '%${type}%'
+			</if>
+			<if test="title != null and title != ''">
+				and t.title LIKE '%${title}%'
+			</if>
+			<if test="createUser != null and createUser.userName != null and createUser.userName != ''">
+				and t.create_user LIKE '%${createUser.userName}%'
+			</if>
+			<if test="createDate != null and createDate != ''">
+				and t.create_date = ${createDate}
+			</if>
+			<if test="remoteAddr != null and remoteAddr != ''">
+				and t.remote_addr LIKE '%${remoteAddr}%'
+			</if>
+			<if test="userAgent != null and userAgent != ''">
+				and t.user_agent LIKE '%${userAgent}%'
+			</if>
+			<if test="requestUri != null and requestUri != ''">
+				and t.request_uri LIKE '%${requestUri}%'
+			</if>
+			<if test="method != null and method != ''">
+				and t.method LIKE '%${method}%'
+			</if>
+			<if test="params != null and params != ''">
+				and t.params LIKE '%${params}%'
+			</if>
+			<if test="exception != null and exception != ''">
+				and t.exception LIKE '%${exception}%'
+			</if>
+			<if test="spendTime != null and spendTime != ''">
+				and t.spend_time LIKE '%${spendTime}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_LOG t
+		WHERE t.id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_LOG t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) AS "total"
+		FROM SYS_LOG T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+		INSERT INTO SYS_LOG (
+	    	type,
+	    	title,
+	    	create_user,
+	    	create_date,
+	    	remote_addr,
+	    	user_agent,
+	    	request_uri,
+	    	method,
+	    	params,
+	    	exception,
+	    	spend_time,
+		    id
+		)
+		VALUES (
+			#{type},
+			#{title},
+			#{createUser.userName},
+			#{createDate},
+			#{remoteAddr},
+			#{userAgent},
+			#{requestUri},
+			#{method},
+			#{params},
+			#{exception},
+			#{spendTime},
+		    #{id}
+		)
+	</insert>
+</mapper>

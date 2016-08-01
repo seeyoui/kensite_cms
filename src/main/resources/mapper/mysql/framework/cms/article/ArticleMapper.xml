@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.cms.article.persistence.ArticleMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser.userName",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser.userName",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.SITE_ID AS "siteId",
+		T.CATEGORY_ID AS "categoryId",
+		T.TITLE AS "title",
+		T.SUB_TITLE AS "subTitle",
+		T.KEYWORDS AS "keywords",
+		T.TAG_ID AS "tagId",
+		T.DESCRIPTION AS "description",
+		T.SEQ AS "seq",
+		T.HITS AS "hits",
+		T.CONTENT AS "content",
+		T.COPYFROM AS "copyfrom",
+		T.CUSTOM_CONTENT_VIEW AS "customContentView",
+		T.VIEW_CONFIG AS "viewConfig",
+		IFNULL(T.POSTER, 'upload/none.jpg') AS "poster",
+		IFNULL(VCACS.COU, 0) AS "collectNum",
+		IFNULL(VCACD.COU, 0) AS "praiseNum",
+		IFNULL(VCACM.COU, 0) AS "commentNum",
+		IFNULL(VCACM.SCORE, 0) AS "commentScore",
+		VCAT.TAG AS "tag",
+		U.USER_NAME AS "author.userName",
+		IFNULL(U.NAME, '匿名') AS "author.name",
+		IFNULL(U.HEAD_ICON, 'headerIcon.png') AS "author.headIcon"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%${createUser}%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%${updateUser}%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%${remarks}%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%${delFlag}%'
+			</if>
+			<if test="siteId != null and siteId != ''">
+				AND T.SITE_ID LIKE '%${siteId}%'
+			</if>
+			<if test="categoryId != null and categoryId != ''">
+				AND T.CATEGORY_ID LIKE '%${categoryId}%'
+			</if>
+			<if test="title != null and title != ''">
+				AND T.TITLE LIKE '%${title}%'
+			</if>
+			<if test="subTitle != null and subTitle != ''">
+				AND T.SUB_TITLE LIKE '%${subTitle}%'
+			</if>
+			<if test="keywords != null and keywords != ''">
+				AND T.KEYWORDS LIKE '%${keywords}%'
+			</if>
+			<if test="tagId != null and tagId != ''">
+				AND T.TAG_ID LIKE '%${tagId}%'
+			</if>
+			<if test="description != null and description != ''">
+				AND T.DESCRIPTION LIKE '%${description}%'
+			</if>
+			<if test="seq != null and seq != ''">
+				AND T.SEQ = #{seq}
+			</if>
+			<if test="hits != null and hits != ''">
+				AND T.HITS = #{hits}
+			</if>
+			<if test="content != null and content != ''">
+				
+			</if>
+			<if test="copyfrom != null and copyfrom != ''">
+				AND T.COPYFROM LIKE '%${copyfrom}%'
+			</if>
+			<if test="customContentView != null and customContentView != ''">
+				AND T.CUSTOM_CONTENT_VIEW LIKE '%${customContentView}%'
+			</if>
+			<if test="viewConfig != null and viewConfig != ''">
+				
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			#{sort} #{order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	<sql id="joinOn">
+		LEFT JOIN V_CMS_ARTICLE_COLLECTIONS VCACS ON T.ID=VCACS.BASIC_ID AND VCACS.TYPE=1
+		LEFT JOIN V_CMS_ARTICLE_COLLECTIONS VCACD ON T.ID=VCACD.BASIC_ID AND VCACD.TYPE=2
+		LEFT JOIN V_CMS_ARTICLE_COMMENT VCACM ON T.ID=VCACM.BASIC_ID
+		LEFT JOIN V_CMS_ARTICLE_TAGS VCAT ON T.ID=VCAT.ID
+		LEFT JOIN SYS_USER U ON T.CREATE_USER=U.USER_NAME
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.cms.article.domain.Article">
+		SELECT
+		<include refid="tableColumns" />
+		FROM CMS_ARTICLE T
+		<include refid="joinOn"/>
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.cms.article.domain.Article">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_ARTICLE T
+		<include refid="joinOn"/>
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.cms.article.domain.Article">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM CMS_ARTICLE T
+		<include refid="joinOn"/>
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_ARTICLE T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM CMS_ARTICLE T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.cms.article.domain.Article">
+		INSERT INTO CMS_ARTICLE (
+			
+			
+			
+			
+			
+			REMARKS,
+			DEL_FLAG,
+			SITE_ID,
+			CATEGORY_ID,
+			TITLE,
+			SUB_TITLE,
+			KEYWORDS,
+			TAG_ID,
+			DESCRIPTION,
+			SEQ,
+			HITS,
+			CONTENT,
+			COPYFROM,
+			CUSTOM_CONTENT_VIEW,
+			VIEW_CONFIG,
+			POSTER,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{siteId,jdbcType=VARCHAR},
+			#{categoryId,jdbcType=VARCHAR},
+			#{title,jdbcType=VARCHAR},
+			#{subTitle,jdbcType=VARCHAR},
+			#{keywords,jdbcType=VARCHAR},
+			#{tagId,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR},
+			#{seq,jdbcType=NUMERIC},
+			#{hits,jdbcType=NUMERIC},
+			#{content,jdbcType=CLOB},
+			#{copyfrom,jdbcType=VARCHAR},
+			#{customContentView,jdbcType=VARCHAR},
+			#{viewConfig,jdbcType=CLOB},
+			#{poster,jdbcType=VARCHAR},
+			#{createUser.userName},
+			now(),
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.cms.article.domain.Article">
+		UPDATE CMS_ARTICLE
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+			<if test="siteId !=null and siteId !=''">
+			SITE_ID=#{siteId},
+			</if>
+			<if test="categoryId !=null and categoryId !=''">
+			CATEGORY_ID=#{categoryId},
+			</if>
+			<if test="title !=null and title !=''">
+			TITLE=#{title},
+			</if>
+			<if test="subTitle !=null and subTitle !=''">
+			SUB_TITLE=#{subTitle},
+			</if>
+			<if test="keywords !=null and keywords !=''">
+			KEYWORDS=#{keywords},
+			</if>
+			<if test="tagId !=null and tagId !=''">
+			TAG_ID=#{tagId},
+			</if>
+			<if test="description !=null and description !=''">
+			DESCRIPTION=#{description},
+			</if>
+			<if test="seq !=null and seq !=''">
+			SEQ=#{seq},
+			</if>
+			<if test="hits !=null and hits !=''">
+			HITS=#{hits},
+			</if>
+			<if test="content !=null and content !=''">
+			CONTENT=#{content},
+			</if>
+			<if test="copyfrom !=null and copyfrom !=''">
+			COPYFROM=#{copyfrom},
+			</if>
+			<if test="customContentView !=null and customContentView !=''">
+			CUSTOM_CONTENT_VIEW=#{customContentView},
+			</if>
+			<if test="viewConfig !=null and viewConfig !=''">
+			VIEW_CONFIG=#{viewConfig},
+			</if>
+			<if test="poster !=null and poster !=''">
+			POSTER=#{poster},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = now(),
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据修改 -->
+	<update id="hits">
+		UPDATE CMS_ARTICLE
+		<set>
+			HITS = IFNULL(HITS,0)+1
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM CMS_ARTICLE WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

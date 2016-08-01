@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysRoleModuleMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.role_id as "roleId",
+	    t.module_id as "moduleId"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="roleId != null and roleId != ''">
+				and t.role_id LIKE '%${roleId}%'
+			</if>
+			<if test="moduleId != null and moduleId != ''">
+				and t.module_id LIKE '%${moduleId}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 查询数据TREE -->
+	<select id="tree" resultType="com.seeyoui.kensite.framework.system.domain.SysModule" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleModule">
+		SELECT 
+		t.id,
+	    t.name,
+		case when sr.id is null then 'F' else 'T' end shiro
+		from sys_module t
+	    left join sys_role_module srm
+	   	on srm.module_id = t.id and srm.role_id=#{roleId}
+    	left join sys_role sr
+    	on sr.id = srm.role_id
+    	ORDER BY t.id ASC
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleModule">
+		INSERT INTO SYS_ROLE_MODULE (
+	    	role_id,
+	    	module_id
+		)
+		VALUES (
+			#{roleId,jdbcType=VARCHAR},
+			#{moduleId,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM SYS_ROLE_MODULE WHERE role_id=#{roleId} OR module_id=#{roleId}
+	</delete>
+</mapper>

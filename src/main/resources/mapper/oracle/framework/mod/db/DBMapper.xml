@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.mod.db.persistence.DBMapper" >
+	
+	<!-- 创建表 -->
+	<update id="createTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+		create table ${name} (
+			id          CHAR(32) not null,
+			create_date DATE default SYSDATE,
+			create_user VARCHAR2(50),
+			update_date DATE default SYSDATE,
+			update_user VARCHAR2(50),
+			remarks     VARCHAR2(255),
+			del_flag    CHAR(1) default '0'
+		)
+	</update>
+	
+	<!-- 表重命名 -->
+	<update id="renameTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+		rename ${oldName} to ${name}
+	</update>
+	
+	<!-- 删除表 -->
+	<update id="dropTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+		drop table ${name} cascade constraints
+	</update>
+	
+	<!-- 给表添加注释 -->
+	<update id="commentTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+		comment on table ${name} is '${comments}'
+	</update>
+	
+	<!-- 增加字段 -->
+	<update id="addColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} add ${name} ${modifyStr}
+	</update>
+	
+	<!-- 修改字段 -->
+	<update id="modifyColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} modify ${name} ${modifyStr} 
+	</update>
+	
+	<!-- 修改字段 -->
+	<update id="renameColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} rename column ${oldName} to ${name}
+	</update>
+	
+	<!-- 删除字段 -->
+	<update id="dropColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} drop column ${name}
+	</update>
+	
+	<!-- 给表添加注释 -->
+	<update id="commentColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		comment on column ${tableName}.${name} is '${comments}'
+	</update>
+	
+	<!-- 给表添加主键 -->
+	<update id="addPrimaryKey" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} add constraint ${tableName}_ID primary key(${name})
+	</update>
+	
+	<!-- 给表删除主键 -->
+	<update id="dropPrimaryKey" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} drop constraint ${tableName}_ID
+	</update>
+	
+</mapper>

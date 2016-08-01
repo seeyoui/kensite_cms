@@ -1,0 +1,203 @@
+<#assign className = table.className> 
+<#assign classNameLower = className?uncap_first>
+
+<#function getWhereStr column>
+<#assign dbtype=column.sqlTypeName?lower_case>
+<#assign colname=column.columnName?lower_case>
+<#assign rtn>
+<#if (colname=="id") ><#else>
+<#if dbtype=="number" >
+AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
+<#elseif (dbtype=="varchar2"||dbtype=="char")>
+AND T.${column.sqlName} LIKE '%'||${"#{"+column.columnNameLower+"}"}||'%'
+<#elseif (dbtype=="clob")>
+<#elseif (dbtype=="date")>
+AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
+</#if>
+</#if>
+</#assign>
+<#return rtn?trim>
+</#function>
+
+<#function getInsertColStr column>
+<#assign dbtype=column.sqlTypeName?lower_case>
+<#assign colname=column.columnName?lower_case>
+<#assign rtn>
+<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser") ><#else>
+${column.sqlName},
+</#if>
+</#assign>
+<#return rtn?trim>
+</#function>
+
+<#function getInsertDataStr column>
+<#assign dbtype=column.sqlTypeName?lower_case>
+<#assign colname=column.columnName?lower_case>
+<#assign rtn>
+<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser") ><#else>
+<#if (dbtype=="number"&&column.decimalDigits==0) >
+${"#{"+column.columnNameLower+",jdbcType=NUMERIC}"},
+<#elseif (dbtype=="number"&&column.decimalDigits!=0)>
+${"#{"+column.columnNameLower+",jdbcType=NUMERIC}"},
+<#elseif (dbtype=="varchar2"||dbtype=="char")>
+${"#{"+column.columnNameLower+",jdbcType=VARCHAR}"},
+<#elseif (dbtype=="clob")>
+${"#{"+column.columnNameLower+",jdbcType=CLOB}"},
+<#elseif (dbtype=="date")>
+${"#{"+column.columnNameLower+",jdbcType=TIMESTAMP}"},
+</#if>
+</#if>
+</#assign>
+<#return rtn?trim>
+</#function>
+
+<#function getUpdateStr column>
+<#assign dbtype=column.sqlTypeName?lower_case>
+<#assign colname=column.columnName?lower_case>
+<#assign rtn>
+<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="createuser"||colname=="updateuser") ><#else>
+${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !=''\">"}
+			${column.sqlName}=${"#{"+column.columnNameLower+"}"},
+			${"</if>"}
+</#if>
+</#assign>
+<#return rtn?trim>
+</#function>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${basepackage}.${innerpackage}.${table.classNameFirstLower}.persistence.${className}Mapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		<#list table.columns as column>
+		T.${column.sqlName} AS "${column.columnNameLower}"<#if column_has_next>,</#if>
+		</#list>
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<#list table.columns as column>
+			<if test="${column.columnNameLower} != null and ${column.columnNameLower} != ''">
+				${getWhereStr(column)}
+			</if>
+		</#list>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			${"${"}sort${"}"} ${"${"}order${"}"},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		SELECT
+		<include refid="tableColumns" />
+		FROM ${table.sqlName} T
+		WHERE T.ID = ${"#{"}id${"}"}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		select * from(select T.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM ${table.sqlName} T
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) T WHERE rownum &lt; = ${"#{"}page${"}"}*${"#{"}rows${"}"}) where rn &gt; (${"#{"}page${"}"}-1)*${"#{"}rows${"}"}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM ${table.sqlName} T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM ${table.sqlName} T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM ${table.sqlName} T
+		<include refid="whereStr"/>
+		AND T.ID != ${"#{"}id${"}"}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		<#list table.columns as column>
+			<#if (column.columnName=="id") >
+				<#if column.sqlTypeName=="number" >
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT SEQ_COMMON_BO_ID.NEXTVAL FROM DUAL
+		</selectKey>
+				</#if>
+			</#if>
+		</#list>
+		INSERT INTO ${table.sqlName} (
+			<#list table.columns as column>
+			${getInsertColStr(column)}
+			</#list>
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			<#list table.columns as column>
+			${getInsertDataStr(column)}
+			</#list>
+			${"#{"}createUser.userName${"}"},
+			sysdate,
+			${"#{"}id${"}"}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		UPDATE ${table.sqlName}
+		<set>
+			<#list table.columns as column>
+			${getUpdateStr(column)}
+			</#list>
+			UPDATE_USER = ${"#{"}updateUser.userName${"}"},
+			UPDATE_DATE = sysdate,
+			ID = ${"#{"}id${"}"}
+		</set>
+		WHERE ID = ${"#{"}id${"}"}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM ${table.sqlName} WHERE ${"id"} IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			${"#{"}listId${"}"}
+		</foreach>
+	</delete>
+	<#if (lucene=="Y") >
+	<!-- 查询所有数据集合 -->
+	<select id="findLucene" resultType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM ${table.sqlName} T
+		WHERE ${"id"} IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			${"#{"}listId${"}"}
+		</foreach>
+	</select>
+	</#if>
+</mapper>
