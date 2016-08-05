@@ -110,4 +110,9 @@ KenSite 提供了常用工具进行封装，包括日志工具、缓存工具、
 3. Apache Licence也是对商业应用友好的许可。使用者也可以在需要的时候修改代码来满足需要并作为开源或商业产品发布/销售
 
 #系统美图
-![输入图片说明](https://github.com/seeyoui/kensite_cms/picture/ac2cabafddf14f17ba7db961faf673c4.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/1.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/2.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/3.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/4.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/5.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/6.png)
