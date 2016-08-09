@@ -35,7 +35,7 @@
 				beforeSend: function(XMLHttpRequest){
 				},
 				success: function(data, textStatus){
-					if (data=="<%=StringConstant.TRUE%>"){
+					if (data==TRUE){
 				    	layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 					} else {
 						layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});

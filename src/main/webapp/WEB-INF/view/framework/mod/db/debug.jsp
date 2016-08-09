@@ -351,7 +351,7 @@
             	layer.close(loadi);
                 cleanErrMsg();
             	data = eval('(' + info + ')');
-                if (data.success=="<%=StringConstant.TRUE%>"){
+                if (data.success==TRUE){
                     layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
             		$('#dataSubWin').window('close'); 
             		reloadSubData();
@@ -377,7 +377,7 @@
 						},
 						success: function(data, textStatus){
 							layer.close(loadi);
-							if (data.success=="<%=StringConstant.TRUE%>"){
+							if (data.success==TRUE){
 		                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 								reloadSubData();
 		                    } else {

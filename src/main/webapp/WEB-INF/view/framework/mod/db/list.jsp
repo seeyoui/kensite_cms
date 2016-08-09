@@ -88,6 +88,11 @@
                 <span id="msg-comments" class="err-msg"></span>
             </div>
 			<div class="fitem">
+                <label>分类</label>
+                <input id="categoryT" name="category" class="easyui-combobox" data-options="required:true,valueField:'label',textField:'value',data:[{'label':'普通表','value':'普通表'},{'label':'系统表','value':'系统表'}],panelHeight:'auto',editable:false"/>
+                <span id="msg-category" class="err-msg"></span>
+            </div>
+			<div class="fitem">
                 <label>关联父表</label>
                 <input id="parentTable" name="parentTable" class="easyui-textbox" data-options=""/>
                 <span id="msg-parenttable" class="err-msg"></span>
@@ -421,7 +426,7 @@
             success: function(info){
                 cleanErrMsg();
             	data = eval('(' + info + ')');
-                if (data.success=="<%=StringConstant.TRUE%>"){
+                if (data.success==TRUE){
                     layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
             		$('#dataWin').window('close'); 
             		reloadData();
@@ -435,6 +440,10 @@
     }
     function destroyInfo(){
         var row = $('#dataList').datagrid('getSelected');
+        if(row.category=='系统表') {
+        	layer.msg("系统表不能删除！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+        	return;
+        }
         if (row){
             $.messager.confirm('确认','你确定删除该记录吗？',function(r){
                 if (r){
@@ -446,7 +455,7 @@
 						beforeSend: function(XMLHttpRequest){
 						},
 						success: function(data, textStatus){
-							if (data.success=="<%=StringConstant.TRUE%>"){
+							if (data.success==TRUE){
 		                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 								reloadData();
 		                    } else {
@@ -501,7 +510,7 @@
             	layer.close(loadi);
                 cleanErrMsg();
             	data = eval('(' + info + ')');
-                if (data.success=="<%=StringConstant.TRUE%>"){
+                if (data.success==TRUE){
                     layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
             		$('#dataSubWin').window('close'); 
             		reloadSubData();
@@ -527,7 +536,7 @@
 						},
 						success: function(data, textStatus){
 							layer.close(loadi);
-							if (data.success=="<%=StringConstant.TRUE%>"){
+							if (data.success==TRUE){
 		                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 								reloadSubData();
 		                    } else {
