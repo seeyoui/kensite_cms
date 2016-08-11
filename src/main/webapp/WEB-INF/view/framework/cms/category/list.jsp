@@ -99,14 +99,14 @@
 			var tableName = "CMS_CATEGORY";
 			$(document).ready(function(){
 				$('#siteDataList').datagrid({
-		    		onClickRow: function(index, row){
+		    		onDblClickRow: function(index, row){
 		    			$('#sel_siteId').val(row.id);
 		    			$('#sel_parentId').val('${ksfn:getConst("ROOT_ID_32")}');
 		    			$.category.reloadData();
 		    		}
 		    	});
 				$("#dataTreeList").treegrid({
-					onClickRow: function(row){
+					onDblClickRow: function(row){
 		    			$('#sel_parentId').val(row.id);
 		    			$.category.selectData();
 		    		}

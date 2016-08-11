@@ -59,6 +59,7 @@
 	var loadi,index = parent.layer.getFrameIndex(window.name);
 	function submitInfo() {
 		if($("#signupForm").validate().form()) {
+			password = $('#password').val();
 			loadi = parent.layer.load('正在修改，请稍后...');
 			$.ajax({
 	   			type:'POST',

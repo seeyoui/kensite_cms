@@ -59,7 +59,7 @@
 		<include refid="tableColumns" />
 		FROM SYS_USER t
 		<include refid="joinOn" />
-		WHERE id = #{id}
+		WHERE t.id = #{id}
 	</select>
 	
 	<!-- 根据账号查询单条数据 -->

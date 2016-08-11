@@ -81,7 +81,7 @@
     <script type="text/javascript">
 	    $(document).ready(function(){
 	    	$('#dataList').datagrid({
-	    		onDblClickRow: function(index,row){
+	    		onClickRow: function(index,row){
 	    			$('#sel_catalogId').val(row.id);
 	    			catalogId = row.id;
 	    			$.interfaceDesc.selectData();

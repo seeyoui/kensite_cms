@@ -87,14 +87,14 @@
 			$(document).ready(function(){
 				$('#sel_auditState').combobox('setValue', 'N');
 				$('#siteDataList').datagrid({
-		    		onClickRow: function(index, row){
+		    		onDblClickRow: function(index, row){
 		    			$('#sel_siteId').val(row.id);
 		    			$('#sel_categoryId').val('');
 		    			$.comment.reloadData();
 		    		}
 		    	});
 				$("#dataTreeList").treegrid({
-					onClickRow: function(row){
+					onDblClickRow: function(row){
 		    			if(row.id == '${ksfn:getConst("ROOT_ID_32")}') {
 		    				$('#sel_categoryId').val('');
 		    			} else {

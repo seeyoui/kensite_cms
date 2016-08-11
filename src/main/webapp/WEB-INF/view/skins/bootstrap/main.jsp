@@ -46,7 +46,7 @@
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
 							<!-- <li><a href="javascript:headIcon();">修改头像</a></li> -->
 							<li><a class="J_menuItem" href="${ctx }/login/skinsPage/common/headIcon">修改头像</a></li>
-							<li><a class="J_menuItem" href="profile.html">个人资料</a></li>
+							<!-- <li><a class="J_menuItem" href="profile.html">个人资料</a></li> -->
 							<li><a href="javascript:updatePassword()">修改密码</a></li>
 							<li class="divider"></li>
 							<li><a href="javascript:logout();">安全退出</a></li>

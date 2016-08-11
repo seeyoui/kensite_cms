@@ -74,7 +74,7 @@
 			var tableName = "CMS_GUESTBOOK";
 			$(document).ready(function(){
 				$('#siteDataList').datagrid({
-		    		onClickRow: function(index, row){
+		    		onDblClickRow: function(index, row){
 		    			$('#sel_siteId').val(row.id);
 		    			$.guestbook.reloadData();
 		    		}

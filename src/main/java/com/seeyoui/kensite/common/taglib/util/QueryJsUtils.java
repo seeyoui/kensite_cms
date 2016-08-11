@@ -30,8 +30,9 @@ public class QueryJsUtils {
 		boolean needCache = true;
 		result = new StringBuffer();
 		String column = tableColumn.getName();
+		String table = tableColumn.getTableName();
 		column = StringUtils.toCamelCase(column);
-		result.append(column+" : $('#sel_"+column+"').");
+		result.append(column+" : $('#sel_"+table+"_"+column+"').");
 		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory()) || TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
 			result.append("textbox('getValue')");
 		}

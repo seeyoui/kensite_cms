@@ -41,12 +41,13 @@ public class QueryUtils {
 		boolean needCache = true;
 		result = new StringBuffer();
 		String column = tableColumn.getName();
+		String table = tableColumn.getTableName();
 		column = StringUtils.toCamelCase(column);
 		result.append("<span>"+tableColumn.getComments()+"</span>");
 		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory()) || TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
-			result.append("<input class=\"easyui-textbox\" id=\"sel_");
+			result.append("<input class=\"easyui-textbox\" id=\"sel_"+table+"_");
 			result.append(column);
-			result.append("\" name=\"sel_");
+			result.append("\" name=\"sel_"+table+"_");
 			result.append(column);
 			result.append("\" data-options=\"");
 			if(StringUtils.isNoneBlank(tableColumn.getQueryWidth())) {
@@ -57,9 +58,9 @@ public class QueryUtils {
 			result.append("\"/>");
 		}
 		if(TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory())) {
-			result.append("<input class=\"easyui-numberbox\" id=\"sel_");
+			result.append("<input class=\"easyui-numberbox\" id=\"sel_"+table+"_");
 			result.append(column);
-			result.append("\" name=\"sel_");
+			result.append("\" name=\"sel_"+table+"_");
 			result.append(column);
 			result.append("\" data-options=\"");
 			if(StringUtils.isNoneBlank(tableColumn.getQueryWidth())) {
@@ -74,9 +75,9 @@ public class QueryUtils {
 		}
 		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
 			needCache = false;
-			result.append("<input class=\"easyui-combobox\" id=\"sel_");
+			result.append("<input class=\"easyui-combobox\" id=\"sel_"+table+"_");
 			result.append(column);
-			result.append("\" name=\"sel_");
+			result.append("\" name=\"sel_"+table+"_");
 			result.append(column);
 			result.append("\" data-options=\"editable:false, ");
 			int dataCount = 0;
@@ -165,9 +166,9 @@ public class QueryUtils {
 		}
 		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
 			needCache = false;
-			result.append("<input class=\"easyui-combotree\" id=\"sel_");
+			result.append("<input class=\"easyui-combotree\" id=\"sel_"+table+"_");
 			result.append(column);
-			result.append("\" name=\"sel_");
+			result.append("\" name=\"sel_"+table+"_");
 			result.append(column);
 			result.append("\" data-options=\"");
 			result.append("editable:false,");
@@ -247,9 +248,9 @@ public class QueryUtils {
 			result.append("/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
-			result.append("<input class=\"date-input easyui-validatebox\" id=\"sel_");
+			result.append("<input class=\"date-input easyui-validatebox\" id=\"sel_"+table+"_");
 			result.append(column);
-			result.append("\" name=\"sel_");
+			result.append("\" name=\"sel_"+table+"_");
 			result.append(column);
 			result.append("\" "+tableColumn.getHtmlInner());
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {

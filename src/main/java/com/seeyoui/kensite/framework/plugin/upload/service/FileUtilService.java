@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,9 @@ import sun.misc.BASE64Decoder;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.common.util.SessionUtil;
+import com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile;
+import com.seeyoui.kensite.framework.plugin.upload.persistence.UploadfileMapper;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysUserMapper;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
@@ -78,11 +82,12 @@ public class FileUtilService extends BaseService {
 				Map<String, String> result = new HashMap<String, String>();
 				String fileUrl = StringConstant.UPLOAD_FILE_URL
 						+ StringConstant.HEAD_ICON_URL + fileName;
-				SysUser sysUser = new SysUser();
+				SysUser sysUser = sysUserMapper.findOne(userId);
 				sysUser.setId(userId);
 				sysUser.setHeadIcon(fileName);
 				sysUserMapper.update(sysUser);
 				UserUtils.clearCache(sysUser);
+				SessionUtil.setSession("currentUser", sysUser);
 				result.put("fileUrl", fileUrl);
 				return result;
 			} catch (Exception e) {

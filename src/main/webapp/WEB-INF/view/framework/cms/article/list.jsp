@@ -93,14 +93,14 @@
 			var tableName = "CMS_ARTICLE";
 			$(document).ready(function(){
 				$('#siteDataList').datagrid({
-		    		onClickRow: function(index, row){
+		    		onDblClickRow: function(index, row){
 		    			$('#sel_siteId').val(row.id);
 		    			$('#sel_categoryId').val('');
 		    			$.article.reloadData();
 		    		}
 		    	});
 				$("#dataTreeList").treegrid({
-					onClickRow: function(row){
+					onDblClickRow: function(row){
 		    			if(row.id == '${ksfn:getConst("ROOT_ID_32")}') {
 		    				$('#sel_categoryId').val('');
 		    			} else {

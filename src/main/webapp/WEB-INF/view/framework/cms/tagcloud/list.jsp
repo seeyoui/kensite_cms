@@ -56,7 +56,7 @@
 			var tableName = "CMS_TAGCLOUD";
 			$(document).ready(function(){
 				$('#siteDataList').datagrid({
-		    		onClickRow: function(index, row){
+		    		onDblClickRow: function(index, row){
 		    			$('#sel_siteId').val(row.id);
 		    			$('#sel_categoryId').val('');
 		    			$.tagcloud.reloadData();

@@ -187,7 +187,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			// 如果是一个单个文件，则直接复制
 			if (files[i].isFile()) {
 				flag = FileUtils.copyFile(files[i].getAbsolutePath(),
-						descDirName + files[i].getName());
+						descDirNames + files[i].getName());
 				// 如果拷贝文件失败，则退出循环
 				if (!flag) {
 					break;
@@ -196,7 +196,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 			// 如果是子目录，则继续复制目录
 			if (files[i].isDirectory()) {
 				flag = FileUtils.copyDirectory(files[i]
-						.getAbsolutePath(), descDirName + files[i].getName());
+						.getAbsolutePath(), descDirNames + files[i].getName());
 				// 如果拷贝目录失败，则退出循环
 				if (!flag) {
 					break;
