@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>model carrier</comment>
+<entry key="jdbc.type">oracle</entry>
+<entry key="jdbc.url">jdbc:oracle:thin:@192.168.31.251:1521:orcl</entry>
+<entry key="jdbc.username">kensitecms</entry>
+<entry key="jdbc.password">kensite</entry>
+<entry key="target.jdbc.type">oracle</entry>
+<entry key="target.jdbc.url">jdbc:oracle:thin:@192.168.31.251:1521:orcl</entry>
+<entry key="target.jdbc.username">test</entry>
+<entry key="target.jdbc.password">test</entry>
+
+<entry key="tableName">BO_DEMO</entry>
+
+<entry key="sourceUrl">bussiness/demo</entry>
+<entry key="siteVersion">2</entry>
+</properties>
