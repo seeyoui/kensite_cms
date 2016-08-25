@@ -146,7 +146,9 @@
 				<label>最小日期</label><input id="minDate" class="easyui-textbox" data-options="value:''" style="width:200px;"/>
 			</div>
 			<div class="fitem">
-				<label>参考地址</label><a href="http://www.my97.net/dp/demo/index.htm" target="_blank">日期范围限制</a>(二. 功能及示例>>4. 日期范围限制)
+				<label>参考地址</label><a href="http://www.my97.net/dp/demo/index.htm" target="_blank">日期范围限制</a>(二. 功能及示例>>4. 日期范围限制)<br/>
+				maxDate:'#F{$dp.$D(\'endDate\')||\'2050-10-01\'}',minDate:'%y-%M-%d'<br/>
+				maxDate:'2050-01-01',minDate:'#F{$dp.$D(\'startDate\')}'
 			</div>
 		</div>
 		<div id="textarea" title="多行" data-options="iconCls:'icon-uicomponent-textArea'" style="padding:10px">

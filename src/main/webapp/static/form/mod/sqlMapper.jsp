@@ -32,9 +32,9 @@
 					for (int i = 0; i < array.size(); i++) {
 						JSONObject object = (JSONObject)array.get(i);
 						if("0".equals(object.get("width"))) {
-							out.println("<th data-options=\"field:'"+object.get("fieldTo")+"',hidden:true\">"+object.get("title")+"</th>");
+							out.println("<th data-options=\"field:'"+object.get("field")+"',hidden:true\">"+object.get("title")+"</th>");
 						} else {
-							out.println("<th data-options=\"field:'"+object.get("fieldTo")+"',width:"+object.get("width")+"\">"+object.get("title")+"</th>");
+							out.println("<th data-options=\"field:'"+object.get("field")+"',width:"+object.get("width")+"\">"+object.get("title")+"</th>");
 						}
 					}
 				} catch (Exception e) {
@@ -86,7 +86,11 @@
 					JSONArray array = jsonobjectJs.getJSONArray("rows");
 					for (int i = 0; i < array.size(); i++) {
 						JSONObject object = (JSONObject)array.get(i);
-						out.println("renderField('"+object.get("fieldTo")+"', row."+object.get("fieldTo")+");");
+						out.println("cleanField('"+object.get("fieldTo")+"');");
+					}
+					for (int i = 0; i < array.size(); i++) {
+						JSONObject object = (JSONObject)array.get(i);
+						out.println("renderField('"+object.get("fieldTo")+"', row."+object.get("field")+");");
 					}
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -97,24 +101,56 @@
             	parent.layer.msg('请选择行', {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
             }
 		}
-		
+
 		function renderField(fieldId, fieldData) {
 			var fieldClass = parent.$('#'+fieldId).attr('class');
 			if(fieldClass.indexOf('easyui-textbox') != -1) {
-				parent.$('#'+fieldId).textbox('setValue', fieldData);
+				var oldValue = parent.$('#'+fieldId).textbox('getValue');
+				parent.$('#'+fieldId).textbox('setValue', oldValue+fieldData);
+				return;
 			}
 			if(fieldClass.indexOf('easyui-combobox') != -1) {
 				parent.$('#'+fieldId).combobox('setValue', fieldData);
+				return;
 			}
 			if(fieldClass.indexOf('easyui-numberbox') != -1) {
 				parent.$('#'+fieldId).numberbox('setValue', fieldData);
+				return;
 			}
 			if(fieldClass.indexOf('easyui-combotree') != -1) {
 				parent.$('#'+fieldId).combotree('setValue', fieldData);
+				return;
 			}
 			if(fieldClass.indexOf('date-input') != -1) {
 				parent.$('#'+fieldId).val(fieldData);
+				return;
 			}
+			parent.$('#'+fieldId).val(fieldData);
+		}
+		
+		function cleanField(fieldId) {
+			var fieldClass = parent.$('#'+fieldId).attr('class');
+			if(fieldClass.indexOf('easyui-textbox') != -1) {
+				parent.$('#'+fieldId).textbox('clear');
+				return;
+			}
+			if(fieldClass.indexOf('easyui-combobox') != -1) {
+				parent.$('#'+fieldId).combobox('clear');
+				return;
+			}
+			if(fieldClass.indexOf('easyui-numberbox') != -1) {
+				parent.$('#'+fieldId).numberbox('clear');
+				return;
+			}
+			if(fieldClass.indexOf('easyui-combotree') != -1) {
+				parent.$('#'+fieldId).combotree('clear');
+				return;
+			}
+			if(fieldClass.indexOf('date-input') != -1) {
+				parent.$('#'+fieldId).val('');
+				return;
+			}
+			parent.$('#'+fieldId).val('');
 		}
 	</script>
 	</body>
