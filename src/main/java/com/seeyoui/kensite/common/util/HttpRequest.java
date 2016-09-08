@@ -157,12 +157,22 @@ public class HttpRequest {
 		// "type=2&content=内容&name=匿名&email=&phone=&workunit=";//type:1=咨询 2=建议
 		// 3=投诉 4=其他
 
-		System.out.println("金山词霸每日一句JSON note2");
-		String url = "http://open.iciba.com/dsapi/";
-		String param = "";// categoryId=类别主键 contentId=文章主键
+//		System.out.println("金山词霸每日一句JSON note2");
+//		String url = "http://open.iciba.com/dsapi/";
+//		String param = "";// categoryId=类别主键 contentId=文章主键
+//
+//		String source = HttpRequest.sendGet(url, param);
+//		System.out.println(JSONObject.fromObject(source).get("note"));
+//        System.out.println(source);
+		System.out.println("图灵");
+		String url = "http://www.tuling123.com/openapi/api";
+		String param = "key=69a51fe6b4ec4c57b453a464dba1429b&info=你好";// categoryId=类别主键 contentId=文章主键
 
 		String source = HttpRequest.sendGet(url, param);
-		System.out.println(JSONObject.fromObject(source).get("note"));
+        System.out.println(source);
+        System.out.println("post");
+        param = "{\"key\": \"69a51fe6b4ec4c57b453a464dba1429b\",\"info\": \"今天天气怎么样\",\"loc\"：\"北京市中关村\",\"userid\"：\"123456\"}";
+        source = HttpRequest.sendPost(url, param);
         System.out.println(source);
 	}
 }

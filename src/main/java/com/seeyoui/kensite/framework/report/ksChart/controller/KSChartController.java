@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +63,7 @@ public class KSChartController extends BaseController {
 			Map<Object, Object> zMap = zList.get(i);
 			Map<Object, Object> seriesMap = new HashMap<Object, Object>();
 			String zKey = zMap.get("KEY").toString();
+			seriesMap.put("zkey", zKey);
 			seriesMap.put("name", zMap.get("NAME"));
 			seriesMap.put("type", "line");
 			List<Double> yData = new ArrayList<Double>();
@@ -151,11 +154,12 @@ public class KSChartController extends BaseController {
 	@ResponseBody
 	public Object pie(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String sqlx, String sqly) throws Exception {
+			ModelMap modelMap, String sqlx, String sqly, String sqlz) throws Exception {
 		sqlx= HtmlUtils.htmlUnescape(sqlx);
 		sqly= HtmlUtils.htmlUnescape(sqly);
 		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx, false);
 		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly, false);
+		List<Map<Object, Object>> zList = DBUtils.executeQuery(sqlz, false);
 		Map<String, Object> option = new HashMap<String, Object>();
 		Map<String, Object> legend = new HashMap<String, Object>();
 		List<String> data = new ArrayList<String>();
@@ -165,33 +169,40 @@ public class KSChartController extends BaseController {
 		legend.put("data", data);
 		option.put("legend", legend);
 		List<Map<Object, Object>> series = new ArrayList<Map<Object,Object>>();
-		Map<Object, Object> seriesMap = new HashMap<Object, Object>();
-		List<Map<Object, Object>> seriesData = new ArrayList<Map<Object,Object>>();
-		for(int i=0; i<xList.size(); i++) {
-			Map<Object, Object> xMap = xList.get(i);
-			String xkey = xMap.get("KEY").toString();
-			String xvalue = xList.get(i).get("VALUE").toString();
-			boolean isAdd = false;
-			for(int k=0; k<yList.size(); k++) {
-				Map<Object, Object> yMap = yList.get(k);
-				if(yMap.get("XKEY") != null && xkey.equals(yMap.get("XKEY").toString())) {
+		for(int i=0; i<zList.size(); i++) {
+			Map<Object, Object> zMap = zList.get(i);
+			Map<Object, Object> seriesMap = new HashMap<Object, Object>();
+			List<Map<Object, Object>> seriesData = new ArrayList<Map<Object,Object>>();
+			String zKey = zMap.get("KEY").toString();
+			seriesMap.put("name", zMap.get("NAME"));
+			seriesMap.put("type", "pie");
+			seriesMap.put("zkey", zKey);
+			for(int j=0; j<xList.size(); j++) {
+				Map<Object, Object> xMap = xList.get(j);
+				String xkey = xMap.get("KEY").toString();
+				String xvalue = xList.get(j).get("VALUE").toString();
+				boolean isAdd = false;
+				for(int k=0; k<yList.size(); k++) {
+					Map<Object, Object> yMap = yList.get(k);
+					if(yMap.get("ZKEY") != null && yMap.get("XKEY") != null && zKey.equals(yMap.get("ZKEY").toString()) && xkey.equals(yMap.get("XKEY").toString())) {
+						Map<Object, Object> sd = new HashMap<Object, Object>();
+						sd.put("value", Double.parseDouble(yMap.get("VALUE").toString()));
+						sd.put("name", xvalue);
+						seriesData.add(sd);
+						isAdd = true;
+						break;
+					}
+				}
+				if(!isAdd) {
 					Map<Object, Object> sd = new HashMap<Object, Object>();
-					sd.put("value", Double.parseDouble(yMap.get("VALUE").toString()));
+					sd.put("value", 0D);
 					sd.put("name", xvalue);
 					seriesData.add(sd);
-					isAdd = true;
-					break;
 				}
 			}
-			if(!isAdd) {
-				Map<Object, Object> sd = new HashMap<Object, Object>();
-				sd.put("value", 0D);
-				sd.put("name", xvalue);
-				seriesData.add(sd);
-			}
+			seriesMap.put("data", seriesData);
+			series.add(seriesMap);
 		}
-		seriesMap.put("data", seriesData);
-		series.add(seriesMap);
 		option.put("series", series);
 		return option;
 	}

@@ -1,0 +1,198 @@
+#cssload-loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 171px;
+	height: 171px;
+	margin: auto;
+	z-index: 9999;
+}
+.cssload-loader-shadow {
+	background-color: #f3f3f3;
+	z-index: 999;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	position: absolute;
+}
+#cssload-loader .cssload-dot {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 85.5px;
+	height: 100%;
+	margin: auto;
+}
+#cssload-loader .cssload-dot:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 85.5px;
+	height: 85.5px;
+	border-radius: 100%;
+	transform: scale(0);
+		-o-transform: scale(0);
+		-ms-transform: scale(0);
+		-webkit-transform: scale(0);
+		-moz-transform: scale(0);
+}
+#cssload-loader .cssload-dot:nth-child(7n+1) {
+	transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+1):before {
+	background: rgb(0,255,128);
+	animation: cssload-load 0.92s linear 0.12s infinite;
+		-o-animation: cssload-load 0.92s linear 0.12s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.12s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.12s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.12s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+2) {
+	transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		-moz-transform: rotate(90deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+2):before {
+	background: rgb(0,255,234);
+	animation: cssload-load 0.92s linear 0.23s infinite;
+		-o-animation: cssload-load 0.92s linear 0.23s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.23s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.23s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.23s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+3) {
+	transform: rotate(135deg);
+		-o-transform: rotate(135deg);
+		-ms-transform: rotate(135deg);
+		-webkit-transform: rotate(135deg);
+		-moz-transform: rotate(135deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+3):before {
+	background: rgb(0,170,255);
+	animation: cssload-load 0.92s linear 0.35s infinite;
+		-o-animation: cssload-load 0.92s linear 0.35s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.35s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.35s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.35s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+4) {
+	transform: rotate(180deg);
+		-o-transform: rotate(180deg);
+		-ms-transform: rotate(180deg);
+		-webkit-transform: rotate(180deg);
+		-moz-transform: rotate(180deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+4):before {
+	background: rgb(0,64,255);
+	animation: cssload-load 0.92s linear 0.46s infinite;
+		-o-animation: cssload-load 0.92s linear 0.46s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.46s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.46s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.46s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+5) {
+	transform: rotate(225deg);
+		-o-transform: rotate(225deg);
+		-ms-transform: rotate(225deg);
+		-webkit-transform: rotate(225deg);
+		-moz-transform: rotate(225deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+5):before {
+	background: rgb(42,0,255);
+	animation: cssload-load 0.92s linear 0.58s infinite;
+		-o-animation: cssload-load 0.92s linear 0.58s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.58s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.58s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.58s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+6) {
+	transform: rotate(270deg);
+		-o-transform: rotate(270deg);
+		-ms-transform: rotate(270deg);
+		-webkit-transform: rotate(270deg);
+		-moz-transform: rotate(270deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+6):before {
+	background: rgb(149,0,255);
+	animation: cssload-load 0.92s linear 0.69s infinite;
+		-o-animation: cssload-load 0.92s linear 0.69s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.69s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.69s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.69s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+7) {
+	transform: rotate(315deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+7):before {
+	background: magenta;
+	animation: cssload-load 0.92s linear 0.81s infinite;
+		-o-animation: cssload-load 0.92s linear 0.81s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.81s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.81s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.81s infinite;
+}
+#cssload-loader .cssload-dot:nth-child(7n+8) {
+	transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+}
+#cssload-loader .cssload-dot:nth-child(7n+8):before {
+	background: rgb(255,0,149);
+	animation: cssload-load 0.92s linear 0.92s infinite;
+		-o-animation: cssload-load 0.92s linear 0.92s infinite;
+		-ms-animation: cssload-load 0.92s linear 0.92s infinite;
+		-webkit-animation: cssload-load 0.92s linear 0.92s infinite;
+		-moz-animation: cssload-load 0.92s linear 0.92s infinite;
+}
+
+
+
+@keyframes cssload-load {
+	100% {
+		opacity: 0;
+		transform: scale(1);
+	}
+}
+
+@-o-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-o-transform: scale(1);
+	}
+}
+
+@-ms-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-ms-transform: scale(1);
+	}
+}
+
+@-webkit-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(1);
+	}
+}
+
+@-moz-keyframes cssload-load {
+	100% {
+		opacity: 0;
+		-moz-transform: scale(1);
+	}
+}

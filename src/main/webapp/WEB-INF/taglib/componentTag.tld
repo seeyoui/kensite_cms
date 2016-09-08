@@ -102,4 +102,28 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	<tag>
+		<!-- 指定标签名 -->
+		<name>chart</name>
+		<!-- 指定标签类文件的全路径 -->
+		<tag-class>com.seeyoui.kensite.common.taglib.ChartTag</tag-class>
+		<!--如果不需要标签体则设置empty，反之设定jsp -->
+		<body-content>empty</body-content>
+		<!-- 设定属性(如果有的话) -->
+		<attribute>
+			<!-- 指定属性名 -->
+			<!-- 主键 -->
+			<name>id</name>
+			<!-- 是否是必须，如果非必须没设置则为空 -->
+			<required>false</required>
+			<!-- 是否可在属性中使用表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 编码 -->
+			<name>codeNum</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>
