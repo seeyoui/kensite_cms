@@ -2,7 +2,7 @@
 <script type="text/javascript">
 	${codeNum}ChartData();
 	function ${codeNum}ChartData() {
-		var ${codeNum}Chart = echarts.init(document.getElementById('${codeNum}'));
+		var ${codeNum}Chart = echarts.init(document.getElementById('${codeNum}'), 'macarons');
 		var sqlx = "${sqlx}";
 		var sqly = "${sqly}";
 		var sqlz = "${sqlz}";
