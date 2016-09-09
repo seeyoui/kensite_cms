@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
+import com.seeyoui.kensite.framework.websocket.util.PostServer;
 /**
  * websocket 在线聊天
  * @author cuichen
@@ -42,4 +44,13 @@ public class ChatController extends BaseController {
 		return new ModelAndView("framework/websocket/"+page, modelMap);
 	}
 	
+	@RequestMapping(value = "/hi")
+	@ResponseBody
+	public Object hi(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String info) {
+		String data = "{\"key\":\"69a51fe6b4ec4c57b453a464dba1429b\",\"info\":\""+info+"\"}";
+		String result = PostServer.SendPost(data, "http://www.tuling123.com/openapi/api");
+		return result;
+	}
 }

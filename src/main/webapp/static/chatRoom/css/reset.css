@@ -1,0 +1,95 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-family: 微软雅黑, "Microsoft YaHei";
+	overflow-x: hidden;
+}
+input{
+	outline: none;
+	font-family: 微软雅黑, "Microsoft YaHei";
+	color: #333;
+	font-size: 14px;
+}
+input[type='text'],input[type='password']{
+	text-indent: 10px;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+.row:before,
+.row:after {
+	content: '\0020';
+	display: block;
+	clear: both;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+html {
+	-webkit-text-size-adjust: none;
+	height: 100%;
+}
+strong,b{
+	font-weight:bold;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	width: auto\9;
+	/* ie8 */
+}
+button{
+    font-family: 微软雅黑, "Microsoft YaHei";
+}
+
+a{text-decoration: none;}
+/*清浮动*/
+.clearfix:before,.clearfix:after {content: "."; display: block; height: 0; visibility: hidden;}
+.clearfix:after {clear: both;}
+.clearfix {zoom: 1;} /* IE < 8 */
+.fl{float:left;}
+.fr{float:right;}

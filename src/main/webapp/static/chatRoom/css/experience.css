@@ -1,0 +1,712 @@
+.stop {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none
+}
+
+.wapper_ex {
+	height: 530px;
+	background: #f9f9f9
+}
+
+.wapper_ex .con {
+	width: 1000px;
+	margin: 0 auto;
+	padding-top: 10px
+}
+
+.wapper_ex .message {
+	width: 202px;
+	height: 508px;
+	float: left;
+	border: #dbdada solid 1px;
+	-ms-box-shadow: 0 0 5px 0 #dbdada;
+	-moz-box-shadow: 0 0 5px 0 #dbdada;
+	-webkit-box-shadow: 0 0 5px 0 #dbdada;
+	-o-box-shadow: 0 0 5px 0 #dbdada;
+	box-shadow: 0 0 5px 0 #dbdada;
+	background: #fff;
+	margin-right: 12px
+}
+
+.wapper_ex .message .top {
+	height: 162px;
+	padding-top: 40px;
+	background: #00a3f0
+}
+
+.wapper_ex .message .top span {
+	background: url(../img/experience.png) no-repeat;
+	height: 92px;
+	width: 92px;
+	background-position: 0 -709px;
+	display: block;
+	margin: 0 auto
+}
+
+.wapper_ex .message .top p {
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+	line-height: 62px
+}
+
+.wapper_ex .message .btm {
+	padding-top: 10px
+}
+
+.wapper_ex .message .btm p {
+	font-size: 14px;
+	color: #333;
+	height: 16px;
+	line-height: 16px;
+	padding: 12px 0 15px 30px
+}
+
+.wapper_ex .message .btm div {
+	padding: 0 0 0 25px
+}
+
+.wapper_ex .message .btm span {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 16px;
+	padding: 5px 12px;
+	font-size: 14px;
+	-ms-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px
+}
+
+.wapper_ex .message .btm span.active {
+	margin-right: 0
+}
+
+.wapper_ex .message .btm span.col1 {
+	color: #3cb1e7;
+	border: #3cb1e7 solid 1px
+}
+
+.wapper_ex .message .btm span.col2 {
+	color: #ff9c01;
+	border: #ff9c01 solid 1px
+}
+
+.wapper_ex .message .btm span.col3 {
+	color: #009944;
+	border: #009944 solid 1px
+}
+
+.wapper_ex .message .btm span.col4 {
+	color: #6e61a9;
+	border: #6e61a9 solid 1px
+}
+
+.wapper_ex .dialogue {
+	float: left;
+	width: 564px;
+	height: 508px;
+	border: #dbdada solid 1px;
+	-ms-box-shadow: 0 0 5px 0 #dbdada;
+	-moz-box-shadow: 0 0 5px 0 #dbdada;
+	-webkit-box-shadow: 0 0 5px 0 #dbdada;
+	-o-box-shadow: 0 0 5px 0 #dbdada;
+	box-shadow: 0 0 5px 0 #dbdada;
+	background: #fff;
+	overflow: hidden;
+	margin-right: 12px;
+	position: relative
+}
+
+.wapper_ex .dialogue .roll {
+	width: 2px;
+	height: 352px;
+	position: absolute;
+	right: 12px;
+	top: 20px;
+	background: #ededed;
+	z-index: 5;
+	display: none
+}
+
+.wapper_ex .dialogue .roll span {
+	width: 6px;
+	height: 26px;
+	background: #ededed;
+	position: absolute;
+	left: -2px;
+	top: 0px;
+	-ms-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	cursor: pointer
+}
+
+.wapper_ex .displayArea {
+	margin-top: 30px;
+	width: 584px;
+	height: 364px;
+	overflow-y: scroll;
+	border-bottom: #f0f0f0 solid 1px;
+	position: relative
+}
+
+.wapper_ex .mWord {
+	margin-bottom: 18px
+}
+
+.wapper_ex .mWord span {
+	background: url(../img/experience.png) no-repeat;
+	height: 40px;
+	width: 40px;
+	background-position: 0 -626px;
+	float: right;
+	margin-right: 28px
+}
+
+.wapper_ex .mWord p {
+	word-break: break-all;
+	top: 2px;
+	float: right;
+	margin-right: 14px;
+	color: #fff;
+	font-size: 14px;
+	padding: 6px 18px;
+	line-height: 24px;
+	background: #19b955;
+	-ms-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
+	position: relative;
+	max-width: 210px
+}
+
+.wapper_ex .mWord p i {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-left: 6px solid #19b955;
+	right: -6px;
+	top: 12px
+}
+
+.wapper_ex .rotWord {
+	margin-bottom: 18px
+}
+
+.wapper_ex .rotWord span {
+	background: url(../img/experience.png) no-repeat;
+	height: 43px;
+	width: 43px;
+	background-position: 0 -666px;
+	float: left;
+	margin-left: 24px
+}
+
+.wapper_ex .rotWord p {
+	word-break: break-all;
+	top: 4px;
+	float: left;
+	margin-left: 14px;
+	color: #333;
+	font-size: 14px;
+	padding: 6px 18px;
+	line-height: 24px;
+	background: #f1f1f1;
+	-ms-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
+	position: relative;
+	max-width: 220px
+}
+
+.wapper_ex .rotWord p i {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-right: 6px solid #f1f1f1;
+	left: -6px;
+	top: 12px
+}
+
+.wapper_ex .rotWord p a {
+	color: #2373be
+}
+
+.wapper_ex .rotWord1 {
+	margin-bottom: 18px
+}
+
+.wapper_ex .rotWord1 span {
+	background: url(../img/experience.png) no-repeat;
+	height: 43px;
+	width: 43px;
+	background-position: 0 -666px;
+	float: left;
+	margin-left: 24px
+}
+
+.wapper_ex .rotWord1 .findMsg {
+	float: left;
+	margin-left: 14px;
+	width: 210px;
+	height: 176px;
+	background: #f1f1f1;
+	-ms-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+	position: relative
+}
+
+.wapper_ex .rotWord1 .findMsg i {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-right: 6px solid #f1f1f1;
+	left: -6px;
+	top: 14px
+}
+
+.wapper_ex .rotWord1 .findMsg p {
+	font-size: 14px;
+	color: #333333;
+	text-align: left;
+	height: 14px;
+	line-height: 14px;
+	padding: 10px 0 6px;
+	text-indent: 10px
+}
+
+.wapper_ex .rotWord1 .findMsg .main {
+	width: 188px;
+	height: 134px;
+	border: #dcdcdc solid 1px;
+	margin: 0 auto;
+	-ms-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	overflow: hidden
+}
+
+.wapper_ex .rotWord1 .findMsg .pic img {
+	display: block;
+	width: 188px;
+	height: 54px
+}
+
+.wapper_ex .rotWord1 .findMsg .info {
+	height: 36px;
+	padding: 2px 6px;
+	background: #fff
+}
+
+.wapper_ex .rotWord1 .findMsg .info .make {
+	float: left;
+	width: 140px;
+	line-height: 16px;
+	height: 38px;
+	font-size: 12px;
+	color: #8e8c8c;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.wapper_ex .rotWord1 .findMsg .info img {
+	float: right;
+	width: 25px;
+	height: 25px;
+	margin: 6px 7px 0 0
+}
+
+.wapper_ex .rotWord1 .findMsg .line {
+	height: 1px;
+	background: #dcdcdc
+}
+
+.wapper_ex .writeArea {
+	height: 42px;
+	margin-top: 25px
+}
+
+.wapper_ex .writeArea input {
+	width: 430px;
+	height: 38px;
+	line-height: 38px;
+	float: left;
+	margin-left: 14px;
+	border: #d0cfcf solid 1px;
+	-ms-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	text-indent: 14px;
+	-ms-box-shadow: 1px 1px 2px 0 #d0cfcf;
+	-moz-box-shadow: 1px 1px 2px 0 #d0cfcf;
+	-webkit-box-shadow: 1px 1px 2px 0 #d0cfcf;
+	-o-box-shadow: 1px 1px 2px 0 #d0cfcf;
+	box-shadow: 1px 1px 2px 0 #d0cfcf;
+	font-size: 14px
+}
+
+.wapper_ex .writeArea span {
+	cursor: pointer;
+	float: left;
+	margin-left: 12px;
+	color: #fff;
+	font-size: 14px;
+	width: 90px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	-ms-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	background: #00a3f0
+}
+
+.wapper_ex .writeArea span:hover {
+	background: #54c4f8
+}
+
+.wapper_ex #share {
+	height: 20px;
+	padding: 15px 20px 0
+}
+
+.wapper_ex #share em,
+.wapper_ex #share a {
+	float: left;
+	margin-left: 6px;
+	font-size: 12px;
+	padding-left: 0;
+	line-height: 24px;
+	margin-top: -4px
+}
+
+.wapper_ex #share .sp {
+	color: #333;
+	margin-left: 0;
+	line-height: 20px
+}
+
+.wapper_ex #share .sp1 {
+	background: url(../img/experience.png) no-repeat;
+	height: 24px;
+	width: 24px;
+	background-position: 0 -18px;
+	margin-left: 12px
+}
+
+.wapper_ex #share .sp1:hover {
+	background: url(../img/experience.png) no-repeat;
+	height: 24px;
+	width: 24px;
+	background-position: 0 -42px
+}
+
+.wapper_ex #share .sp2 {
+	background: url(../img/experience.png) no-repeat;
+	height: 24px;
+	width: 25px;
+	background-position: 0 -90px
+}
+
+.wapper_ex #share .sp2:hover {
+	background: url(../img/experience.png) no-repeat;
+	height: 24px;
+	width: 25px;
+	background-position: 0 -138px
+}
+
+.wapper_ex #share .sp3 {
+	background: url(../img/experience.png) no-repeat;
+	height: 24px;
+	width: 25px;
+	background-position: 0 -66px
+}
+
+.wapper_ex #share .sp3:hover {
+	background: url(../img/experience.png) no-repeat;
+	height: 24px;
+	width: 25px;
+	background-position: 0 -114px
+}
+
+.wapper_ex #share .sp4 {
+	float: right;
+	color: #2373be;
+	cursor: pointer
+}
+
+.wapper_ex #share .sp4:hover {
+	text-decoration: underline
+}
+
+.wapper_ex .example {
+	width: 200px;
+	height: 508px;
+	float: left;
+	border: #dbdada solid 1px;
+	-ms-box-shadow: 0 0 5px 0 #dbdada;
+	-moz-box-shadow: 0 0 5px 0 #dbdada;
+	-webkit-box-shadow: 0 0 5px 0 #dbdada;
+	-o-box-shadow: 0 0 5px 0 #dbdada;
+	box-shadow: 0 0 5px 0 #dbdada;
+	background: #fff
+}
+
+.wapper_ex .example ul {
+	padding: 0 19px 17px;
+	margin-top: 40px;
+	border-bottom: #eeeeee solid 1px
+}
+
+.wapper_ex .example li {
+	width: 54px;
+	margin-bottom: 18px;
+	float: left;
+	cursor: pointer
+}
+
+.wapper_ex .example li span {
+	margin: 0 auto 8px;
+	display: block
+}
+
+.wapper_ex .example li .spic1 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -423px
+}
+
+.wapper_ex .example li .spic2 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -452px
+}
+
+.wapper_ex .example li .spic3 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -365px
+}
+
+.wapper_ex .example li .spic4 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -394px
+}
+
+.wapper_ex .example li .spic5 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -481px
+}
+
+.wapper_ex .example li .spic6 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -597px
+}
+
+.wapper_ex .example li .spic7 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -568px
+}
+
+.wapper_ex .example li .spic8 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -510px
+}
+
+.wapper_ex .example li .spic9 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -539px
+}
+
+.wapper_ex .example li .spic10 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -336px
+}
+
+.wapper_ex .example li .spic11 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -220px
+}
+
+.wapper_ex .example li .spic12 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -191px
+}
+
+.wapper_ex .example li .spic13 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -162px
+}
+
+.wapper_ex .example li .spic14 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -307px
+}
+
+.wapper_ex .example li .spic15 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -278px
+}
+
+.wapper_ex .example li .spic16 {
+	background: url(../img/experience.png) no-repeat;
+	height: 29px;
+	width: 29px;
+	background-position: 0 -249px
+}
+
+.wapper_ex .example li p {
+	font-size: 12px;
+	text-align: center;
+	color: #30303f;
+	height: 12px
+}
+
+.wapper_ex .example .more {
+	height: 46px;
+	line-height: 46px;
+	text-align: center
+}
+
+.wapper_ex .example .more a {
+	font-size: 12px;
+	color: #2373be
+}
+
+.wapper_ex .example .more a:hover {
+	text-decoration: underline
+}
+
+.bg_ex {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 1008
+}
+
+.bg_ex .con {
+	width: 360px;
+	height: auto;
+	position: absolute;
+	left: 50%;
+	margin-left: -180px;
+	margin-top: 220px;
+	background: #fff;
+	-ms-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+	-ms-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	padding-bottom: 16px
+}
+
+.bg_ex .con .tit {
+	font-size: 14px;
+	text-align: center;
+	color: #fff;
+	background: #00a3f0;
+	height: 40px;
+	line-height: 40px;
+	-moz-border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-o-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0
+}
+
+.bg_ex .con .btm1,
+.bg_ex .con .btm2,
+.bg_ex .con .btm3 {
+	font-size: 12px;
+	text-align: center;
+	color: #2373be;
+	line-height: 14px;
+	margin-top: 16px;
+	display: none;
+	cursor: pointer
+}
+
+.bg_ex .con .close {
+	background: url(../img/experience.png) no-repeat;
+	height: 18px;
+	width: 18px;
+	background-position: 0 0;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	-ms-transition: 0.5s, 0s;
+	-moz-transition: 0.5s, 0s;
+	-webkit-transition: 0.5s, 0s;
+	-o-transition: 0.5s, 0.5s;
+	transition: 0.5s, 0s
+}
+
+.bg_ex .con .close:hover {
+	-ms-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg)
+}

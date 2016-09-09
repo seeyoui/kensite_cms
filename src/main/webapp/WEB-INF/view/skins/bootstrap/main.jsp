@@ -175,6 +175,7 @@
 				<small class="chat-date pull-right" id="headDate">
 				</small>
 				K信
+				<button type="button" class="btn btn-outline btn-danger btn-xs btn-rounded" onclick="hi();">自嗨</button>
 			</div>
 			<div id="console" class="content">
 				
@@ -243,6 +244,10 @@ function layerOpen(url, title, area) {
    	    	layer.close(index);
    	    }
    	});
+}
+
+function hi() {
+	window.open("${ctx}/sys/chat/chatRoom");
 }
 </script>
 
