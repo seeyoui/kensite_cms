@@ -157,6 +157,7 @@ public class KSChartController extends BaseController {
 			ModelMap modelMap, String sqlx, String sqly, String sqlz) throws Exception {
 		sqlx= HtmlUtils.htmlUnescape(sqlx);
 		sqly= HtmlUtils.htmlUnescape(sqly);
+		sqlz= HtmlUtils.htmlUnescape(sqlz);
 		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx, false);
 		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly, false);
 		List<Map<Object, Object>> zList = DBUtils.executeQuery(sqlz, false);

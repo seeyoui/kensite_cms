@@ -41,6 +41,8 @@ public class ChartConfig extends DataEntity<ChartConfig> {
 	private String sqly;//纵轴
 	@ExcelField(title="Z轴", type=1, align=2, sort=15, mod="KS_CHART_CONFIG|SQLZ")
 	private String sqlz;//Z轴
+	@ExcelField(title="扩展函数", type=1, align=2, sort=16, mod="KS_CHART_CONFIG|FUNC")
+	private String func;//扩展函数
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -109,5 +111,14 @@ public class ChartConfig extends DataEntity<ChartConfig> {
 	public String getSqlz() {
 //		return this.sqlz;
 		return HtmlUtils.htmlUnescape(this.sqlz);
+	}
+
+	public String getFunc() {
+//		return func;
+		return HtmlUtils.htmlUnescape(this.func);
+	}
+
+	public void setFunc(String func) {
+		this.func = func;
 	}
 }

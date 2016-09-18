@@ -7,11 +7,35 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/echarts.jsp"%>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp"%>
 </head>
 
 <body>
-	<div style="width:500px;height:300px;">
-	<ks:chart codeNum="dept_user_state_bar"/>
+	<div>
+		<input id="idStr" class="easyui-textbox" data-options="iconCls:'icon-search',value:'00000000000000000000000000000000'" style="width:300px"/>
+		<a href="javascript:dept_user_state_lineQueryParam();" class="easyui-linkbutton">查询</a>
 	</div>
+	<div style="width:500px;height:300px;">
+	<ks:chart codeNum="dept_user_state_line"/>
+	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		dept_user_state_lineQueryParam();
+	});
+	function getOpt() {
+		console.info(dept_user_state_lineChart.getOption());
+		console.info($("#idStr").textbox("getValue"));
+		dept_user_state_lineChart.setOption({
+			series: [
+		     	{
+		     	},
+		     	{
+		     		data:[3, 4]
+		     	}
+		     ]
+		});
+	}
+	</script>
 </body>
 </html>

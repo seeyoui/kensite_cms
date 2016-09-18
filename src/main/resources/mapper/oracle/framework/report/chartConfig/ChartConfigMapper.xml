@@ -18,7 +18,8 @@
 		T.SERIES_OPTION AS "seriesOption",
 		T.SQLX AS "sqlx",
 		T.SQLY AS "sqly",
-		T.SQLZ AS "sqlz"
+		T.SQLZ AS "sqlz",
+		T.FUNC AS "func"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -71,6 +72,9 @@
 			</if>
 			<if test="sqlz != null and sqlz != ''">
 				AND T.SQLZ LIKE '%'||#{sqlz}||'%'
+			</if>
+			<if test="func != null and func != ''">
+				AND T.FUNC LIKE '%'||#{func}||'%'
 			</if>
 		</where>
 	</sql>
@@ -153,6 +157,7 @@
 			SQLX,
 			SQLY,
 			SQLZ,
+			FUNC,
 			CREATE_USER,
 			CREATE_DATE,
 			ID
@@ -174,6 +179,7 @@
 			#{sqlx,jdbcType=VARCHAR},
 			#{sqly,jdbcType=VARCHAR},
 			#{sqlz,jdbcType=VARCHAR},
+			#{func,jdbcType=VARCHAR},
 			#{createUser.userName},
 			sysdate,
 			#{id}
@@ -221,6 +227,9 @@
 			</if>
 			<if test="sqlz !=null and sqlz !=''">
 			SQLZ=#{sqlz},
+			</if>
+			<if test="func !=null and func !=''">
+			FUNC=#{func},
 			</if>
 			UPDATE_USER = #{updateUser.userName},
 			UPDATE_DATE = sysdate,

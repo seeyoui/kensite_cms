@@ -9,6 +9,7 @@
 	<%@ include file="/WEB-INF/view/taglib/bootstrap.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/codemirror.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/echarts.jsp"%>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp"%>
 	<link rel="stylesheet" href="${ctx_bootstrap}/load/blueHeart.css" type="text/css"/>
 	<style type="text/css">
 		.btn-default {
@@ -72,7 +73,7 @@ ${chartConfig.chartOption }
 ${chartConfig.seriesOption }
 </textarea>
 </div>
-<div style="position: absolute;top: 40px;bottom: 300px;right: 0px;left: 600px;">
+<div style="position: absolute;top: 40px;bottom: 300px;right: 400px;left: 600px;">
 <textarea id="xsql">
 ${chartConfig.sqlx }
 </textarea>
@@ -81,6 +82,11 @@ ${chartConfig.sqlz }
 </textarea>
 <textarea id="ysql">
 ${chartConfig.sqly }
+</textarea>
+</div>
+<div style="position: absolute;top: 40px;bottom: 300px;right: 0px;width: 400px;">
+<textarea id="func">
+${chartConfig.func }
 </textarea>
 </div>
 <div style="position: absolute;height: 300px;bottom: 0px;right: 0px;left: 600px;">
@@ -101,7 +107,8 @@ ${chartConfig.sqly }
    				matchBrackets : true,
    				theme : "ambiance",
    				indentUnit : 4,
-   				styleActiveLine : true
+   				styleActiveLine : true,
+   				lineWrapping : true
    			});
 		editor_series = CodeMirror.fromTextArea(
 	   			document.getElementById("series"),
@@ -110,7 +117,8 @@ ${chartConfig.sqly }
 	   				matchBrackets : true,
 	   				theme : "ambiance",
 	   				indentUnit : 4,
-	   				styleActiveLine : true
+	   				styleActiveLine : true,
+	   				lineWrapping : true
 	   			});
 		editor_xsql = CodeMirror.fromTextArea(
 	   			document.getElementById("xsql"),
@@ -121,7 +129,8 @@ ${chartConfig.sqly }
 	   				theme : "ambiance",
 	   				indentUnit : 4,
 	   				mode: {name: "text/x-mysql"},
-	   				styleActiveLine : true
+	   				styleActiveLine : true,
+	   				lineWrapping : true
 	   			});
 		editor_zsql = CodeMirror.fromTextArea(
 	   			document.getElementById("zsql"),
@@ -132,7 +141,8 @@ ${chartConfig.sqly }
 	   				theme : "ambiance",
 	   				indentUnit : 4,
 	   				mode: {name: "text/x-mysql"},
-	   				styleActiveLine : true
+	   				styleActiveLine : true,
+	   				lineWrapping : true
 	   			});
 		editor_ysql = CodeMirror.fromTextArea(
 	   			document.getElementById("ysql"),
@@ -143,7 +153,18 @@ ${chartConfig.sqly }
 	   				theme : "ambiance",
 	   				indentUnit : 4,
 	   				mode: {name: "text/x-mysql"},
-	   				styleActiveLine : true
+	   				styleActiveLine : true,
+	   				lineWrapping : true
+	   			});
+		editor_func = CodeMirror.fromTextArea(
+	   			document.getElementById("func"),
+	   			{
+	   				lineNumbers : true,
+	   				matchBrackets : true,
+	   				theme : "ambiance",
+	   				indentUnit : 4,
+	   				styleActiveLine : true,
+	   				lineWrapping : true
 	   			});
 		editor_option.setSize('auto', '100%');
 		editor_series.setSize('auto', '100%');
@@ -151,6 +172,8 @@ ${chartConfig.sqly }
 		editor_xsql.setSize('auto', '30%');
 		editor_zsql.setSize('auto', '30%');
 		editor_ysql.setSize('auto', '40%');
+
+		editor_func.setSize('auto', '100%');
 		setTimeout("hideLoad()", 500);
 	});
 	
@@ -169,13 +192,8 @@ ${chartConfig.sqly }
 		eval(editor_option.getValue());
 		eval(editor_series.getValue());
 		
-		myChart = echarts.init(document.getElementById('chartMain'));
+		myChart = echarts.init(document.getElementById('chartMain'), 'macarons');
 		getChartData();
-	}
-
-	function getChartData1() {
-		myChart.setOption(option);
-		myChart.setOption(seriesOption);
 	}
 	
 	function getChartData() {
@@ -186,6 +204,8 @@ ${chartConfig.sqly }
 			layer.msg('请检查数据项', {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 			return;
 		}
+		var func = editor_func.getValue();
+		eval(func);
 		$.ajax({
 			type: "post",
 			url: '${ctx}/ks/chart/${chartConfig.type }',
@@ -222,7 +242,9 @@ ${chartConfig.sqly }
 		var sqlx = editor_xsql.getValue();
 		var sqly = editor_ysql.getValue();
 		var sqlz = editor_zsql.getValue();
-		if(chartOption==null || chartOption=='' || seriesOption==null || seriesOption=='' || sqlx==null || sqlx=='' || sqly==null || sqly=='' || sqlz==null || sqlz=='') {
+
+		var func = editor_func.getValue();
+		if(chartOption==null || chartOption=='' || seriesOption==null || seriesOption=='' || sqlx==null || sqlx=='' || sqly==null || sqly=='' || sqlz==null || sqlz=='' || func==null || func=='') {
 			layer.msg('请检查数据项', {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 			return;
 		}
@@ -236,7 +258,8 @@ ${chartConfig.sqly }
 				seriesOption : seriesOption,
 				sqlx : sqlx,
 				sqly : sqly,
-				sqlz : sqlz
+				sqlz : sqlz,
+				func : func
 			},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){

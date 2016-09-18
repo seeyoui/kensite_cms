@@ -1,11 +1,15 @@
 <div id="${codeNum}" style="height:100%"></div>
 <script type="text/javascript">
-	${codeNum}ChartData();
-	function ${codeNum}ChartData() {
-		var ${codeNum}Chart = echarts.init(document.getElementById('${codeNum}'), 'macarons');
+	//${codeNum}QueryParam();
+	var ${codeNum}Chart = echarts.init(document.getElementById('${codeNum}'), 'macarons');
+	function ${codeNum}QueryParam() {
 		var sqlx = "${sqlx}";
 		var sqly = "${sqly}";
 		var sqlz = "${sqlz}";
+		${func}
+		${codeNum}ChartData(sqlx, sqly, sqlz);
+	}
+	function ${codeNum}ChartData(sqlx, sqly, sqlz) {
 		$.ajax({
 			type: "post",
 			url: '/kensite/ks/chart/${type}',
