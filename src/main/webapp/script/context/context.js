@@ -5,7 +5,6 @@
  */
 
 var context = context || (function () {
-    
 	var options = {
 		fadeSpeed: 100,
 		filter: function ($obj) {
@@ -90,7 +89,6 @@ var context = context || (function () {
 	}
 
 	function addContext(selector, data) {
-		
 		var d = new Date(),
 			id = d.getTime(),
 			$menu = buildMenu(data, id);
@@ -113,16 +111,45 @@ var context = context || (function () {
 			} else if (typeof options.above == 'string' && options.above == 'auto') {
 				$dd.removeClass('dropdown-context-up');
 				var autoH = $dd.height() + 12;
-				if ((e.pageY + autoH) > $('html').height()) {
-					$dd.addClass('dropdown-context-up').css({
-						top: e.pageY - 20 - autoH,
-						left: e.pageX - 13
-					}).fadeIn(options.fadeSpeed);
+				var autoW = $dd.width();
+				if ((e.pageY + autoH) > $(selector).height()) {
+					if((e.pageX + autoW) < $(selector).width()) {
+						if(e.pageX > 13) {
+							$dd.addClass('dropdown-context-up').css({
+								top: e.pageY - 20 - autoH,
+								left: e.pageX - 13
+							}).fadeIn(options.fadeSpeed);
+						} else {
+							$dd.addClass('dropdown-context-up').css({
+								top: e.pageY - 20 - autoH,
+								left: 5
+							}).fadeIn(options.fadeSpeed);
+						}
+					} else {
+						$dd.addClass('dropdown-context-up').css({
+							top: e.pageY - 20 - autoH,
+							left: $(selector).width() - autoW - 5
+						}).fadeIn(options.fadeSpeed);
+					}
 				} else {
-					$dd.css({
-						top: e.pageY + 10,
-						left: e.pageX - 13
-					}).fadeIn(options.fadeSpeed);
+					if((e.pageX + autoW) < $(selector).width()) {
+						if(e.pageX > 13) {
+							$dd.css({
+								top: e.pageY + 10,
+								left: e.pageX - 13
+							}).fadeIn(options.fadeSpeed);
+						} else {
+							$dd.css({
+								top: e.pageY + 10,
+								left: 5
+							}).fadeIn(options.fadeSpeed);
+						}
+					} else {
+						$dd.css({
+							top: e.pageY + 10,
+							left: $(selector).width() - autoW - 5
+						}).fadeIn(options.fadeSpeed);
+					}
 				}
 			}
 		});
