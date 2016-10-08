@@ -457,10 +457,6 @@ function drawborder(){
         var sel = getActualCellRange(sels[n], sheet.getRowCount(), sheet.getColumnCount());
         var haveborder = false;
         if(whichborder != "" && whichborder != "none"){
-        	console.info(sheet);
-        	console.info(sel);
-        	console.info(whichborder);
-        	console.info(lineBorder);
     		sheet.setBorder(sel, lineBorder, {
                   left: whichborder == "left",
                   right: whichborder == "right",

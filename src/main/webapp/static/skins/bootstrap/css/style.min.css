@@ -5140,12 +5140,25 @@ del {
 
 #small-chat {
 	position: fixed;
-	bottom: 50px;
-	right: 26px;
+	bottom: 0px;
+	right: 150px;
 	z-index: 100
 }
 
 #small-chat .badge {
+	position: absolute;
+	top: -3px;
+	right: -4px
+}
+
+#robot-chat {
+	position: fixed;
+	bottom: 0px;
+	right: 200px;
+	z-index: 100
+}
+
+#robot-chat .badge {
 	position: absolute;
 	top: -3px;
 	right: -4px
@@ -5167,11 +5180,27 @@ del {
 	background: #1ab394
 }
 
+.open-robot-chat {
+	height: 38px;
+	width: 38px;
+	display: block;
+	background: #ed5565;
+	padding: 9px 8px;
+	text-align: center;
+	color: #fff;
+	border-radius: 50%
+}
+
+.open-robot-chat:hover {
+	color: #fff;
+	background: #ed5565
+}
+
 .small-chat-box {
 	display: none;
 	position: fixed;
-	bottom: 50px;
-	right: 80px;
+	bottom: 45px;
+	right: 30px;
 	background: #fff;
 	border: 1px solid #e7eaec;
 	width: 300px;

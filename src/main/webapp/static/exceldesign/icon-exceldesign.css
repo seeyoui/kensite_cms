@@ -58,3 +58,9 @@
 .icon-menuBtn-double{background:url('img/border/double.png') no-repeat center center;}
 .icon-menuBtn-hair{background:url('img/border/hair.png') no-repeat center center;}
 .icon-menuBtn-mediumdashed{background:url('img/border/mediumdashed.png') no-repeat center center;}
+
+.icon-menuBtn-none{background:url('img/menuBtn/none.png') no-repeat center center;}
+.icon-menuBtn-right{background:url('img/menuBtn/right.png') no-repeat center center;}
+.icon-menuBtn-left{background:url('img/menuBtn/left.png') no-repeat center center;}
+.icon-menuBtn-top{background:url('img/menuBtn/top.png') no-repeat center center;}
+.icon-menuBtn-bottom{background:url('img/menuBtn/bottom.png') no-repeat center center;}

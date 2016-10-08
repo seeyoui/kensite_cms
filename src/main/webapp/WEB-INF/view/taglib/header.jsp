@@ -14,7 +14,7 @@
 	<script src="${ctx_static}/json2.js"></script>
 	<script type="text/javascript" src="${ctx_static}/kensite.sys.js"></script>
 	<script type="text/javascript" src="${ctx_static}/kensite.info.js"></script>
-
+	
 	<script type="text/javascript" >
 		var ctx="${ctx }";
 		var TRUE = "<%=StringConstant.TRUE%>";

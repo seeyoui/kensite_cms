@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.google.code.kaptcha.Constants;
 import com.seeyoui.kensite.common.util.CookieUtils;
 import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.common.util.SessionUtil;
@@ -68,14 +69,15 @@ public class LoginController {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
         password = MD5.md5(userName+password);
-        //获取HttpSession中的验证码
-//        String verifyCode = (String)request.getSession().getAttribute("verifyCode");
-        //获取用户请求表单中输入的验证码
-//        String submitCode = WebUtils.getCleanParam(request, "verifyCode");
+//        //获取HttpSession中的验证码
+//        String verifyCode = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+//        //获取用户请求表单中输入的验证码
+//        String submitCode = request.getParameter("verifyCode");
 //        System.out.println("用户[" + userName + "]登录时输入的验证码为[" + submitCode + "],HttpSession中的验证码为[" + verifyCode + "]");
 //        if (StringUtils.isEmpty(submitCode) || !StringUtils.equals(verifyCode, submitCode.toLowerCase())){
-//            request.setAttribute("message_login", "验证码不正确");
-//            return resultPageURL;
+//        	info = "验证码不正确";
+//        	modelMap.put("info", info);
+//        	return resultPageURL;
 //        }
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         token.setRememberMe(true);
@@ -175,31 +177,5 @@ public class LoginController {
 		return "skins/common/"+url;
 	}
 	
-	/**
-	 * 单点登录
-	 * @param modelMap
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/sso/weaver")
-	@ResponseBody
-	public ModelAndView ssoWeaver(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String userInfo, String url, String license) {
-		String mac = "00-26-C6-3B-B6-9A";
-		System.out.println(request.getRemoteAddr());
-		List<String> result = new ArrayList<String>();
-		result.add(mac);
-		result.add(request.getRemoteAddr());
-		System.out.println(MD5.md5(result.toString()));
-		if(StringUtils.isBlank(license) || !license.equals(MD5.md5(result.toString()))) {
-			return new ModelAndView("redirect:/WEB-INF/view/error/error404.jsp", modelMap);
-		}
-		JSONObject jsonObj = JSONObject.fromObject(userInfo);
-		SysUser sysUser = (SysUser) JSONObject.toBean(jsonObj, SysUser.class);
-		SessionUtil.setSession("currentUserName", "system");
-		SessionUtil.setSession("currentUser", sysUser);
-		return new ModelAndView("redirect:"+url, modelMap);
-	}
 }
 

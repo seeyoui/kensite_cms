@@ -115,8 +115,8 @@
 					<a id="rightAlign" title="右对齐" href="javascript:alignBx({'a_halign':'2'}, $('#rightAlign').linkbutton('options').selected)" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-rightAlign',iconAlign:'top',toggle:true,selected:false,group:'valign'"></a>
 				</td>
 				<td class="splitTHead">
-					<a id="mergeCell" title="合并单元格" href="javascript:mergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-MergenBx',iconAlign:'top'"></a>
-					<a id="unMergeCell" title="拆分单元格" href="javascript:unMergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-splitBx',iconAlign:'top'"></a>
+					<a id="mergeCell" title="合并单元格" href="javascript:mergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-MergenBx',iconAlign:'top',selected:false"></a>
+					<a id="unMergeCell" title="拆分单元格" href="javascript:unMergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-splitBx',iconAlign:'top',selected:false"></a>
 				</td>
 				<td class="splitTHead">
 					<input id="borderstyle" class="easyui-combobox" style="width:60px;height:26px" data-options="
@@ -154,7 +154,7 @@
 				</td>
 				<td class="splitTHead">
 					<a id="cleanAll" title="清除所有" href="javascript:cleanCell(3)" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-cleanAll',iconAlign:'top'"></a>
-					<a id="setting" title="单元格设置" href="javascript:setting()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-settingBx',iconAlign:'top'"></a>
+					<a id="setting" title="单元格设置" href="javascript:getSheetData()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-settingBx',iconAlign:'top'"></a>
 				</td>
 				<td class="splitTHead">
 					<a id="showtitle" title="显示行列头" href="javascript:showExcelHead($('#showtitle').linkbutton('options').selected);" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-showtitle',iconAlign:'top',toggle:true,selected:true"></a>
@@ -200,6 +200,7 @@
 	}
 	
 	function getSheetData() {
+		//setting();
 		console.info($("#KSreport").data('spread').toJSON( { includeBindingSource: true } ));
 	}
 </script>

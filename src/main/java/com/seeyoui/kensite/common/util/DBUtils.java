@@ -1,6 +1,7 @@
 package com.seeyoui.kensite.common.util;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -27,13 +28,32 @@ public class DBUtils {
 	 * @throws Exception
 	 */
 	public static Connection getConnection() throws Exception {
-		Connection conn=null;
+		Connection conn = null;
 		try {
 			conn = dataSource.getConnection();
 		} catch (SQLException e) {
 			throw e;
 		}
 		return conn;
+	}
+	/**
+	 * 获得数据库连接
+	 * @param driver 驱动
+	 * @param url URL
+	 * @param username 用户名
+	 * @param password 密码
+	 * @return
+	 * @throws Exception
+	 */
+	public static Connection getConnection(String driver, String url, String username, String password) throws Exception {
+		Connection conn = null;
+	       try {
+	           Class.forName(driver);
+	           conn = DriverManager.getConnection(url, username, password);
+	       } catch (Exception e) {
+	    	   throw e;
+	       }
+	       return conn;
 	}
 	/**
 	 * 关闭数据库资源

@@ -766,6 +766,13 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ueditor-1.1.1.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>com.seeyoui.kensite</groupId>
+			<artifactId>kaptcha-2.3.2.jar</artifactId>
+			<version>2.3.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/kaptcha-2.3.2.jar</systemPath>
+		</dependency>
 		
 		<!-- 使用 Jetty JSP引擎 
 		<dependency>
