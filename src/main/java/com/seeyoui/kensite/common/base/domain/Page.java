@@ -1,5 +1,8 @@
 package com.seeyoui.kensite.common.base.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Page<T> {
 	
@@ -15,6 +18,8 @@ public class Page<T> {
 	
 	private boolean firstPage;//是否是第一页
 	private boolean lastPage;//是否是最后一页
+	
+	private List<T> list = new ArrayList<T>();//数据集合
 	
 	/**
 	 * 构造方法
@@ -147,5 +152,23 @@ public class Page<T> {
 
 	public void setLastPage(boolean lastPage) {
 		this.lastPage = lastPage;
+	}
+	
+	/**
+	 * 获取本页数据对象列表
+	 * @return List<T>
+	 */
+	public List<T> getList() {
+		return list;
+	}
+
+	/**
+	 * 设置本页数据对象列表
+	 * @param list
+	 */
+	public Page<T> setList(List<T> list) {
+		this.list = list;
+		initialize();
+		return this;
 	}
 }

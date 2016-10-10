@@ -31,7 +31,7 @@
 						
 	<!-- 它背后注册了很多用于解析注解的处理器,其中就包括<context:annotation-config/>配置的注解所使用的处理器 -->
 	<!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config> -->
-	<context:component-scan base-package="com.seeyoui.kensite.**.controller,com.seeyoui.kensite.**.service,com.seeyoui.kensite.**.quartz,com.seeyoui.kensite.**.shiro,com.seeyoui.kensite.common.util,com.seeyoui.kensite.common.listener">
+	<context:component-scan base-package="com.seeyoui.kensite.**.controller,com.seeyoui.kensite.**.service,com.seeyoui.kensite.**.quartz,com.seeyoui.kensite.**.shiro,com.seeyoui.kensite.common.util,com.seeyoui.kensite.common.listener,org.activiti.rest.editor">
 	<!-- <context:component-scan base-package="com.seeyoui.kensite"> -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" /> -->
@@ -116,6 +116,7 @@
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/portal/**"/>
 			<mvc:exclude-mapping path="/login/**"/>
+			<mvc:exclude-mapping path="/act/**"/>
 			<mvc:exclude-mapping path="/cms/**"/>
 			<mvc:exclude-mapping path="/sys/**"/>
 			<mvc:exclude-mapping path="/"/>
@@ -129,6 +130,7 @@
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/portal/**"/>
+			<mvc:exclude-mapping path="/act/**"/>
 			<mvc:exclude-mapping path="/sys/**"/>
 			<mvc:exclude-mapping path="/information/**"/>
 			<mvc:exclude-mapping path="/"/>
