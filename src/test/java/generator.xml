@@ -15,23 +15,23 @@
 	<!-- JSP文件所在路径 web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">WEB-INF/view</entry>
 	<!-- 项目本地硬盘绝对路径 -->
-	<entry key="outRoot">F:\workspace\</entry>
+	<entry key="outRoot">C:\Users\cuichen\git\</entry>
 	<!-- ==========只需要配置一次========== -->
 	
 	
 	<!-- ==========根据业务自行修改========== -->
 	<!-- 当前模块所属包路径 -->
-	<entry key="innerpackage">framework.cms</entry>
+	<entry key="innerpackage">framework.plugin</entry>
 	<!-- 当前模块名，@RequestMapping(value = "guestbook")==@RequestMapping(value = "cms/guestbook") -->
-	<entry key="moduleC">cms/</entry>
+	<entry key="moduleC">ks/</entry>
 	<!-- 当前模块名，@RequiresPermissions("guestbook:view")==@RequiresPermissions("cms:guestbook:view") -->
-	<entry key="moduleP">cms:</entry>
+	<entry key="moduleP">ks:</entry>
 	<!-- 是否生成全文检索模块，需要：Y，不需要：N，打开将会对增删改查操作有一定效率影响，请按照需求设置 -->
 	<entry key="lucene">N</entry>
 	<!-- ==========根据业务自行修改========== -->
 
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
-	<entry key="tableRemovePrefixes">job_,bo_,cms_,sys_,mod_,t_</entry>
+	<entry key="tableRemovePrefixes">job_,bo_,cms_,sys_,mod_,ks_,t_</entry>
 	
 	<entry key="jdbc.username">kensitecms</entry>
 	<entry key="jdbc.password">kensite</entry>
