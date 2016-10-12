@@ -39,7 +39,7 @@
 }
 
 .editor-toolbar > .btn-group {
-	margin: 12px 15px 0px 0px;
+	margin: 5px 5px 0px 0px;
 }
 
 .editor-toolbar  > .btn-group.pull-right {
@@ -47,7 +47,7 @@
 }
 
 .editor-toolbar .btn.btn-inverse {
-	font-size: 24px;
+	font-size: 18px;
 	color: #FFFFFF;
     border-color: rgba(0, 0, 0, 0);
     padding: 3px 6px 0px 6px;
@@ -56,8 +56,8 @@
     text-align: center;
     border: none;
     margin: 0px 0px 0px 5px;
-    height: 36px;
-    min-width: 36px;
+    height: 32px;
+    min-width: 32px;
 }
 .editor-toolbar .btn.btn-inverse.pressed {
 	background-color: #287d92;
@@ -109,7 +109,7 @@
 	margin: 0px 0px 5px 15px;
 	background-color: #ffffff;
 	font-family: Arial, Regular;
-	font-size: 17px;
+	font-size: 14px;
 	color: #323437;
 }
 
@@ -273,7 +273,7 @@ div.propertySection {
 .selected-item-body {
 	padding: 0;
 	overflow: auto;
-	height: 199px;
+	height: 177px;
 }
 
 .selected-item-body > div {
@@ -301,7 +301,7 @@ div.propertySection {
 }
 
 .property-row span.title {
-	font-size: 13px;
+	font-size: 12px;
 	font-weight: bold;
 	width: 46%;
 }
@@ -407,7 +407,7 @@ li.x-menu-list-item.x-menu-item-active a {
 /* Editor icon font */
 .editor-icon {
 	position: relative;
-	top: 1px;
+	top: 0px;
 	display: inline-block;
 	font-family: 'ActivitiModeler';
 	font-style: normal;
