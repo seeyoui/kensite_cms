@@ -48,8 +48,8 @@ public class ActProcessController extends BaseController {
 	/**
 	 * 流程模型列表
 	 */
-	@RequestMapping(value = {"showPageList", ""})
-	public ModelAndView showactModelPageList(HttpSession session,
+	@RequestMapping(value = {"list", ""})
+	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
 		return new ModelAndView("framework/act/actProcessList", modelMap);
@@ -62,9 +62,9 @@ public class ActProcessController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public String listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String category, Pager pager) throws Exception{
 		EasyUIDataGrid eudg = actProcessService.processList(pager, category);
@@ -78,7 +78,7 @@ public class ActProcessController extends BaseController {
 	/**
 	 * 运行中的实例列表
 	 */
-	@RequestMapping(value = "showRunningPageList")
+	@RequestMapping(value = "running")
 	public ModelAndView runningList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
@@ -92,9 +92,9 @@ public class ActProcessController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "getRunningListData", method=RequestMethod.POST)
+	@RequestMapping(value = "list/running", method=RequestMethod.POST)
 	@ResponseBody
-	public String getRunningListData(HttpSession session,
+	public String listRunning(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String category, String procDefKey, Pager pager) throws Exception{
 		EasyUIDataGrid eudg = actProcessService.runningList(pager, category, procDefKey);

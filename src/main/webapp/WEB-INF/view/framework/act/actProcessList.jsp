@@ -15,7 +15,7 @@
   	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/actProcess/getListData.do"
+		    		url="${ctx}/actProcess/list/data"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -43,12 +43,12 @@
     </div>
     <script type="text/javascript">
     	function formatProcessXml(val, row){
-    		var xmlstr = '<a target="_blank" href="${ctx}/actProcess/resource.do?procDefId='+row.id+'&resType=xml">'+val+'</a>';
+    		var xmlstr = '<a target="_blank" href="${ctx}/actProcess/resource?procDefId='+row.id+'&resType=xml">'+val+'</a>';
             return xmlstr;
         }
         
         function formatProcessImg(val, row){
-    		var imgstr = '<a target="_blank" href="${ctx}/actProcess/resource.do?procDefId='+row.id+'&resType=image">'+val+'</a>';
+    		var imgstr = '<a target="_blank" href="${ctx}/actProcess/resource?procDefId='+row.id+'&resType=image">'+val+'</a>';
             return imgstr;
         }
         
@@ -80,13 +80,13 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: "${ctx}/actProcess/remove.do",
+							url: "${ctx}/actProcess/remove",
 							data: {deploymentId:row.deploymentId},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data==TRUE){
 			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 			                    } else {
 				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
@@ -115,8 +115,8 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: "${ctx}/actProcess/"+cmd+".do",
-							data: {procDefId:row.id},
+							url: "${ctx}/actProcess/"+cmd,
+							data: {procDefId : row.id},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){
 							},

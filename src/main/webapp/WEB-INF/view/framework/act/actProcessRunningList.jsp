@@ -15,7 +15,7 @@
   	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/actProcess/getRunningListData.do"
+		    		url="${ctx}/actProcess/list/running"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -34,10 +34,10 @@
 		    <div id="dataWin" class="easyui-window" title="流程实例删除" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">删除原因</div>
 		        <form id="dataForm" method="post" enctype="multipart/form-data">
-							<div class="fitem">
-				                <label>原因</label>
-				                <input id="reason" name="reason" class="easyui-textbox" data-options="required:true"/>
-				            </div>
+					<div class="fitem">
+		                <label>原因</label>
+		                <input id="reason" name="reason" class="easyui-textbox" data-options="required:true"/>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -86,7 +86,7 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: "${ctx}/actProcess/deleteProcIns.do",
+							url: "${ctx}/actProcess/deleteProcIns",
 							data: {procInsId:row.processInstanceId,reason:reason},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){

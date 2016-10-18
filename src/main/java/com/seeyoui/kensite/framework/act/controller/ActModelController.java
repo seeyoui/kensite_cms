@@ -31,8 +31,8 @@ public class ActModelController extends BaseController {
 	/**
 	 * 流程模型列表
 	 */
-	@RequestMapping(value = {"showPageList", ""})
-	public ModelAndView showactModelPageList(HttpSession session,
+	@RequestMapping(value = {"list", ""})
+	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
 		return new ModelAndView("framework/act/actModelList", modelMap);
@@ -45,9 +45,9 @@ public class ActModelController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String category, Pager pager) throws Exception{
 		EasyUIDataGrid eudg = actModelService.modelList(pager, category);
@@ -71,11 +71,10 @@ public class ActModelController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveactModelByAdd(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap,
+	public String save(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request, ModelMap modelMap,
 			String name, String key, String description, String category) throws Exception{
 		try {
 			org.activiti.engine.repository.Model modelData = actModelService.create(name, key, description, category);
@@ -117,9 +116,9 @@ public class ActModelController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveactModelByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String id, String category) throws Exception{
 		actModelService.updateCategory(id, category);
@@ -138,8 +137,8 @@ public class ActModelController extends BaseController {
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		actModelService.delete(delDataId);
+			ModelMap modelMap, String id) throws Exception {
+		actModelService.delete(id);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}

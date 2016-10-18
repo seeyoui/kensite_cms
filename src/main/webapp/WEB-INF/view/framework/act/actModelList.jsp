@@ -15,7 +15,7 @@
   	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/actModel/getListData.do"
+		    		url="${ctx}/actModel/list/data"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -39,22 +39,22 @@
 		    <div id="dataWin" class="easyui-window" title="流程模型信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">流程模型信息维护</div>
 		        <form id="dataForm" method="post" enctype="multipart/form-data">
-							<div class="fitem">
-				                <label>流程分类</label>
-				                <input id="category" name="category" class="easyui-textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>模型标识</label>
-				                <input id="key" name="key" class="easyui-textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>模型名称</label>
-				                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>描述</label>
-				                <input id="description" name="description" class="easyui-textbox" data-options="required:true"/>
-				            </div>
+					<div class="fitem">
+		                <label>流程分类</label>
+		                <input id="category" name="category" class="easyui-textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>模型标识</label>
+		                <input id="key" name="key" class="easyui-textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>模型名称</label>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>描述</label>
+		                <input id="description" name="description" class="easyui-textbox" data-options="required:true"/>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -64,9 +64,6 @@
 		    </div>
 	    </div>
     </div>
-    <form id="delForm" method="post" enctype="multipart/form-data">
-    	<input type="hidden" id="delDataId" name="delDataId" value=""/>
-    </form>
     <script type="text/javascript">
 	    $(document).ready(function(){
 	    });
@@ -86,7 +83,7 @@
         function newInfo(){
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
-            url = '${ctx}/actModel/saveByAdd.do';
+            url = '${ctx}/actModel/save';
         }
         function editInfo(){
             var row = $('#dataList').datagrid('getSelected');
@@ -123,7 +120,7 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: "${ctx}/actModel/deploy.do",
+							url: "${ctx}/actModel/deploy",
 							data: {id:row.id},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){
@@ -144,13 +141,13 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: "${ctx}/actModel/delete.do",
-							data: {delDataId:row.id},
+							url: "${ctx}/actModel/delete",
+							data: {id : row.id},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data==TRUE){
 			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 			                    } else {
 				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
