@@ -1,77 +1,71 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
+<%@ include file="/WEB-INF/view/taglib/common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Kensite开发平台</title>
-	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
-	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
-	<link rel="stylesheet" type="text/css" href="${ctx_login}/login_index/css/style.css" />
-	<!--[if lte IE 7]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
-	<style type="text/css">
-	form {
-		position: absolute;
-		height: 110px;
-		width: 360px;
-	}
-	
-	#loginForm {
-		position:absolute;
-		top:50%;
-		left:50%;
-		margin:-55px 0 0 -163px;
-	}
-	
-	#bg_div{ 
-		position:fixed; 
-		top:0; 
-		left:0; 
-		bottom:0; 
-		right:0; 
-		z-index:-1; 
-	} 
-	
-	#bg_div img { 
-		height:100%; 
-		width:100%; 
-		border:0; 
-	} 
-	</style>
+<title>Kensite开发平台</title>
+<%@ include file="/WEB-INF/view/taglib/header.jsp"%>
+<%@ include file="/WEB-INF/view/taglib/layer.jsp"%>
+<link rel="stylesheet" type="text/css" href="${ctx_login}/login_particle/css/style.css" />
+<script type="text/javascript" src="${ctx_login}/login_particle/js/Particleground.js"></script>
+<style type="text/css">
+body {
+	height: 100%;
+	background: #16a085;
+	overflow: hidden;
+}
+canvas {
+	z-index: -1;
+	position: absolute;
+}
+</style>
 </head>
 
 <body>
-	<div id="bg_div"><img src="${ctx_login}/login_index/img/login_bg.jpg" /></div>
 	<form class="form-1" method="post" id="loginForm" name="loginForm" action="${ctx}/login">
-		<p class="field">
-			<input type="text" id="userName" name="userName" placeholder="帐号"/>
-			<i class="icon-user icon-large"></i>
-		</p>
-			<p class="field">
-				<input type="password" id="password" name="password" placeholder="密码"/>
-				<i class="icon-lock icon-large"></i>
-		</p>
-		<input id="rememberMe" name="rememberMe" type="hidden" value="" />
-		<p class="submit">
-			<button type="submit" name="submit"><i class="icon-arrow-right icon-large"></i></button>
-		</p>
+		<dl class="admin_login">
+			<dt>
+				<strong>站点后台管理系统</strong> <em>Management System</em>
+			</dt>
+			<dd class="user_icon">
+				<input id="userName" name="userName" type="text" placeholder="账号" class="login_txtbx" />
+			</dd>
+			<dd class="pwd_icon">
+				<input id="password" name="password" type="password" placeholder="密码" class="login_txtbx" />
+			</dd>
+			<dd>
+			</dd>
+			<dd>
+				<input type="button" value="立即登陆" class="submit_btn" />
+			</dd>
+			<dd>
+				<p>© 2014-2016 kensite 版权所有</p>
+				<p>鲁B2-8998988-1</p>
+			</dd>
+		</dl>
 	</form>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('.submit').click(function() {
+			$('body').particleground({
+				dotColor : '#5cbdaa',
+				lineColor : '#5cbdaa'
+			});
+
+			$('.submit_btn').click(function() {
 				$('#loginForm').submit();
 			});
 			//添加“回车”事件
 			$(document).keydown(function(e) {
 				if (e.keyCode === 13) {
-					$('.submit').click();
+					$('.submit_btn').click();
 				}
 			});
 			<c:if test="${not empty info}">
-				layer.msg('${info}', {
-				    offset: 'rb',
-					icon: 5,
-				    shift: 8
-				});
+			layer.msg('${info}', {
+				offset : 'rb',
+				icon : 5,
+				shift : 8
+			});
 			</c:if>
 		});
 	</script>
