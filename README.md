@@ -89,6 +89,7 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 
 [https://github.com/seeyoui/kensite_cms/src/main/webapp/DOC/doc/doc.html](https://github.com/seeyoui/kensite_cms/src/main/webapp/DOC/doc/doc.html)
 [https://github.com/seeyoui/kensite_cms/doc/doc.html](https://github.com/seeyoui/kensite_cms/doc/doc.html)
+[http://htmlpreview.github.io/?https://github.com/seeyoui/kensite_cms/blob/master/doc/doc.html](http://htmlpreview.github.io/?https://github.com/seeyoui/kensite_cms/blob/master/doc/doc.html)
 
 1. 具备运行环境：JDK1.7+、Maven3.0+、MySql5+或Oracle10g+。
 2. 修改src\main\resources\kensite.properties文件中的数据库设置参数。
