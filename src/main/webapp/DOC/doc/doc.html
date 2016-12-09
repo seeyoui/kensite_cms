@@ -35,6 +35,14 @@
     .gradient {filter: none !important;}
 </style>
 <![endif]-->
+<style type="text/css">
+    .full-img {
+        width: 687px;
+    }
+    .step-img {
+        width: 226px;
+    }
+</style>
 </head>
 
 <body>
@@ -47,13 +55,13 @@
                 <!-- row -->
                 <div class="row">
                     <div class="col-sm-3">
-                        <div class="logo"><img src="images/logo.png" alt="" /></div>
+                        <div class="logo"><img style="width: 126px;" src="images/logo.png" alt="" /></div>
                     </div>
 
                     <div class="col-sm-9">
                         <h1>SeeYoui KenSite</h1>
-                        <span>Version: 1.0</span>
-                        <span>Last update: 持续更新</span>
+                        <span>Version: 2.5.0</span>
+                        <span>Last update: 2016-12-09，持续更新中...</span>
                     </div>
                 </div>
                 <!--/ row-->
@@ -91,8 +99,8 @@
 <pre class="prettyprint">
 框架采用maven+springmvc+mybatis+shiro+ehcache+easyui搭建
 系统基础模块：部门，人员，角色，权限，菜单，字典，皮肤
-代码生成器：一键生成controller、service、domain、数据库映射、jsp列表及表单页面，增删改查操作一步到位，极大减少工作量，减少50%的工作量
-后台数据库建模：使的列表和表单可基于配置，可以灵活便捷的完成大部分功能，极大减少开发量，减少80%的工作量
+代码生成器：一键生成controller、service、domain、数据库映射、jsp列表及表单页面，增删改查操作一步到位，极大减少工作量，减少80%的工作量
+后台数据库建模：使的列表和表单可基于配置，通过可视化配置便可以灵活便捷的完成大部分功能，极大减少开发量和修改代码的操作，再次减少80%的工作量
 附件上传：基于配置可以灵活上传各种文件，或增加上传限制
 定时任务计划：Quartz灵活配置任意时间任意循环的任务计划
 信息发送相关：集成微信、百度推送、极光推送、邮件发送等
@@ -120,12 +128,16 @@ kensite
 ├───src
 │   ├───main
 │   │   ├───java(java文件)
+│   │   │   ├───bussiness(平台演示模块)
 │   │   │   ├───common(平台通用模块)
-│   │   │   ├───framework(平台系统模块)
-│   │   │   └───bussiness(平台演示模块)
+│   │   │   │   ├───constants(系统静态常量)
+│   │   │   │   ├───quartz(定时任务计划)
+│   │   │   │   └───util(丰富的工具类)
+│   │   │   └───framework(平台系统模块)
 │   │   ├───resources(资源配置文件)
 │   │   │   ├───db(数据SQL)
 │   │   │   ├───ehcache(缓存配置文件)
+│   │   │   ├───mailtemplate(邮件模版|短信模版)
 │   │   │   ├───mapper(mybatis数据库映射文件)
 │   │   │   ├───kensite.properties(平台配置文件)
 │   │   │   ├───log4j.properties(日志配置文件)
@@ -203,14 +215,14 @@ kensite
 									打开命令提示符（开始---运行---cmd）</br>
 									<code>mvn -v</code></br>
 									如果能打印出maven的版本号，说明配置成功。</br>
-									<img style="width:640px;" src="./images/mvncmd.jpg"/>
+									<img class="full-img" src="./images/mvncmd.jpg"/>
 								</p>
 								<p>
 									<em>五、修改本地仓库</em></br>
 									修改我们仓库地址，仓库用于存放我们项目所依赖的所有jar包。</br>
 									我的仓库路径：D:\apache-maven-repo----这个路径是自己创建的，你可以将路径创建在任何位置。</br>
 									打开<code>D:\apache-maven-3.0.5\conf</code>目录下的<code>setting.xml</code>文件，设置成我们创建的仓库路径</br>
-									<img style="width:640px;" src="./images/mvnconf.png"/></br>
+									<img class="full-img" src="./images/mvnconf.png"/></br>
 									下面我们用一个命令验证一下。打开命令提示符，输入：<code>mvn help:system</code></br>
 									该命令会打印出所有的java系统属性和环境变量。这些信息对我们日常的编程工作很有帮助。</br>
 									如果运行的过程中没有错误，打开我们仓库（D:\apache-maven-repo）会发现里面多了一些文件。这些文件就是我们从maven的中央仓库下载到本地仓库的。</br>
@@ -220,37 +232,38 @@ kensite
 								<p>
 									<em>一、初始化数据库</em></br>
 									1）、自行创建用户名及密码</br>
-									2）、执行sql语句，创建表和初始化表数据<code>src/main/resources/db/act&sys/*.sql</code>
+									2）、执行sql语句，创建表和初始化表数据<code>src/main/resources/db/sys/*.sql</code></br>
+                                    3）、修改项目数据库配置文件<code>src/main/resources/kensite.properties</code>
 								</p>
 								<p>
 									<em>二、启动并访问项目</em></br>
-									1）、<code>bin/clean.bat</code></br>
-									2）、<code>bin/run-jetty.bat</code></br>
-									<img style="width:640px;" src="./images/jettyrun.png"/></br>
+									1）、运行项目根目录下<code>bin/clean.bat</code></br>
+									2）、运行项目根目录下<code>bin/run-jetty.bat</code></br>
+									<img class="full-img" src="./images/jettyrun.png"/></br>
 									3）、浏览器地址栏访问：<code>http://localhost:8080/kensite/</code></br>
-									<img style="width:640px;" src="./images/login.png"/></br>
+									<img class="full-img" src="./images/login.png"/></br>
 									4）、管理员用户名密码：<code>system/system</code></br>
-									<img style="width:640px;" src="./images/website.png"/></br>
+									<img class="full-img" src="./images/website.png"/></br>
 								</p>
 								<dt class="parent">eclipse运行KenSite</dt><dd>eclipse使用的版本是luna自带maven插件，不带maven的请自行集成</dd>
 								<p>
 									<em>一、MAVEN配置</em></br>
 									1）、打开eclipse，进入<code>window-preference-Maven</code></br>
 									2）、设置maven安装路径</br>
-									<img style="width:640px;" src="./images/eclipsemvnconf.png"/></br>
+									<img class="full-img" src="./images/eclipsemvnconf.png"/></br>
 									3）、设置本地库地址</br>
-									<img style="width:640px;" src="./images/eclipsemvnsetting.png"/></br>
+									<img class="full-img" src="./images/eclipsemvnsetting.png"/></br>
 								</p>
 								<p>
 									<em>二、启动并访问项目</em></br>
 									1）、项目导入到eclipse</br>
 									2）、右键项目<code>Run As-Run Configurations...</code></br>
-									<img style="width:640px;" src="./images/RunConfigurations.png"/></br>
-									<img style="width:640px;" src="./images/eclipserun.png"/></br>
+									<img class="full-img" src="./images/RunConfigurations.png"/></br>
+									<img class="full-img" src="./images/eclipserun.png"/></br>
 									3）、浏览器地址栏访问：<code>http://localhost:8080/kensite/</code></br>
-									<img style="width:640px;" src="./images/login.png"/></br>
+									<img class="full-img" src="./images/login.png"/></br>
 									4）、管理员用户名密码：<code>system/system</code></br>
-									<img style="width:640px;" src="./images/website.png"/></br>
+									<img class="full-img" src="./images/website.png"/></br>
 								</p>
 							</dl>
                         </div>
@@ -263,13 +276,35 @@ kensite
                         <h2 id="base-code">基础开发</h2>
 
                         <div class="description">
-                            <p>敬请期待...</p>
-                        </div>
-                        <div class="example">
-                            <div class="example-code">
-                                <pre class="prettyprint">
-                                </pre>
-                            </div>
+                            <dt class="parent">快速创建开发模块</dt><dd>5分钟完成90%的开发工作</dd>
+                            <p>
+                                <em>一、创建表结构</em></br>
+                                1）、创建是数据库表</br>
+                                <img class="full-img" src="./images/develop1.png"/></br>
+                                2）、创建数据库字段</br>
+                                <img class="full-img" src="./images/develop2.png"/></br>
+                                3）、配置数据库字段</br>
+                                <img class="step-img" src="./images/develop31.png"/>
+                                <img class="step-img" src="./images/develop32.png"/>
+                                <img class="step-img" src="./images/develop33.png"/></br>
+                                <img class="step-img" src="./images/develop34.png"/>
+                                <img class="step-img" src="./images/develop35.png"/>
+                                <img class="step-img" src="./images/develop36.png"/></br>
+                                <img class="step-img" src="./images/develop37.png"/>
+                                <img class="step-img" src="./images/develop38.png"/>
+                                <img class="step-img" src="./images/develop39.png"/></br>
+                                <img class="step-img" src="./images/develop30.png"/></br>
+                                4）、修改代码生成器配置文件</br>
+                                配置文件位置<code>src/test/java/generator.xml</code></br>
+                                5）、生成代码</br>
+                                修改表名并运行<code>src/test/java/cn/org/generator/GenerationTest.java</code></br>
+                                6）、配置系统菜单及访问权限</br>
+                                <img class="full-img" src="./images/develop4.png"/></br>
+                                <img class="full-img" src="./images/develop5.png"/></br>
+                                7）、重启服务，完成</br>
+                                <img class="full-img" src="./images/develop6.png"/></br>
+                                8）、新增修改删除导出等基础操作完成</br>
+                            </p>
                         </div>
                     </div>
                     <!-- Basic Template -->
@@ -282,11 +317,14 @@ kensite
                             <p>敬请期待...</p>
                         </div>
                         <div class="example">
-                            <div class="example-code">
-                                    <pre class="prettyprint">
-                                    </pre>
+                            <div class="example-item example-buttons">
+                                <p>示例代码</p>
                             </div>
-                        </div>
+                            <div class="example-code">
+                                <pre class="prettyprint">
+&lt;!doctype html>
+                                </pre>
+                            </div>
                     </div>
                     <!--/ senior-code -->
 
