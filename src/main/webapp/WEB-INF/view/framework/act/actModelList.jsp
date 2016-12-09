@@ -65,11 +65,10 @@
 	    </div>
     </div>
     <script type="text/javascript">
-	    $(document).ready(function(){
+	    $(document).ready(function() {
 	    });
 	    
 	    function selectData() {
-		    
 		    var sel_name = $("#sel_name").val();
         	$('#dataList').datagrid('load',{
     		    name:sel_name
@@ -80,29 +79,29 @@
         	selectData();
         }
         var url;
-        function newInfo(){
+        function newInfo() {
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
             url = '${ctx}/actModel/save';
         }
-        function editInfo(){
+        function editInfo() {
             var row = $('#dataList').datagrid('getSelected');
-            if (row){
+            if (row) {
                 window.open('${ctx}/act/modeler.jsp?modelId='+row.id);
             }    	
         }
         var loadi;
-        function saveInfo(){
+        function saveInfo() {
             $('#dataForm').form('submit',{
                 url: url,
-                onSubmit: function(param){
+                onSubmit: function(param) {
                 	if($(this).form('validate')) {
                 		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
-                success: function(info){
-                    if (info==TRUE){
+                success: function(info) {
+                    if (info==TRUE) {
                         layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
                     } else {
 	                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
@@ -115,48 +114,54 @@
         }
         function deploy() {
         	var row = $('#dataList').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('确认','你确定部署该记录吗？',function(r){
-                    if (r){
-                    	$.ajax({
-							type: "post",
-							url: "${ctx}/actModel/deploy",
-							data: {id:row.id},
-							dataType: 'text',
-							beforeSend: function(XMLHttpRequest){
-							},
-							success: function(data, textStatus){
-			                    layer.msg(data, {time: layerMsgTime});
-								reloadData();
-							}
-						});
-                    }
-                });
+            if (row) {
+            	layer.confirm('你确定部署该记录吗？', {
+					btn: ['确定','取消'] //按钮
+				}, function() {
+					$.ajax({
+						type: "post",
+						url: "${ctx}/actModel/deploy",
+						data: {id:row.id},
+						dataType: 'text',
+						beforeSend: function(XMLHttpRequest) {
+							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+						},
+						success: function(data, textStatus) {
+		                	layer.close(loadi);
+		                    layer.msg(data, {time: layerMsgTime});
+							reloadData();
+						}
+					});
+				}, function() {
+				});
             }
         }
-        function destroyInfo(){
+        function destroyInfo() {
             var row = $('#dataList').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('确认','你确定删除该记录吗？',function(r){
-                    if (r){
-                    	$.ajax({
-							type: "post",
-							url: "${ctx}/actModel/delete",
-							data: {id : row.id},
-							dataType: 'text',
-							beforeSend: function(XMLHttpRequest){
-							},
-							success: function(data, textStatus){
-								if (data==TRUE){
-			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-			                    } else {
-				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-			                    }
-								reloadData();
-							}
-						});
-                    }
-                });
+            if (row) {
+            	layer.confirm('你确定删除该记录吗？', {
+					btn: ['确定','取消'] //按钮
+				}, function() {
+					$.ajax({
+						type: "post",
+						url: "${ctx}/actModel/delete",
+						data: {id : row.id},
+						dataType: 'text',
+						beforeSend: function(XMLHttpRequest) {
+							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+						},
+						success: function(data, textStatus) {
+		                	layer.close(loadi);
+							if (data==TRUE) {
+		                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+		                    } else {
+			                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+		                    }
+							reloadData();
+						}
+					});
+				}, function() {
+				});
             }
         }
     </script>
