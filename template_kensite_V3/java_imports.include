@@ -1,0 +1,8 @@
+/**
+ * ${table.tableAlias}
+ * @author cuichen
+ * @version 2.0
+ * @since 1.0
+ * @date <#if now??>${now?string('yyyy-MM-dd')}</#if>
+ */
+ 

@@ -24,12 +24,19 @@ public class QueryUtils {
 	
 	private static final String ALL_STR = "全部";
 	
-	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
+	public static StringBuffer getTableColumnStr(TableColumn tableColumn, String theme) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
 		if(tc == null || StringConstant.NO.equals(tc.getIsQuery())) {
 			return null;
 		}
-		StringBuffer result = getEasyUIStr(tc);
+		StringBuffer result = null;
+		if(StringUtils.isBlank(theme)) {
+			result = getEasyUIStr(tc);
+		} else if("layer".equals(theme)) {
+			result = getLayerUIStr(tc);
+		} else {
+			result = getEasyUIStr(tc);
+		}
 		return result;
 	}
 	
@@ -43,7 +50,7 @@ public class QueryUtils {
 		String column = tableColumn.getName();
 		String table = tableColumn.getTableName();
 		column = StringUtils.toCamelCase(column);
-		result.append("<span>"+tableColumn.getComments()+"</span>");
+		result.append("<span class=\"toolbar-title\">"+tableColumn.getComments()+"</span>");
 		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory()) || TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
 			result.append("<input class=\"easyui-textbox\" id=\"sel_"+table+"_");
 			result.append(column);
@@ -267,6 +274,188 @@ public class QueryUtils {
 			}
 			result.append("/>");
 		}
+		if(needCache) {
+			CacheUtils.put(TableColumnConstants.CACHE_QUERY+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
+		}
+		return result;
+	}
+	
+	private static StringBuffer getLayerUIStr(TableColumn tableColumn) throws Exception {
+		StringBuffer result = (StringBuffer)CacheUtils.get(TableColumnConstants.CACHE_QUERY+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+		if (result !=  null){
+			return result;
+		}
+		boolean needCache = true;
+		result = new StringBuffer();
+		String column = tableColumn.getName();
+		String table = tableColumn.getTableName();
+		column = StringUtils.toCamelCase(column);
+		result.append("<label class=\"layui-form-label\">"+tableColumn.getComments()+"</label>");
+		result.append("<div class=\"layui-input-block\">");
+		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory()) || TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
+			result.append("<input class=\"layui-input\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" type=\"text\" autocomplete=\"off\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" "));
+			}
+			result.append("/>");
+		}
+		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append("<select id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" lay-filter=\"aihao\" ");
+			result.append(">");
+			result.append("<option value=\"\"></option>");
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
+					for(Map<Object, Object> map : list) {
+						String selected = "";
+						result.append("<option value=\""+map.get(value.toUpperCase())+"\" "+selected+">"+map.get(label.toUpperCase())+"</option>");
+					}
+				} else if(settings.indexOf("DICT>") != -1) {
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						String selected = "";
+						result.append("<option value=\""+dict.getValue()+"\" "+selected+">"+dict.getLabel()+"</option>");
+					}
+				} else if(settings.indexOf("URL>") != -1) {
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
+				} else {
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							String selected = "";
+							result.append("<option value=\""+set+"\" "+selected+">"+set+"</option>");
+						} else {
+							String[] setArr = set.split(":");
+							String selected = "";
+							result.append("<option value=\""+setArr[0]+"\" "+selected+">"+setArr[1]+"</option>");
+						}
+					}
+				}
+			}
+			result.append("</select>");
+		}
+		if(TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory())) {
+			needCache = false;
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				int count = 1;
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
+					for(Map<Object, Object> map : list) {
+						String checked = "";
+						result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+map.get(value.toUpperCase())+"\" title=\""+map.get(label.toUpperCase())+"\" "+checked);
+						result.append("/>");
+					}
+				} else if(settings.indexOf("DICT>") != -1) {
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						String checked = "";
+						result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+dict.getValue()+"\" title=\""+dict.getLabel()+"\" "+checked);
+						result.append("/>");
+					}
+				} else if(settings.indexOf("URL>") != -1) {
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
+				} else {
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							String checked = "";
+							result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+set+"\" title=\""+set+"\" "+checked);
+							if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+								result.append(tableColumn.getHtmlInner()+" ");
+							}
+							result.append("/>");
+						} else {
+							String[] setArr = set.split(":");
+							String checked = "";
+							result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+setArr[0]+"\" title=\""+setArr[1]+"\" "+checked);
+							result.append("/>");
+						}
+					}
+				}
+			}
+		}if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+			needCache = false;
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				int count = 1;
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
+					for(Map<Object, Object> map : list) {
+						String checked = "";
+						result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+map.get(value.toUpperCase())+"\" title=\""+map.get(label.toUpperCase())+"\" "+checked);
+						result.append("/>");
+					}
+				} else if(settings.indexOf("DICT>") != -1) {
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						String checked = "";
+						result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+dict.getValue()+"\" title=\""+dict.getLabel()+"\" "+checked);
+						result.append("/>");
+					}
+				} else if(settings.indexOf("URL>") != -1) {
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
+				} else {
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							String checked = "";
+							result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+set+"\" title=\""+set+"\" "+checked);
+							result.append("/>");
+						} else {
+							String[] setArr = set.split(":");
+							String checked = "";
+							result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+setArr[0]+"\" title=\""+setArr[1]+"\" "+checked);
+							result.append("/>");
+						}
+					}
+				}
+			}
+		}
+		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append("Layui不支持此插件");
+		}
+		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
+			result.append("<input class=\"layui-input\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" ");
+			if(!StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append(" onClick=\"WdatePicker({");
+					result.append(tableColumn.getSettings().replaceAll(",maxDate:''", "").replaceAll(",minDate:''", ""));
+					result.append("})\"");
+				} else {
+					result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");
+				}
+			}
+			result.append("/>");
+		}
+		result.append("</div>");
 		if(needCache) {
 			CacheUtils.put(TableColumnConstants.CACHE_QUERY+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
 		}

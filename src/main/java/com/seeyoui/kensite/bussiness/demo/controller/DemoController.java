@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -58,6 +60,25 @@ public class DemoController extends BaseController {
 	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("bussiness/demo/"+page, modelMap);
+	}
+	
+	/**
+	 * 根据ID查询单条数据
+	 * @param modelMap
+	 * @param module
+	 * @return
+	 * @throws Exception
+	 */
+	//@RequiresPermissions("bussiness:demo:select")
+	@RequestMapping(value = "/form/{id}")
+	@ResponseBody
+	public ModelAndView form(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, @PathVariable String id) throws Exception {
+		String page = "layui";
+		Demo demo = demoService.findOne(id);
+		modelMap.put("demo", JSONObject.fromObject(demo).toString());
 		return new ModelAndView("bussiness/demo/"+page, modelMap);
 	}
 	

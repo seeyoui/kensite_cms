@@ -29,6 +29,12 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<!-- 主题 -->
+			<name>theme</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- 指定标签名 -->
@@ -50,6 +56,12 @@
 		<attribute>
 			<!-- 列名 -->
 			<name>column</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 主题 -->
+			<name>theme</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -77,6 +89,12 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<!-- 主题 -->
+			<name>theme</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- 指定标签名 -->
@@ -98,6 +116,12 @@
 		<attribute>
 			<!-- 列名 -->
 			<name>column</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 主题 -->
+			<name>theme</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

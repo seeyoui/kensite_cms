@@ -24,7 +24,7 @@ import com.seeyoui.kensite.framework.system.util.DictUtils;
  */
 public class FormUtils {
 	
-	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
+	public static StringBuffer getTableColumnStr(TableColumn tableColumn, String theme) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
 		if(tc == null) {
 			return null;
@@ -35,7 +35,14 @@ public class FormUtils {
 		if(StringUtils.isNoneBlank(tc.getSettings())) {
 			tc.setSettings(ExpressionUtils.parse(tc.getSettings()));
 		}
-		StringBuffer result = getEasyUIStr(tc);
+		StringBuffer result = null;
+		if(StringUtils.isBlank(theme)) {
+			result = getEasyUIStr(tc);
+		} else if("layer".equals(theme)) {
+			result = getLayerUIStr(tc);
+		} else {
+			result = getEasyUIStr(tc);
+		}
 		return result;
 	}
 	
@@ -79,7 +86,10 @@ public class FormUtils {
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 				result.append(tableColumn.getSettings());
 			}
-			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
 			result.append("/>");
 		}
 		if(TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory())) {
@@ -106,7 +116,10 @@ public class FormUtils {
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 				result.append(tableColumn.getSettings());
 			}
-			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
 			result.append("/>");
 		}
 		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
@@ -209,7 +222,10 @@ public class FormUtils {
 			} else {
 				result.append(",panelHeight:'130',");
 			}
-			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
 			result.append("/>");
 		}
 		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
@@ -310,7 +326,10 @@ public class FormUtils {
 			} else {
 				result.append(",panelHeight:'130',");
 			}
-			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
 			result.append("/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
@@ -318,7 +337,10 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" name=\"");
 			result.append(column);
-			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
 			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
@@ -394,9 +416,427 @@ public class FormUtils {
 					result.append("var url = '/"+Global.getConfig("productName")+"/static/form/mod/sqlMapper.jsp?sqlStr='+sqlStr+'&mapperStr='+mapperStr;layerOpenSqlMapper(url);}}]");
 				}
 			}
-			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
 			result.append("/>");
 		}
+		result.append("<span id=\"msg-"+column+"\" class=\"err-msg\"></span>");
+		if(needCache) {
+			CacheUtils.put(TableColumnConstants.CACHE_FORM+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
+		}
+		return result;
+	}
+	
+	private static StringBuffer getLayerUIStr(TableColumn tableColumn) throws Exception {
+		StringBuffer result = (StringBuffer)CacheUtils.get(TableColumnConstants.CACHE_FORM+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+		if (result !=  null){
+			return result;
+		}
+		if(StringUtils.isNoneBlank(tableColumn.getIsEdit()) && StringConstant.HIDDEN.equals(tableColumn.getIsEdit())) {
+			return new StringBuffer();
+		}
+		boolean needCache = true;
+		result = new StringBuffer();
+		String column = tableColumn.getName();
+		column = StringUtils.toCamelCase(column);
+		result.append("<label class=\"layui-form-label\">"+tableColumn.getComments()+"</label>");
+		result.append("<div class=\"layui-input-block\">");
+		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory())) {
+			result.append("<input class=\"layui-input\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" type=\"text\" autocomplete=\"off\" ");
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append("readonly=true ");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled=disabled ");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
+				result.append("required ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+				result.append("lay-verify=\""+tableColumn.getValidType()+"\" ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append("value=\""+tableColumn.getDefaultValue()+"\" ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" "));
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
+			result.append("/>");
+		}
+		if(TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory())) {
+			result.append("<textarea class=\"layui-textarea\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" ");
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append("readonly=true ");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled=disabled ");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
+				result.append("required ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+				result.append("lay-verify=\""+tableColumn.getValidType()+"\" ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" "));
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
+			result.append(">");
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append(tableColumn.getDefaultValue());
+			}
+			result.append("</textarea>");
+		}
+		if(TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory())) {
+			result.append("<input class=\"layui-input\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" ");
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append("readonly=true ");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled=disabled ");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
+				result.append("required ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+				result.append("lay-verify=\""+tableColumn.getValidType()+"\" ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append("value=\""+tableColumn.getDefaultValue()+"\" ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" "));
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
+			result.append("/>");
+		}
+		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append("<select id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" lay-filter=\"aihao\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append("readonly=true ");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled=disabled ");
+			}
+			result.append(">");
+			result.append("<option value=\"\"></option>");
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
+					for(Map<Object, Object> map : list) {
+						String selected = "";
+						if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(map.get(value.toUpperCase()))) {
+							selected = "selected=\"\"";
+						}
+						result.append("<option value=\""+map.get(value.toUpperCase())+"\" "+selected+">"+map.get(label.toUpperCase())+"</option>");
+					}
+				} else if(settings.indexOf("DICT>") != -1) {
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						String selected = "";
+						if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(dict.getValue())) {
+							selected = "selected=\"\"";
+						}
+						result.append("<option value=\""+dict.getValue()+"\" "+selected+">"+dict.getLabel()+"</option>");
+					}
+				} else if(settings.indexOf("URL>") != -1) {
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
+				} else {
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							String selected = "";
+							if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(set)) {
+								selected = "selected=\"\"";
+							}
+							result.append("<option value=\""+set+"\" "+selected+">"+set+"</option>");
+						} else {
+							String[] setArr = set.split(":");
+							String selected = "";
+							if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(setArr[0])) {
+								selected = "selected=\"\"";
+							}
+							result.append("<option value=\""+setArr[0]+"\" "+selected+">"+setArr[1]+"</option>");
+						}
+					}
+				}
+			}
+			result.append("</select>");
+		}
+		if(TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory())) {
+			needCache = false;
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				int count = 1;
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
+					for(Map<Object, Object> map : list) {
+						String checked = "";
+						if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(map.get(value.toUpperCase()))) {
+							checked = "checked=\"\" ";
+						}
+						result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+map.get(value.toUpperCase())+"\" title=\""+map.get(label.toUpperCase())+"\" "+checked);
+						if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+							result.append(tableColumn.getHtmlInner()+" ");
+						}
+						if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+							result.append("readonly=true ");
+						}
+						if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+							result.append("disabled=disabled ");
+						}
+						result.append("/>");
+					}
+				} else if(settings.indexOf("DICT>") != -1) {
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						String checked = "";
+						if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(dict.getValue())) {
+							checked = "checked=\"\" ";
+						}
+						result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+dict.getValue()+"\" title=\""+dict.getLabel()+"\" "+checked);
+						if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+							result.append(tableColumn.getHtmlInner()+" ");
+						}
+						if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+							result.append("readonly=true ");
+						}
+						if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+							result.append("disabled=disabled ");
+						}
+						result.append("/>");
+					}
+				} else if(settings.indexOf("URL>") != -1) {
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
+				} else {
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							String checked = "";
+							if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(set)) {
+								checked = "checked=\"\" ";
+							}
+							result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+set+"\" title=\""+set+"\" "+checked);
+							if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+								result.append(tableColumn.getHtmlInner()+" ");
+							}
+							if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+								result.append("readonly=true ");
+							}
+							if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+								result.append("disabled=disabled ");
+							}
+							result.append("/>");
+						} else {
+							String[] setArr = set.split(":");
+							String checked = "";
+							if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(setArr[0])) {
+								checked = "checked=\"\" ";
+							}
+							result.append("<input type=\"radio\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+setArr[0]+"\" title=\""+setArr[1]+"\" "+checked);
+							if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+								result.append(tableColumn.getHtmlInner()+" ");
+							}
+							if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+								result.append("readonly=true ");
+							}
+							if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+								result.append("disabled=disabled ");
+							}
+							result.append("/>");
+						}
+					}
+				}
+			}
+		}if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+			needCache = false;
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				int count = 1;
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
+					for(Map<Object, Object> map : list) {
+						String checked = "";
+						if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(map.get(value.toUpperCase()))) {
+							checked = "checked=\"\" ";
+						}
+						result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+map.get(value.toUpperCase())+"\" title=\""+map.get(label.toUpperCase())+"\" "+checked);
+						if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+							result.append(tableColumn.getHtmlInner()+" ");
+						}
+						if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+							result.append("readonly=true ");
+						}
+						if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+							result.append("disabled=disabled ");
+						}
+						result.append("/>");
+					}
+				} else if(settings.indexOf("DICT>") != -1) {
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						String checked = "";
+						if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(dict.getValue())) {
+							checked = "checked=\"\" ";
+						}
+						result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+dict.getValue()+"\" title=\""+dict.getLabel()+"\" "+checked);
+						if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+							result.append(tableColumn.getHtmlInner()+" ");
+						}
+						if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+							result.append("readonly=true ");
+						}
+						if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+							result.append("disabled=disabled ");
+						}
+						result.append("/>");
+					}
+				} else if(settings.indexOf("URL>") != -1) {
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
+				} else {
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							String checked = "";
+							if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(set)) {
+								checked = "checked=\"\" ";
+							}
+							result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+set+"\" title=\""+set+"\" "+checked);
+							if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+								result.append(tableColumn.getHtmlInner()+" ");
+							}
+							if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+								result.append("readonly=true ");
+							}
+							if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+								result.append("disabled=disabled ");
+							}
+							result.append("/>");
+						} else {
+							String[] setArr = set.split(":");
+							String checked = "";
+							if(StringUtils.isNoneBlank(tableColumn.getDefaultValue()) && tableColumn.getDefaultValue().equals(setArr[0])) {
+								checked = "checked=\"\"";
+							}
+							result.append("<input type=\"checkbox\" id=\""+column+(count++)+"\" name=\""+column+"\" value=\""+setArr[0]+"\" title=\""+setArr[1]+"\" "+checked);
+							if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+								result.append(tableColumn.getHtmlInner()+" ");
+							}
+							if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+								result.append("readonly=true ");
+							}
+							if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+								result.append("disabled=disabled ");
+							}
+							result.append("/>");
+						}
+					}
+				}
+			}
+		}
+		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append("Layui不支持此插件");
+		}
+		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
+			result.append("<input class=\"layui-input\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" ");
+			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
+				result.append(tableColumn.getHtmlInner()+" ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append("value=\""+tableColumn.getDefaultValue()+"\" ");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append(" readonly=true");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append(" disabled = true");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
+				result.append("required ");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+				result.append("lay-verify=\""+tableColumn.getValidType()+"\" ");
+			}
+			if(!StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append(" onClick=\"WdatePicker({");
+					result.append(tableColumn.getSettings().replaceAll(",maxDate:''", "").replaceAll(",minDate:''", ""));
+					result.append("})\"");
+				} else {
+					result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");
+				}
+			}
+			result.append("/>");
+		}
+		if(TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory())) {
+			result.append("<script id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" type=\"text/plain\">");
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append(tableColumn.getDefaultValue());
+			}
+			result.append("</script>");
+			result.append("<script type=\"text/javascript\">");
+			result.append("var "+column+" = UE.getEditor('"+column+"', {autoHeight: false});");
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				result.append(""+column+".ready(function() {"+column+".setHeight("+tableColumn.getSettings()+");});");
+			}
+			result.append("</script>");
+		}
+		if(TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append("Layui不支持此插件");
+		}
+		result.append("</div>");
 		result.append("<span id=\"msg-"+column+"\" class=\"err-msg\"></span>");
 		if(needCache) {
 			CacheUtils.put(TableColumnConstants.CACHE_FORM+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);

@@ -347,7 +347,7 @@ $.extend($.fn.validatebox.defaults.rules,{
 		validator:function(value,param){
 			return/^[\u0391-\uFFE5\w]+$/.test(value);
 		},
-		message:'登录名称只允许汉字、英文字母、数字及下划线。'
+		message:'登录名称只允许汉字、英文字母、数字及下划线'
 	},
 	equalTo:{
 		validator:function(value,param){
@@ -377,7 +377,7 @@ $.extend($.fn.validatebox.defaults.rules,{
 		validator:function(value){
 			return/^(([1-9]+)|([0-9]+\.[0-9]{1,2}))$/.test(value);
 		},
-		message:'最多保留两位小数！'		
+		message:'最多保留两位小数'		
 	},
 	ddPrice:{
 		validator:function(value,param){

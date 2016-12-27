@@ -13,6 +13,7 @@ public class FormTag extends TagSupport {
 	
 	private String table;
 	private String column;
+	private String theme;
 	
 	@Override
 	public int doStartTag() throws JspException {
@@ -21,7 +22,7 @@ public class FormTag extends TagSupport {
 			TableColumn tableColumn = new TableColumn();
 			tableColumn.setTableName(table);
 			tableColumn.setName(column);
-			StringBuffer result = FormUtils.getTableColumnStr(tableColumn);
+			StringBuffer result = FormUtils.getTableColumnStr(tableColumn, theme);
 			if (StringUtils.isBlank(result)) {
 				return SKIP_BODY;
 			}
@@ -53,6 +54,10 @@ public class FormTag extends TagSupport {
 
 	public void setColumn(String column) {
 		this.column = column;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 	
 }

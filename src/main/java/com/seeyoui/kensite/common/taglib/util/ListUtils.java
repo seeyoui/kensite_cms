@@ -55,7 +55,7 @@ public class ListUtils {
 		if((StringUtils.isNoneBlank(tableColumn.getIsList()) && StringConstant.NO.equals(tableColumn.getIsList()))) {
 			result.append(" hidden:true,");
 		}
-		if((StringUtils.isNoneBlank(tableColumn.getIsSort()) && StringConstant.YES.equals(tableColumn.getIsList()))) {
+		if((StringUtils.isNoneBlank(tableColumn.getIsSort()) && StringConstant.YES.equals(tableColumn.getIsSort()))) {
 			result.append(" sortable:true,");
 		}
 		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {

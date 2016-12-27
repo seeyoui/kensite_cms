@@ -13,7 +13,7 @@
   <body style="overflow:hidden">
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;right:0px;left:0px;bottom:0px;">
-		    <table id="dataSubList" title="数据列" class="easyui-datagrid" style="width:100%;height:100%"
+		    <table id="dataSubList" title="" class="easyui-datagrid" style="width:100%;height:100%"
 		            toolbar="#subtoolbar" pagination="true"
 		            rownumbers="true" fitColumns="false" singleSelect="true">
 		        <thead>
@@ -36,13 +36,13 @@
 		            </tr>
 		        </thead>
 		    </table>
-		    <div id="subtoolbar">
+		    <div id="subtoolbar" class="toolbar">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newSubInfo()">新建</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editSubInfo()">修改</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroySubInfo()">删除</a>
-				列名<input id="sel_sub_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				注释<input id="sel_sub_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
-				类型<input id="sel_jdbcType" name="sel_jdbcType" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">列名</span><input id="sel_sub_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">注释</span><input id="sel_sub_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">类型</span><input id="sel_jdbcType" name="sel_jdbcType" class="easyui-textbox" data-options=""/>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectSubData()">查询</a>
 		    </div>
 	    </div>

@@ -204,7 +204,7 @@ public class TableColumnService extends BaseService {
 	public void changeState(TableColumn tableColumn) throws CRUDException{
 		tableColumn.preUpdate();
 		TagCacheUtils.removeCache(tableColumn);
-		tableColumnMapper.update(tableColumn);
+		tableColumnMapper.changeState(tableColumn);
 	}
 	
 	/**

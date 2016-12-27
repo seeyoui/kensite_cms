@@ -13,16 +13,62 @@ import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
  */
 public class QueryJsUtils {
 	
-	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
+	public static StringBuffer getTableColumnStr(TableColumn tableColumn, String theme) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
 		if(tc == null || StringConstant.NO.equals(tc.getIsQuery())) {
 			return null;
 		}
-		StringBuffer result = getEasyUIStr(tc);
+		StringBuffer result = null;
+		if(StringUtils.isBlank(theme)) {
+			result = getEasyUIStr(tc);
+		} else if("layer".equals(theme)) {
+			result = getLayerUIStr(tc);
+		} else {
+			result = getEasyUIStr(tc);
+		}
 		return result;
 	}
 	
 	private static StringBuffer getEasyUIStr(TableColumn tableColumn) throws Exception {
+		StringBuffer result = (StringBuffer)CacheUtils.get(TableColumnConstants.CACHE_QUERY_JS+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+		if (result !=  null){
+			return result;
+		}
+		boolean needCache = true;
+		result = new StringBuffer();
+		String column = tableColumn.getName();
+		String table = tableColumn.getTableName();
+		column = StringUtils.toCamelCase(column);
+		result.append(column+" : $('#sel_"+table+"_"+column+"').");
+		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory()) || TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
+			result.append("textbox('getValue')");
+		}
+		if(TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory())) {
+			result.append("numberbox('getValue')");
+		}
+		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory())) {
+			result.append("combobox('getValue')");
+		}
+		if(TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory())) {
+			result.append("combobox('getValue')");
+		}
+		if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+			result.append("combobox('getValue')");
+		}
+		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
+			result.append("val()");
+		}
+		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
+			result.append("combotree('getValue')");
+		}
+		result.append(",");
+		if(needCache) {
+			CacheUtils.put(TableColumnConstants.CACHE_QUERY_JS+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
+		}
+		return result;
+	}
+	
+	private static StringBuffer getLayerUIStr(TableColumn tableColumn) throws Exception {
 		StringBuffer result = (StringBuffer)CacheUtils.get(TableColumnConstants.CACHE_QUERY_JS+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
 		if (result !=  null){
 			return result;

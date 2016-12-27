@@ -79,7 +79,7 @@ function layerOpenSqlMapper(url) {
 function modDebug() {
 	layer.open({
 	    type: 2,
-	    title: '请选择',
+	    title: '数据列',
 	    fix: false, //不固定
 	    area: ['860px', '480px'],
 	    maxmin: false,

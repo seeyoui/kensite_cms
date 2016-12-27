@@ -4,6 +4,7 @@
  */
 package com.seeyoui.kensite.bussiness.demo.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.util.HtmlUtils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -31,9 +32,11 @@ public class Demo extends DataEntity<Demo> {
 	@ExcelField(title="用户性别", type=1, align=2, sort=10, mod="BO_DEMO|USER_SEX")
 	private String userSex;//用户性别
 	@ExcelField(title="用户年龄", type=1, align=2, sort=11, mod="BO_DEMO|USER_AGE")
+	@NotBlank
 	private String userAge;//用户年龄
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	@ExcelField(title="出生日期", type=1, align=2, sort=12, mod="BO_DEMO|USER_BIRTHDAY")
+	@NotBlank
 	private java.util.Date userBirthday;//出生日期
 	@ExcelField(title="用户头像", type=1, align=2, sort=13, mod="BO_DEMO|USER_ICON")
 	private String userIcon;//用户头像

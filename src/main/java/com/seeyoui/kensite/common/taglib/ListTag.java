@@ -13,6 +13,7 @@ public class ListTag extends TagSupport {
 	
 	private String table;
 	private String column;
+	private String theme;
 	
 	@Override
 	public int doStartTag() throws JspException {
@@ -53,6 +54,10 @@ public class ListTag extends TagSupport {
 
 	public void setColumn(String column) {
 		this.column = column;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 	
 }
