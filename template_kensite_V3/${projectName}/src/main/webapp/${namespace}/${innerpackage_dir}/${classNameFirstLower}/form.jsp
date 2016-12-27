@@ -15,7 +15,7 @@
 			<#list table.columns as column>
 				<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="delflag") ><#else>
 				<div class="layui-form-item">
-					<ks:formTag table="${table.sqlName}" column="${column.sqlName}"/>
+					<ks:formTag table="${table.sqlName}" column="${column.sqlName}" theme="layer"/>
 				</div>
 				</#if>
 			</#list>
