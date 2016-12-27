@@ -37,6 +37,7 @@ public class ListUtils {
 				if(StringUtils.isNoneBlank(pItem)) {
 					String[] pArr = pItem.split(":");
 					tc.setSettings(tc.getSettings().replaceAll("\\$"+pArr[0], pArr[1]));
+					tc.setDefaultValue(tc.getDefaultValue().replaceAll("\\$"+pArr[0], pArr[1]));
 				}
 			}
 		}
