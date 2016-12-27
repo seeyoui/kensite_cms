@@ -20,7 +20,7 @@ import com.seeyoui.kensite.framework.system.util.DictUtils;
  */
 public class ListUtils {
 	
-	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
+	public static StringBuffer getTableColumnStr(TableColumn tableColumn, String param) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
 		if(tc == null) {
 			return null;
@@ -30,6 +30,15 @@ public class ListUtils {
 		}
 		if(StringUtils.isNoneBlank(tc.getSettings())) {
 			tc.setSettings(ExpressionUtils.parse(tc.getSettings()));
+		}
+		if(StringUtils.isNoneBlank(param)) {
+			String[] paramArr = param.split("\\|");
+			for(String pItem : paramArr) {
+				if(StringUtils.isNoneBlank(pItem)) {
+					String[] pArr = pItem.split(":");
+					tc.setSettings(tc.getSettings().replaceAll("\\$"+pArr[0], pArr[1]));
+				}
+			}
 		}
 		StringBuffer result = getEasyUIStr(tc);
 		return result;

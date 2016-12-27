@@ -35,6 +35,12 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<!-- 参数 -->
+			<name>param</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- 指定标签名 -->
@@ -65,6 +71,12 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<!-- 参数 -->
+			<name>param</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<!-- 指定标签名 -->
@@ -92,6 +104,12 @@
 		<attribute>
 			<!-- 主题 -->
 			<name>theme</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 参数 -->
+			<name>param</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

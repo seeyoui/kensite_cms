@@ -14,6 +14,7 @@ public class ListTag extends TagSupport {
 	private String table;
 	private String column;
 	private String theme;
+	private String param;
 	
 	@Override
 	public int doStartTag() throws JspException {
@@ -22,7 +23,7 @@ public class ListTag extends TagSupport {
 			TableColumn tableColumn = new TableColumn();
 			tableColumn.setTableName(table);
 			tableColumn.setName(column);
-			StringBuffer result = ListUtils.getTableColumnStr(tableColumn);
+			StringBuffer result = ListUtils.getTableColumnStr(tableColumn, param);
 			if (StringUtils.isBlank(result)) {
 				return SKIP_BODY;
 			}
@@ -58,6 +59,10 @@ public class ListTag extends TagSupport {
 
 	public void setTheme(String theme) {
 		this.theme = theme;
+	}
+
+	public void setParam(String param) {
+		this.param = param;
 	}
 	
 }

@@ -483,6 +483,12 @@
 		
 		$('#category').combobox('setValue', 'textbox');
 		$('#settings').textbox('setValue', "prompt:''");
+		
+		$('#isNull').combobox('setValue', 'Y');
+		$('#isEdit').combobox('setValue', 'Y');
+		$('#isList').combobox('setValue', 'Y');
+		$('#isQuery').combobox('setValue', 'Y');
+		$('#isSort').combobox('setValue', 'Y');
         $('#dataSubWin').window('open');
         url = '${ctx}/sys/tableColumn/save';
     }
