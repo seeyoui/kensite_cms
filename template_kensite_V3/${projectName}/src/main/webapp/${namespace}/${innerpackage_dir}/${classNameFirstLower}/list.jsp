@@ -10,16 +10,17 @@
 		<title>${table.tableAlias}</title>
 		<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 		<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+		<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/ks/easyui.css"/>
 		<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
+		<%@ include file="/WEB-INF/view/taglib/layui.jsp" %>
 	</head>
 	<body>
 	 	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 			<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
-				<table id="dataList" title="${table.tableAlias}列表<c:if test="${"${"}ksfn:getConfig('debug')=='T'${"}"}"><a href='javascript:void(0)' onclick='modDebug()'>debug</a></c:if>" 
-						class="easyui-datagrid" style="width:100%;height:100%"
+				<table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
 						url="${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/list/data"
 						toolbar="#toolbar" pagination="true"
-						rownumbers="true" fitColumns="true" singleSelect="false">
+						rownumbers="true" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
 							<th data-options="field:'id',hidden:true">ID</th>
@@ -32,35 +33,69 @@
 						</tr>
 					</thead>
 				</table>
-				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.${table.classNameFirstLower}.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.${table.classNameFirstLower}.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.${table.classNameFirstLower}.destroyInfo()">删除</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.${table.classNameFirstLower}.exportExcel()">导出</a>
-					<#list table.columns as column>
-					<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="delflag") ><#else>
-					<ks:queryTag table="${table.sqlName}" column="${column.sqlName}"/>
-					</#if>
-					</#list>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.${table.classNameFirstLower}.selectData()">查询</a>
+				<div id="toolbar" class="toolbar">
+					<div class="toolbar-left">
+						<div class="toolbar-form">
+							<form id="search-form" class="layui-form" action="">
+								<div class="layui-form-item">
+									<div class="layui-inline">
+									</div>
+								</div>
+								<div id="form-other" style="display:none;">
+								<#list table.columns as column>
+								<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="delflag") ><#else>
+									<div class="layui-form-item">
+										<div class="layui-inline">
+											<ks:queryTag table="${table.sqlName}" column="${column.sqlName}" theme="layer"/>
+										</div>
+									</div>
+								</#if>
+								</#list>
+								</div>
+							</form>
+							<div id="form-btn" style="display:none;" class="layui-form-item">
+								<div class="layui-input-block">
+									<button class="layui-btn" onclick="$.${table.classNameFirstLower}.selectData()"><i class="layui-icon">&#xe615;</i></button>
+									<button class="layui-btn layui-btn-warm" onclick="$('#search-form')[0].reset()"><i class="layui-icon">&#xe63d;</i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="toolbar-right">
+						<button class="layui-btn layui-btn-normal" onclick="$.${table.classNameFirstLower}.newInfo()"><i class="layui-icon">&#xe61f;</i></button>
+						<button class="layui-btn layui-btn-normal" onclick="$.${table.classNameFirstLower}.editInfo()"><i class="layui-icon">&#xe642;</i></button>
+						<button class="layui-btn layui-btn-normal" onclick="$.${table.classNameFirstLower}.destroyInfo()"><i class="layui-icon">&#xe640;</i></button>
+					</div>
 				</div>
+			</div>
+			<div class="debug">
+				<c:if test="${ksfn:getConfig('debug')=='T'}"><a href='javascript:void(0)' onclick='modDebug()'>debug</a></c:if>
 			</div>
 		</div>
 		<script type="text/javascript">
 			var tableName = "${table.sqlName}";
 			$(document).ready(function(){
+				layui.use(['form', 'layedit', 'laydate'], function(){
+					var form = layui.form()
+					,layer = layui.layer
+					,layedit = layui.layedit
+					,laydate = layui.laydate;
+				});
+				$(".toolbar-left").hover(function() {
+					$(".toolbar-form").addClass("toolbar-form-ex");
+					$("#form-other").show();
+					$("#form-btn").show();
+				}, function() {
+					$(".toolbar-form").removeClass("toolbar-form-ex");
+					$("#form-other").hide();
+					$("#form-btn").hide();
+				});
 			});
 			var url, loadi;
 			var iframeWin = null, iframeBody=null;
 			$.${table.classNameFirstLower} = {
-		   		selectData : function () {
-					$('#dataList').datagrid('load',{
-						<#list table.columns as column>
-						<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="delflag") ><#else>
-						<ks:queryJsTag table="${table.sqlName}" column="${column.sqlName}"/>
-						</#if>
-						</#list>
-					});
+				selectData : function () {
+					$('#dataList').datagrid('load', $('#search-form').parseForm());
 				},
 				reloadData : function () {
 					$.${table.classNameFirstLower}.selectData();
@@ -85,7 +120,7 @@
 					layer.open({
 						type: 2,
 						title: '${table.tableAlias}基本信息',
-						area: ['310px', '350px'],
+						area: ['635px', '460px'],
 						fix: false, //不固定
 						maxmin: false,
 						content: url,
