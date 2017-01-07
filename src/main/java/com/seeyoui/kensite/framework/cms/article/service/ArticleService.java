@@ -103,6 +103,16 @@ public class ArticleService extends BaseService {
 	}
 	
 	/**
+	 * 数据修改
+	 * @param article
+	 * @throws CRUDException
+	 */
+	public void updateContent(Article article) throws CRUDException{
+		article.preUpdate();
+		articleMapper.updateContent(article);			
+	}
+	
+	/**
 	 * 点击数据修改
 	 * @param id
 	 * @throws CRUDException

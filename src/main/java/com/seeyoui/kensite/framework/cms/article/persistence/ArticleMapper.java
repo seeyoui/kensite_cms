@@ -69,6 +69,12 @@ public interface ArticleMapper {
 	public void update(Article article);
 	
 	/**
+	 * 数据修改
+	 * @param article
+	 */
+	public void updateContent(Article article);
+	
+	/**
 	 * 点击数据修改
 	 * @param id
 	 */

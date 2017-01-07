@@ -84,6 +84,22 @@ public class ArticleController extends BaseController {
 	}
 	
 	/**
+	 * 根据ID查询单条数据并返回相应表单
+	 * @param modelMap
+	 * @param module
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/form/{page}/{id}")
+	public ModelAndView form(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, @PathVariable String page, @PathVariable String id) throws Exception {
+		Article article = articleService.findOne(id);
+		modelMap.put("article", article);
+		return new ModelAndView("framework/cms/article/"+page, modelMap);
+	}
+	
+	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param article
@@ -157,6 +173,27 @@ public class ArticleController extends BaseController {
 			return null;
 		}
 		articleService.update(article);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 保存修改的数据
+	 * @param modelMap
+	 * @param article
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/updateContent", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateContent(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Article article) throws Exception {
+		if (!beanValidator(modelMap, article)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
+		articleService.updateContent(article);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

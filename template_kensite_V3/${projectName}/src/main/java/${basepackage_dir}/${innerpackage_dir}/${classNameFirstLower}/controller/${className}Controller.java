@@ -82,6 +82,22 @@ public class ${className}Controller extends BaseController {
 	}
 	
 	/**
+	 * 根据ID查询单条数据并返回相应表单
+	 * @param modelMap
+	 * @param module
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/form/{page}/{id}")
+	public ModelAndView form(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, @PathVariable String page, @PathVariable String id) throws Exception {
+		${className} ${table.classNameFirstLower} = ${table.classNameFirstLower}Service.findOne(id);
+		modelMap.put("${table.classNameFirstLower}", ${table.classNameFirstLower});
+		return new ModelAndView("${innerpackage_dir}/${table.classNameFirstLower}/"+page, modelMap);
+	}
+	
+	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param ${table.classNameFirstLower}

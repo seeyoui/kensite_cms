@@ -31,6 +31,7 @@
 							<ks:listTag table="CMS_SITE" column="THEME"/>
 							<ks:listTag table="CMS_SITE" column="COPYRIGHT"/>
 							<ks:listTag table="CMS_SITE" column="CUSTOM_VIEW"/>
+					    	<th field="viewHtml" width="100px" formatter="formatViewHtml">演示</th>
 						</tr>
 					</thead>
 				</table>
@@ -164,6 +165,10 @@
 					}
 				}
 			}
+		    
+		    function formatViewHtml(val, row) {
+				return "<a href='${ctx}/portal/"+row.domain+"/index.jsp' target='_blank'>查看</a>";
+		    }
 		</script>
 	</body>
 </html>

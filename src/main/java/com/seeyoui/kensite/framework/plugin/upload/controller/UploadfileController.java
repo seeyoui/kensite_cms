@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile;
 import com.seeyoui.kensite.framework.plugin.upload.service.UploadfileService;
@@ -126,6 +127,28 @@ public class UploadfileController extends BaseController {
 			ModelMap modelMap, MultipartFile file, Uploadfile uploadfile) throws Exception{
 		Uploadfile uf = uploadfileService.uploadFile(file, uploadfile, request);
 		return uf;
+	}
+	
+	/**
+	 * 保存新增的数据
+	 * @param modelMap
+	 * @param uploadfile
+	 * @param file
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/uploadMarkdown", method=RequestMethod.POST)
+	@ResponseBody
+	public Object uploadMarkdown(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, MultipartFile file, Uploadfile uploadfile) throws Exception{
+		uploadfile.setUrl("tempMarkdown");
+		Uploadfile uf = uploadfileService.uploadFile(file, uploadfile, request);
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("success", 1);
+		result.put("url", Global.getConfig("productName")+"/"+uf.getUrl()+uf.getRealname());
+		result.put("message", "上传成功");
+		return result;
 	}
 	
 	/**

@@ -145,7 +145,8 @@ public class Article extends DataEntity<Article> {
 	}
 
 	public String getViewConfig() {
-		return this.viewConfig;
+//		return this.viewConfig;
+		return HtmlUtils.htmlUnescape(this.viewConfig);
 	}
 
 	public String getPoster() {

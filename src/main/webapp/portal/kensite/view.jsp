@@ -7,13 +7,14 @@
 <head>
 	<%@include file="title.jsp" %>
 	<%@include file="style.jsp" %>
+	<link rel="stylesheet" type="text/css" href="${ctx_script}/editormd/css/editormd.preview.min.css"/>
 	<%
 	String articleId = request.getParameter("articleId");
 	request.setAttribute("articleId",articleId);
 	%>
 </head>
 <body>
-	<section class="container user-select">
+	<section class="container"><!-- user-select -->
 		<%@include file="header.jsp"%>
 		<cms:article var="article" id="${articleId}">
 		<c:set var="article" value="${article }"/>
@@ -36,8 +37,13 @@
 						<li>共 <strong>${article.hits }</strong> 人围观 </li>
 					</ul>
 				</header>
-				<article class="news_content">
+				<article id="content" class="news_content">
+				<c:if test="${article.customContentView eq 'markdown'}">
+					<textarea id="append-test" style="display:none;">${article.content}</textarea>
+				</c:if>
+				<c:if test="${article.customContentView eq 'ueditor'}">
 					${article.content}
+				</c:if>
 				</article>
 				<!-- <div class="reprint">转载请说明出处：
 					<a href="" title="" target="_blank"></a> »
@@ -133,9 +139,30 @@
 	</div>
 	<%@include file="script.jsp"%>
 	<%@include file="/WEB-INF/view/taglib/layer.jsp" %>
+	
+	<c:if test="${article.customContentView eq 'markdown'}">
+	<script src="${ctx_script}/editormd/lib/marked.min.js"></script>
+	<script src="${ctx_script}/editormd/lib/prettify.min.js"></script>
+	<script src="${ctx_script}/editormd/lib/raphael.min.js"></script>
+	<script src="${ctx_script}/editormd/lib/underscore.min.js"></script>
+	<script src="${ctx_script}/editormd/lib/sequence-diagram.min.js"></script>
+	<script src="${ctx_script}/editormd/lib/flowchart.min.js"></script>
+	<script src="${ctx_script}/editormd/lib/jquery.flowchart.min.js"></script>
+	<script src="${ctx_script}/editormd/editormd.min.js"></script>
+	</c:if>
 	<script type="text/javascript">
 		var pageRows = 5;
 		$(function() {
+			<c:if test="${article.customContentView eq 'markdown'}">
+			editormd.markdownToHTML("content", {
+				htmlDecode      : "style,script,iframe",  // you can filter tags decode
+				emoji           : true,
+				taskList        : true,
+				tex             : true,  // 默认不解析
+				flowChart       : true,  // 默认不解析
+				sequenceDiagram : true  // 默认不解析
+			});
+			</c:if>
 			$(".related-content ul li").hover(function() {
 				$(this).find("h3").show();
 			}, function() {

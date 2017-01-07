@@ -61,6 +61,7 @@
 							<ks:listTag table="CMS_ARTICLE" column="CUSTOM_CONTENT_VIEW"/>
 							<ks:listTag table="CMS_ARTICLE" column="VIEW_CONFIG"/>
 							<ks:listTag table="CMS_ARTICLE" column="POSTER"/>
+					    	<th field="operate" width="100px" formatter="formatOperate">写文章</th>
 						</tr>
 					</thead>
 				</table>
@@ -264,6 +265,45 @@
 						layer.msg("请先选择要删除的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 					}
 				}
+			}
+		    
+		    function formatOperate(val, row) {
+				return "<a href='javascript:editContent(\""+row.id+"\",\"UEditor\")'>UEditor</a>&nbsp;&nbsp;<a href='javascript:editContent(\""+row.id+"\",\"MarkDown\")'>MarkDown</a>";
+		    }
+			
+			function editContent(id, type) {
+				var url = '';
+				var title = '';
+				if(type == 'UEditor') {
+					url = '${ctx}/cms/article/form/ueditor/'+id;
+					title = 'UEditor编辑器';
+				}
+				if(type == 'MarkDown') {
+					url = '${ctx}/cms/article/form/markdown/'+id;
+					title = 'MarkDown编辑器';
+				}
+				var index = layer.open({
+					type: 2,
+					title: title,
+					area: ['800px', '470px'],
+					fix: false, //不固定
+					maxmin: false,
+					content: url,
+					btn: ['保存', '取消'],
+					success: function(layero, index){
+						iframeBody = layer.getChildFrame('body', index);
+						iframeWin = window[layero.find('iframe')[0]['name']];
+					},
+					yes: function(index, layero) {
+						if(iframeWin != null) {
+							iframeWin.submitInfo();
+						}
+					},
+					cancel: function(index){
+						layer.close(index);
+					}
+				});
+				layer.full(index);
 			}
 		</script>
 	</body>
