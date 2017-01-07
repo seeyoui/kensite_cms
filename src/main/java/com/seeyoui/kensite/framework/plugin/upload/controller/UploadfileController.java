@@ -143,10 +143,10 @@ public class UploadfileController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, MultipartFile file, Uploadfile uploadfile) throws Exception{
 		uploadfile.setUrl("tempMarkdown");
-		Uploadfile uf = uploadfileService.uploadFile(file, uploadfile, request);
+		Uploadfile uf = uploadfileService.upload(uploadfile, request);
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("success", 1);
-		result.put("url", Global.getConfig("productName")+"/"+uf.getUrl()+uf.getRealname());
+		result.put("url", "/"+Global.getConfig("productName")+"/"+uf.getUrl()+"/"+uf.getRealname());
 		result.put("message", "上传成功");
 		return result;
 	}
