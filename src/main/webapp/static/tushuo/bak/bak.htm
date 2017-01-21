@@ -1,0 +1,1264 @@
+<div class="dtm-winpn cpt" style="display: none;">
+      <div class="dtm-close-cross">X</div>
+      <div class="dtm-winpn-con"></div>
+    </div>
+    <div class="dtm-winpn cpt" style="display: none;">
+      <div class="dtm-close-cross">X</div>
+      <div class="dtm-winpn-con"></div>
+    </div>
+    <div class="dtm-winpn cpt" style="display: none;">
+      <div class="dtm-close-cross">X</div>
+      <div class="dtm-winpn-con"></div>
+    </div>
+    <div class="dt-global-mask " style="display: none; opacity: 0;"></div>
+    <div class="dt-global-tooltip" style="display: none; left: 475px; top: 76px;">点击则开启此项的&nbsp;
+      <span style="color:#FFEA00">自定义设定</span>&nbsp;</div>
+    <div class="dtm-addsltpn">
+      <div data-cpt="type: 'button',name: 'addChart',viewModel: {css: ['dtm-btn', 'dtm-add-slt-btn'],text: lib.ob(lang.string.addSelectPanel.addChart)}" class="cpt cpt-btn dtm-btn dtm-add-slt-btn">图表</div>
+      <div data-cpt="type: 'button',name: 'addText',viewModel: {css: ['dtm-btn', 'dtm-add-slt-btn'],text: lib.ob(lang.string.addSelectPanel.addText)}" class="cpt cpt-btn dtm-btn dtm-add-slt-btn">文字</div>
+      <div data-cpt="type: 'button',name: 'addPicture',viewModel: {css: ['dtm-btn', 'dtm-add-slt-btn'],text: lib.ob(lang.string.addSelectPanel.addPicture)}" class="cpt cpt-btn dtm-btn dtm-add-slt-btn">图片</div></div>
+    <style type="text/css">.dtp-wgt,.dtp-paper-con,.dtp-lay-mnr-doc{position:relative}.dtp-lay-mnr-abs{position:absolute}.dtp-wgt{padding:0}.dtp-paper{display:none}.dtp-paper-curr{display:block}.dtp-theme-aatushuo .dtp-wgt{margin:20px auto}.dtp-theme-aatushuo .dtp-wgt-schart-container{height:300px}.dtp-theme-aatushuo .dtp-wgt-schart .dtp-wgt-main{display:block;height:100%}.dtp-theme-aatushuo .dtp-wgt-image .dtp-wgt-main{display:block;margin:0 auto;width:100%}.dtp-theme-aatushuo .dtp-wgt-ptext{padding:10px 0;font:13px/1.5 "Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext{font-family:"Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext-container{min-height:30px;line-height:1.3}.dtp-theme-aatushuo .dtp-wgt-ftext-content{white-space:normal;word-break:break-all}.dtp-theme-aatushuo .dtp-wgt-ftext-title0,.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0{text-align:center}.dtp-theme-aatushuo .dtp-wgt-ftext-title0 .dtp-wgt-ftext-container{font-size:40px;font-weight:bold;border-bottom:4px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0 .dtp-wgt-ftext-container{font-size:24px;font-weight:bold;border-bottom:2px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-container{font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quote0 .dtp-wgt-ftext-container{border-left:3px solid #999;padding-left:20px;font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quotetext{font-style:italic}.dtp-theme-aatushuo .dtp-wgt-ftext-quoteauthor{margin-top:5px}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-content[data-placeholder]:empty:not(:focus):before{font-size:14px}.dtp-theme-aatushuo .dtp-paper-view{padding:35px 35px;color:#333;background:#fff}</style>
+    <div class="htContextMenu" style="display: none;"></div>
+    <div id="CopyPasteDiv" style="position: fixed; top: -10000px; left: -10000px;">
+      <textarea class="copyPaste" style="width: 10000px; height: 10000px; overflow: hidden; opacity: 0;"></textarea>
+    </div>
+    <div class="cpt-clrpkr-panel" style="display: none;">
+      <div class="jPicker Container" style="">
+        <table class="jPicker" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td rowspan="9">
+                <h2 class="Title">请选择颜色</h2>
+                <div class="Map" style="background-color: rgb(255, 204, 0);">
+                  <span class="Map1" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Maps.png&quot;); top: 0px; visibility: visible;">&nbsp;</span>
+                  <span class="Map2" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Maps.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map3" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/map-opacity.png&quot;); visibility: hidden;">&nbsp;</span>
+                  <img src="./css/mappoint.gif" class="Arrow" style="left: 249px; top: -7px;"></div>
+              </td>
+              <td rowspan="9">
+                <div class="Bar" style="background-color: transparent;">
+                  <span class="Map1" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 0px; visibility: visible;">&nbsp;</span>
+                  <span class="Map2" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map3" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map4" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map5" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/bar-opacity.png&quot;); visibility: hidden;">&nbsp;</span>
+                  <span class="Map6" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/AlphaBar.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <img src="./css/rangearrows.gif" class="Arrow" style="left: 0px; top: 218px;"></div>
+              </td>
+              <td colspan="2" class="Preview">new
+                <div style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/preview-opacity.png&quot;);">
+                  <span class="Active" title="New Color - Press “OK” To Commit" style="background-color: rgb(255, 204, 0); visibility: visible;">&nbsp;</span>
+                  <span class="Current" title="Click To Revert To Original Color" style="background-color: rgb(255, 204, 0); visibility: visible;">&nbsp;</span></div>current</td>
+              <td rowspan="9" class="Button">
+                <input class="Ok" value="OK" title="Commit To This Color Selection" type="button">
+                <input class="Cancel" value="Cancel" title="Cancel And Revert To Original Color" type="button">
+                <hr>
+                <div class="Grid" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/bar-opacity.png&quot;);">
+                  <span class="QuickColor" title="#ffaaaaff" style="background-color:#ffaaaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff5656ff" style="background-color:#ff5656;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff0000ff" style="background-color:#ff0000;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf0000ff" style="background-color:#bf0000;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f0000ff" style="background-color:#7f0000;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffffffff" style="background-color:#ffffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffd4aaff" style="background-color:#ffd4aa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffaa56ff" style="background-color:#ffaa56;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff7f00ff" style="background-color:#ff7f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf5f00ff" style="background-color:#bf5f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f3f00ff" style="background-color:#7f3f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#e5e5e5ff" style="background-color:#e5e5e5;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffffaaff" style="background-color:#ffffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffff56ff" style="background-color:#ffff56;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffff00ff" style="background-color:#ffff00;">&nbsp;</span>
+                  <span class="QuickColor" title="#bfbf00ff" style="background-color:#bfbf00;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f7f00ff" style="background-color:#7f7f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#ccccccff" style="background-color:#cccccc;">&nbsp;</span>
+                  <span class="QuickColor" title="#d4ffaaff" style="background-color:#d4ffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaff56ff" style="background-color:#aaff56;">&nbsp;</span>
+                  <span class="QuickColor" title="#7fff00ff" style="background-color:#7fff00;">&nbsp;</span>
+                  <span class="QuickColor" title="#5fbf00ff" style="background-color:#5fbf00;">&nbsp;</span>
+                  <span class="QuickColor" title="#3f7f00ff" style="background-color:#3f7f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#b2b2b2ff" style="background-color:#b2b2b2;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaffaaff" style="background-color:#aaffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#56ff56ff" style="background-color:#56ff56;">&nbsp;</span>
+                  <span class="QuickColor" title="#00ff00ff" style="background-color:#00ff00;">&nbsp;</span>
+                  <span class="QuickColor" title="#00bf00ff" style="background-color:#00bf00;">&nbsp;</span>
+                  <span class="QuickColor" title="#007f00ff" style="background-color:#007f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#999999ff" style="background-color:#999999;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaffd4ff" style="background-color:#aaffd4;">&nbsp;</span>
+                  <span class="QuickColor" title="#56ffaaff" style="background-color:#56ffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#00ff7fff" style="background-color:#00ff7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#00bf5fff" style="background-color:#00bf5f;">&nbsp;</span>
+                  <span class="QuickColor" title="#007f3fff" style="background-color:#007f3f;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f7f7fff" style="background-color:#7f7f7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaffffff" style="background-color:#aaffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#56ffffff" style="background-color:#56ffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#00ffffff" style="background-color:#00ffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#00bfbfff" style="background-color:#00bfbf;">&nbsp;</span>
+                  <span class="QuickColor" title="#007f7fff" style="background-color:#007f7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#666666ff" style="background-color:#666666;">&nbsp;</span>
+                  <span class="QuickColor" title="#aad4ffff" style="background-color:#aad4ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#56aaffff" style="background-color:#56aaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#007fffff" style="background-color:#007fff;">&nbsp;</span>
+                  <span class="QuickColor" title="#005fbfff" style="background-color:#005fbf;">&nbsp;</span>
+                  <span class="QuickColor" title="#003f7fff" style="background-color:#003f7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#4c4c4cff" style="background-color:#4c4c4c;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaaaffff" style="background-color:#aaaaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#5656ffff" style="background-color:#5656ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#0000ffff" style="background-color:#0000ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#0000bfff" style="background-color:#0000bf;">&nbsp;</span>
+                  <span class="QuickColor" title="#00007fff" style="background-color:#00007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#333333ff" style="background-color:#333333;">&nbsp;</span>
+                  <span class="QuickColor" title="#d4aaffff" style="background-color:#d4aaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#aa56ffff" style="background-color:#aa56ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f00ffff" style="background-color:#7f00ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#5f00bfff" style="background-color:#5f00bf;">&nbsp;</span>
+                  <span class="QuickColor" title="#3f007fff" style="background-color:#3f007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#191919ff" style="background-color:#191919;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffaaffff" style="background-color:#ffaaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff56ffff" style="background-color:#ff56ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff00ffff" style="background-color:#ff00ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf00bfff" style="background-color:#bf00bf;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f007fff" style="background-color:#7f007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#000000ff" style="background-color:#000000;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffaad4ff" style="background-color:#ffaad4;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff56aaff" style="background-color:#ff56aa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff007fff" style="background-color:#ff007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf005fff" style="background-color:#bf005f;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f003fff" style="background-color:#7f003f;">&nbsp;</span>
+                  <span class="QuickColor" style="background-color:;background-image:url(http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/NoColor.png)">&nbsp;</span></div>
+              </td>
+            </tr>
+            <tr class="Hue">
+              <td class="Radio">
+                <label title="Set To “Hue” Color Mode">
+                  <input value="h" checked="checked" type="radio">H:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="48" title="Enter A “Hue” Value (0-360°)" type="text">&nbsp;°</td></tr>
+            <tr class="Saturation">
+              <td class="Radio">
+                <label title="Set To “Saturation” Color Mode">
+                  <input value="s" type="radio">S:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="100" title="Enter A “Saturation” Value (0-100%)" type="text">&nbsp;%</td></tr>
+            <tr class="Value">
+              <td class="Radio">
+                <label title="Set To “Value” Color Mode">
+                  <input value="v" type="radio">V:</label>
+                <br>
+                <br></td>
+              <td class="Text">
+                <input maxlength="3" value="100" title="Enter A “Value” Value (0-100%)" type="text">&nbsp;%
+                <br>
+                <br></td></tr>
+            <tr class="Red">
+              <td class="Radio">
+                <label title="Set To “Red” Color Mode">
+                  <input value="r" type="radio">R:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="255" title="Enter A “Red” Value (0-255)" type="text"></td>
+            </tr>
+            <tr class="Green">
+              <td class="Radio">
+                <label title="Set To “Green” Color Mode">
+                  <input value="g" type="radio">G:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="204" title="Enter A “Green” Value (0-255)" type="text"></td>
+            </tr>
+            <tr class="Blue">
+              <td class="Radio">
+                <label title="Set To “Blue” Color Mode">
+                  <input value="b" type="radio">B:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="0" title="Enter A “Blue” Value (0-255)" type="text"></td>
+            </tr>
+            <tr class="Alpha">
+              <td class="Radio">
+                <label title="Set To “Alpha” Color Mode">
+                  <input value="a" type="radio">A:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="100" title="Enter A “Alpha” Value (0-100)" type="text">&nbsp;%</td></tr>
+            <tr class="Hex">
+              <td colspan="2" class="Text">
+                <label title="Enter A “Hex” Color Value (#000000-#ffffff)">#:
+                  <input maxlength="6" class="Hex" value="ffcc00" type="text"></label>
+                <input maxlength="2" class="AHex" value="ff" title="Enter A “Alpha” Value (#00-#ff)" type="text"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="cpt-clrpkr-panel" style="display: none;">
+      <div class="jPicker Container" style="">
+        <table class="jPicker" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td rowspan="9">
+                <h2 class="Title">请选择颜色</h2>
+                <div class="Map" style="background-color: rgb(255, 204, 0);">
+                  <span class="Map1" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Maps.png&quot;); top: 0px; visibility: visible;">&nbsp;</span>
+                  <span class="Map2" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Maps.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map3" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/map-opacity.png&quot;); visibility: hidden;">&nbsp;</span>
+                  <img src="./css/mappoint.gif" class="Arrow" style="left: 249px; top: -7px;"></div>
+              </td>
+              <td rowspan="9">
+                <div class="Bar" style="background-color: transparent;">
+                  <span class="Map1" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 0px; visibility: visible;">&nbsp;</span>
+                  <span class="Map2" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map3" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map4" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/Bars.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <span class="Map5" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/bar-opacity.png&quot;); visibility: hidden;">&nbsp;</span>
+                  <span class="Map6" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/AlphaBar.png&quot;); top: 260px; visibility: visible;">&nbsp;</span>
+                  <img src="./css/rangearrows.gif" class="Arrow" style="left: 0px; top: 218px;"></div>
+              </td>
+              <td colspan="2" class="Preview">new
+                <div style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/preview-opacity.png&quot;);">
+                  <span class="Active" title="New Color - Press “OK” To Commit" style="background-color: rgb(255, 204, 0); visibility: visible;">&nbsp;</span>
+                  <span class="Current" title="Click To Revert To Original Color" style="background-color: rgb(255, 204, 0); visibility: visible;">&nbsp;</span></div>current</td>
+              <td rowspan="9" class="Button">
+                <input class="Ok" value="OK" title="Commit To This Color Selection" type="button">
+                <input class="Cancel" value="Cancel" title="Cancel And Revert To Original Color" type="button">
+                <hr>
+                <div class="Grid" style="background-image: url(&quot;http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/bar-opacity.png&quot;);">
+                  <span class="QuickColor" title="#ffaaaaff" style="background-color:#ffaaaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff5656ff" style="background-color:#ff5656;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff0000ff" style="background-color:#ff0000;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf0000ff" style="background-color:#bf0000;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f0000ff" style="background-color:#7f0000;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffffffff" style="background-color:#ffffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffd4aaff" style="background-color:#ffd4aa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffaa56ff" style="background-color:#ffaa56;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff7f00ff" style="background-color:#ff7f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf5f00ff" style="background-color:#bf5f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f3f00ff" style="background-color:#7f3f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#e5e5e5ff" style="background-color:#e5e5e5;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffffaaff" style="background-color:#ffffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffff56ff" style="background-color:#ffff56;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffff00ff" style="background-color:#ffff00;">&nbsp;</span>
+                  <span class="QuickColor" title="#bfbf00ff" style="background-color:#bfbf00;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f7f00ff" style="background-color:#7f7f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#ccccccff" style="background-color:#cccccc;">&nbsp;</span>
+                  <span class="QuickColor" title="#d4ffaaff" style="background-color:#d4ffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaff56ff" style="background-color:#aaff56;">&nbsp;</span>
+                  <span class="QuickColor" title="#7fff00ff" style="background-color:#7fff00;">&nbsp;</span>
+                  <span class="QuickColor" title="#5fbf00ff" style="background-color:#5fbf00;">&nbsp;</span>
+                  <span class="QuickColor" title="#3f7f00ff" style="background-color:#3f7f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#b2b2b2ff" style="background-color:#b2b2b2;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaffaaff" style="background-color:#aaffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#56ff56ff" style="background-color:#56ff56;">&nbsp;</span>
+                  <span class="QuickColor" title="#00ff00ff" style="background-color:#00ff00;">&nbsp;</span>
+                  <span class="QuickColor" title="#00bf00ff" style="background-color:#00bf00;">&nbsp;</span>
+                  <span class="QuickColor" title="#007f00ff" style="background-color:#007f00;">&nbsp;</span>
+                  <span class="QuickColor" title="#999999ff" style="background-color:#999999;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaffd4ff" style="background-color:#aaffd4;">&nbsp;</span>
+                  <span class="QuickColor" title="#56ffaaff" style="background-color:#56ffaa;">&nbsp;</span>
+                  <span class="QuickColor" title="#00ff7fff" style="background-color:#00ff7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#00bf5fff" style="background-color:#00bf5f;">&nbsp;</span>
+                  <span class="QuickColor" title="#007f3fff" style="background-color:#007f3f;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f7f7fff" style="background-color:#7f7f7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaffffff" style="background-color:#aaffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#56ffffff" style="background-color:#56ffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#00ffffff" style="background-color:#00ffff;">&nbsp;</span>
+                  <span class="QuickColor" title="#00bfbfff" style="background-color:#00bfbf;">&nbsp;</span>
+                  <span class="QuickColor" title="#007f7fff" style="background-color:#007f7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#666666ff" style="background-color:#666666;">&nbsp;</span>
+                  <span class="QuickColor" title="#aad4ffff" style="background-color:#aad4ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#56aaffff" style="background-color:#56aaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#007fffff" style="background-color:#007fff;">&nbsp;</span>
+                  <span class="QuickColor" title="#005fbfff" style="background-color:#005fbf;">&nbsp;</span>
+                  <span class="QuickColor" title="#003f7fff" style="background-color:#003f7f;">&nbsp;</span>
+                  <span class="QuickColor" title="#4c4c4cff" style="background-color:#4c4c4c;">&nbsp;</span>
+                  <span class="QuickColor" title="#aaaaffff" style="background-color:#aaaaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#5656ffff" style="background-color:#5656ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#0000ffff" style="background-color:#0000ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#0000bfff" style="background-color:#0000bf;">&nbsp;</span>
+                  <span class="QuickColor" title="#00007fff" style="background-color:#00007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#333333ff" style="background-color:#333333;">&nbsp;</span>
+                  <span class="QuickColor" title="#d4aaffff" style="background-color:#d4aaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#aa56ffff" style="background-color:#aa56ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f00ffff" style="background-color:#7f00ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#5f00bfff" style="background-color:#5f00bf;">&nbsp;</span>
+                  <span class="QuickColor" title="#3f007fff" style="background-color:#3f007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#191919ff" style="background-color:#191919;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffaaffff" style="background-color:#ffaaff;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff56ffff" style="background-color:#ff56ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff00ffff" style="background-color:#ff00ff;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf00bfff" style="background-color:#bf00bf;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f007fff" style="background-color:#7f007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#000000ff" style="background-color:#000000;">&nbsp;</span>
+                  <span class="QuickColor" title="#ffaad4ff" style="background-color:#ffaad4;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff56aaff" style="background-color:#ff56aa;">&nbsp;</span>
+                  <span class="QuickColor" title="#ff007fff" style="background-color:#ff007f;">&nbsp;</span>
+                  <span class="QuickColor" title="#bf005fff" style="background-color:#bf005f;">&nbsp;</span>
+                  <span class="QuickColor" title="#7f003fff" style="background-color:#7f003f;">&nbsp;</span>
+                  <span class="QuickColor" style="background-color:;background-image:url(http://tushuo.baidu.com'/dep/jpicker/1.1.6/images/NoColor.png)">&nbsp;</span></div>
+              </td>
+            </tr>
+            <tr class="Hue">
+              <td class="Radio">
+                <label title="Set To “Hue” Color Mode">
+                  <input value="h" checked="checked" type="radio">H:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="48" title="Enter A “Hue” Value (0-360°)" type="text">&nbsp;°</td></tr>
+            <tr class="Saturation">
+              <td class="Radio">
+                <label title="Set To “Saturation” Color Mode">
+                  <input value="s" type="radio">S:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="100" title="Enter A “Saturation” Value (0-100%)" type="text">&nbsp;%</td></tr>
+            <tr class="Value">
+              <td class="Radio">
+                <label title="Set To “Value” Color Mode">
+                  <input value="v" type="radio">V:</label>
+                <br>
+                <br></td>
+              <td class="Text">
+                <input maxlength="3" value="100" title="Enter A “Value” Value (0-100%)" type="text">&nbsp;%
+                <br>
+                <br></td></tr>
+            <tr class="Red">
+              <td class="Radio">
+                <label title="Set To “Red” Color Mode">
+                  <input value="r" type="radio">R:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="255" title="Enter A “Red” Value (0-255)" type="text"></td>
+            </tr>
+            <tr class="Green">
+              <td class="Radio">
+                <label title="Set To “Green” Color Mode">
+                  <input value="g" type="radio">G:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="204" title="Enter A “Green” Value (0-255)" type="text"></td>
+            </tr>
+            <tr class="Blue">
+              <td class="Radio">
+                <label title="Set To “Blue” Color Mode">
+                  <input value="b" type="radio">B:</label></td>
+              <td class="Text">
+                <input maxlength="3" value="0" title="Enter A “Blue” Value (0-255)" type="text"></td>
+            </tr>
+            <tr class="Alpha">
+              <td class="Radio">&nbsp;</td>
+              <td class="Text">&nbsp;</td></tr>
+            <tr class="Hex">
+              <td colspan="2" class="Text">
+                <label title="Enter A “Hex” Color Value (#000000-#ffffff)">#:
+                  <input maxlength="6" class="Hex" value="ffcc00" type="text"></label>&nbsp;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!DOCTYPE html>
+<html class="dtm-html-mf" lang="zh-CN">
+    
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="description" content="图说">
+        <title>百度 · 图说</title>
+        <link rel="stylesheet" href="./css/waveApp.css">
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </head>
+    
+    <body class="cpt cpt-wave">
+        <div id="wave-main">
+            <div class="cpt cpt-manufacture">
+                <!-- 主体开始 -->
+                <div class="dtm-mf-paper-box" style="margin-right: 0px; margin-left: 680px; opacity: 1; top: -61px;">
+                    <div data-cpt="type: 'wave/manufacture/Paper',name: 'paper',viewModel: {residenceHandle: viewModel.residenceHandle}" class="cpt cpt-mf-paper">
+                        <div class="dtp-paper dtp-theme-aatushuo" data-dtppr="999" data-paper-theme="aatushuo">
+                            <div class="dtp-paper-view" style="">
+                            <div class="dtp-paper-con ui-sortable">
+                                <div data-dtwgt="3713" class="dtp-wgt dtp-wgt-schart dtp-lay-mnr-doc cpt-mf-paper-dwgt cpt-mf-paper-dwgt-pnedt">
+                                    <div class="dtp-wgt-container dtp-wgt-schart-container" style="">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 主体结束 -->
+            
+                <!-- 参数调整 -->
+                <div style="display: block; left: 0px; top: 0px;" class="cpt cpt-chtedt">
+                    <div data-cpt="type: 'button',name: 'closeBtn',viewModel: {css: ['dtm-btn', 'dtm-close-btn'],text: lib.ob(lang.string.closeBtnText)}" class="cpt cpt-btn dtm-btn dtm-close-btn">保存</div>
+                    <div data-cpt="type: 'tab',name: 'tab',viewModel: {currentTab: lib.ob('dataEditor'),baseCss: 'dtm-tabh',tabAttr: 'cpt-tabh',conAttr: 'cpt-conh'}" class="dtm-tabh cpt cpt-tab">
+                        <ul class="dtm-tabh-h">
+                            <li data-cpt-tabh="chartConfigurer" class="dtm-tabh-hi dtm-tabh-hi-curr">参数调整</li>
+                        </ul>
+                        <div data-cpt="type: 'wave/chartConfigurer/ChartConfigurer',name: 'chartConfigurer',viewModel: {panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-conh-chart-configurer dtm-tabh-coni cpt cpt-chtcf" data-cpt-conh="chartConfigurer" style="display: block;">
+                            <div data-cpt="type: 'tab',name: 'tab',viewModel: {currentTab: lib.ob('base'),baseCss: 'dtm-tab0',tabAttr: 'cpt-tab0',conAttr: 'cpt-con0'}" class="cpt cpt-tab">
+                                <!-- 导航开始 -->
+                                <ul class="dtm-tab0">
+                                    <li data-cpt-tab0="base" class="dtm-tab0-hi dtm-tab0-hi-curr">系列</li>
+                                    <li data-cpt-tab0="title" class="dtm-tab0-hi">标题</li>
+                                    <li data-cpt-tab0="legend" class="dtm-tab0-hi">图例</li>
+                                    <li data-cpt-tab0="tooltip" class="dtm-tab0-hi">提示</li>
+                                    <li data-cpt-tab0="toolbox" class="dtm-tab0-hi">工具</li>
+                                </ul>
+                                <!-- 导航结束 -->
+                                <!-- 系列开始 -->
+                                <div data-cpt-con0="base" data-cpt="type: viewModel.dpct.con.base.ui,name: 'con.base',viewModel: {dpct: viewModel.dpct.con.base,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab0-coni cpt cpt-chtcf-sertpn cpt-chtcf-sbtpn" style="display: block;">
+                                    <div data-cpt="type: 'tab',name: 'tab',viewModel: {baseCss: 'dtm-tab1',tabAttr: 'cpt-tab1',conAttr: 'cpt-con1',currentTab: lib.ob('base')}" class="cpt cpt-tab">
+                                        <div class="dtm-sertb-up"></div>
+                                        <div class="dtm-tab1">
+                                            <div class="dtm-tab1-inner" style="top: 0px;">
+                                            <div data-cpt="type: 'foreach',name: 'seriesTabList',viewModelGet: 'seriesTabListViewModel',itemConfigAttr: 'itemConfig'" class="cpt cpt-foreach">
+                                                <div data-cpt-tab1="seriesTabKey0" class="cpt cpt-foreach-item dtm-tab1-hi dtm-tab1-hi-curr">系列0</div></div>
+                                            </div>
+                                        </div>
+                                        <div class="dtm-sertb-down"></div>
+                                        <div data-cpt="type: 'foreach',name: 'seriesConList',viewModelGet: 'seriesConListViewModel',itemConfigAttr: 'itemConfig'" class="cpt cpt-foreach">
+                                            <div data-cpt-con1="seriesTabKey0" class="cpt cpt-edtpn dtm-tab1-coni" style="display: block;">
+                                                <div data-cpt="type: 'scrollPanel',name: 'scrollPanel',viewModel: {css: 'dim-sclpn'}" class="cpt cpt-sclpn dim-sclpn">
+                                                    <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                        <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.pieSectionColorSetTip',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtblk-title">扇型的自定义颜色设置：请在 “通用” -&gt; “系列默认的颜色列表” 中进行</div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.seriesPieBlock',viewModel: {dpct: viewModel.dpct.rows[4],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtblk-title">饼图设置（针对本系列）</div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled" data-cpt="type: 'wave/gadget/EditItem',name: 'items.roseType',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（series[0].roseType）：">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">南丁格尔玫瑰图模式</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt cpt-disabled cpt-sltggt-disabled dtm-edtitm-ggt-disabled">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn cpt-disabled cpt-chkbtn-disabled">
+                                                                        <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                        <i>
+                                                                            <em></em>
+                                                                        </i>
+                                                                        <span>半径模式</span></div>
+                                                                        <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                        <i>
+                                                                            <em></em>
+                                                                        </i>
+                                                                        <span>面积模式</span></div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.center',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（series[0].center）：">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">饼图圆心坐标</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div data-cpt="type: 'wave/gadget/ArrayValueGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-arrvalggt dtm-edtitm-ggt">
+                                                                    <div class="dtm-row ">
+                                                                        <span class="dtm-label">x:</span>
+                                                                        <div class="dtm-con dtm-con-swc">
+                                                                            <div data-cpt="type: 'wave/gadget/MeasureGadget',name: 'gadgets[0][0]',viewModel: viewModel.arrayConfDpct[0].ggtViewModels[0]" class="cpt cpt-msrggt dtm-ggt" style="display: block;">
+                                                                                <div data-cpt="type: 'input/TextInput',name: 'textInput0',viewModel: {value: viewModel.value0,css: 'dtm-msrggt-tx0',disabled: viewModel.disabled}" class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                <div>
+                                                                                    <input type="text" value="50"></div>
+                                                                                </div>
+                                                                                <div class="dtm-msrggt-unit">%</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="dtm-row ">
+                                                                        <span class="dtm-label">y:</span>
+                                                                        <div class="dtm-con dtm-con-swc">
+                                                                            <div data-cpt="type: 'wave/gadget/MeasureGadget',name: 'gadgets[1][0]',viewModel: viewModel.arrayConfDpct[1].ggtViewModels[0]" class="cpt cpt-msrggt dtm-ggt" style="display: block;">
+                                                                                <div data-cpt="type: 'input/TextInput',name: 'textInput0',viewModel: {value: viewModel.value0,css: 'dtm-msrggt-tx0',disabled: viewModel.disabled}" class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                <div>
+                                                                                    <input type="text" value="50"></div>
+                                                                                </div>
+                                                                                <div class="dtm-msrggt-unit">%</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.radius',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（series[0].radius）：">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">饼图半径</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div data-cpt="type: 'wave/gadget/ArrayValueGadget',name: 'gadgets[1]',viewModel: viewModel.gadgetViewModelList[1]" class="cpt cpt-arrvalggt dtm-edtitm-ggt" style="display: block;">
+                                                                        <div class="dtm-row ">
+                                                                            <span class="dtm-label">内:</span>
+                                                                            <div class="dtm-con dtm-con-swc">
+                                                                                <div data-cpt="type: 'wave/gadget/MeasureGadget',name: 'gadgets[0][0]',viewModel: viewModel.arrayConfDpct[0].ggtViewModels[0]" class="cpt cpt-msrggt dtm-ggt" style="display: block;">
+                                                                                    <div data-cpt="type: 'input/TextInput',name: 'textInput0',viewModel: {value: viewModel.value0,css: 'dtm-msrggt-tx0',disabled: viewModel.disabled}" class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                    <div>
+                                                                                        <input type="text" value="0"></div>
+                                                                                    </div>
+                                                                                    <div class="dtm-msrggt-unit">%</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="dtm-row ">
+                                                                            <span class="dtm-label">外:</span>
+                                                                            <div class="dtm-con dtm-con-swc">
+                                                                                <div data-cpt="type: 'wave/gadget/MeasureGadget',name: 'gadgets[1][0]',viewModel: viewModel.arrayConfDpct[1].ggtViewModels[0]" class="cpt cpt-msrggt dtm-ggt">
+                                                                                    <div data-cpt="type: 'input/TextInput',name: 'textInput0',viewModel: {value: viewModel.value0,css: 'dtm-msrggt-tx0',disabled: viewModel.disabled}" class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                    <div>
+                                                                                        <input type="text" value="100"></div>
+                                                                                    </div>
+                                                                                    <div class="dtm-msrggt-unit">%</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.startAngle',viewModel: {dpct: viewModel.dpct.rows[3],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（series[0].startAngle）：">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">饼图起始角度</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div data-cpt="type: 'wave/gadget/MeasureGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-msrggt dtm-edtitm-ggt">
+                                                                        <div data-cpt="type: 'input/TextInput',name: 'textInput0',viewModel: {value: viewModel.value0,css: 'dtm-msrggt-tx0',disabled: viewModel.disabled}" class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                            <div>
+                                                                            <input type="text" value="90"></div>
+                                                                        </div>
+                                                                        <div class="dtm-msrggt-unit">°</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.selectedMode',viewModel: {dpct: viewModel.dpct.rows[5],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（series[0].selectedMode）：">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">鼠标点选模式</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                        <div class="cpt-chkbtn-i" data-value-index="0">
+                                                                            <i>
+                                                                                <em></em>
+                                                                            </i>
+                                                                            <span>不可选</span>
+                                                                        </div>
+                                                                        <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                            <i>
+                                                                                <em></em>
+                                                                            </i>
+                                                                            <span>单选</span>
+                                                                        </div>
+                                                                        <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="2">
+                                                                            <i>
+                                                                                <em></em>
+                                                                            </i>
+                                                                            <span>多选</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 系列结束 -->
+                                <!-- 标题开始 -->
+                                <div data-cpt-con0="title" data-cpt="type: viewModel.dpct.con.title.ui,name: 'con.title',viewModel: {dpct: viewModel.dpct.con.title,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
+                                    <div data-cpt="type: 'tab',name: 'tab',viewModel: {baseCss: 'dtm-tab1',tabAttr: 'cpt-tab1',conAttr: 'cpt-con1',currentTab: lib.ob('content')}" class="cpt cpt-tab">
+                                        <div class="dtm-tab1">
+                                            <div data-cpt-tab1="content" class="dtm-tab1-hi dtm-tab1-hi-curr">内容</div>
+                                            <div data-cpt-tab1="style" class="dtm-tab1-hi">样式</div>
+                                        </div>
+                                        <div data-cpt-con1="content" data-cpt="type: viewModel.dpct.con.content.ui,name: 'con.content',viewModel: {dpct: viewModel.dpct.con.content,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
+                                            <div data-cpt="type: 'scrollPanel',name: 'scrollPanel',viewModel: {css: 'dim-sclpn'}" class="cpt cpt-sclpn dim-sclpn">
+                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con" style="position: absolute; top: 0px;">
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.contentBlock',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                    <div class="dtm-edtblk-title"></div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.text',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（title.text）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">主标题文本</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/TextInputGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-txiptggt dtm-edtitm-ggt">
+                                                            <div data-cpt="type: 'input/TextInput',name: 'textInput',viewModel: {value: viewModel.value,disabled: viewModel.disabled}" class="cpt cpt-txipt">
+                                                            <div>
+                                                                <input value="主标题文本" type="text"></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled" data-cpt="type: 'wave/gadget/EditItem',name: 'items.link',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（title.link）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">主标题文本超链接</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/TextInputGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-txiptggt dtm-edtitm-ggt cpt-disabled cpt-txiptggt-disabled dtm-edtitm-ggt-disabled">
+                                                            <div data-cpt="type: 'input/TextInput',name: 'textInput',viewModel: {value: viewModel.value,disabled: viewModel.disabled}" class="cpt cpt-txipt cpt-disabled cpt-txipt-disabled">
+                                                            <div>
+                                                                <input value="http://" type="text"></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.subtext',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（title.subtext）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">副标题文本</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/TextInputGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-txiptggt dtm-edtitm-ggt">
+                                                            <div data-cpt="type: 'input/TextInput',name: 'textInput',viewModel: {value: viewModel.value,disabled: viewModel.disabled}" class="cpt cpt-txipt">
+                                                            <div>
+                                                                <input value="纯属虚构" type="text"></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled" data-cpt="type: 'wave/gadget/EditItem',name: 'items.sublink',viewModel: {dpct: viewModel.dpct.rows[3],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（title.sublink）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">副标题文本超链接</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/TextInputGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-txiptggt dtm-edtitm-ggt cpt-disabled cpt-txiptggt-disabled dtm-edtitm-ggt-disabled">
+                                                            <div data-cpt="type: 'input/TextInput',name: 'textInput',viewModel: {value: viewModel.value,disabled: viewModel.disabled}" class="cpt cpt-txipt cpt-disabled cpt-txipt-disabled">
+                                                            <div>
+                                                                <input disabled="disabled" value="http://" type="text"></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-cpt-con1="style" data-cpt="type: viewModel.dpct.con.style.ui,name: 'con.style',viewModel: {dpct: viewModel.dpct.con.style,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab1-coni cpt cpt-edtpn" style="display: none;">
+                                            <div data-cpt="type: 'scrollPanel',name: 'scrollPanel',viewModel: {css: 'dim-sclpn'}" class="cpt cpt-sclpn dim-sclpn">
+                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.positionBlock',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtblk-title">标题块位置</div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.x',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（title.x）：">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">水平安放位置</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                                <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="0">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居左</span></div>
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居中</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居右</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.y',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（title.y）：">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">垂直安放位置</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                                <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居上</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居中</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居下</span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled" data-cpt="type: 'wave/gadget/EditItem',name: 'items.textAlign',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（title.textAlign）：">
+                                                                    <em>
+                                                                        <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">水平对齐方式</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt cpt-disabled cpt-sltggt-disabled dtm-edtitm-ggt-disabled">
+                                                                        <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn cpt-disabled cpt-chkbtn-disabled">
+                                                                        <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                            <i>
+                                                                            <em></em>
+                                                                            </i>
+                                                                            <span>居左</span></div>
+                                                                        <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                            <i>
+                                                                            <em></em>
+                                                                            </i>
+                                                                            <span>居中</span></div>
+                                                                        <div class="cpt-chkbtn-i" data-value-index="2">
+                                                                            <i>
+                                                                            <em></em>
+                                                                            </i>
+                                                                            <span>居右</span></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 标题结束 -->
+                                <!-- 图例开始 -->
+                                <div data-cpt-con0="legend" data-cpt="type: viewModel.dpct.con.legend.ui,name: 'con.legend',viewModel: {dpct: viewModel.dpct.con.legend,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
+                                    <div data-cpt="type: 'tab',name: 'tab',viewModel: {baseCss: 'dtm-tab1',tabAttr: 'cpt-tab1',conAttr: 'cpt-con1',currentTab: lib.ob('base')}" class="cpt cpt-tab">
+                                        <div class="dtm-tab1">
+                                            <div data-cpt-tab1="base" class="dtm-tab1-hi dtm-tab1-hi-curr">基础</div>
+                                        </div>
+                                        <div data-cpt-con1="base" data-cpt="type: viewModel.dpct.con.base.ui,name: 'con.base',viewModel: {dpct: viewModel.dpct.con.base,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
+                                            <div data-cpt="type: 'scrollPanel',name: 'scrollPanel',viewModel: {css: 'dim-sclpn'}" class="cpt cpt-sclpn dim-sclpn">
+                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.baseBlock',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtblk-title"></div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items._show',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（legend._show）：">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">是否显示图例</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.locationBlock',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtblk-title">图例位置</div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.x',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（legend.x）：">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">水平安放位置</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                                <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居左</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居中</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居右</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.y',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（legend.y）：">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">垂直安放位置</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                                <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居上</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居中</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>居下</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.orient',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（legend.orient）：">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">水平放置还是垂直放置</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                                <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="0">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>水平放置</span></div>
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>垂直放置</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 图例结束 -->
+                                <!-- 提示开始 -->
+                                <div data-cpt-con0="tooltip" data-cpt="type: viewModel.dpct.con.tooltip.ui,name: 'con.tooltip',viewModel: {dpct: viewModel.dpct.con.tooltip,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab0-coni cpt cpt-chtcf-sertpn cpt-chtcf-sbtpn" style="display: none;">
+                                    <div data-cpt="type: 'tab',name: 'tab',viewModel: {baseCss: 'dtm-tab1',tabAttr: 'cpt-tab1',conAttr: 'cpt-con1',currentTab: lib.ob('all')}" class="cpt cpt-tab">
+                                    <div class="dtm-sertb-up"></div>
+                                    <div class="dtm-tab1">
+                                        <div class="dtm-tab1-inner" style="top: 0px;">
+                                        <div data-cpt-tab1="all" class="dtm-tab1-hi dtm-tab1-hi-curr">通用</div>
+                                        </div>
+                                    </div>
+                                    <div class="dtm-sertb-down"></div>
+                                    <div data-cpt-con1="all" data-cpt="type: viewModel.dpct.con.all.ui,name: 'con.all',viewModel: {dpct: viewModel.dpct.con.all,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
+                                        <div data-cpt="type: 'scrollPanel',name: 'scrollPanel',viewModel: {css: 'dim-sclpn'}" class="cpt cpt-sclpn dim-sclpn">
+                                            <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.baseBlock',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                    <div class="dtm-edtblk-title"></div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.show',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（tooltip.show）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">是否使用提示</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt cpt-disabled cpt-boolggt-disabled dtm-edtitm-ggt-disabled">
+                                                            <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>是</span></div>
+                                                            <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>否</span></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.formatterBlock',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                    <div class="dtm-edtblk-title">格式模板</div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.formatter',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（tooltip.formatter）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">普通提示模板</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/FormatterGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-fmtggt dtm-edtitm-ggt">
+                                                            <div class="dtm-fmtggt-desc">模板中可以试试看“{a} {b} {c} {d} {e}”这些变量</div>
+                                                            <div data-cpt="type: 'input/TextInput',name: 'textInput',viewModel: {value: viewModel.value,disabled: viewModel.disabled}" class="cpt cpt-txipt">
+                                                            <div>
+                                                                <input value="{a} &lt;br&gt;{b} : {c} ({d}%)" type="text"></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-cpt="type: 'foreach',name: 'seriesConList',viewModelGet: 'seriesConListViewModel',itemConfigAttr: 'itemConfig'" class="cpt cpt-foreach">
+                                        <div data-cpt-con1="seriesTabKey0" class="cpt cpt-edtpn dtm-tab1-coni" style="display: none;"></div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!-- 提示结束 -->
+                                <!-- 工具开始 -->
+                                <div data-cpt-con0="toolbox" data-cpt="type: viewModel.dpct.con.toolbox.ui,name: 'con.toolbox',viewModel: {dpct: viewModel.dpct.con.toolbox,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
+                                    <div data-cpt="type: 'tab',name: 'tab',viewModel: {baseCss: 'dtm-tab1',tabAttr: 'cpt-tab1',conAttr: 'cpt-con1',currentTab: lib.ob('base')}" class="cpt cpt-tab">
+                                        <div class="dtm-tab1">
+                                            <div data-cpt-tab1="base" class="dtm-tab1-hi dtm-tab1-hi-curr">基础</div>
+                                        </div>
+                                        <div data-cpt-con1="base" data-cpt="type: viewModel.dpct.con.base.ui,name: 'con.base',viewModel: {dpct: viewModel.dpct.con.base,panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
+                                            <div data-cpt="type: 'scrollPanel',name: 'scrollPanel',viewModel: {css: 'dim-sclpn'}" class="cpt cpt-sclpn dim-sclpn">
+                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.baseBlock',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                    <div class="dtm-edtblk-title"></div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.show',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.show）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">是否显示工具箱</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                            <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>是</span></div>
+                                                            <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>否</span></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.locationBlock',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                    <div class="dtm-edtblk-title">工具箱位置</div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.x',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.x）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">水平安放位置</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                            <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                            <div class="cpt-chkbtn-i" data-value-index="0">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>居左</span></div>
+                                                            <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>居中</span></div>
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="2">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>居右</span></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.y',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.y）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">垂直安放位置</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                            <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>居上</span></div>
+                                                            <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>居中</span></div>
+                                                            <div class="cpt-chkbtn-i" data-value-index="2">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>居下</span></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.orient',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.orient）：">
+                                                        <em>
+                                                            <i class="dtmic-used"></i>
+                                                        </em>
+                                                        <span class="dtm-edtitm-title-con">水平放置还是垂直放置</span></div>
+                                                        <div class="dtm-edtitm-con">
+                                                        <div data-cpt="type: 'wave/gadget/SelectGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                            <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>水平放置</span></div>
+                                                            <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                <i>
+                                                                <em></em>
+                                                                </i>
+                                                                <span>垂直放置</span></div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn" data-cpt="type: 'wave/gadget/EditBlock',name: 'items.functionBlock',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                        <div class="dtm-edtblk-title">功能按钮设定</div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.mark',viewModel: {dpct: viewModel.dpct.rows[0],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.feature.mark.show）：">
+                                                            <em>
+                                                                <i class="dtmic-used"></i>
+                                                            </em>
+                                                            <span class="dtm-edtitm-title-con">绘制辅助线功能按钮</span></div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.dataZoom',viewModel: {dpct: viewModel.dpct.rows[1],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.feature.dataZoom.show）：">
+                                                            <em>
+                                                                <i class="dtmic-used"></i>
+                                                            </em>
+                                                            <span class="dtm-edtitm-title-con">选区缩放功能按钮</span></div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i" data-value-index="0">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.dataView',viewModel: {dpct: viewModel.dpct.rows[2],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.feature.dataView.show）：">
+                                                            <em>
+                                                                <i class="dtmic-used"></i>
+                                                            </em>
+                                                            <span class="dtm-edtitm-title-con">切换至数据视图按钮</span></div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.magicType',viewModel: {dpct: viewModel.dpct.rows[3],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.feature.magicType.show）：">
+                                                            <em>
+                                                                <i class="dtmic-used"></i>
+                                                            </em>
+                                                            <span class="dtm-edtitm-title-con">折柱切换按钮</span></div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i" data-value-index="0">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.restore',viewModel: {dpct: viewModel.dpct.rows[4],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.feature.restore.show）：">
+                                                            <em>
+                                                                <i class="dtmic-used"></i>
+                                                            </em>
+                                                            <span class="dtm-edtitm-title-con">还原按钮</span></div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm" data-cpt="type: 'wave/gadget/EditItem',name: 'items.saveAsImage',viewModel: {dpct: viewModel.dpct.rows[5],panelOpenStatus: viewModel.panelOpenStatus,residenceHandle: viewModel.residenceHandle}">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="（toolbox.feature.saveAsImage.show）：">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">保存为图片按钮</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                                <div data-cpt="type: 'wave/gadget/BooleanGadget',name: 'gadgets[0]',viewModel: viewModel.gadgetViewModelList[0]" class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                    <div data-cpt="type: 'input/CheckButton',name: 'checkButton',viewModel: {checked: viewModel.value,dataList: viewModel.dataList,disabled: viewModel.disabled}" class="cpt cpt-chkbtn">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>是</span></div>
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1">
+                                                                        <i>
+                                                                        <em></em>
+                                                                        </i>
+                                                                        <span>否</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 工具结束 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 参数调整 -->
+            </div>
+        </div>
+        <!-- bak.htm -->
+        <!-- 统计图样式开始 -->
+        <style type="text/css">.dtp-wgt,.dtp-paper-con,.dtp-lay-mnr-doc{position:relative}.dtp-lay-mnr-abs{position:absolute}.dtp-wgt{padding:0}.dtp-paper{display:none}.dtp-paper-curr{display:block}.dtp-theme-aatushuo .dtp-wgt{margin:20px auto}.dtp-theme-aatushuo .dtp-wgt-schart-container{height:300px}.dtp-theme-aatushuo .dtp-wgt-schart .dtp-wgt-main{display:block;height:100%}.dtp-theme-aatushuo .dtp-wgt-image .dtp-wgt-main{display:block;margin:0 auto;width:100%}.dtp-theme-aatushuo .dtp-wgt-ptext{padding:10px 0;font:13px/1.5 "Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext{font-family:"Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext-container{min-height:30px;line-height:1.3}.dtp-theme-aatushuo .dtp-wgt-ftext-content{white-space:normal;word-break:break-all}.dtp-theme-aatushuo .dtp-wgt-ftext-title0,.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0{text-align:center}.dtp-theme-aatushuo .dtp-wgt-ftext-title0 .dtp-wgt-ftext-container{font-size:40px;font-weight:bold;border-bottom:4px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0 .dtp-wgt-ftext-container{font-size:24px;font-weight:bold;border-bottom:2px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-container{font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quote0 .dtp-wgt-ftext-container{border-left:3px solid #999;padding-left:20px;font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quotetext{font-style:italic}.dtp-theme-aatushuo .dtp-wgt-ftext-quoteauthor{margin-top:5px}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-content[data-placeholder]:empty:not(:focus):before{font-size:14px}.dtp-theme-aatushuo .dtp-paper-view{padding:35px 35px;color:#333;background:#fff}
+        </style>
+        <!-- 统计图样式结束 -->
+    </body>
+
+</html>

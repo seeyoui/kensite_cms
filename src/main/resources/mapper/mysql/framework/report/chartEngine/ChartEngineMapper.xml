@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.report.chartEngine.persistence.ChartEngineMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.DESCRIBE AS "describe",
+		T.TYPE AS "type",
+		T.SET_OPTION AS "setOption",
+		T.Z_SOURCE AS "zsource",
+		T.Z_KEY AS "zkey",
+		T.Z_VALUE AS "zvalue",
+		T.X_SOURCE AS "xsource",
+		T.X_KEY AS "xkey",
+		T.X_Z_KEY AS "xzkey",
+		T.X_VALUE AS "xvalue",
+		T.Y_SOURCE AS "ysource",
+		T.Y_Z_KEY AS "yzkey",
+		T.Y_X_KEY AS "yxkey",
+		T.Y_VALUE AS "yvalue",
+		T.FUNC AS "func"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%${createUser}%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%${updateUser}%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%${remarks}%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%${delFlag}%'
+			</if>
+			<if test="describe != null and describe != ''">
+				AND T.DESCRIBE LIKE '%${describe}%'
+			</if>
+			<if test="type != null and type != ''">
+				AND T.TYPE LIKE '%${type}%'
+			</if>
+			<if test="setOption != null and setOption != ''">
+				
+			</if>
+			<if test="zsource != null and zsource != ''">
+				AND T.Z_SOURCE LIKE '%${zsource}%'
+			</if>
+			<if test="zkey != null and zkey != ''">
+				AND T.Z_KEY LIKE '%${zkey}%'
+			</if>
+			<if test="zvalue != null and zvalue != ''">
+				AND T.Z_VALUE LIKE '%${zvalue}%'
+			</if>
+			<if test="xsource != null and xsource != ''">
+				AND T.X_SOURCE LIKE '%${xsource}%'
+			</if>
+			<if test="xkey != null and xkey != ''">
+				AND T.X_KEY LIKE '%${xkey}%'
+			</if>
+			<if test="xzkey != null and xzkey != ''">
+				AND T.X_Z_KEY LIKE '%${xzkey}%'
+			</if>
+			<if test="xvalue != null and xvalue != ''">
+				AND T.X_VALUE LIKE '%${xvalue}%'
+			</if>
+			<if test="ysource != null and ysource != ''">
+				AND T.Y_SOURCE LIKE '%${ysource}%'
+			</if>
+			<if test="yzkey != null and yzkey != ''">
+				AND T.Y_Z_KEY LIKE '%${yzkey}%'
+			</if>
+			<if test="yxkey != null and yxkey != ''">
+				AND T.Y_X_KEY LIKE '%${yxkey}%'
+			</if>
+			<if test="yvalue != null and yvalue != ''">
+				AND T.Y_VALUE LIKE '%${yvalue}%'
+			</if>
+			<if test="func != null and func != ''">
+				
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			${sort} ${order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.report.chartEngine.domain.ChartEngine">
+		SELECT
+		<include refid="tableColumns" />
+		FROM KS_CHART_ENGINE T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.report.chartEngine.domain.ChartEngine">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM KS_CHART_ENGINE T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.report.chartEngine.domain.ChartEngine">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM KS_CHART_ENGINE T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM KS_CHART_ENGINE T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM KS_CHART_ENGINE T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.report.chartEngine.domain.ChartEngine">
+		INSERT INTO KS_CHART_ENGINE (
+			
+			
+			
+			
+			
+			REMARKS,
+			DEL_FLAG,
+			DESCRIBE,
+			TYPE,
+			SET_OPTION,
+			Z_SOURCE,
+			Z_KEY,
+			Z_VALUE,
+			X_SOURCE,
+			X_KEY,
+			X_Z_KEY,
+			X_VALUE,
+			Y_SOURCE,
+			Y_Z_KEY,
+			Y_X_KEY,
+			Y_VALUE,
+			FUNC,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{describe,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{setOption,jdbcType=CLOB},
+			#{zsource,jdbcType=VARCHAR},
+			#{zkey,jdbcType=VARCHAR},
+			#{zvalue,jdbcType=VARCHAR},
+			#{xsource,jdbcType=VARCHAR},
+			#{xkey,jdbcType=VARCHAR},
+			#{xzkey,jdbcType=VARCHAR},
+			#{xvalue,jdbcType=VARCHAR},
+			#{ysource,jdbcType=VARCHAR},
+			#{yzkey,jdbcType=VARCHAR},
+			#{yxkey,jdbcType=VARCHAR},
+			#{yvalue,jdbcType=VARCHAR},
+			#{func,jdbcType=CLOB},
+			#{createUser.userName},
+			now(),
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.report.chartEngine.domain.ChartEngine">
+		UPDATE KS_CHART_ENGINE
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+			<if test="describe !=null and describe !=''">
+			DESCRIBE=#{describe},
+			</if>
+			<if test="type !=null and type !=''">
+			TYPE=#{type},
+			</if>
+			<if test="setOption !=null and setOption !=''">
+			SET_OPTION=#{setOption},
+			</if>
+			<if test="zsource !=null and zsource !=''">
+			Z_SOURCE=#{zsource},
+			</if>
+			<if test="zkey !=null and zkey !=''">
+			Z_KEY=#{zkey},
+			</if>
+			<if test="zvalue !=null and zvalue !=''">
+			Z_VALUE=#{zvalue},
+			</if>
+			<if test="xsource !=null and xsource !=''">
+			X_SOURCE=#{xsource},
+			</if>
+			<if test="xkey !=null and xkey !=''">
+			X_KEY=#{xkey},
+			</if>
+			<if test="xzkey !=null and xzkey !=''">
+			X_Z_KEY=#{xzkey},
+			</if>
+			<if test="xvalue !=null and xvalue !=''">
+			X_VALUE=#{xvalue},
+			</if>
+			<if test="ysource !=null and ysource !=''">
+			Y_SOURCE=#{ysource},
+			</if>
+			<if test="yzkey !=null and yzkey !=''">
+			Y_Z_KEY=#{yzkey},
+			</if>
+			<if test="yxkey !=null and yxkey !=''">
+			Y_X_KEY=#{yxkey},
+			</if>
+			<if test="yvalue !=null and yvalue !=''">
+			Y_VALUE=#{yvalue},
+			</if>
+			<if test="func !=null and func !=''">
+			FUNC=#{func},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = now(),
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM KS_CHART_ENGINE WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

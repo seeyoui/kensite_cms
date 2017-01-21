@@ -14,91 +14,108 @@
 			<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 				<table id="dataList" title="统计图表列表<c:if test="${ksfn:getConfig('debug')=='T'}"><a href='javascript:void(0)' onclick='modDebug()'>debug</a></c:if>" 
 						class="easyui-datagrid" style="width:100%;height:100%"
-						url="${ctx}/ks/chartConfig/list/data"
+						url="${ctx}/ks/chartEngine/list/data"
 						toolbar="#toolbar" pagination="true"
-						rownumbers="true" fitColumns="false" singleSelect="false">
+						rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
 							<th data-options="field:'id',hidden:true">ID</th>
 							<th data-options="field:'ck',checkbox:true"></th>
-							<ks:listTag table="KS_CHART_CONFIG" column="REMARKS"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="TITLE"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="CODE_NUM"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="TYPE"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="DESCRIBE"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="CHART_OPTION"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="SERIES_OPTION"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="SQLX"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="SQLY"/>
-							<ks:listTag table="KS_CHART_CONFIG" column="SQLZ"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="REMARKS"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="TYPE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="SET_OPTION"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="Z_SOURCE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="Z_KEY"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="Z_VALUE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="X_SOURCE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="X_KEY"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="X_Z_KEY"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="X_VALUE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="Y_SOURCE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="Y_Z_KEY"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="Y_X_KEY"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="Y_VALUE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="FUNC"/>
 					    	<th field="config" width="100px" formatter="formatConfig">操作</th>
 						</tr>
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.chartConfig.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.chartConfig.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.chartConfig.destroyInfo()">删除</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.chartConfig.exportExcel()">导出</a>
-					<ks:queryTag table="KS_CHART_CONFIG" column="REMARKS"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="TITLE"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="CODE_NUM"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="TYPE"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="DESCRIBE"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="CHART_OPTION"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="SERIES_OPTION"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="SQLX"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="SQLY"/>
-					<ks:queryTag table="KS_CHART_CONFIG" column="SQLZ"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.chartConfig.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.chartEngine.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.chartEngine.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.chartEngine.destroyInfo()">删除</a>
+					<ks:queryTag table="KS_CHART_ENGINE" column="REMARKS"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="TYPE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="SET_OPTION"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="Z_SOURCE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="Z_KEY"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="Z_VALUE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="X_SOURCE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="X_KEY"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="X_Z_KEY"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="X_VALUE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="Y_SOURCE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="Y_Z_KEY"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="Y_X_KEY"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="Y_VALUE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="FUNC"/>
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.chartEngine.selectData()">查询</a>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
-			var tableName = "KS_CHART_CONFIG";
+			var tableName = "KS_CHART_ENGINE";
 			$(document).ready(function(){
 			});
 			var url, loadi;
 			var iframeWin = null, iframeBody=null;
-			$.chartConfig = {
+			$.chartEngine = {
 		   		selectData : function () {
 					$('#dataList').datagrid('load',{
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="REMARKS"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="TITLE"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="CODE_NUM"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="TYPE"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="DESCRIBE"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="CHART_OPTION"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="SERIES_OPTION"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="SQLX"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="SQLY"/>
-						<ks:queryJsTag table="KS_CHART_CONFIG" column="SQLZ"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="REMARKS"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="TYPE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="SET_OPTION"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="Z_SOURCE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="Z_KEY"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="Z_VALUE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="X_SOURCE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="X_KEY"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="X_Z_KEY"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="X_VALUE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="Y_SOURCE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="Y_Z_KEY"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="Y_X_KEY"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="Y_VALUE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="FUNC"/>
 					});
 				},
 				reloadData : function () {
-					$.chartConfig.selectData();
+					$.chartEngine.selectData();
 				},
 				newInfo : function (){
 					$('#dataList').datagrid('clearSelections');
-					$.chartConfig.layerOpen(url);
+					$.chartEngine.layerOpen(url);
 				},
 				editInfo : function (){
 					var row = $('#dataList').datagrid('getSelected');
 					if (row){
-						$.chartConfig.layerOpen(url);
+						$.chartEngine.layerOpen(url);
 					} else {
 						layer.msg("请先选择要修改的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 					}
 				},
 				exportExcel : function () {
-					window.open("${ctx}/ks/chartConfig/export");
+					window.open("${ctx}/ks/chartEngine/export");
 				},
 				layerOpen : function (url) {
-					url = '${ctx}/ks/chartConfig/form';
+					url = '${ctx}/ks/chartEngine/form';
 					layer.open({
 						type: 2,
 						title: '统计图表基本信息',
-						area: ['310px', '350px'],
+						area: ['310px', '250px'],
 						fix: false, //不固定
 						maxmin: false,
 						content: url,
@@ -120,7 +137,7 @@
 				destroyInfo : function (){
 					//var row = $('#dataList').datagrid('getSelected');
 					var rows = $('#dataList').datagrid('getSelections');
-					if (rows){
+					if (rows && rows.length>0){
 						layer.confirm('是否确认删除？', {
 							btn: ['确定','取消'] //按钮
 						}, function(){
@@ -131,7 +148,7 @@
 							}
 							$.ajax({
 								type: "post",
-								url: '${ctx}/ks/chartConfig/delete',
+								url: '${ctx}/ks/chartEngine/delete',
 								data: {id:id},
 								dataType: 'json',
 								timeout: layerLoadMaxTime,
@@ -142,7 +159,7 @@
 									layer.close(loadi);
 									if (data.success==TRUE){
 										layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-										$.chartConfig.reloadData();
+										$.chartEngine.reloadData();
 									} else {
 										layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 									}
@@ -172,8 +189,7 @@
 		    }
 			
 			function config(id) {
-				//window.open('${ctx}/ks/chartConfig/config?id='+id);
-				window.open('${ctx}/ks/chartConfig/tushuo?id='+id);
+				window.open('${ctx}/ks/chartEngine/form/pie/'+id);
 			}
 		</script>
 	</body>
