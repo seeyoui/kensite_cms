@@ -39,7 +39,7 @@
                         <ul class="dtm-tabh-h">
                             <li data-cpt-tabh="dataEditor" class="dtm-tabh-hi dtm-tabh-hi-curr">数据编辑</li>
                             <li data-cpt-tabh="chartConfigurer" class="dtm-tabh-hi">参数调整</li>
-                            <li data-cpt-tabh="extendJs" class="dtm-tabh-hi" style="display:none;">扩展函数</li>
+                            <li data-cpt-tabh="extendJs" class="dtm-tabh-hi">开发脚本</li>
                         </ul>
                         <div class="dtm-conh-data-editor dtm-tabh-coni cpt cpt-datedt cpt-datedt-pie" data-cpt-conh="dataEditor" style="display: block;">
                             <!-- <div class="dtm-cfg-head">
@@ -861,17 +861,17 @@
                     	<div class="dtm-conh-data-editor dtm-tabh-coni cpt cpt-datedt cpt-datedt-pie" data-cpt-conh="extendJs" style="display: none;">
                             <div class="dtm-handsontable handsontable" id="func_div">
 <textarea id="func" style="display:none;">
-/*************保留项*************/
-var zWhere = "id='$id$'";//系列扩展条件
-var xWhere = "name='zhangsan'";//X轴扩展条件
-var yWhere = "sex like '男'";//Y轴扩展条件
-/*************保留项*************/
-/*
-if($("#idStr")!=null && $("#idStr").length!=0) {
-    var idStr = $("#idStr").textbox("getValue");
-    zWhere = zWhere.replace("$id$", idStr);
-}
-*/
+&lt;ks:chart uuid="${chartEngine.id }"/>
+<script type="text/javascript">
+$(document).ready(function() {
+	var xwhere = "";
+	var ywhere = "";//" and name like 'zhangsan'"
+	var zwhere = "";
+	renderChart_${chartEngine.id }(xwhere, ywhere, zwhere);
+});
+</script>
+
+示例demo：/webapp/try1try/chart.jsp
 </textarea>
                             </div>
                         </div>
