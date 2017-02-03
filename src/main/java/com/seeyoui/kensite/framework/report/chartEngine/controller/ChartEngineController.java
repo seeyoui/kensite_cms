@@ -111,6 +111,9 @@ public class ChartEngineController extends BaseController {
 				List<Map<Object, Object>> yList = DBUtils.executeQuery(sql, true);
 				modelMap.put("yList", yList);
 			}
+			sql = "select value,label from sys_dict where category='oracle_operation' order by sequence";
+			List<Map<Object, Object>> yOperation = DBUtils.executeQuery(sql, true);
+			modelMap.put("yOperation", yOperation);
 		}
 		return new ModelAndView("framework/report/chartEngine/"+page, modelMap);
 	}
@@ -262,7 +265,10 @@ public class ChartEngineController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, ChartEngine chartEngine) throws Exception {
 		String type = chartEngine.getType();
-		return chartEngineService.pie(chartEngine);
+		if(StringUtils.isNoneBlank(type) && "pie".equals(type)) {
+			return chartEngineService.pie(chartEngine);
+		}
+		return null;
 	}
 	
 	/**

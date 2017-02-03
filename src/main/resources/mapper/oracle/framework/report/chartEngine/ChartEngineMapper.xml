@@ -24,7 +24,8 @@
 		T.Y_Z_KEY AS "yzkey",
 		T.Y_X_KEY AS "yxkey",
 		T.Y_VALUE AS "yvalue",
-		T.FUNC AS "func"
+		T.FUNC AS "func",
+		T.OPERATION AS "operation"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -95,6 +96,9 @@
 			</if>
 			<if test="func != null and func != ''">
 				
+			</if>
+			<if test="operation != null and operation != ''">
+				AND T.OPERATION LIKE '%'||#{operation}||'%'
 			</if>
 		</where>
 	</sql>
@@ -176,6 +180,7 @@
 			Y_X_KEY,
 			Y_VALUE,
 			FUNC,
+			OPERATION,
 			CREATE_USER,
 			CREATE_DATE,
 			ID
@@ -203,6 +208,7 @@
 			#{yxkey,jdbcType=VARCHAR},
 			#{yvalue,jdbcType=VARCHAR},
 			#{func,jdbcType=CLOB},
+			#{operation,jdbcType=CLOB},
 			#{createUser.userName},
 			sysdate,
 			#{id}
@@ -268,6 +274,9 @@
 			</if>
 			<if test="func !=null and func !=''">
 			FUNC=#{func},
+			</if>
+			<if test="operation !=null and operation !=''">
+			OPERATION=#{operation},
 			</if>
 			UPDATE_USER = #{updateUser.userName},
 			UPDATE_DATE = sysdate,

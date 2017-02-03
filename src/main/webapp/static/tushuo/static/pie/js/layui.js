@@ -7,14 +7,14 @@ define(function(require, exports, module) {
             layui.use(['layer', 'form'], function() {
 				layer = layui.layer
 				,form = layui.form();
-
 				form.on('select(md)', function (data) {
 					module.exports.loadData(data);
-	            })
+	            });
+				
 			});
         },
         loadData: function(data) {
-        	var subSel = '';
+        	var subSel = [];
         	if(data.elem.name == 'legend') {
         		subSel = ['select[name="legend-key"]', 'select[name="legend-value"]'];
     		}
@@ -71,6 +71,9 @@ define(function(require, exports, module) {
         validForm: function(formData) {
         	for(var o in formData) {
         		if(!formData[o]) {
+        			if(layer == null) {
+        				return;
+        			}
         			layer.tips('不允许为空', '#'+o, {
         				tips: [2, '#ea5532']
         			});
@@ -92,6 +95,7 @@ define(function(require, exports, module) {
         	formData['yzkey'] = fd['y-legend-key'];
         	formData['yxkey'] = fd['y-x-key'];
         	formData['yvalue'] = fd['y-value'];
+        	formData['operation'] = fd['y-operation'];
         	formData['type'] = 'pie';
         	return formData;
         }

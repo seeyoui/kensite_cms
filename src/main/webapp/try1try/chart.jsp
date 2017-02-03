@@ -12,29 +12,23 @@
 
 <body>
 	<div>
-		<input id="idStr" class="easyui-textbox" data-options="iconCls:'icon-search',value:'00000000000000000000000000000000'" style="width:300px"/>
-		<a href="javascript:dept_user_state_lineQueryParam();" class="easyui-linkbutton">查询</a>
+		<input id="num" class="easyui-textbox" data-options="iconCls:'icon-search',value:'0'"/>
+		<a href="javascript:test();" class="easyui-linkbutton">查询</a>
 	</div>
 	<div style="width:500px;height:300px;">
-	<ks:chart codeNum="dept_user_state_line"/>
+	<ks:chart uuid="b0022b5378434294a2584181deaf460b"/>
 	</div>
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
-		dept_user_state_lineQueryParam();
+		renderChart_b0022b5378434294a2584181deaf460b();
 	});
-	function getOpt() {
-		console.info(dept_user_state_lineChart.getOption());
-		console.info($("#idStr").textbox("getValue"));
-		dept_user_state_lineChart.setOption({
-			series: [
-		     	{
-		     	},
-		     	{
-		     		data:[3, 4]
-		     	}
-		     ]
-		});
+	function test() {
+		var num = $('#num').textbox('getValue');
+		var xwhere = '';
+		var ywhere = ' and hits>'+num;
+		var zwhere = '';
+		renderChart_b0022b5378434294a2584181deaf460b(xwhere, ywhere, zwhere);
 	}
 	</script>
 </body>

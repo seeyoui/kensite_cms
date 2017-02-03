@@ -2,6 +2,7 @@ define(function(require, exports, module) {
 
     var $ = require('jquery');
     var layui = require('./layui.js');
+    var chart = require('./chart.js');
     var loadi = null;
     module.exports = {
         init: function(data) {
@@ -34,6 +35,7 @@ define(function(require, exports, module) {
 					},
 					success: function(data, textStatus){
 						layer.close(loadi);
+						chart.loadData();
 						if (data.success=='T'){
 							layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: 1500});
 						} else {

@@ -124,14 +124,25 @@ public class ChartEngineService extends BaseService {
 		String yvalue = chartEngine.getYvalue();
 		String yxkey = chartEngine.getYxkey();
 		String yzkey = chartEngine.getYzkey();
+		String operation = chartEngine.getOperation();
 		
 		String zsource = chartEngine.getZsource();
 		String zkey = chartEngine.getZkey();
 		String zvalue = chartEngine.getZvalue();
 		
-		String xsql = "select "+xkey+","+xvalue+","+xzkey+" from "+xsource;
-		String ysql = "select "+yvalue+","+yxkey+","+yzkey+" from "+ysource;
-		String zsql = "select "+zkey+","+zvalue+" from "+zsource;
+		String xsql = "select "+xkey+","+xvalue+","+xzkey+" from "+xsource+" where 1=1 ";
+		if(StringUtils.isNoneBlank(chartEngine.getXwhere())) {
+			xsql += chartEngine.getXwhere();
+		}
+		String ysql = "select "+operation+"("+yvalue+") "+yvalue+","+yxkey+","+yzkey+" from "+ysource+" where 1=1 ";
+		if(StringUtils.isNoneBlank(chartEngine.getYwhere())) {
+			ysql += chartEngine.getYwhere();
+		}
+		ysql += " group by "+yxkey+","+yzkey;
+		String zsql = "select "+zkey+","+zvalue+" from "+zsource+" where 1=1 ";
+		if(StringUtils.isNoneBlank(chartEngine.getZwhere())) {
+			zsql += chartEngine.getZwhere();
+		}
 		
 		List<Map<Object, Object>> xList = DBUtils.executeQuery(xsql, false);
 		List<Map<Object, Object>> yList = DBUtils.executeQuery(ysql, false);

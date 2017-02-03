@@ -19,8 +19,8 @@
 						rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th data-options="field:'id',hidden:true">ID</th>
 							<th data-options="field:'ck',checkbox:true"></th>
+							<th data-options="field:'id'">UUID</th>
 							<ks:listTag table="KS_CHART_ENGINE" column="REMARKS"/>
 							<ks:listTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
 							<ks:listTag table="KS_CHART_ENGINE" column="TYPE"/>

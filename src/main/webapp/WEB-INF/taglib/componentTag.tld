@@ -163,7 +163,7 @@
 		</attribute>
 		<attribute>
 			<!-- 编码 -->
-			<name>codeNum</name>
+			<name>uuid</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

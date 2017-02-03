@@ -64,17 +64,17 @@
 															</c:forEach>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="layui-form-item">
                                                     <label id="legend-key" class="layui-form-label">系列KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="legend-key">
                                                             <option value="">请选择</option>
                                                             <c:forEach var="opt" items="${zList}" varStatus="status">
                                                             <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.zkey}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
                                                     <label id="legend-value" class="layui-form-label">VALUE</label>
                                                     <div class="layui-input-inline">
                                                         <select name="legend-value">
@@ -100,6 +100,7 @@
 															</c:forEach>
                                                         </select>
                                                     </div>
+                                                    <!--
                                                     <label id="x-legend-key" class="layui-form-label">系列KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="x-legend-key">
@@ -109,6 +110,7 @@
 															</c:forEach>
                                                         </select>
                                                     </div>
+                                                    -->
                                                 </div>
                                                 <div class="layui-form-item">
                                                     <label id="x-key" class="layui-form-label">X轴KEY</label>
@@ -145,24 +147,35 @@
 															</c:forEach>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="layui-form-item">
                                                     <label id="y-legend-key" class="layui-form-label">系列KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="y-legend-key">
                                                             <option value="">请选择</option>
                                                             <c:forEach var="opt" items="${yList}" varStatus="status">
                                                             <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yzkey}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
                                                     <label id="y-x-key" class="layui-form-label">X轴KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="y-x-key">
                                                             <option value="">请选择</option>
                                                             <c:forEach var="opt" items="${yList}" varStatus="status">
                                                             <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yxkey}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="layui-form-item">
+                                                    <label id="y-operation" class="layui-form-label">运算</label>
+                                                    <div class="layui-input-inline">
+                                                        <select name="y-operation">
+                                                            <option value="">请选择</option>
+                                                            <c:forEach var="opt" items="${yOperation}" varStatus="status">
+                                                            <option value="${opt.value }" <c:if test="${opt.value eq chartEngine.operation}"> selected=""</c:if>>${opt.label }</option>
+                                                            </c:forEach>
                                                         </select>
                                                     </div>
                                                     <label id="y-value" class="layui-form-label">VALUE</label>

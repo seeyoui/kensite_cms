@@ -1,22 +1,41 @@
-<div id="${codeNum}" style="height:100%"></div>
+<div id="${id}" style="height:100%"></div>
 <script type="text/javascript">
-	//${codeNum}QueryParam();
-	var ${codeNum}Chart = echarts.init(document.getElementById('${codeNum}'), 'macarons');
-	function ${codeNum}QueryParam() {
-		var sqlx = "${sqlx}";
-		var sqly = "${sqly}";
-		var sqlz = "${sqlz}";
-		${func}
-		${codeNum}ChartData(sqlx, sqly, sqlz);
+	//queryChart_${id}();
+	var chart_${id} = echarts.init(document.getElementById('${id}'), 'macarons');
+	function queryChart_${id}() {
+		renderChart_${id}();
 	}
-	function ${codeNum}ChartData(sqlx, sqly, sqlz) {
+	function renderChart_${id}(xwhere, ywhere, zwhere) {
+		if(xwhere == null) {
+			xwhere = '';
+		}
+		if(ywhere == null) {
+			ywhere = '';
+		}
+		if(zwhere == null) {
+			zwhere = '';
+		}
 		$.ajax({
-			type: "post",
-			url: '/kensite/ks/chart/${type}',
+			type: 'post',
+			url: '/kensite/ks/chartEngine/config',
 			data: {
-				sqlx : sqlx,
-				sqly : sqly,
-				sqlz : sqlz
+				id : '${id}',
+				type : '${type}',
+				zsource : '${zsource}',
+				zkey : '${zkey}',
+				zvalue : '${zvalue}',
+				xsource : '${xsource}',
+				xkey : '${xkey}',
+				xzkey : '${xzkey}',
+				xvalue : '${xvalue}',
+				ysource : '${ysource}',
+				yzkey : '${yzkey}',
+				yxkey : '${yxkey}',
+				yvalue : '${yvalue}',
+				operation : '${operation}',
+				xwhere : xwhere,
+				ywhere : ywhere,
+				zwhere : zwhere
 			},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
@@ -24,19 +43,10 @@
 			},
 			success: function(data, textStatus){
 				layer.close(loadi);
-				${chartOption}
-				${seriesOption}
-				if(seriesOption) {
-					for(var i=0; i<seriesOption.length; i++) {
-						for(var j=0; j<data.series.length; j++) {
-							if(seriesOption[i].zkey == data.series[j].zkey) {
-								$.extend(data.series[j], seriesOption[i]);
-							}
-						}
-					}
-				}
-				$.extend(option, data);
-				${codeNum}Chart.setOption(option);
+				var chartOpt = {};
+				$.extend(true, chartOpt, ${setOption});
+				$.extend(true, chartOpt, data);
+				chart_${id}.setOption(chartOpt);
 			}
 		});
 	}

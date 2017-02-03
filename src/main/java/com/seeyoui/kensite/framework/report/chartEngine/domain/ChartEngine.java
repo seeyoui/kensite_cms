@@ -53,6 +53,12 @@ public class ChartEngine extends DataEntity<ChartEngine> {
 	private String yvalue;//Y轴值
 	@ExcelField(title="扩展函数", type=1, align=2, sort=21, mod="KS_CHART_ENGINE|FUNC")
 	private String func;//扩展函数
+	@ExcelField(title="运算", type=1, align=2, sort=21, mod="KS_CHART_ENGINE|OPERATION")
+	private String operation;
+	
+	private String xwhere;
+	private String ywhere;
+	private String zwhere;
 
 	public void setDescribe(String describe) {
 		this.describe = describe;
@@ -161,4 +167,37 @@ public class ChartEngine extends DataEntity<ChartEngine> {
 //		return this.func;
 		return HtmlUtils.htmlUnescape(this.func);
 	}
+
+	public String getXwhere() {
+		return HtmlUtils.htmlUnescape(this.xwhere);
+	}
+
+	public void setXwhere(String xwhere) {
+		this.xwhere = xwhere;
+	}
+
+	public String getYwhere() {
+		return HtmlUtils.htmlUnescape(this.ywhere);
+	}
+
+	public void setYwhere(String ywhere) {
+		this.ywhere = ywhere;
+	}
+
+	public String getZwhere() {
+		return HtmlUtils.htmlUnescape(this.zwhere);
+	}
+
+	public void setZwhere(String zwhere) {
+		this.zwhere = zwhere;
+	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+
 }

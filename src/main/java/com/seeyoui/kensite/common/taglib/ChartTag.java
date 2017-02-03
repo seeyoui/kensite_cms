@@ -7,32 +7,32 @@ import javax.servlet.jsp.tagext.TagSupport;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.common.util.TemplateUtils;
-import com.seeyoui.kensite.framework.report.chartConfig.domain.ChartConfig;
-import com.seeyoui.kensite.framework.report.chartConfig.persistence.ChartConfigMapper;
+import com.seeyoui.kensite.framework.report.chartEngine.domain.ChartEngine;
+import com.seeyoui.kensite.framework.report.chartEngine.persistence.ChartEngineMapper;
 
 public class ChartTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 	
-	private static ChartConfigMapper chartConfigMapper = SpringContextHolder.getBean(ChartConfigMapper.class);
+	private static ChartEngineMapper chartEngineMapper = SpringContextHolder.getBean(ChartEngineMapper.class);
 	
 	private String id;
-	private String codeNum;
+	private String uuid;
 	
 	@Override
 	public int doStartTag() throws JspException {
 		//如果返回SKIP_BODY则忽略标签之中的内容，如果返回EVAL_BODY_INCLUDE则将标签体的内容进行输出
 		try {
-			ChartConfig chartConfig = null;
+			ChartEngine chartEngine = null;
 			if(StringUtils.isNoneBlank(id)) {
-				chartConfig = chartConfigMapper.findOne(id);
+				chartEngine = chartEngineMapper.findOne(id);
 			}
-			if(StringUtils.isNoneBlank(codeNum)) {
-				chartConfig = chartConfigMapper.findOne(codeNum);
+			if(StringUtils.isNoneBlank(uuid)) {
+				chartEngine = chartEngineMapper.findOne(uuid);
 			}
-			if(chartConfig == null) {
+			if(chartEngine == null) {
 				return SKIP_BODY;
 			}
-			String result = TemplateUtils.getStringFromTemplate(chartConfig, TemplateUtils.getFilePath("chart"), "chartTemplate.ks");
+			String result = TemplateUtils.getStringFromTemplate(chartEngine, TemplateUtils.getFilePath("chart"), "chartTemplate.ks");
 			if (StringUtils.isBlank(result)) {
 				return SKIP_BODY;
 			}
@@ -55,15 +55,15 @@ public class ChartTag extends TagSupport {
 	public void release() {
 		super.release();
 		this.id = null;
-		this.codeNum = null;
+		this.uuid = null;
 	}
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public void setCodeNum(String codeNum) {
-		this.codeNum = codeNum;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 }
