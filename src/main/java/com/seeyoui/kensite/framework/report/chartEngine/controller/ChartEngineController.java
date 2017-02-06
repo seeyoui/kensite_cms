@@ -268,6 +268,9 @@ public class ChartEngineController extends BaseController {
 		if(StringUtils.isNoneBlank(type) && "pie".equals(type)) {
 			return chartEngineService.pie(chartEngine);
 		}
+		if(StringUtils.isNoneBlank(type) && "bar".equals(type)) {
+			return chartEngineService.bar(chartEngine);
+		}
 		return null;
 	}
 	

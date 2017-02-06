@@ -184,12 +184,15 @@
 			}
 		    
 		    function formatConfig(val,row) {
-				var returnStr = "&nbsp;&nbsp;<a href='javascript:config(\""+row.id+"\")'>配置</a>";
+				var returnStr = "&nbsp;&nbsp;<a href='javascript:config(\""+row.id+"\",\""+row.type+"\")'>配置</a>";
 				return returnStr;
 		    }
 			
-			function config(id) {
-				window.open('${ctx}/ks/chartEngine/form/pie/'+id);
+			function config(id, type) {
+				if(type == null || type == '') {
+					return;
+				}
+				window.open('${ctx}/ks/chartEngine/form/'+type+'/'+id);
 			}
 		</script>
 	</body>

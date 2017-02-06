@@ -1,19 +1,17 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" class="dtm-html-mf">
-	<head>
-		<title>Kensite开发平台</title>
-		<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
-		<%@ include file="/WEB-INF/view/taglib/layui.jsp" %>
-		<%@ include file="/WEB-INF/view/taglib/echarts.jsp" %>
-		<%@ include file="/WEB-INF/view/taglib/codemirror.jsp" %>
-		<link rel="stylesheet" href="${ctx_static}/tushuo/static/pie/css/waveApp.css" type="text/css"/>
-		<style type="text/css">
-		</style>
-	</head>
-
-	<body class="cpt cpt-wave">
+<!DOCTYPE html>
+<html class="dtm-html-mf" lang="zh-CN">
+    
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="图说">
+    <title>百度 · 图说</title>
+    <link rel="stylesheet" href="../../lib/spreadjs/gcspread.sheets.excel2013lightGray.9.40.20161.0.css">
+    <link rel="stylesheet" href="css/waveApp.css">
+    </head>
+    
+    <body class="cpt cpt-wave">
         <div id="wave-main">
             <div class="cpt cpt-manufacture">
                 <!-- 主体开始 -->
@@ -34,165 +32,21 @@
             
                 <!-- 参数调整 -->
                 <div style="display: block; left: 0px; top: 0px;" class="cpt cpt-chtedt">
-                    <div class="cpt cpt-btn dtm-btn dtm-close-btn" data-id="${chartEngine.id }">保存</div>
+                    <div class="cpt cpt-btn dtm-btn dtm-close-btn">保存</div>
                     <div class="dtm-tabh cpt cpt-tab">
                         <ul class="dtm-tabh-h">
                             <li data-cpt-tabh="dataEditor" class="dtm-tabh-hi dtm-tabh-hi-curr">数据编辑</li>
                             <li data-cpt-tabh="chartConfigurer" class="dtm-tabh-hi">参数调整</li>
-                            <li data-cpt-tabh="extendJs" class="dtm-tabh-hi">开发脚本</li>
                         </ul>
                         <div class="dtm-conh-data-editor dtm-tabh-coni cpt cpt-datedt cpt-datedt-pie" data-cpt-conh="dataEditor" style="display: block;">
-                            <!-- <div class="dtm-cfg-head">
+                            <div class="dtm-cfg-head">
                                 <div class="dtm-cfgpn"></div>
                                 <div class="cpt cpt-upld">
                                     <span class="dtm-upld-btn fileinput-button">生成配置</span>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="dtm-handsontable handsontable" id="ht_c0ae913fd814788d">
-                                <div id="KSreport" style="position:absolute; top:0px; bottom:0px; left:0px; right:0px; border: 0px; padding-top: 15px; overflow-y: auto;">
-                                    <form id="setting" class="layui-form" action="">
-                                        <fieldset class="layui-elem-field layui-field-title">
-                                            <legend>系列</legend>
-                                            <div class="layui-field-box">
-                                                <div class="layui-form-item">
-                                                    <label id="legend" class="layui-form-label">数据源</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="legend" lay-filter="md">
-                                                            <option value="">请选择数据源</option>
-                                                            <c:forEach var="view" items="${viewList}" varStatus="status">
-                                                            <option value="${view.viewName }" <c:if test="${view.viewName eq chartEngine.zsource}"> selected=""</c:if>>${view.viewName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label id="legend-key" class="layui-form-label">系列KEY</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="legend-key">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${zList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.zkey}"> selected=""</c:if>>${opt.columnName }</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    <label id="legend-value" class="layui-form-label">VALUE</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="legend-value">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${zList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.zvalue}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset class="layui-elem-field layui-field-title">
-                                            <legend>X轴</legend>
-                                            <div class="layui-field-box">
-                                                <div class="layui-form-item">
-                                                    <label id="x" class="layui-form-label">数据源</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="x" lay-filter="md">
-                                                            <option value="">请选择数据源</option>
-                                                            <c:forEach var="view" items="${viewList}" varStatus="status">
-                                                            <option value="${view.viewName }" <c:if test="${view.viewName eq chartEngine.xsource}"> selected=""</c:if>>${view.viewName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    <!--
-                                                    <label id="x-legend-key" class="layui-form-label">系列KEY</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="x-legend-key">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${xList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.xzkey}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    -->
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label id="x-key" class="layui-form-label">X轴KEY</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="x-key">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${xList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.xkey}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    <label id="x-value" class="layui-form-label">VALUE</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="x-value">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${xList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.xvalue}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset class="layui-elem-field layui-field-title">
-                                            <legend>Y轴</legend>
-                                            <div class="layui-field-box">
-                                                <div class="layui-form-item">
-                                                    <label id="y" class="layui-form-label">数据源</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="y" lay-filter="md">
-                                                            <option value="">请选择数据源</option>
-                                                            <c:forEach var="view" items="${viewList}" varStatus="status">
-                                                            <option value="${view.viewName }" <c:if test="${view.viewName eq chartEngine.ysource}"> selected=""</c:if>>${view.viewName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label id="y-legend-key" class="layui-form-label">系列KEY</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="y-legend-key">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yzkey}"> selected=""</c:if>>${opt.columnName }</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    <label id="y-x-key" class="layui-form-label">X轴KEY</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="y-x-key">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yxkey}"> selected=""</c:if>>${opt.columnName }</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="layui-form-item">
-                                                    <label id="y-operation" class="layui-form-label">运算</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="y-operation">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yOperation}" varStatus="status">
-                                                            <option value="${opt.value }" <c:if test="${opt.value eq chartEngine.operation}"> selected=""</c:if>>${opt.label }</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    <label id="y-value" class="layui-form-label">VALUE</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="y-value">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yvalue}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <input type="hidden" id="type" name="type" value="pie"/>
-                                    </form>
-                                </div>
+                                <div id="KSreport" style="position:absolute; top:0px; bottom:0px; left:0px; right:0px; border: 1px solid gray"></div>
                             </div>
                         </div>
                         <div class="dtm-conh-chart-configurer dtm-tabh-coni cpt cpt-chtcf" data-cpt-conh="chartConfigurer" style="display: none;">
@@ -210,15 +64,174 @@
                                         <div class="dtm-sertb-up"></div>
                                         <div class="dtm-tab1">
                                             <div data-cpt-add="series" class="dtm-tab1-hi">
+                                                <em>
+                                                    <i class="dtmic-add"></i>
+                                                </em>
                                             </div>
-                                            <div class="dtm-tab1-inner" style="top: 0px;">
-                                                <div class="cpt cpt-foreach" id="legend-menu">
+                                            <div class="dtm-tab1-inner" style="top: 40px;">
+                                                <div class="cpt cpt-foreach">
+                                                    <div data-cpt-tab1="seriesTabKey0" class="cpt cpt-foreach-item dtm-tab1-hi dtm-tab1-hi-curr">系列0</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="dtm-sertb-down"></div>
-                                        <div class="cpt cpt-foreach" id="legend-div">
-                                            
+                                        <div class="cpt cpt-foreach">
+                                            <div data-cpt-con1="seriesTabKey0" class="cpt cpt-edtpn dtm-tab1-coni" style="display: block;">
+                                                <div class="cpt cpt-sclpn dim-sclpn">
+                                                    <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                        <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn">
+                                                            <div class="dtm-edtblk-title">饼图设置（针对本系列）</div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.series[0].roseType = false;">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">南丁格尔玫瑰图模式</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div class="cpt cpt-sltggt dtm-edtitm-ggt cpt-disabled cpt-sltggt-disabled dtm-edtitm-ggt-disabled">
+                                                                    <div class="cpt cpt-chkbtn cpt-disabled cpt-chkbtn-disabled">
+                                                                        <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-opt="chartOpt.series[0].roseType = 'radius'" data-value-index="0">
+                                                                        <i>
+                                                                            <em></em>
+                                                                        </i>
+                                                                        <span>半径模式</span></div>
+                                                                        <div class="cpt-chkbtn-i" data-opt="chartOpt.series[0].roseType = 'area'" data-value-index="1">
+                                                                        <i>
+                                                                            <em></em>
+                                                                        </i>
+                                                                        <span>面积模式</span></div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div> -->
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.series[0].center=['50%', '50%'];">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">饼图圆心坐标</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div class="cpt cpt-arrvalggt dtm-edtitm-ggt">
+                                                                    <div class="dtm-row ">
+                                                                        <span class="dtm-label">x:</span>
+                                                                        <div class="dtm-con dtm-con-swc">
+                                                                            <div class="cpt cpt-msrggt dtm-ggt" style="display: block;">
+                                                                                <div class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                <div>
+                                                                                    <input type="text" value="50"></div>
+                                                                                </div>
+                                                                                <div class="dtm-msrggt-unit">%</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="dtm-row ">
+                                                                        <span class="dtm-label">y:</span>
+                                                                        <div class="dtm-con dtm-con-swc">
+                                                                            <div class="cpt cpt-msrggt dtm-ggt" style="display: block;">
+                                                                                <div class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                <div>
+                                                                                    <input type="text" value="50"></div>
+                                                                                </div>
+                                                                                <div class="dtm-msrggt-unit">%</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div> -->
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="series[0].radius：">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">饼图半径</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div class="cpt cpt-arrvalggt dtm-edtitm-ggt" style="display: block;">
+                                                                        <div class="dtm-row ">
+                                                                            <span class="dtm-label">内:</span>
+                                                                            <div class="dtm-con dtm-con-swc">
+                                                                                <div class="cpt cpt-msrggt dtm-ggt" style="display: block;">
+                                                                                    <div class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                    <div>
+                                                                                        <input type="text" value="0"></div>
+                                                                                    </div>
+                                                                                    <div class="dtm-msrggt-unit">%</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="dtm-row ">
+                                                                            <span class="dtm-label">外:</span>
+                                                                            <div class="dtm-con dtm-con-swc">
+                                                                                <div class="cpt cpt-msrggt dtm-ggt">
+                                                                                    <div class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                                    <div>
+                                                                                        <input type="text" value="75"></div>
+                                                                                    </div>
+                                                                                    <div class="dtm-msrggt-unit">%</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="series[0].startAngle：">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">饼图起始角度</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div class="cpt cpt-msrggt dtm-edtitm-ggt">
+                                                                        <div class="cpt cpt-txipt dtm-msrggt-tx0">
+                                                                            <div>
+                                                                            <input type="text" value="90"></div>
+                                                                        </div>
+                                                                        <div class="dtm-msrggt-unit">°</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                                <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.series[0].selectedMode=false;">
+                                                                    <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                    </em>
+                                                                    <span class="dtm-edtitm-title-con">鼠标点选模式</span>
+                                                                </div>
+                                                                <div class="dtm-edtitm-con">
+                                                                    <div class="cpt cpt-sltggt dtm-edtitm-ggt">
+                                                                    <div class="cpt cpt-chkbtn">
+                                                                        <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.series[0].selectedMode=false;">
+                                                                            <i>
+                                                                                <em></em>
+                                                                            </i>
+                                                                            <span>不可选</span>
+                                                                        </div>
+                                                                        <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.series[0].selectedMode='single';">
+                                                                            <i>
+                                                                                <em></em>
+                                                                            </i>
+                                                                            <span>单选</span>
+                                                                        </div>
+                                                                        <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="2" data-opt="chartOpt.series[0].selectedMode='multiple';">
+                                                                            <i>
+                                                                                <em></em>
+                                                                            </i>
+                                                                            <span>多选</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -245,22 +258,22 @@
                                                         <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-txipt">
                                                             <div>
-                                                                <input value="主标题文本" type="text" data-opt="chartOpt.title.text='val';" data-type="title.text"></div>
+                                                                <input value="主标题文本" type="text" data-opt="chartOpt.title.text='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled">
                                                         <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.title.link='';">
                                                         <em>
                                                             <i class="dtmic-used"></i>
                                                         </em>
                                                         <span class="dtm-edtitm-title-con">主标题文本超链接</span></div>
                                                         <div class="dtm-edtitm-con">
-                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
-                                                            <div class="cpt cpt-txipt">
+                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt cpt-disabled cpt-txiptggt-disabled dtm-edtitm-ggt-disabled">
+                                                            <div class="cpt cpt-txipt cpt-disabled cpt-txipt-disabled">
                                                             <div>
-                                                                <input value="" type="text" data-opt="chartOpt.title.link='val';" data-type="title.link"></div>
+                                                                <input value="http://" type="text" data-opt="chartOpt.title.link='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -275,22 +288,22 @@
                                                         <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-txipt">
                                                             <div>
-                                                                <input value="副标题文本" type="text" data-opt="chartOpt.title.subtext='val';" data-type="title.subtext"></div>
+                                                                <input value="副标题文本" type="text" data-opt="chartOpt.title.subtext='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled">
                                                         <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.title.sublink='';">
                                                         <em>
                                                             <i class="dtmic-used"></i>
                                                         </em>
                                                         <span class="dtm-edtitm-title-con">副标题文本超链接</span></div>
                                                         <div class="dtm-edtitm-con">
-                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
-                                                            <div class="cpt cpt-txipt">
+                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt cpt-disabled cpt-txiptggt-disabled dtm-edtitm-ggt-disabled">
+                                                            <div class="cpt cpt-txipt cpt-disabled cpt-txipt-disabled">
                                                             <div>
-                                                                <input value="" type="text" data-opt="chartOpt.title.sublink='val';" data-type="title.sublink"></div>
+                                                                <input value="http://" type="text" data-opt="chartOpt.title.sublink='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -314,17 +327,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.x='left';" data-cate="title.x" data-type="title.x.left">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.x='left';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居左</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.x='center';" data-cate="title.x" data-type="title.x.center">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.x='center';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.x='right';" data-cate="title.x" data-type="title.x.right">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.x='right';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -343,17 +356,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.y='top';" data-cate="title.y" data-type="title.y.top">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.y='top';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居上</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.y='middle';" data-cate="title.y" data-type="title.y.middle">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.y='middle';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.y='bottom';" data-cate="title.y" data-type="title.y.bottom">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.y='bottom';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -419,12 +432,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.show=true;" data-cate="legend.show" data-type="legend.show.true">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.show=false;" data-cate="legend.show" data-type="legend.show.false">
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -446,17 +459,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.legend.x='left';" data-cate="legend.x" data-type="legend.x.left">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.legend.x='left';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居左</span></div>
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.legend.x='center';" data-cate="legend.x" data-type="legend.x.center">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.legend.x='center';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.x='right';" data-cate="legend.x" data-type="legend.x.right">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.x='right';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -475,17 +488,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.y='top';" data-cate="legend.y" data-type="legend.y.top">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.y='top';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居上</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.y='middle';" data-cate="legend.y" data-type="legend.y.middle">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.y='middle';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.y='bottom';" data-cate="legend.y" data-type="legend.y.bottom">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.y='bottom';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -504,12 +517,12 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.orient='horizontal';" data-cate="legend.orient" data-type="legend.orient.horizontal">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.orient='horizontal';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>水平放置</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.orient='vertical';" data-cate="legend.orient" data-type="legend.orient.vertical">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.orient='vertical';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -549,12 +562,12 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-boolggt dtm-edtitm-ggt cpt-disabled cpt-boolggt-disabled dtm-edtitm-ggt-disabled">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.tooltip.show=true;" data-cate="tooltip.show" data-type="tooltip.show.true">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.tooltip.show=true;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>是</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.tooltip.show=false;" data-cate="tooltip.show" data-type="tooltip.show.false">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.tooltip.show=false;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -577,7 +590,7 @@
                                                             <div class="dtm-fmtggt-desc">模板中可以试试看“{a} {b} {c} {d} {e}”这些变量</div>
                                                             <div class="cpt cpt-txipt">
                                                             <div>
-                                                                <input value="{a} &lt;br&gt;{b} : {c} ({d}%)" type="text" data-opt="chartOpt.tooltip.formatter='val';" data-type="tooltip.formatter"></div>
+                                                                <input value="{a} &lt;br&gt;{b} : {c} ({d}%)" type="text" data-opt="chartOpt.tooltip.formatter='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -612,12 +625,12 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.show=true;" data-cate="toolbox.show" data-type="toolbox.show.true">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.show=true;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>是</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.show=false;" data-cate="toolbox.show" data-type="toolbox.show.false">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.show=false;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -638,17 +651,17 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.x='left';" data-cate="toolbox.x" data-type="toolbox.x.left">
+                                                            <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.x='left';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居左</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.x='center';" data-cate="toolbox.x" data-type="toolbox.x.center">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.x='center';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居中</span></div>
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="2" data-opt="chartOpt.toolbox.x='right';" data-cate="toolbox.x" data-type="toolbox.x.right">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="2" data-opt="chartOpt.toolbox.x='right';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -666,17 +679,17 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.y='top';" data-cate="toolbox.y" data-type="toolbox.y.top">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.y='top';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居上</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.y='middle';" data-cate="toolbox.y" data-type="toolbox.y.middle">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.y='middle';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居中</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.toolbox.y='bottom';" data-cate="toolbox.y" data-type="toolbox.y.bottom">
+                                                            <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.toolbox.y='bottom';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -694,12 +707,12 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.orient='horizontal';" data-cate="toolbox.orient" data-type="toolbox.orient.horizontal">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.orient='horizontal';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>水平放置</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.orient='vertical';" data-cate="toolbox.orient" data-type="toolbox.orient.vertical">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.orient='vertical';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -743,12 +756,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataZoom.show=true;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.true">
+                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataZoom.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataZoom.show=false;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.false">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataZoom.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -766,12 +779,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataView.show=true;" data-cate="toolbox.feature.dataView.show" data-type="toolbox.feature.dataView.show.true">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataView.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataView.show=false;" data-cate="toolbox.feature.dataView.show" data-type="toolbox.feature.dataView.show.false">
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataView.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -812,12 +825,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.restore.show=true;" data-cate="toolbox.feature.restore.show" data-type="toolbox.feature.restore.show.true">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.restore.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.restore.show=false;" data-cate="toolbox.feature.restore.show" data-type="toolbox.feature.restore.show.false">
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.restore.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -836,12 +849,12 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.saveAsImage.show=true;" data-cate="toolbox.feature.saveAsImage.show" data-type="toolbox.feature.saveAsImage.show.true">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.saveAsImage.show=true;">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>是</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.saveAsImage.show=false;" data-cate="toolbox.feature.saveAsImage.show" data-type="toolbox.feature.saveAsImage.show.false">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.saveAsImage.show=false;">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -859,23 +872,6 @@
                                 <!-- 工具结束 -->
                             </div>
                         </div>
-                    	<div class="dtm-conh-data-editor dtm-tabh-coni cpt cpt-datedt cpt-datedt-pie" data-cpt-conh="extendJs" style="display: none;">
-                            <div class="dtm-handsontable handsontable" id="func_div">
-<textarea id="func" style="display:none;">
-&lt;ks:chart uuid="${chartEngine.id }"/>
-<script type="text/javascript">
-$(document).ready(function() {
-	var xwhere = "";
-	var ywhere = "";//" and name like 'zhangsan'"
-	var zwhere = "";
-	renderChart_${chartEngine.id }(xwhere, ywhere, zwhere);
-});
-</script>
-
-示例demo：/webapp/try1try/chart.jsp
-</textarea>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- 参数调整 -->
@@ -883,35 +879,32 @@ $(document).ready(function() {
         </div>
         <!-- bak.htm -->
         <!-- 统计图样式开始 -->
-        <style type="text/css">
-        .dtp-wgt,.dtp-paper-con,.dtp-lay-mnr-doc{position:relative}.dtp-lay-mnr-abs{position:absolute}.dtp-wgt{padding:0}.dtp-paper{display:none}.dtp-paper-curr{display:block}.dtp-theme-aatushuo .dtp-wgt{margin:20px auto}.dtp-theme-aatushuo .dtp-wgt-schart-container{height:300px}.dtp-theme-aatushuo .dtp-wgt-schart .dtp-wgt-main{display:block;height:100%}.dtp-theme-aatushuo .dtp-wgt-image .dtp-wgt-main{display:block;margin:0 auto;width:100%}.dtp-theme-aatushuo .dtp-wgt-ptext{padding:10px 0;font:13px/1.5 "Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext{font-family:"Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext-container{min-height:30px;line-height:1.3}.dtp-theme-aatushuo .dtp-wgt-ftext-content{white-space:normal;word-break:break-all}.dtp-theme-aatushuo .dtp-wgt-ftext-title0,.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0{text-align:center}.dtp-theme-aatushuo .dtp-wgt-ftext-title0 .dtp-wgt-ftext-container{font-size:40px;font-weight:bold;border-bottom:4px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0 .dtp-wgt-ftext-container{font-size:24px;font-weight:bold;border-bottom:2px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-container{font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quote0 .dtp-wgt-ftext-container{border-left:3px solid #999;padding-left:20px;font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quotetext{font-style:italic}.dtp-theme-aatushuo .dtp-wgt-ftext-quoteauthor{margin-top:5px}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-content[data-placeholder]:empty:not(:focus):before{font-size:14px}.dtp-theme-aatushuo .dtp-paper-view{padding:35px 35px;color:#333;background:#fff}
+        <style type="text/css">.dtp-wgt,.dtp-paper-con,.dtp-lay-mnr-doc{position:relative}.dtp-lay-mnr-abs{position:absolute}.dtp-wgt{padding:0}.dtp-paper{display:none}.dtp-paper-curr{display:block}.dtp-theme-aatushuo .dtp-wgt{margin:20px auto}.dtp-theme-aatushuo .dtp-wgt-schart-container{height:300px}.dtp-theme-aatushuo .dtp-wgt-schart .dtp-wgt-main{display:block;height:100%}.dtp-theme-aatushuo .dtp-wgt-image .dtp-wgt-main{display:block;margin:0 auto;width:100%}.dtp-theme-aatushuo .dtp-wgt-ptext{padding:10px 0;font:13px/1.5 "Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext{font-family:"Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext-container{min-height:30px;line-height:1.3}.dtp-theme-aatushuo .dtp-wgt-ftext-content{white-space:normal;word-break:break-all}.dtp-theme-aatushuo .dtp-wgt-ftext-title0,.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0{text-align:center}.dtp-theme-aatushuo .dtp-wgt-ftext-title0 .dtp-wgt-ftext-container{font-size:40px;font-weight:bold;border-bottom:4px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0 .dtp-wgt-ftext-container{font-size:24px;font-weight:bold;border-bottom:2px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-container{font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quote0 .dtp-wgt-ftext-container{border-left:3px solid #999;padding-left:20px;font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quotetext{font-style:italic}.dtp-theme-aatushuo .dtp-wgt-ftext-quoteauthor{margin-top:5px}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-content[data-placeholder]:empty:not(:focus):before{font-size:14px}.dtp-theme-aatushuo .dtp-paper-view{padding:35px 35px;color:#333;background:#fff}
         </style>
         <!-- 统计图样式结束 -->
 
-        <script src="${ctx_static}/tushuo/lib/seajs/sea.js"></script>
+        <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+        <script src="../../lib/seajs/sea.js"></script>
+        <script src="../../lib/echarts/echarts.js"></script>
+        <script src="../../lib/spreadjs/gcspread.sheets.all.9.40.20161.0.min.js"></script>
+        <script type="text/javascript" src="js/spread.js"></script>
         <script>
             seajs.config({
-                base: "${ctx_static}/tushuo/lib/",
+                base: "../../lib/",
                 alias: {
                     "jquery": "jquery/jquery/1.10.1/jquery.js"
                 }
             });
-            seajs.use("${ctx_static}/tushuo/static/pie/js/main");
+
+            seajs.use("./js/main");
         </script>
         <script type="text/javascript">
-        $(document).ready(function(){
-        	
-        });
+            $(document).ready( $(function () {
+                //initSheet();
+            })
+            );
         </script>
-
-<div id="chartOpt" style="display: none;">
-<c:if test="${empty chartEngine.setOption}">
-chartOpt = {title: {show: true,text: '主标题文本',subtext: '副标题文本'},legend: {data: []},tooltip: {show: true,formatter: '{a} <br>{b} : {c} ({d}%)'},toolbox: {show: true,feature: {mark: {show: true},dataZoom: {show: false},dataView: {show: true},magicType: {show: true},restore: {show: true},saveAsImage: {show: true}}},series : []};
-</c:if>
-
-<c:if test="${!empty chartEngine.setOption}">
-chartOpt = ${chartEngine.setOption}
-</c:if>
-</div>
     </body>
+
 </html>
+

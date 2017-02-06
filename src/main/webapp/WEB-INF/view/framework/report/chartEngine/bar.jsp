@@ -8,7 +8,7 @@
 		<%@ include file="/WEB-INF/view/taglib/layui.jsp" %>
 		<%@ include file="/WEB-INF/view/taglib/echarts.jsp" %>
 		<%@ include file="/WEB-INF/view/taglib/codemirror.jsp" %>
-		<link rel="stylesheet" href="${ctx_static}/tushuo/static/pie/css/waveApp.css" type="text/css"/>
+		<link rel="stylesheet" href="${ctx_static}/tushuo/static/bar/css/waveApp.css" type="text/css"/>
 		<style type="text/css">
 		</style>
 	</head>
@@ -190,7 +190,7 @@
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <input type="hidden" id="type" name="type" value="pie"/>
+                                        <input type="hidden" id="type" name="type" value="bar"/>
                                     </form>
                                 </div>
                             </div>
@@ -200,6 +200,10 @@
                                 <ul class="dtm-tab0">
                                     <li data-cpt-tab0="base" class="dtm-tab0-hi dtm-tab0-hi-curr">系列</li>
                                     <li data-cpt-tab0="title" class="dtm-tab0-hi">标题</li>
+									<li data-cpt-tab0="xAxis0" class="dtm-tab0-hi">X轴</li>
+									<li data-cpt-tab0="xAxis1" class="dtm-tab0-hi dtm-tab0-hi-disabled">X轴B</li>
+									<li data-cpt-tab0="yAxis0" class="dtm-tab0-hi">Y轴</li>
+									<li data-cpt-tab0="yAxis1" class="dtm-tab0-hi dtm-tab0-hi-disabled">Y轴B</li>
                                     <li data-cpt-tab0="legend" class="dtm-tab0-hi">图例</li>
                                     <li data-cpt-tab0="tooltip" class="dtm-tab0-hi">提示</li>
                                     <li data-cpt-tab0="toolbox" class="dtm-tab0-hi">工具</li>
@@ -398,6 +402,330 @@
                                     </div>
                                 </div>
                                 <!-- 标题结束 -->
+                                <!-- X轴开始 -->
+                                <div data-cpt-con0="xAxis0" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
+                                    <div class="cpt cpt-tab">
+                                        <div class="dtm-tab1">
+                                            <div data-cpt-tab1="base" class="dtm-tab1-hi dtm-tab1-hi-curr">基础</div>
+                                        </div>
+                                        <div data-cpt-con1="base" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
+                                            <div class="cpt cpt-sclpn dim-sclpn">
+                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn">
+                                                        <div class="dtm-edtblk-title"></div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].position='bottom';">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">坐标轴位置</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].position='bottom';" data-cate="xAxis[0].position" data-type="xAxis[0].position.bottom">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>居下</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].position='top';" data-cate="xAxis[0].position" data-type="xAxis[0].position.top">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>居上</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].axisLine.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">轴线是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].axisLine.show=true;" data-cate="xAxis[0].axisLine.show" data-type="xAxis[0].axisLine.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].axisLine.show=false;" data-cate="xAxis[0].axisLine.show" data-type="xAxis[0].axisLine.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].axisLabel.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">坐标轴文本标签是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].axisLabel.show=true;" data-cate="xAxis[0].axisLabel.show" data-type="xAxis[0].axisLabel.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].axisLabel.show=false;" data-cate="xAxis[0].axisLabel.show" data-type="xAxis[0].axisLabel.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].axisTick.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">坐标轴刻度是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].axisTick.show=true;" data-cate="xAxis[0].axisTick.show" data-type="xAxis[0].axisTick.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].axisTick.show=false;" data-cate="xAxis[0].axisTick.show" data-type="xAxis[0].axisTick.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].splitLine.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">网络线是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].splitLine.show=true;" data-cate="xAxis[0].splitLine.show" data-type="xAxis[0].splitLine.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].splitLine.show=false;" data-cate="xAxis[0].splitLine.show" data-type="xAxis[0].splitLine.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].splitArea.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">网络区域是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].splitArea.show=true;" data-cate="xAxis[0].splitArea.show" data-type="xAxis[0].splitArea.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].splitArea.show=false;" data-cate="xAxis[0].splitArea.show" data-type="xAxis[0].splitArea.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- X轴结束 -->
+                                <!-- Y轴开始 -->
+                                <div data-cpt-con0="yAxis0" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
+                                    <div class="cpt cpt-tab">
+                                        <div class="dtm-tab1">
+                                            <div data-cpt-tab1="base" class="dtm-tab1-hi dtm-tab1-hi-curr">基础</div>
+                                        </div>
+                                        <div data-cpt-con1="base" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
+                                            <div class="cpt cpt-sclpn dim-sclpn">
+                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
+                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn">
+                                                        <div class="dtm-edtblk-title"></div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].position='left';">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">坐标轴位置</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].position='left';" data-cate="yAxis[0].position" data-type="yAxis[0].position.left">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>居左</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].position='right';" data-cate="yAxis[0].position" data-type="yAxis[0].position.right">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>居右</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].axisLine.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">轴线是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].axisLine.show=true;" data-cate="yAxis[0].axisLine.show" data-type="yAxis[0].axisLine.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].axisLine.show=false;" data-cate="yAxis[0].axisLine.show" data-type="yAxis[0].axisLine.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].axisLabel.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">坐标轴文本标签是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].axisLabel.show=true;" data-cate="yAxis[0].axisLabel.show" data-type="yAxis[0].axisLabel.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].axisLabel.show=false;" data-cate="yAxis[0].axisLabel.show" data-type="yAxis[0].axisLabel.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].axisTick.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">坐标轴刻度是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].axisTick.show=true;" data-cate="yAxis[0].axisTick.show" data-type="yAxis[0].axisTick.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].axisTick.show=false;" data-cate="yAxis[0].axisTick.show" data-type="yAxis[0].axisTick.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].splitLine.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">网络线是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].splitLine.show=true;" data-cate="yAxis[0].splitLine.show" data-type="yAxis[0].splitLine.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].splitLine.show=false;" data-cate="yAxis[0].splitLine.show" data-type="yAxis[0].splitLine.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].splitArea.show=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">网络区域是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].splitArea.show=true;" data-cate="yAxis[0].splitArea.show" data-type="yAxis[0].splitArea.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].splitArea.show=false;" data-cate="yAxis[0].splitArea.show" data-type="yAxis[0].splitArea.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Y轴结束 -->
                                 <!-- 图例开始 -->
                                 <div data-cpt-con0="legend" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
                                     <div class="cpt cpt-tab">
@@ -735,20 +1063,20 @@
                                                             </div>
                                                         </div> -->
                                                         <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.toolbox.feature.dataZoom.show=false;">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.toolbox.feature.magicType.show=false;">
                                                             <em>
                                                                 <i class="dtmic-used"></i>
                                                             </em>
-                                                            <span class="dtm-edtitm-title-con">选区缩放功能按钮</span></div>
+                                                            <span class="dtm-edtitm-title-con">类型切换按钮</span></div>
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataZoom.show=true;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.true">
+                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.magicType.show=true;" data-cate="toolbox.feature.magicType.show" data-type="toolbox.feature.magicType.show.true">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataZoom.show=false;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.false">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.magicType.show=false;" data-cate="toolbox.feature.magicType.show" data-type="toolbox.feature.magicType.show.false">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -896,7 +1224,7 @@ $(document).ready(function() {
                     "jquery": "jquery/jquery/1.10.1/jquery.js"
                 }
             });
-            seajs.use("${ctx_static}/tushuo/static/pie/js/main");
+            seajs.use("${ctx_static}/tushuo/static/bar/js/main");
         </script>
         <script type="text/javascript">
         $(document).ready(function(){
@@ -906,7 +1234,7 @@ $(document).ready(function() {
 
 <div id="chartOpt" style="display: none;">
 <c:if test="${empty chartEngine.setOption}">
-chartOpt = {title: {show: true,text: '主标题文本',subtext: '副标题文本'},legend: {data: []},tooltip: {show: true,formatter: '{a} <br>{b} : {c} ({d}%)'},toolbox: {show: true,feature: {mark: {show: true},dataZoom: {show: false},dataView: {show: true},magicType: {show: true},restore: {show: true},saveAsImage: {show: true}}},series : []};
+chartOpt = {title: {text: '主标题文本',subtext: '副标题文本'},tooltip: {trigger: 'axis',show: true,formatter: ''},legend: {type: 'category',data: ['蒸发量','降水量']},toolbox: {show: true,feature: {mark: {show: true},dataView: {show: true,readOnly: true},magicType: {show: false,type: ['line', 'bar']},restore: {show: true},saveAsImage: {show: true}}},calculable: true,xAxis: [{postion: 'bottom',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true},type: 'category',data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']}],yAxis: [{type: 'value',postion: 'left',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true}}],series: [{name: '蒸发量',type: 'bar',data: [2, 4.9, 7, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20, 6.4, 3.3],itemStyle: {normal: {label: {show: false}}}},{name: '降水量',type: 'bar',data: [2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3]}]};
 </c:if>
 
 <c:if test="${!empty chartEngine.setOption}">

@@ -111,6 +111,13 @@ public class ChartEngineService extends BaseService {
 		chartEngineMapper.delete(listId);
 	}
 	
+	/**
+	 * 饼图数据拼接
+	 * @param chartEngine
+	 * @return
+	 * @throws CRUDException
+	 * @throws Exception
+	 */
 	public Map<String, Object> pie(ChartEngine chartEngine) throws CRUDException, Exception {
 		Map<String, Object> chart = new HashMap<String, Object>();
 		Map<String, Object> legend = new HashMap<String, Object>();
@@ -179,6 +186,97 @@ public class ChartEngineService extends BaseService {
 		
 		legend.put("data", legendData);
 		chart.put("legend", legend);
+		chart.put("series", series);
+		return chart;
+	}
+	/**
+	 * 柱状图数据拼接
+	 * @param chartEngine
+	 * @return
+	 * @throws CRUDException
+	 * @throws Exception
+	 */
+	public Map<String, Object> bar(ChartEngine chartEngine) throws CRUDException, Exception {
+		Map<String, Object> chart = new HashMap<String, Object>();
+		Map<String, Object> legend = new HashMap<String, Object>();
+		List<Map<String, Object>> series = new ArrayList<Map<String,Object>>();
+		String xsource = chartEngine.getXsource();
+		String xkey = chartEngine.getXkey();
+		String xvalue = chartEngine.getXvalue();
+		String xzkey = chartEngine.getXzkey();
+		
+		String ysource = chartEngine.getYsource();
+		String yvalue = chartEngine.getYvalue();
+		String yxkey = chartEngine.getYxkey();
+		String yzkey = chartEngine.getYzkey();
+		String operation = chartEngine.getOperation();
+		
+		String zsource = chartEngine.getZsource();
+		String zkey = chartEngine.getZkey();
+		String zvalue = chartEngine.getZvalue();
+		
+		String xsql = "select "+xkey+","+xvalue+","+xzkey+" from "+xsource+" where 1=1 ";
+		if(StringUtils.isNoneBlank(chartEngine.getXwhere())) {
+			xsql += chartEngine.getXwhere();
+		}
+		String ysql = "select "+operation+"("+yvalue+") "+yvalue+","+yxkey+","+yzkey+" from "+ysource+" where 1=1 ";
+		if(StringUtils.isNoneBlank(chartEngine.getYwhere())) {
+			ysql += chartEngine.getYwhere();
+		}
+		ysql += " group by "+yxkey+","+yzkey;
+		String zsql = "select "+zkey+","+zvalue+" from "+zsource+" where 1=1 ";
+		if(StringUtils.isNoneBlank(chartEngine.getZwhere())) {
+			zsql += chartEngine.getZwhere();
+		}
+		
+		List<Map<Object, Object>> xList = DBUtils.executeQuery(xsql, false);
+		List<Map<Object, Object>> yList = DBUtils.executeQuery(ysql, false);
+		List<Map<Object, Object>> zList = DBUtils.executeQuery(zsql, false);
+		
+		List<String> legendData = new ArrayList<String>();
+		for(Map<Object, Object> z : zList) {
+			legendData.add(String.valueOf(z.get(zvalue)));
+		}
+		
+		List<Map<String, Object>> xAxisList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> xAxis = new HashMap<String, Object>();
+		List<String> xAxisData = new ArrayList<String>();
+		for(Map<Object, Object> x : xList) {
+			xAxisData.add(x.get(xvalue).toString());
+		}
+		
+		for(Map<Object, Object> z : zList) {
+			Map<String, Object> seriesMap = new HashMap<String, Object>();
+//			seriesMap.put("type", "bar");
+			seriesMap.put("name", String.valueOf(z.get(zvalue)));
+			List<Map<String, Object>> seriesData = new ArrayList<Map<String, Object>>();
+			String zk = String.valueOf(z.get(zkey));
+			seriesMap.put("zkey", zk);
+			for(Map<Object, Object> y : yList) {
+				String yzk = String.valueOf(y.get(yzkey));
+				if(zk.equals(yzk)) {
+					Map<String, Object> seriesDataMap = new HashMap<String, Object>();
+					seriesDataMap.put("value", Long.parseLong(String.valueOf(y.get(yvalue))));
+					for(Map<Object, Object> x : xList) {
+						if(String.valueOf(x.get(xkey)).equals(String.valueOf(y.get(yxkey)))) {
+							seriesDataMap.put("name", String.valueOf(x.get(xvalue)));
+							break;
+						}
+					}
+					seriesData.add(seriesDataMap);
+				}
+			}
+			seriesMap.put("data", seriesData);
+			series.add(seriesMap);
+		}
+		
+		legend.put("data", legendData);
+		chart.put("legend", legend);
+		
+		xAxis.put("data", xAxisData);
+		xAxisList.add(xAxis);
+		chart.put("xAxis", xAxisList);
+		
 		chart.put("series", series);
 		return chart;
 	}
