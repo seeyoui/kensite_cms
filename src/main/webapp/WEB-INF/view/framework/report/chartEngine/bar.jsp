@@ -902,10 +902,10 @@
                                                         <span class="dtm-edtitm-title-con">普通提示模板</span></div>
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-fmtggt dtm-edtitm-ggt">
-                                                            <div class="dtm-fmtggt-desc">模板中可以试试看“{a} {b} {c} {d} {e}”这些变量</div>
+                                                            <div class="dtm-fmtggt-desc">{a}（系列名称），{b}（类目值），{c}（数值）</div>
                                                             <div class="cpt cpt-txipt">
                                                             <div>
-                                                                <input value="{a} &lt;br&gt;{b} : {c} ({d}%)" type="text" data-opt="chartOpt.tooltip.formatter='val';" data-type="tooltip.formatter"></div>
+                                                                <input value="" type="text" data-opt="chartOpt.tooltip.formatter='val';" data-type="tooltip.formatter"/></div>
                                                             </div>
                                                         </div>
                                                         </div>

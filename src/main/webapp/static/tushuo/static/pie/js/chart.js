@@ -73,6 +73,15 @@ define(function(require, exports, module) {
 				beforeSend: function(XMLHttpRequest){
 				},
 				success: function(data, textStatus){
+					for(var i=0; i<data.series.length; i++) {
+						for(var j=0; j>chartOpt.series; j++) {
+							if(data.series[i].zkey == chartOpt.series[j].zkey) {
+								data.series[i] = $.extend(true, chartOpt.series[j], data.series[i]);
+								break;
+							}
+						}
+					}
+					delete chartOpt.series;
 					$.extend(true, chartOpt, data);
 					module.exports.initSeries();
 					chartObj.setOption(chartOpt);

@@ -18,6 +18,7 @@ define(function(require, exports, module) {
             		return false;
             	}
             	chartOpt.legend.data = [];
+            	chartOpt.xAxis[0].data = [];
             	for(var i=0; i<chartOpt.series.length; i++) {
             		chartOpt.series[i].data = [];
             		chartOpt.series[i].name = '';
