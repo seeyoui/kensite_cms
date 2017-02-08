@@ -74,9 +74,10 @@ define(function(require, exports, module) {
 				},
 				success: function(data, textStatus){
 					for(var i=0; i<data.series.length; i++) {
-						for(var j=0; j>chartOpt.series; j++) {
+						for(var j=0; j<chartOpt.series.length; j++) {
 							if(data.series[i].zkey == chartOpt.series[j].zkey) {
-								data.series[i] = $.extend(true, chartOpt.series[j], data.series[i]);
+								//data.series[i] = $.extend(true, chartOpt.series[j], data.series[i]);
+								$.extend(true, data.series[i], chartOpt.series[j]);
 								break;
 							}
 						}
@@ -94,6 +95,9 @@ define(function(require, exports, module) {
         },
         initSeries: function(seriesArr) {
         	for(var i=0; i<chartOpt.series.length; i++) {
+        		if(chartOpt.series[i].type==null) {
+        			chartOpt.series[i].type = 'pie';
+        		}
         		if(chartOpt.series[i].roseType==null) {
         			chartOpt.series[i].roseType = 'area';
         		}

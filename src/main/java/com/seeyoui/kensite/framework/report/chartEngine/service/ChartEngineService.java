@@ -118,7 +118,7 @@ public class ChartEngineService extends BaseService {
 	 * @throws CRUDException
 	 * @throws Exception
 	 */
-	public Map<String, Object> pie(ChartEngine chartEngine) throws CRUDException, Exception {
+	public Map<String, Object> pieAndGauge(ChartEngine chartEngine) throws CRUDException, Exception {
 		Map<String, Object> chart = new HashMap<String, Object>();
 		Map<String, Object> legend = new HashMap<String, Object>();
 		List<Map<String, Object>> series = new ArrayList<Map<String,Object>>();
@@ -161,7 +161,7 @@ public class ChartEngineService extends BaseService {
 		}
 		for(Map<Object, Object> z : zList) {
 			Map<String, Object> seriesMap = new HashMap<String, Object>();
-			seriesMap.put("type", "pie");
+//			seriesMap.put("type", "pie");
 			seriesMap.put("name", String.valueOf(z.get(zvalue)));
 			List<Map<String, Object>> seriesData = new ArrayList<Map<String, Object>>();
 			String zk = String.valueOf(z.get(zkey));

@@ -1048,12 +1048,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.mark.show=true;">
+                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.mark.show=true;" data-cate="toolbox.feature.mark.show" data-type="toolbox.feature.mark.show.true">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.mark.show=false;">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.mark.show=false;" data-cate="toolbox.feature.mark.show" data-type="toolbox.feature.mark.show.false">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -1062,6 +1062,29 @@
                                                             </div>
                                                             </div>
                                                         </div> -->
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.toolbox.feature.dataZoom.show=false;">
+                                                            <em>
+                                                                <i class="dtmic-used"></i>
+                                                            </em>
+                                                            <span class="dtm-edtitm-title-con">选区缩放功能按钮</span></div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataZoom.show=true;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataZoom.show=false;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
                                                             <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.toolbox.feature.magicType.show=false;">
                                                             <em>
@@ -1234,7 +1257,7 @@ $(document).ready(function() {
 
 <div id="chartOpt" style="display: none;">
 <c:if test="${empty chartEngine.setOption}">
-chartOpt = {title: {text: '主标题文本',subtext: '副标题文本'},tooltip: {trigger: 'axis',show: true,formatter: ''},legend: {type: 'category',data: []},toolbox: {show: true,feature: {mark: {show: true},dataView: {show: true,readOnly: true},magicType: {show: false,type: ['line', 'bar']},restore: {show: true},saveAsImage: {show: true}}},calculable: true,xAxis: [{postion: 'bottom',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true},type: 'category',data: []}],yAxis: [{type: 'value',postion: 'left',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true}}],series: []};
+chartOpt = {title: {text: '主标题文本',subtext: '副标题文本'},tooltip: {trigger: 'axis',show: true,formatter: ''},legend: {type: 'category',data: []},toolbox: {show: true,feature: {dataZoom: {show: true},mark: {show: false},dataView: {show: true,readOnly: true},magicType: {show: false,type: ['line', 'bar']},restore: {show: true},saveAsImage: {show: true}}},calculable: true,xAxis: [{postion: 'bottom',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true},type: 'category',data: []}],yAxis: [{type: 'value',postion: 'left',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true}}],series: []};
 </c:if>
 
 <c:if test="${!empty chartEngine.setOption}">

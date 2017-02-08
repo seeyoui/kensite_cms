@@ -83,7 +83,7 @@ define(function(require, exports, module) {
         createSeries: function(seriesArr) {
         	var index = $('#legend-div div[data-cpt-con1]').length;
         	var content = '';
-        	$.get('/kensite/static/tushuo/static/line/tpl/legend.tpl').success(function(ctnt) {
+        	$.get('/kensite/static/tushuo/static/gauge/tpl/legend.tpl').success(function(ctnt) {
                 //$('#legend-div').append(content);
                 content = ctnt;
             }).error(function (XMLHttpRequest, textStatus, errorThrown) {
@@ -137,37 +137,62 @@ define(function(require, exports, module) {
         	var seriesArr = chartOpt.series;
         	for(var i=0; i<seriesArr.length; i++) {
         		var series = seriesArr[i];
-    			if(series.type != null) {
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="type"]').removeClass('cpt-chkbtn-i-active');
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="type.'+series.type+'"]').addClass('cpt-chkbtn-i-active');
-    			}
-    			if(series.label != null && series.label.normal != null && series.label.normal.show != null) {
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="label.normal.show"]').removeClass('cpt-chkbtn-i-active');
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="label.normal.show.'+series.label.normal.show+'"]').addClass('cpt-chkbtn-i-active');
-    			}
-    			if(series.label != null && series.label.normal != null && series.label.normal.position != null) {
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="label.normal.position"]').removeClass('cpt-chkbtn-i-active');
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="label.normal.position.'+series.label.normal.position+'"]').addClass('cpt-chkbtn-i-active');
-    			}
-    			if(series.markPoint != null && series.markPoint.data != null) {
-    				var isT = true;
-    				if(series.markPoint.data.length == 0) {
-    					isT = false;
-    				}
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="markPoint.data"]').removeClass('cpt-chkbtn-i-active');
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="markPoint.data.'+isT+'"]').addClass('cpt-chkbtn-i-active');
-    			}
-    			if(series.markLine != null && series.markLine.data != null) {
-    				var isT = true;
-    				if(series.markLine.data.length == 0) {
-    					isT = false;
-    				}
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="markLine.data"]').removeClass('cpt-chkbtn-i-active');
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="markLine.data.'+isT+'"]').addClass('cpt-chkbtn-i-active');
-    			}
-    			if(series.stack != null) {
-    				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="stack"]').val(series.stack);
-    			}
+        		if(series.type == 'gauge') {
+        			if(series.clockwise != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="clockwise"]').removeClass('cpt-chkbtn-i-active');
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="clockwise.'+series.clockwise+'"]').addClass('cpt-chkbtn-i-active');
+        			}
+        			if(series.center != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="center0"]').val(series.center[0].replace('%',''));
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="center1"]').val(series.center[1].replace('%',''));
+        			}
+        			if(series.radius != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="radius"]').val(series.radius.replace('%',''));
+        			}
+        			if(series.startAngle != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="startAngle"]').val(series.startAngle);
+        			}
+        			if(series.endAngle != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="endAngle"]').val(series.endAngle);
+        			}
+        			if(series.min != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="min"]').val(series.min);
+        			}
+        			if(series.max != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="max"]').val(series.max);
+        			}
+        			if(series.splitNumber != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="splitNumber"]').val(series.splitNumber);
+        			}
+        			if(series.axisTick.show != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="axisTick.show"]').removeClass('cpt-chkbtn-i-active');
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="axisTick.show.'+series.axisTick.show+'"]').addClass('cpt-chkbtn-i-active');
+        			}
+        			if(series.splitLine.show != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="splitLine.show"]').removeClass('cpt-chkbtn-i-active');
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="splitLine.show.'+series.splitLine.show+'"]').addClass('cpt-chkbtn-i-active');
+        			}
+        			if(series.title.show != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-cate="title.show"]').removeClass('cpt-chkbtn-i-active');
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('div[data-type="title.show.'+series.title.show+'"]').addClass('cpt-chkbtn-i-active');
+        			}
+        			if(series.title.offsetCenter != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="title.offsetCenter0"]').val(series.title.offsetCenter[0].replace('%',''));
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="title.offsetCenter"]').val(series.title.offsetCenter[1].replace('%',''));
+        			}
+        			if(series.pointer.length != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="pointer.length"]').val(series.pointer.length.replace('%',''));
+        			}
+        			if(series.pointer.width != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="pointer.width"]').val(series.pointer.width);
+        			}
+        			if(series.axisLine.lineStyle.width != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="axisLine.lineStyle.width"]').val(series.axisLine.lineStyle.width);
+        			}
+        			if(series.axisLine.lineStyle.color != null) {
+        				$('div[data-cpt-con1="seriesTabKey'+series.zkey+'"]').find('input[data-type="axisLine.lineStyle.color"]').val(JSON.stringify(series.axisLine.lineStyle.color));
+        			}
+        		}
         	}
         },
         renderTitle: function() {
@@ -244,15 +269,8 @@ define(function(require, exports, module) {
 				$('div[data-cate="toolbox.feature.dataZoom.show"]').removeClass('cpt-chkbtn-i-active');
 				$('div[data-type="toolbox.feature.dataZoom.show.'+toolbox.feature.dataZoom.show+'"]').addClass('cpt-chkbtn-i-active');
 			}
-			if(toolbox.feature.mark.show != null) {
-				$('div[data-cate="toolbox.feature.mark.show"]').removeClass('cpt-chkbtn-i-active');
-				$('div[data-type="toolbox.feature.mark.show.'+toolbox.feature.mark.show+'"]').addClass('cpt-chkbtn-i-active');
-			}
-			if(toolbox.feature.magicType.show != null) {
-				$('div[data-cate="toolbox.feature.magicType.show"]').removeClass('cpt-chkbtn-i-active');
-				$('div[data-type="toolbox.feature.magicType.show.'+toolbox.feature.magicType.show+'"]').addClass('cpt-chkbtn-i-active');
-			}
 			if(toolbox.feature.dataView.show != null) {
+				console.info(toolbox.feature.dataView.show);
 				$('div[data-cate="toolbox.feature.dataView.show"]').removeClass('cpt-chkbtn-i-active');
 				$('div[data-type="toolbox.feature.dataView.show.'+toolbox.feature.dataView.show+'"]').addClass('cpt-chkbtn-i-active');
 			}

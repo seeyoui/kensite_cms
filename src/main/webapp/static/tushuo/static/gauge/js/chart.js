@@ -10,9 +10,10 @@ define(function(require, exports, module) {
 			// 指定图表的配置项和数据
 			var chartOptStr = $('#chartOpt').html();
 			eval(chartOptStr);
+
 			// 使用刚指定的配置项和数据显示图表。
+			//chartObj.setOption(chartOpt);
 			this.loadData();
-//			chartObj.setOption(chartOpt);
         },
         setOption: function(dom, bol, typ) {
         	if(bol) {
@@ -36,7 +37,6 @@ define(function(require, exports, module) {
         	} else {
 	        	if(typ == 'btn') {
 					var opt = $(dom).data('opt');
-					console.info(opt);
 					eval(opt);
 					chartObj.setOption(chartOpt);
 	        	} else if(typ == 'ipt') {
@@ -96,10 +96,52 @@ define(function(require, exports, module) {
         initSeries: function(seriesArr) {
         	for(var i=0; i<chartOpt.series.length; i++) {
         		if(chartOpt.series[i].type==null) {
-        			chartOpt.series[i].type = 'line';
+        			chartOpt.series[i].type = 'gauge';
         		}
-        		if(chartOpt.series[i].stack==null) {
-        			chartOpt.series[i].stack = null;
+        		if(chartOpt.series[i].center==null) {
+        			chartOpt.series[i].center = ['50%','50%'];
+        		}
+        		if(chartOpt.series[i].radius==null) {
+        			chartOpt.series[i].radius = '75%';
+        		}
+        		if(chartOpt.series[i].startAngle==null) {
+        			chartOpt.series[i].startAngle = 225;
+        		}
+        		if(chartOpt.series[i].endAngle==null) {
+        			chartOpt.series[i].endAngle = -45;
+        		}
+        		if(chartOpt.series[i].clockwise==null) {
+        			chartOpt.series[i].clockwise = true;
+        		}
+        		if(chartOpt.series[i].min==null) {
+        			chartOpt.series[i].min = 0;
+        		}
+        		if(chartOpt.series[i].max==null) {
+        			chartOpt.series[i].max = 100;
+        		}
+        		if(chartOpt.series[i].splitNumber==null) {
+        			chartOpt.series[i].splitNumber = 10;
+        		}
+        		if(chartOpt.series[i].axisLine==null) {
+        			chartOpt.series[i].axisLine = {show: true};
+        		}
+        		if(chartOpt.series[i].axisLine.lineStyle==null) {
+        			chartOpt.series[i].axisLine.lineStyle = {
+        					color: [[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']],
+        					width: 30
+        			};
+        		}
+        		if(chartOpt.series[i].splitLine==null) {
+        			chartOpt.series[i].splitLine = {show: true};
+        		}
+        		if(chartOpt.series[i].axisTick==null) {
+        			chartOpt.series[i].axisTick = {show: true};
+        		}
+        		if(chartOpt.series[i].pointer==null) {
+        			chartOpt.series[i].pointer = {show: true,length: '80%',width: 8};
+        		}
+        		if(chartOpt.series[i].title==null) {
+        			chartOpt.series[i].title = {show: true,offsetCenter: ['0%', '-40%']};
         		}
         	}
         },

@@ -92,7 +92,7 @@ public class ChartEngineController extends BaseController {
 			ModelMap modelMap, @PathVariable String page, @PathVariable String id) throws Exception {
 		ChartEngine chartEngine = chartEngineService.findOne(id);
 		modelMap.put("chartEngine", chartEngine);
-		if("pie".equals(page) || "line".equals(page) || "bar".equals(page)) {
+		if("pie".equals(page) || "line".equals(page) || "bar".equals(page) || "gauge".equals(page)) {
 			String sql = "select view_name from user_views where view_name like 'REPORT%'";
 			List<Map<Object, Object>> viewList = DBUtils.executeQuery(sql, true);
 			modelMap.put("viewList", viewList);
@@ -265,8 +265,8 @@ public class ChartEngineController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, ChartEngine chartEngine) throws Exception {
 		String type = chartEngine.getType();
-		if(StringUtils.isNoneBlank(type) && "pie".equals(type)) {
-			return chartEngineService.pie(chartEngine);
+		if(StringUtils.isNoneBlank(type) && ("pie".equals(type) || "gauge".equals(type))) {
+			return chartEngineService.pieAndGauge(chartEngine);
 		}
 		if(StringUtils.isNoneBlank(type) && ("bar".equals(type) || "line".equals(type))) {
 			return chartEngineService.barAndLine(chartEngine);

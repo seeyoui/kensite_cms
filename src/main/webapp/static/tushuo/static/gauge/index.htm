@@ -1,19 +1,17 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" class="dtm-html-mf">
-	<head>
-		<title>Kensite开发平台</title>
-		<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
-		<%@ include file="/WEB-INF/view/taglib/layui.jsp" %>
-		<%@ include file="/WEB-INF/view/taglib/echarts.jsp" %>
-		<%@ include file="/WEB-INF/view/taglib/codemirror.jsp" %>
-		<link rel="stylesheet" href="${ctx_static}/tushuo/static/bar/css/waveApp.css" type="text/css"/>
-		<style type="text/css">
-		</style>
-	</head>
-
-	<body class="cpt cpt-wave">
+<!DOCTYPE html>
+<html class="dtm-html-mf" lang="zh-CN">
+    
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="图说">
+    <title>百度 · 图说</title>
+    <link rel="stylesheet" type="text/css" href="../../lib/layui/css/layui.css">
+    <link rel="stylesheet" href="css/waveApp.css">
+    </head>
+    
+    <body class="cpt cpt-wave">
         <div id="wave-main">
             <div class="cpt cpt-manufacture">
                 <!-- 主体开始 -->
@@ -34,12 +32,11 @@
             
                 <!-- 参数调整 -->
                 <div style="display: block; left: 0px; top: 0px;" class="cpt cpt-chtedt">
-                    <div class="cpt cpt-btn dtm-btn dtm-close-btn" data-id="${chartEngine.id }">保存</div>
+                    <div class="cpt cpt-btn dtm-btn dtm-close-btn">保存</div>
                     <div class="dtm-tabh cpt cpt-tab">
                         <ul class="dtm-tabh-h">
                             <li data-cpt-tabh="dataEditor" class="dtm-tabh-hi dtm-tabh-hi-curr">数据编辑</li>
                             <li data-cpt-tabh="chartConfigurer" class="dtm-tabh-hi">参数调整</li>
-                            <li data-cpt-tabh="extendJs" class="dtm-tabh-hi">开发脚本</li>
                         </ul>
                         <div class="dtm-conh-data-editor dtm-tabh-coni cpt cpt-datedt cpt-datedt-pie" data-cpt-conh="dataEditor" style="display: block;">
                             <!-- <div class="dtm-cfg-head">
@@ -59,29 +56,33 @@
                                                     <div class="layui-input-inline">
                                                         <select name="legend" lay-filter="md">
                                                             <option value="">请选择数据源</option>
-                                                            <c:forEach var="view" items="${viewList}" varStatus="status">
-                                                            <option value="${view.viewName }" <c:if test="${view.viewName eq chartEngine.zsource}"> selected=""</c:if>>${view.viewName }</option>
-															</c:forEach>
+                                                            <optgroup label="SQL数据源">
+                                                                <option value="code">员工编号</option>
+                                                            </optgroup>
+                                                            <optgroup label="BO数据源">
+                                                                <option value="plan">生产计划</option>
+                                                                <option value="sales">销售记录</option>
+                                                            </optgroup>
+                                                            <optgroup label="文本数据源">
+                                                            </optgroup>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
                                                     <label id="legend-key" class="layui-form-label">系列KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="legend-key">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${zList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.zkey}"> selected=""</c:if>>${opt.columnName }</option>
-                                                            </c:forEach>
+                                                            <option value="name">姓名</option>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="layui-form-item">
                                                     <label id="legend-value" class="layui-form-label">VALUE</label>
                                                     <div class="layui-input-inline">
                                                         <select name="legend-value">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${zList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.zvalue}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            <option value="name">姓名</option>
+                                                            <option value="age">年龄</option>
+                                                            <option value="sex">性别</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -95,40 +96,44 @@
                                                     <div class="layui-input-inline">
                                                         <select name="x" lay-filter="md">
                                                             <option value="">请选择数据源</option>
-                                                            <c:forEach var="view" items="${viewList}" varStatus="status">
-                                                            <option value="${view.viewName }" <c:if test="${view.viewName eq chartEngine.xsource}"> selected=""</c:if>>${view.viewName }</option>
-															</c:forEach>
+                                                            <optgroup label="SQL数据源">
+                                                                <option value="code">员工编号</option>
+                                                            </optgroup>
+                                                            <optgroup label="BO数据源">
+                                                                <option value="plan">生产计划</option>
+                                                                <option value="sales">销售记录</option>
+                                                            </optgroup>
+                                                            <optgroup label="文本数据源">
+                                                            </optgroup>
                                                         </select>
                                                     </div>
-                                                    <!--
                                                     <label id="x-legend-key" class="layui-form-label">系列KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="x-legend-key">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${xList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.xzkey}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            <option value="name">姓名</option>
+                                                            <option value="age">年龄</option>
+                                                            <option value="sex">性别</option>
                                                         </select>
                                                     </div>
-                                                    -->
                                                 </div>
                                                 <div class="layui-form-item">
                                                     <label id="x-key" class="layui-form-label">X轴KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="x-key">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${xList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.xkey}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            <option value="name">姓名</option>
+                                                            <option value="age">年龄</option>
+                                                            <option value="sex">性别</option>
                                                         </select>
                                                     </div>
                                                     <label id="x-value" class="layui-form-label">VALUE</label>
                                                     <div class="layui-input-inline">
                                                         <select name="x-value">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${xList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.xvalue}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            <option value="name">姓名</option>
+                                                            <option value="age">年龄</option>
+                                                            <option value="sex">性别</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -142,55 +147,49 @@
                                                     <div class="layui-input-inline">
                                                         <select name="y" lay-filter="md">
                                                             <option value="">请选择数据源</option>
-                                                            <c:forEach var="view" items="${viewList}" varStatus="status">
-                                                            <option value="${view.viewName }" <c:if test="${view.viewName eq chartEngine.ysource}"> selected=""</c:if>>${view.viewName }</option>
-															</c:forEach>
+                                                            <optgroup label="SQL数据源">
+                                                                <option value="code">员工编号</option>
+                                                            </optgroup>
+                                                            <optgroup label="BO数据源">
+                                                                <option value="plan">生产计划</option>
+                                                                <option value="sales">销售记录</option>
+                                                            </optgroup>
+                                                            <optgroup label="文本数据源">
+                                                            </optgroup>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="layui-form-item">
                                                     <label id="y-legend-key" class="layui-form-label">系列KEY</label>
                                                     <div class="layui-input-inline">
                                                         <select name="y-legend-key">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yzkey}"> selected=""</c:if>>${opt.columnName }</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                    <label id="y-x-key" class="layui-form-label">X轴KEY</label>
-                                                    <div class="layui-input-inline">
-                                                        <select name="y-x-key">
-                                                            <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yxkey}"> selected=""</c:if>>${opt.columnName }</option>
-                                                            </c:forEach>
+                                                            <option value="name">姓名</option>
+                                                            <option value="age">年龄</option>
+                                                            <option value="sex">性别</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="layui-form-item">
-                                                    <label id="y-operation" class="layui-form-label">运算</label>
+                                                    <label id="y-x-key" class="layui-form-label">X轴KEY</label>
                                                     <div class="layui-input-inline">
-                                                        <select name="y-operation">
+                                                        <select name="y-x-key">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yOperation}" varStatus="status">
-                                                            <option value="${opt.value }" <c:if test="${opt.value eq chartEngine.operation}"> selected=""</c:if>>${opt.label }</option>
-                                                            </c:forEach>
+                                                            <option value="name">姓名</option>
+                                                            <option value="age">年龄</option>
+                                                            <option value="sex">性别</option>
                                                         </select>
                                                     </div>
                                                     <label id="y-value" class="layui-form-label">VALUE</label>
                                                     <div class="layui-input-inline">
                                                         <select name="y-value">
                                                             <option value="">请选择</option>
-                                                            <c:forEach var="opt" items="${yList}" varStatus="status">
-                                                            <option value="${opt.columnName }" <c:if test="${opt.columnName eq chartEngine.yvalue}"> selected=""</c:if>>${opt.columnName }</option>
-															</c:forEach>
+                                                            <option value="name">姓名</option>
+                                                            <option value="age">年龄</option>
+                                                            <option value="sex">性别</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <input type="hidden" id="type" name="type" value="bar"/>
                                     </form>
                                 </div>
                             </div>
@@ -200,10 +199,6 @@
                                 <ul class="dtm-tab0">
                                     <li data-cpt-tab0="base" class="dtm-tab0-hi dtm-tab0-hi-curr">系列</li>
                                     <li data-cpt-tab0="title" class="dtm-tab0-hi">标题</li>
-									<li data-cpt-tab0="xAxis0" class="dtm-tab0-hi">X轴</li>
-									<li data-cpt-tab0="xAxis1" class="dtm-tab0-hi dtm-tab0-hi-disabled">X轴B</li>
-									<li data-cpt-tab0="yAxis0" class="dtm-tab0-hi">Y轴</li>
-									<li data-cpt-tab0="yAxis1" class="dtm-tab0-hi dtm-tab0-hi-disabled">Y轴B</li>
                                     <li data-cpt-tab0="legend" class="dtm-tab0-hi">图例</li>
                                     <li data-cpt-tab0="tooltip" class="dtm-tab0-hi">提示</li>
                                     <li data-cpt-tab0="toolbox" class="dtm-tab0-hi">工具</li>
@@ -249,22 +244,22 @@
                                                         <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-txipt">
                                                             <div>
-                                                                <input value="主标题文本" type="text" data-opt="chartOpt.title.text='val';" data-type="title.text"></div>
+                                                                <input value="主标题文本" type="text" data-opt="chartOpt.title.text='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled">
                                                         <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.title.link='';">
                                                         <em>
                                                             <i class="dtmic-used"></i>
                                                         </em>
                                                         <span class="dtm-edtitm-title-con">主标题文本超链接</span></div>
                                                         <div class="dtm-edtitm-con">
-                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
-                                                            <div class="cpt cpt-txipt">
+                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt cpt-disabled cpt-txiptggt-disabled dtm-edtitm-ggt-disabled">
+                                                            <div class="cpt cpt-txipt cpt-disabled cpt-txipt-disabled">
                                                             <div>
-                                                                <input value="" type="text" data-opt="chartOpt.title.link='val';" data-type="title.link"></div>
+                                                                <input value="http://" type="text" data-opt="chartOpt.title.link='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -279,22 +274,22 @@
                                                         <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-txipt">
                                                             <div>
-                                                                <input value="副标题文本" type="text" data-opt="chartOpt.title.subtext='val';" data-type="title.subtext"></div>
+                                                                <input value="副标题文本" type="text" data-opt="chartOpt.title.subtext='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
                                                     </div>
-                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                    <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm cpt-disabled cpt-ggt-edtitm-disabled dtm-edtitm-disabled">
                                                         <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.title.sublink='';">
                                                         <em>
                                                             <i class="dtmic-used"></i>
                                                         </em>
                                                         <span class="dtm-edtitm-title-con">副标题文本超链接</span></div>
                                                         <div class="dtm-edtitm-con">
-                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt">
-                                                            <div class="cpt cpt-txipt">
+                                                        <div class="cpt cpt-txiptggt dtm-edtitm-ggt cpt-disabled cpt-txiptggt-disabled dtm-edtitm-ggt-disabled">
+                                                            <div class="cpt cpt-txipt cpt-disabled cpt-txipt-disabled">
                                                             <div>
-                                                                <input value="" type="text" data-opt="chartOpt.title.sublink='val';" data-type="title.sublink"></div>
+                                                                <input value="http://" type="text" data-opt="chartOpt.title.sublink='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -318,17 +313,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.x='left';" data-cate="title.x" data-type="title.x.left">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.x='left';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居左</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.x='center';" data-cate="title.x" data-type="title.x.center">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.x='center';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.x='right';" data-cate="title.x" data-type="title.x.right">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.x='right';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -347,17 +342,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.y='top';" data-cate="title.y" data-type="title.y.top">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.title.y='top';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居上</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.y='middle';" data-cate="title.y" data-type="title.y.middle">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.title.y='middle';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.y='bottom';" data-cate="title.y" data-type="title.y.bottom">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.title.y='bottom';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -402,330 +397,6 @@
                                     </div>
                                 </div>
                                 <!-- 标题结束 -->
-                                <!-- X轴开始 -->
-                                <div data-cpt-con0="xAxis0" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
-                                    <div class="cpt cpt-tab">
-                                        <div class="dtm-tab1">
-                                            <div data-cpt-tab1="base" class="dtm-tab1-hi dtm-tab1-hi-curr">基础</div>
-                                        </div>
-                                        <div data-cpt-con1="base" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
-                                            <div class="cpt cpt-sclpn dim-sclpn">
-                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
-                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn">
-                                                        <div class="dtm-edtblk-title"></div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].position='bottom';">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">坐标轴位置</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].position='bottom';" data-cate="xAxis[0].position" data-type="xAxis[0].position.bottom">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>居下</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].position='top';" data-cate="xAxis[0].position" data-type="xAxis[0].position.top">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>居上</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].axisLine.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">轴线是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].axisLine.show=true;" data-cate="xAxis[0].axisLine.show" data-type="xAxis[0].axisLine.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].axisLine.show=false;" data-cate="xAxis[0].axisLine.show" data-type="xAxis[0].axisLine.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].axisLabel.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">坐标轴文本标签是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].axisLabel.show=true;" data-cate="xAxis[0].axisLabel.show" data-type="xAxis[0].axisLabel.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].axisLabel.show=false;" data-cate="xAxis[0].axisLabel.show" data-type="xAxis[0].axisLabel.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].axisTick.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">坐标轴刻度是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].axisTick.show=true;" data-cate="xAxis[0].axisTick.show" data-type="xAxis[0].axisTick.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].axisTick.show=false;" data-cate="xAxis[0].axisTick.show" data-type="xAxis[0].axisTick.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].splitLine.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">网络线是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].splitLine.show=true;" data-cate="xAxis[0].splitLine.show" data-type="xAxis[0].splitLine.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].splitLine.show=false;" data-cate="xAxis[0].splitLine.show" data-type="xAxis[0].splitLine.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].splitArea.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">网络区域是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].splitArea.show=true;" data-cate="xAxis[0].splitArea.show" data-type="xAxis[0].splitArea.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].splitArea.show=false;" data-cate="xAxis[0].splitArea.show" data-type="xAxis[0].splitArea.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- X轴结束 -->
-                                <!-- Y轴开始 -->
-                                <div data-cpt-con0="yAxis0" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
-                                    <div class="cpt cpt-tab">
-                                        <div class="dtm-tab1">
-                                            <div data-cpt-tab1="base" class="dtm-tab1-hi dtm-tab1-hi-curr">基础</div>
-                                        </div>
-                                        <div data-cpt-con1="base" class="dtm-tab1-coni cpt cpt-edtpn" style="display: block;">
-                                            <div class="cpt cpt-sclpn dim-sclpn">
-                                                <div data-cpt-sclpn-con="" class="dtm-edtcom-pn dtm-edtpn-pn cpt-sclpn-con cpt-sclpn-con-vscl" style="position: absolute; top: 0px;">
-                                                    <div class="dtm-edtcom-row dtm-edtpn-row cpt cpt-chtcf-edtblk dtm-edtcom-pn">
-                                                        <div class="dtm-edtblk-title"></div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].position='left';">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">坐标轴位置</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].position='left';" data-cate="yAxis[0].position" data-type="yAxis[0].position.left">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>居左</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].position='right';" data-cate="yAxis[0].position" data-type="yAxis[0].position.right">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>居右</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].axisLine.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">轴线是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].axisLine.show=true;" data-cate="yAxis[0].axisLine.show" data-type="yAxis[0].axisLine.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].axisLine.show=false;" data-cate="yAxis[0].axisLine.show" data-type="yAxis[0].axisLine.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].axisLabel.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">坐标轴文本标签是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].axisLabel.show=true;" data-cate="yAxis[0].axisLabel.show" data-type="yAxis[0].axisLabel.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].axisLabel.show=false;" data-cate="yAxis[0].axisLabel.show" data-type="yAxis[0].axisLabel.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].axisTick.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">坐标轴刻度是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].axisTick.show=true;" data-cate="yAxis[0].axisTick.show" data-type="yAxis[0].axisTick.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].axisTick.show=false;" data-cate="yAxis[0].axisTick.show" data-type="yAxis[0].axisTick.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].splitLine.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">网络线是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].splitLine.show=true;" data-cate="yAxis[0].splitLine.show" data-type="yAxis[0].splitLine.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].splitLine.show=false;" data-cate="yAxis[0].splitLine.show" data-type="yAxis[0].splitLine.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.yAxis[0].splitArea.show=true;">
-                                                                <em>
-                                                                    <i class="dtmic-used"></i>
-                                                                </em>
-                                                                <span class="dtm-edtitm-title-con">网络区域是否显示</span>
-                                                            </div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.yAxis[0].splitArea.show=true;" data-cate="yAxis[0].splitArea.show" data-type="yAxis[0].splitArea.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.yAxis[0].splitArea.show=false;" data-cate="yAxis[0].splitArea.show" data-type="yAxis[0].splitArea.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Y轴结束 -->
                                 <!-- 图例开始 -->
                                 <div data-cpt-con0="legend" class="dtm-tab0-coni cpt cpt-chtcf-sbtpn" style="display: none;">
                                     <div class="cpt cpt-tab">
@@ -747,12 +418,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.show=true;" data-cate="legend.show" data-type="legend.show.true">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.show=false;" data-cate="legend.show" data-type="legend.show.false">
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -774,17 +445,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.legend.x='left';" data-cate="legend.x" data-type="legend.x.left">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.legend.x='left';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居左</span></div>
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.legend.x='center';" data-cate="legend.x" data-type="legend.x.center">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.legend.x='center';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.x='right';" data-cate="legend.x" data-type="legend.x.right">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.x='right';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -803,17 +474,17 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.y='top';" data-cate="legend.y" data-type="legend.y.top">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.y='top';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居上</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.y='middle';" data-cate="legend.y" data-type="legend.y.middle">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.y='middle';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>居中</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.y='bottom';" data-cate="legend.y" data-type="legend.y.bottom">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.legend.y='bottom';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -832,12 +503,12 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.orient='horizontal';" data-cate="legend.orient" data-type="legend.orient.horizontal">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.legend.orient='horizontal';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>水平放置</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.orient='vertical';" data-cate="legend.orient" data-type="legend.orient.vertical">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.legend.orient='vertical';">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -877,12 +548,12 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-boolggt dtm-edtitm-ggt cpt-disabled cpt-boolggt-disabled dtm-edtitm-ggt-disabled">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.tooltip.show=true;" data-cate="tooltip.show" data-type="tooltip.show.true">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.tooltip.show=true;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>是</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.tooltip.show=false;" data-cate="tooltip.show" data-type="tooltip.show.false">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.tooltip.show=false;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -902,10 +573,10 @@
                                                         <span class="dtm-edtitm-title-con">普通提示模板</span></div>
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-fmtggt dtm-edtitm-ggt">
-                                                            <div class="dtm-fmtggt-desc">{a}（系列名称），{b}（类目值），{c}（数值）</div>
+                                                            <div class="dtm-fmtggt-desc">模板中可以试试看“{a} {b} {c} {d} {e}”这些变量</div>
                                                             <div class="cpt cpt-txipt">
                                                             <div>
-                                                                <input value="" type="text" data-opt="chartOpt.tooltip.formatter='val';" data-type="tooltip.formatter"/></div>
+                                                                <input value="{a} &lt;br&gt;{b} : {c} ({d}%)" type="text" data-opt="chartOpt.tooltip.formatter='val';"></div>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -940,12 +611,12 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.show=true;" data-cate="toolbox.show" data-type="toolbox.show.true">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.show=true;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>是</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.show=false;" data-cate="toolbox.show" data-type="toolbox.show.false">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.show=false;">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -966,17 +637,17 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.x='left';" data-cate="toolbox.x" data-type="toolbox.x.left">
+                                                            <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.x='left';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居左</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.x='center';" data-cate="toolbox.x" data-type="toolbox.x.center">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.x='center';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居中</span></div>
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="2" data-opt="chartOpt.toolbox.x='right';" data-cate="toolbox.x" data-type="toolbox.x.right">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="2" data-opt="chartOpt.toolbox.x='right';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -994,17 +665,17 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.y='top';" data-cate="toolbox.y" data-type="toolbox.y.top">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.y='top';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居上</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.y='middle';" data-cate="toolbox.y" data-type="toolbox.y.middle">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.y='middle';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>居中</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.toolbox.y='bottom';" data-cate="toolbox.y" data-type="toolbox.y.bottom">
+                                                            <div class="cpt-chkbtn-i" data-value-index="2" data-opt="chartOpt.toolbox.y='bottom';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -1022,12 +693,12 @@
                                                         <div class="dtm-edtitm-con">
                                                         <div class="cpt cpt-sltggt dtm-edtitm-ggt">
                                                             <div class="cpt cpt-chkbtn">
-                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.orient='horizontal';" data-cate="toolbox.orient" data-type="toolbox.orient.horizontal">
+                                                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.orient='horizontal';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
                                                                 <span>水平放置</span></div>
-                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.orient='vertical';" data-cate="toolbox.orient" data-type="toolbox.orient.vertical">
+                                                            <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.orient='vertical';">
                                                                 <i>
                                                                 <em></em>
                                                                 </i>
@@ -1048,12 +719,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.mark.show=true;" data-cate="toolbox.feature.mark.show" data-type="toolbox.feature.mark.show.true">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.mark.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.mark.show=false;" data-cate="toolbox.feature.mark.show" data-type="toolbox.feature.mark.show.false">
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.mark.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -1071,35 +742,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataZoom.show=true;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.true">
+                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataZoom.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataZoom.show=false;" data-cate="toolbox.feature.dataZoom.show" data-type="toolbox.feature.dataZoom.show.false">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>否</span></div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
-                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.toolbox.feature.magicType.show=false;">
-                                                            <em>
-                                                                <i class="dtmic-used"></i>
-                                                            </em>
-                                                            <span class="dtm-edtitm-title-con">类型切换按钮</span></div>
-                                                            <div class="dtm-edtitm-con">
-                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
-                                                                <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i" data-value-index="0" data-opt="chartOpt.toolbox.feature.magicType.show=true;" data-cate="toolbox.feature.magicType.show" data-type="toolbox.feature.magicType.show.true">
-                                                                    <i>
-                                                                    <em></em>
-                                                                    </i>
-                                                                    <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.magicType.show=false;" data-cate="toolbox.feature.magicType.show" data-type="toolbox.feature.magicType.show.false">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataZoom.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -1117,12 +765,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataView.show=true;" data-cate="toolbox.feature.dataView.show" data-type="toolbox.feature.dataView.show.true">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.dataView.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataView.show=false;" data-cate="toolbox.feature.dataView.show" data-type="toolbox.feature.dataView.show.false">
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.dataView.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -1163,12 +811,12 @@
                                                             <div class="dtm-edtitm-con">
                                                             <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                 <div class="cpt cpt-chkbtn">
-                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.restore.show=true;" data-cate="toolbox.feature.restore.show" data-type="toolbox.feature.restore.show.true">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.restore.show=true;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
                                                                     <span>是</span></div>
-                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.restore.show=false;" data-cate="toolbox.feature.restore.show" data-type="toolbox.feature.restore.show.false">
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.restore.show=false;">
                                                                     <i>
                                                                     <em></em>
                                                                     </i>
@@ -1187,12 +835,12 @@
                                                             <div class="dtm-edtitm-con">
                                                                 <div class="cpt cpt-boolggt dtm-edtitm-ggt">
                                                                     <div class="cpt cpt-chkbtn">
-                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.saveAsImage.show=true;" data-cate="toolbox.feature.saveAsImage.show" data-type="toolbox.feature.saveAsImage.show.true">
+                                                                    <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.toolbox.feature.saveAsImage.show=true;">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
                                                                         <span>是</span></div>
-                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.saveAsImage.show=false;" data-cate="toolbox.feature.saveAsImage.show" data-type="toolbox.feature.saveAsImage.show.false">
+                                                                    <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.toolbox.feature.saveAsImage.show=false;">
                                                                         <i>
                                                                         <em></em>
                                                                         </i>
@@ -1210,23 +858,6 @@
                                 <!-- 工具结束 -->
                             </div>
                         </div>
-                    	<div class="dtm-conh-data-editor dtm-tabh-coni cpt cpt-datedt cpt-datedt-pie" data-cpt-conh="extendJs" style="display: none;">
-                            <div class="dtm-handsontable handsontable" id="func_div">
-<textarea id="func" style="display:none;">
-&lt;ks:chart uuid="${chartEngine.id }"/>
-<script type="text/javascript">
-$(document).ready(function() {
-	var xwhere = "";
-	var ywhere = "";//" and name like 'zhangsan'"
-	var zwhere = "";
-	renderChart_${chartEngine.id }(xwhere, ywhere, zwhere);
-});
-</script>
-
-示例demo：/webapp/try1try/chart.jsp
-</textarea>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- 参数调整 -->
@@ -1234,35 +865,68 @@ $(document).ready(function() {
         </div>
         <!-- bak.htm -->
         <!-- 统计图样式开始 -->
-        <style type="text/css">
-        .dtp-wgt,.dtp-paper-con,.dtp-lay-mnr-doc{position:relative}.dtp-lay-mnr-abs{position:absolute}.dtp-wgt{padding:0}.dtp-paper{display:none}.dtp-paper-curr{display:block}.dtp-theme-aatushuo .dtp-wgt{margin:20px auto}.dtp-theme-aatushuo .dtp-wgt-schart-container{height:300px}.dtp-theme-aatushuo .dtp-wgt-schart .dtp-wgt-main{display:block;height:100%}.dtp-theme-aatushuo .dtp-wgt-image .dtp-wgt-main{display:block;margin:0 auto;width:100%}.dtp-theme-aatushuo .dtp-wgt-ptext{padding:10px 0;font:13px/1.5 "Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext{font-family:"Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext-container{min-height:30px;line-height:1.3}.dtp-theme-aatushuo .dtp-wgt-ftext-content{white-space:normal;word-break:break-all}.dtp-theme-aatushuo .dtp-wgt-ftext-title0,.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0{text-align:center}.dtp-theme-aatushuo .dtp-wgt-ftext-title0 .dtp-wgt-ftext-container{font-size:40px;font-weight:bold;border-bottom:4px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0 .dtp-wgt-ftext-container{font-size:24px;font-weight:bold;border-bottom:2px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-container{font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quote0 .dtp-wgt-ftext-container{border-left:3px solid #999;padding-left:20px;font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quotetext{font-style:italic}.dtp-theme-aatushuo .dtp-wgt-ftext-quoteauthor{margin-top:5px}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-content[data-placeholder]:empty:not(:focus):before{font-size:14px}.dtp-theme-aatushuo .dtp-paper-view{padding:35px 35px;color:#333;background:#fff}
+        <style type="text/css">.dtp-wgt,.dtp-paper-con,.dtp-lay-mnr-doc{position:relative}.dtp-lay-mnr-abs{position:absolute}.dtp-wgt{padding:0}.dtp-paper{display:none}.dtp-paper-curr{display:block}.dtp-theme-aatushuo .dtp-wgt{margin:20px auto}.dtp-theme-aatushuo .dtp-wgt-schart-container{height:300px}.dtp-theme-aatushuo .dtp-wgt-schart .dtp-wgt-main{display:block;height:100%}.dtp-theme-aatushuo .dtp-wgt-image .dtp-wgt-main{display:block;margin:0 auto;width:100%}.dtp-theme-aatushuo .dtp-wgt-ptext{padding:10px 0;font:13px/1.5 "Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext{font-family:"Helvetica Neue","Microsoft YaHei",Arial,sans-serif}.dtp-theme-aatushuo .dtp-wgt-ftext-container{min-height:30px;line-height:1.3}.dtp-theme-aatushuo .dtp-wgt-ftext-content{white-space:normal;word-break:break-all}.dtp-theme-aatushuo .dtp-wgt-ftext-title0,.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0{text-align:center}.dtp-theme-aatushuo .dtp-wgt-ftext-title0 .dtp-wgt-ftext-container{font-size:40px;font-weight:bold;border-bottom:4px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-charttitle0 .dtp-wgt-ftext-container{font-size:24px;font-weight:bold;border-bottom:2px solid #333}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-container{font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quote0 .dtp-wgt-ftext-container{border-left:3px solid #999;padding-left:20px;font-size:14px}.dtp-theme-aatushuo .dtp-wgt-ftext-quotetext{font-style:italic}.dtp-theme-aatushuo .dtp-wgt-ftext-quoteauthor{margin-top:5px}.dtp-theme-aatushuo .dtp-wgt-ftext-bodytext0 .dtp-wgt-ftext-content[data-placeholder]:empty:not(:focus):before{font-size:14px}.dtp-theme-aatushuo .dtp-paper-view{padding:35px 35px;color:#333;background:#fff}
         </style>
         <!-- 统计图样式结束 -->
 
-        <script src="${ctx_static}/tushuo/lib/seajs/sea.js"></script>
+        <script src="../../lib/jquery/jquery-1.11.1.min.js"></script>
+        <script src="../../lib/seajs/sea.js"></script>
+        <script src="../../lib/echarts/echarts.js"></script>
+        <script type="text/javascript" src="../../lib/layui/layui.js"></script>
         <script>
             seajs.config({
-                base: "${ctx_static}/tushuo/lib/",
+                base: "../../lib/",
                 alias: {
                     "jquery": "jquery/jquery/1.10.1/jquery.js"
                 }
             });
-            seajs.use("${ctx_static}/tushuo/static/bar/js/main");
+
+            seajs.use("./js/main");
         </script>
         <script type="text/javascript">
-        $(document).ready(function(){
-        	
-        });
         </script>
 
 <div id="chartOpt" style="display: none;">
-<c:if test="${empty chartEngine.setOption}">
-chartOpt = {title: {text: '主标题文本',subtext: '副标题文本'},tooltip: {trigger: 'axis',show: true,formatter: ''},legend: {type: 'category',data: ['蒸发量','降水量']},toolbox: {show: true,feature: {dataZoom: {show: true},mark: {show: false},dataView: {show: true,readOnly: true},magicType: {show: false,type: ['line', 'bar']},restore: {show: true},saveAsImage: {show: true}}},calculable: true,xAxis: [{postion: 'bottom',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true},type: 'category',data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']}],yAxis: [{type: 'value',postion: 'left',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true}}],series: [{name: '蒸发量',type: 'bar',data: [2, 4.9, 7, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20, 6.4, 3.3],itemStyle: {normal: {label: {show: false}}}},{name: '降水量',type: 'bar',data: [2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3]}]};
-</c:if>
-
-<c:if test="${!empty chartEngine.setOption}">
-chartOpt = ${chartEngine.setOption}
-</c:if>
+chartOpt = {
+    title: {
+        show: true,
+        text: '主标题文本',
+        subtext: '副标题文本'
+    },
+    legend: {
+        data: []
+    },
+    tooltip: {
+        show: true,
+        formatter: '{a} <br>{b} : {c} ({d}%)'
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            mark: {
+                show: true
+            },
+            dataZoom: {
+                show: false
+            },
+            dataView: {
+                show: true
+            },
+            magicType: {
+                show: true
+            },
+            restore: {
+                show: true
+            },
+            saveAsImage: {
+                show: true
+            }
+        }
+    },
+    series : []
+};
 </div>
     </body>
+
 </html>
+
