@@ -3,11 +3,7 @@ package com.seeyoui.kensite.common.util;
 import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-
-import com.seeyoui.kensite.framework.report.chartConfig.domain.ChartConfig;
 
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -35,13 +31,6 @@ public class TemplateUtils {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("==============");
-		ChartConfig chartConfig = new ChartConfig();
-		chartConfig.setCodeNum("4648");
-		Map<String, Object> object = new HashMap<String, Object>();
-		object.put("name", "success");
-		object.put("chartConfig", chartConfig);
-		System.out.println(getStringFromTemplate(chartConfig, getFilePath("chart"), "chartTemplate.ks"));
 	}
 	
 	public static String getFilePath(String dir) {
