@@ -158,6 +158,44 @@ public class DBUtils {
 	}
 	
 	/**
+	 * 执行sql语句
+	 * @param sql
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean executeSql(String sql)  throws Exception {
+		Connection con = getConnection();
+		Statement stm = null;
+		try {
+			stm = con.createStatement();
+			return stm.execute(sql);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(con, stm, null);
+		}
+	}
+	
+	/**
+	 * 执行sql语句
+	 * @param con
+	 * @param sql
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean executeSql(Connection con, String sql)  throws Exception {
+		Statement stm = null;
+		try {
+			stm = con.createStatement();
+			return stm.execute(sql);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(con, stm, null);
+		}
+	}
+	
+	/**
 	 * 执行一个sql查询语句，结果集转换为List<Map<Object, Object>>返回
 	 * @param con 数据库连接
 	 * @param sql 查询sql

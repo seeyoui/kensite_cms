@@ -56,7 +56,7 @@
 	
 	<!-- 查询用户权限集合 -->
 	<select id="findSysUserList" resultType="com.seeyoui.kensite.framework.system.domain.SysPermission" parameterType="SysUser">
-		select sm.shiro || ':' || sp.id id,
+		select nvl(sm.shiro, 'fo') || ':' || nvl(sp.id, 'foo') id,
 		su.name || '[' || su.user_name || ']' || '-' || sm.name || '-' || sp.name name
 		from sys_user su
 		left join sys_user_role sur

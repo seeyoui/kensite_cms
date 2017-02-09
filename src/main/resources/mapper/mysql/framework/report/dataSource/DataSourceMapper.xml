@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.report.dataSource.persistence.DataSourceMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.NAME AS "name",
+		T.CODE_NUM AS "codeNum",
+		T.TYPE AS "type",
+		T.DESCRIBE AS "describe",
+		T.CONTENT AS "content",
+		T.VIEW_SQL AS "viewSql"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%${createUser}%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%${updateUser}%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%${remarks}%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%${delFlag}%'
+			</if>
+			<if test="name != null and name != ''">
+				AND T.NAME LIKE '%${name}%'
+			</if>
+			<if test="codeNum != null and codeNum != ''">
+				AND T.CODE_NUM LIKE '%${codeNum}%'
+			</if>
+			<if test="type != null and type != ''">
+				AND T.TYPE LIKE '%${type}%'
+			</if>
+			<if test="describe != null and describe != ''">
+				AND T.DESCRIBE LIKE '%${describe}%'
+			</if>
+			<if test="content != null and content != ''">
+				AND T.CONTENT LIKE '%${content}%'
+			</if>
+			<if test="viewSql != null and viewSql != ''">
+				AND T.VIEW_SQL LIKE '%${viewSql}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			${sort} ${order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.report.dataSource.domain.DataSource">
+		SELECT
+		<include refid="tableColumns" />
+		FROM KS_DATA_SOURCE T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.report.dataSource.domain.DataSource">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM KS_DATA_SOURCE T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+		<![CDATA[ limit #{row}, #{rows}]]>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.report.dataSource.domain.DataSource">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM KS_DATA_SOURCE T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM KS_DATA_SOURCE T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM KS_DATA_SOURCE T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.report.dataSource.domain.DataSource">
+		INSERT INTO KS_DATA_SOURCE (
+			
+			
+			
+			
+			
+			REMARKS,
+			DEL_FLAG,
+			NAME,
+			CODE_NUM,
+			TYPE,
+			DESCRIBE,
+			CONTENT,
+			VIEW_SQL,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{codeNum,jdbcType=VARCHAR},
+			#{type,jdbcType=VARCHAR},
+			#{describe,jdbcType=VARCHAR},
+			#{content,jdbcType=VARCHAR},
+			#{viewSql,jdbcType=VARCHAR},
+			#{createUser.userName},
+			now(),
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.report.dataSource.domain.DataSource">
+		UPDATE KS_DATA_SOURCE
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+			<if test="name !=null and name !=''">
+			NAME=#{name},
+			</if>
+			<if test="codeNum !=null and codeNum !=''">
+			CODE_NUM=#{codeNum},
+			</if>
+			<if test="type !=null and type !=''">
+			TYPE=#{type},
+			</if>
+			<if test="describe !=null and describe !=''">
+			DESCRIBE=#{describe},
+			</if>
+			<if test="content !=null and content !=''">
+			CONTENT=#{content},
+			</if>
+			<if test="viewSql !=null and viewSql !=''">
+			VIEW_SQL=#{viewSql},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = now(),
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM KS_DATA_SOURCE WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

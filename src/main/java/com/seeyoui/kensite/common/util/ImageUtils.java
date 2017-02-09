@@ -16,7 +16,8 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -459,38 +460,52 @@ public class ImageUtils {
 	 * @param args
 	 */
     public static void main(String[] args) {
-		/*// 1-缩放图像：
+    	String baseUrl = "d:/img/";
+    	File folder = new File(baseUrl);
+    	File[] fileList = folder.listFiles();
+    	for(File file : fileList) {
+    		if(file.length() > 102400) {
+    			ImageUtils.scale(baseUrl+file.getName(), baseUrl+"ks_"+file.getName(), 1, false);
+    		} else {
+    			file.renameTo(new File(baseUrl+"ks_"+file.getName()));
+    		}
+    	}
+    	/*
+    	System.out.println("开始");
+		// 1-缩放图像：
 		// 方法一：按比例缩放
-		ImageUtils.scale("e:/abc.jpg", "e:/abc_scale.jpg", 2, true);// 测试OK
+		ImageUtils.scale("d:/img/abc.png", "d:/img/abc_scale.png", 2, true);// 测试OK
 		// 方法一：按比例缩放
-		ImageUtils.scale("e:/abc.jpg", "e:/abc_scale11.jpg", 1, true);// 测试OK
+		ImageUtils.scale("d:/img/abc.png", "d:/img/abc_scale11.png", 1, true);// 测试OK
 		// 方法一：按比例缩放
-		ImageUtils.scale("e:/abc.jpg", "e:/abc_scale12.jpg", 1, false);// 测试OK
+		ImageUtils.scale("d:/img/abc.png", "d:/img/abc_scale12.png", 1, false);// 测试OK
 		// 方法二：按高度和宽度缩放
-		ImageUtils.scale2("e:/abc.jpg", "e:/abc_scale2.jpg", 500, 300, true);// 测试OK
+		ImageUtils.scale2("d:/img/abc.png", "d:/img/abc_scale2.png", 500, 300, true);// 测试OK
 		// 2-切割图像：
 		// 方法一：按指定起点坐标和宽高切割
-		ImageUtils.cut("e:/abc.jpg", "e:/abc_cut.jpg", 0, 0, 400, 400);// 测试OK
+		ImageUtils.cut("d:/img/abc.png", "d:/img/abc_cut.png", 0, 0, 400, 400);// 测试OK
 		// 方法二：指定切片的行数和列数
-		ImageUtils.cut2("e:/abc.jpg", "e:/", 2, 2);// 测试OK
+		ImageUtils.cut2("d:/img/abc.png", "d:/img/", 2, 2);// 测试OK
 		// 方法三：指定切片的宽度和高度
-		ImageUtils.cut3("e:/abc.jpg", "e:/", 300, 300);// 测试OK
+		ImageUtils.cut3("d:/img/abc.png", "d:/img/", 300, 300);// 测试OK
 		// 3-图像类型转换：
-		ImageUtils.convert("e:/abc.jpg", "GIF", "e:/abc_convert.gif");// 测试OK
+		ImageUtils.convert("d:/img/abc.png", "GIF", "d:/img/abc_convert.gif");// 测试OK
 		// 3-图像类型转换：
-		ImageUtils.convert("e:/abc.jpg", "PNG", "e:/abc_convert.png");// 测试OK
+		ImageUtils.convert("d:/img/abc.png", "JPG", "d:/img/abc_convert.png");// 测试OK
 		// 4-彩色转黑白：
-		ImageUtils.gray("e:/abc.jpg", "e:/abc_gray.jpg");// 测试OK
+		ImageUtils.gray("d:/img/abc.png", "d:/img/abc_gray.png");// 测试OK
 		// 5-给图片添加文字水印：
 		// 方法一：
-		ImageUtils.pressText("我是水印文字", "e:/abc.jpg", "e:/abc_pressText.jpg",
+		ImageUtils.pressText("我是水印文字", "d:/img/abc.png", "d:/img/abc_pressText.png",
 				"宋体", Font.BOLD, Color.white, 80, 0, 0, 0.5f);// 测试OK
 		// 方法二：
-		ImageUtils.pressText2("我也是水印文字", "e:/abc.jpg", "e:/abc_pressText2.jpg",
+		ImageUtils.pressText2("我也是水印文字", "d:/img/abc.png", "d:/img/abc_pressText2.png",
 				"黑体", 36, Color.white, 80, 0, 0, 0.5f);// 测试OK
 
 		// 6-给图片添加图片水印：
-		ImageUtils.pressImage("e:/abc2.jpg", "e:/abc.jpg",
-				"e:/abc_pressImage.jpg", 0, 0, 0.5f);// 测试OK
-*/	}
+		ImageUtils.pressImage("d:/img/abc2.png", "d:/img/abc.png",
+				"d:/img/abc_pressImage.png", 0, 0, 0.5f);// 测试OK
+		System.out.println("完成");
+		*/
+	}
 }
