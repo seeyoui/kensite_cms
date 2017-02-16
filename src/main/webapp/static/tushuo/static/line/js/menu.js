@@ -83,7 +83,7 @@ define(function(require, exports, module) {
         createSeries: function(seriesArr) {
         	var index = $('#legend-div div[data-cpt-con1]').length;
         	var content = '';
-        	$.get('/kensite/static/tushuo/static/line/tpl/legend.tpl').success(function(ctnt) {
+        	$.get(ctx+'/static/tushuo/static/line/tpl/legend.tpl').success(function(ctnt) {
                 //$('#legend-div').append(content);
                 content = ctnt;
             }).error(function (XMLHttpRequest, textStatus, errorThrown) {

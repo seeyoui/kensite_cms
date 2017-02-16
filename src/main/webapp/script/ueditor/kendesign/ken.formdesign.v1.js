@@ -12,7 +12,7 @@ UE.kenFormDesignUrl = 'kendesign';
 UE.registerUI('componentsDialog',function(editor,uiName){
 
     var dialog = new UE.ui.Dialog({
-        iframeUrl:'/kensite/information/showPageList.do',
+        iframeUrl:ctx+'/information/showPageList.do',
         editor:editor,
         name:uiName,
         title:"表单元素",

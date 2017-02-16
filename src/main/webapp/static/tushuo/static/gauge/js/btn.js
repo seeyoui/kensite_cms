@@ -26,7 +26,7 @@ define(function(require, exports, module) {
             	formData['setOption'] = JSON.stringify(chartOpt);
             	$.ajax({
 					type: "post",
-					url: '/kensite/ks/chartEngine/update',
+					url: ctx+'/ks/chartEngine/update',
 					data: formData,
 					dataType: 'json',
 					timeout: 10000,

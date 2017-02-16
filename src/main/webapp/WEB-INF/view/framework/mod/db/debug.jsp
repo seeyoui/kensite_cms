@@ -85,14 +85,17 @@
                 <label>是否列表</label>
                 <input id="isList" name="isList" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
                 <span id="msg-isList" class="err-msg"></span>
-                <label>列表宽度</label>
-                <input id="listWidth" name="listWidth" class="easyui-numberbox" data-options="min:0,precision:0,value:100,required:true"/>
-                <span id="msg-listWidth" class="err-msg"></span>
-            </div>
-			<div class="fitem">
                 <label>是否查询</label>
                 <input id="isQuery" name="isQuery" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
                 <span id="msg-isQuery" class="err-msg"></span>
+                <label>是否排序</label>
+                <input id="isSort" name="isSort" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
+                <span id="msg-isSort" class="err-msg"></span>
+            </div>
+			<div class="fitem">
+                <label>列表宽度</label>
+                <input id="listWidth" name="listWidth" class="easyui-numberbox" data-options="min:0,precision:0,value:100,required:true"/>
+                <span id="msg-listWidth" class="err-msg"></span>
                 <label>查询宽度</label>
                 <input id="queryWidth" name="queryWidth" class="easyui-numberbox" data-options="min:0,precision:0,value:100,required:true"/>
                 <span id="msg-queryWidth" class="err-msg"></span>

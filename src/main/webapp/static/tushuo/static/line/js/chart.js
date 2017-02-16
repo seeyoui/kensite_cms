@@ -67,7 +67,7 @@ define(function(require, exports, module) {
         	}
         	$.ajax({
 				type: "post",
-				url: '/kensite/ks/chartEngine/config',
+				url: ctx+'/ks/chartEngine/config',
 				data: formData,
 				dataType: 'json',
 				beforeSend: function(XMLHttpRequest){

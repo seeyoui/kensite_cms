@@ -29,10 +29,6 @@
     var loadi,url,index = parent.layer.getFrameIndex(window.name);
     var paramRows = null;
     $(document).ready(function(){
-    	var escapeVal = encodeURI("中国");
-        var UnescapeVal = decodeURI(escapeVal);
-        console.info(escapeVal);
-        console.info(UnescapeVal);
         var row = parent.$('#dataListSub').datagrid('getSelected');
         if(row != null) {
 			$('#url').textbox('setValue', row.url);
@@ -86,7 +82,16 @@
 						data = data.replace('\\', '');
 					}
 				}
-				if(data.indexOf('{') != -1) {
+				
+				if(data.indexOf('<?xml') != -1) {
+					while(data.indexOf('<') != -1) {
+						data = data.replace('<', '&lt;');
+					}
+					while(data.indexOf('>') != -1) {
+						data = data.replace('>', '&gt;');
+					}
+					showMessage(data);
+				} else if(data.indexOf('{') != -1) {
 					showMessage(do_json_beautify(data, 'html'));
 				} else {
 					var message = decodeURI(data);

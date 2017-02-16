@@ -26,7 +26,7 @@ define(function(require, exports, module) {
     		}
         	$.ajax({
 				type: "post",
-				url: '/kensite/ks/chartEngine/viewCol',
+				url: ctx+'/ks/chartEngine/viewCol',
 				data: {viewName: data.value},
 				dataType: 'json',
 				beforeSend: function(XMLHttpRequest){

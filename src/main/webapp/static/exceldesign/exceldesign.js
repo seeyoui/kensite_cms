@@ -807,7 +807,7 @@ function setHeadOperatPanelByCellStyle(isbold,isitalic,fontsize,fontfamliy,hAlig
 function setting() {
 	var sheet = getCurrentSheet();
 	var r=1,c=1;
-	var imgsrc = "/kensite/static/exceldesign/img/field/sqlReport.png";//图的名称很重要
+	var imgsrc = ctx+"/static/exceldesign/img/field/sqlReport.png";//图的名称很重要
 	sheet.getCell(r,c,sheet.sheetArea).backgroundImage(imgsrc);
 	sheet.getCell(r,c,sheet.sheetArea).backgroundImageLayout($.wijmo.wijspread.ImageLayout.None);
 	console.info($("#KSreport").data('spread').toJSON( { includeBindingSource: true } ).sheets["KS Report"].data.dataTable[r][c].style);

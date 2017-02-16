@@ -78,7 +78,7 @@
 			function loadData(id) {
 				$.ajax({
 					type: "post",
-					url: '${ctx}/${moduleC}${table.classNameFirstLower}/data/'+id,
+					url: '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/data/'+id,
 					data: {},
 					dataType: 'json',
 					timeout: layerLoadMaxTime,

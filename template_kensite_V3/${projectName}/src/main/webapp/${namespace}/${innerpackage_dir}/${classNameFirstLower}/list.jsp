@@ -10,7 +10,7 @@
 		<title>${table.tableAlias}</title>
 		<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 		<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
-		<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/ks/easyui.css"/>
+		<link rel="stylesheet" type="text/css" href="${"${"}ctx_script${"}"}/easyui/themes/ks/easyui.css"/>
 		<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 		<%@ include file="/WEB-INF/view/taglib/layui.jsp" %>
 	</head>
@@ -69,7 +69,7 @@
 				</div>
 			</div>
 			<div class="debug">
-				<c:if test="${ksfn:getConfig('debug')=='T'}"><a href='javascript:void(0)' onclick='modDebug()'>debug</a></c:if>
+				<c:if test="${"${"}ksfn:getConfig('debug')=='T'${"}"}"><a href='javascript:void(0)' onclick='modDebug()'>debug</a></c:if>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -83,12 +83,23 @@
 				});
 				$(".toolbar-left").hover(function() {
 					$(".toolbar-form").addClass("toolbar-form-ex");
+					$(".toolbar-form").height($(document).height()-10);
 					$("#form-other").show();
 					$("#form-btn").show();
 				}, function() {
-					$(".toolbar-form").removeClass("toolbar-form-ex");
-					$("#form-other").hide();
-					$("#form-btn").hide();
+					if($("iframe").length != 0) {
+						if($("iframe").parent().is(":hidden")) {
+							$(".toolbar-form").removeClass("toolbar-form-ex");
+							$(".toolbar-form").height(38);
+							$("#form-other").hide();
+							$("#form-btn").hide();
+						}
+					} else {
+						$(".toolbar-form").removeClass("toolbar-form-ex");
+						$(".toolbar-form").height(38);
+						$("#form-other").hide();
+						$("#form-btn").hide();
+					}
 				});
 			});
 			var url, loadi;

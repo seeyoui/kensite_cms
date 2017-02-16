@@ -47,7 +47,7 @@ var kensite = {
     sendInfo : function (infoData) {
     	$.ajax({
 			type: "post",
-			url: "/kensite/information/sendInfo.do",
+			url: ctx+"/information/sendInfo.do",
 			data: {content:infoData.content,type:infoData.type,receivers:infoData.receivers,sendType:infoData.sendType},
 			dataType: 'text',
 			beforeSend: function(XMLHttpRequest){
