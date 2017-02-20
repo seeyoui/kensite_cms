@@ -3,16 +3,23 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.plugin.upload.service;  
  
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -20,10 +27,13 @@ import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.common.util.CacheUtils;
 import com.seeyoui.kensite.common.util.FileUtils;
 import com.seeyoui.kensite.common.util.GeneratorUUID;
+import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile;
 import com.seeyoui.kensite.framework.plugin.upload.persistence.UploadfileMapper;
+import com.seeyoui.kensite.video.constants.VideoConstants;
 
 /**
  * @author cuichen
@@ -177,7 +187,36 @@ public class UploadfileService extends BaseService {
 		} catch (Exception e) {
 		}
         return null;
-		
+	}
+	
+	/**
+	 * 数据新增
+	 * @param uploadfile
+	 * @throws CRUDException
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	public Uploadfile uploadChunk(MultipartFile file, Uploadfile uploadfile, HttpServletRequest request) throws CRUDException {
+		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
+		formatFilePath(ctxPath);
+		ctxPath = ctxPath + StringConstant.UPLOAD_FILE_URL + uploadfile.getUrl() + "\\";
+		formatFilePath(ctxPath);
+		String fileName = file.getOriginalFilename();
+		String cacheName = MD5.md5(fileName);
+		String chunk = CacheUtils.get(cacheName).toString();
+		String fileSize = CacheUtils.get(cacheName+"size").toString();
+		String realName = MD5.md5(fileName+fileSize);
+		//用区块的下标当作文件名
+		String filePath = ctxPath + realName + File.separator + chunk;
+		try {
+			if (file != null) {
+				File f = new File(filePath);
+				file.transferTo(f);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+        return null;
 	}
 	
 	/**
@@ -193,4 +232,11 @@ public class UploadfileService extends BaseService {
 		}
 	}
 	
+	public String formatFilePath(String path) {
+		path = path.replaceAll("\\\\", "/");
+		if (!path.endsWith("/") && !path.endsWith("\\\\")) {
+			path = path + File.separator;
+		}
+		return path;
+	}
 }
