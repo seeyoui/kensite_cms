@@ -33,7 +33,6 @@ import com.seeyoui.kensite.common.util.GeneratorUUID;
 import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile;
 import com.seeyoui.kensite.framework.plugin.upload.persistence.UploadfileMapper;
-import com.seeyoui.kensite.video.constants.VideoConstants;
 
 /**
  * @author cuichen

@@ -187,4 +187,19 @@ public class SysMenuController extends BaseController {
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
+	
+	/**
+	 * 展示页签页面
+	 * @param modelMap
+	 * @param module
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/tabs")
+	public ModelAndView tabs(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String url) throws Exception {
+		modelMap.put("url", url);
+		return new ModelAndView("framework/system/menu/tabs", modelMap);
+	}
 }

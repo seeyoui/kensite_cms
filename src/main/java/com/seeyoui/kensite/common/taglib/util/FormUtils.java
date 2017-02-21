@@ -41,7 +41,9 @@ public class FormUtils {
 				if(StringUtils.isNoneBlank(pItem)) {
 					String[] pArr = pItem.split(":");
 					tc.setSettings(tc.getSettings().replaceAll("\\$"+pArr[0], pArr[1]));
-					tc.setDefaultValue(tc.getDefaultValue().replaceAll("\\$"+pArr[0], pArr[1]));
+					if(StringUtils.isNotBlank(tc.getDefaultValue())) {
+						tc.setDefaultValue(tc.getDefaultValue().replaceAll("\\$"+pArr[0], pArr[1]));
+					}
 				}
 			}
 		}
@@ -662,7 +664,7 @@ public class FormUtils {
 						result.append("/>");
 					}
 				} else if(settings.indexOf("URL>") != -1) {
-					result.append("Layui不支持URL配置");
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
 				} else {
 					String[] settingsArr = settings.split("\\|");
 					for(String set : settingsArr) {
@@ -751,7 +753,7 @@ public class FormUtils {
 						result.append("/>");
 					}
 				} else if(settings.indexOf("URL>") != -1) {
-					result.append("Layui不支持URL配置");
+					result.append("<option value=\"err\">Layui不支持URL配置</option>");
 				} else {
 					String[] settingsArr = settings.split("\\|");
 					for(String set : settingsArr) {
@@ -843,17 +845,10 @@ public class FormUtils {
 			}
 			result.append("</script>");
 			result.append("<script type=\"text/javascript\">");
-//			result.append("var "+column+" = UE.getEditor('"+column+"', {initialFrameHeight: 100,scaleEnabled: true});");
-//			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-//				result.append(""+column+".ready(function() {"+column+".setHeight("+tableColumn.getSettings()+");});");
-//			}
-			result.append("var "+column+" = UE.getEditor('"+column+"', {");
+			result.append("var "+column+" = UE.getEditor('"+column+"', {autoHeight: false});");
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append("initialFrameHeight: "+tableColumn.getSettings());
-			} else {
-				result.append("initialFrameHeight: 100");
+				result.append(""+column+".ready(function() {"+column+".setHeight("+tableColumn.getSettings()+");});");
 			}
-			result.append(",scaleEnabled: true});");
 			result.append("</script>");
 		}
 		if(TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {

@@ -41,7 +41,6 @@ import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.plugin.upload.domain.Uploadfile;
 import com.seeyoui.kensite.framework.plugin.upload.service.UploadfileService;
-import com.seeyoui.kensite.video.constants.VideoConstants;
 
 /**
  * @author cuichen
@@ -306,7 +305,7 @@ public class UploadfileController extends BaseController {
 	@RequestMapping(value = "/downloadChunk", method = RequestMethod.GET)
 	public void downloadChunk(HttpServletRequest request,
 			HttpServletResponse response, String url, String filmName) {
-		String ctxPath = VideoConstants.VIDEO_PATH;
+		String ctxPath = "";
 		ctxPath = ctxPath + StringConstant.UPLOAD_FILE_URL + url;// "video\\video"
 		BufferedInputStream bis = null;
 		try {
