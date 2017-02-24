@@ -9,6 +9,6 @@ public class GenerationTest {
 //		g.generateByTable("CMS_GUESTBOOK","template_kensite");
 
 //		g.deleteByTable("T_TEST_W","template_kensite_V2");
-		g.generateByTable("CMS_GUESTBOOK","template_kensite_V2");
+		g.generateByTable("KS_DATA_SOURCE","template_kensite_V2");
 	}
 }
