@@ -484,7 +484,7 @@ public class FormUtils {
 				result.append("value=\""+tableColumn.getDefaultValue()+"\" ");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" "));
+				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" ")+" ");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
 				result.append(tableColumn.getHtmlInner()+" ");
@@ -510,7 +510,7 @@ public class FormUtils {
 				result.append("lay-verify=\""+tableColumn.getValidType()+"\" ");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" "));
+				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" ")+" ");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
 				result.append(tableColumn.getHtmlInner()+" ");
@@ -543,7 +543,7 @@ public class FormUtils {
 				result.append("value=\""+tableColumn.getDefaultValue()+"\" ");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" "));
+				result.append(tableColumn.getSettings().replace("prompt:'", "placeholder=\"").replace("'", "\" ")+" ");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getHtmlInner())) {
 				result.append(tableColumn.getHtmlInner()+" ");
@@ -826,7 +826,7 @@ public class FormUtils {
 			if(!StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 					result.append(" onClick=\"WdatePicker({");
-					result.append(tableColumn.getSettings().replaceAll(",maxDate:''", "").replaceAll(",minDate:''", ""));
+					result.append(tableColumn.getSettings().replaceAll(",maxDate:''", "").replaceAll(",minDate:''", "")+" ");
 					result.append("})\"");
 				} else {
 					result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");

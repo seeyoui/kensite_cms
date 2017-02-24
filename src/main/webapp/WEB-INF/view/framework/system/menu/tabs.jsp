@@ -12,7 +12,7 @@
 <body>
 <div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 	<div id="ks_tab_win" class="easyui-tabs" data-options="tabPosition:'bottom',plain:true" style="width:100%;height:100%">
-		<div id="123" title="Tab1" style="overflow: auto;">
+		<div id="0" title="基本信息" style="overflow: auto;">
 			<c:if test="${empty url}">
 			<span style="font-size:32px;color:red">URL都不传闹哪样</span>
 			</c:if>
@@ -42,11 +42,10 @@
 		}
 		if(id!=null && id!='') {
 			var tabIdx = getTabIndex(id);
-			console.info(tabIdx);
 			if ($('#ks_tab_win').tabs('exists', tabIdx)){
 	    		$('#ks_tab_win').tabs('select', tabIdx);
 	    	} else {
-	    		var content = '<iframe style="width:100%;height:100%;border:none" src="'+url+'"></iframe>';
+	    		var content = '<iframe id="ifrm'+id+'" style="width:100%;height:100%;border:none" src="'+url+'"></iframe>';
 	    		$('#ks_tab_win').tabs('add', {
 	    			id: id,
 	    			title: title,
@@ -58,13 +57,31 @@
 			if ($('#ks_tab_win').tabs('exists', title)){
 	    		$('#ks_tab_win').tabs('select', title);
 	    	} else {
-	    		var content = '<iframe style="width:100%;height:100%;border:none" src="'+url+'"></iframe>';
+	    		var content = '<iframe id="ifrm'+title+'" style="width:100%;height:100%;border:none" src="'+url+'"></iframe>';
 	    		$('#ks_tab_win').tabs('add', {
 	    			title: title,
 	    			content: content,
 	    			closable: true
 	    		});
 	    	}
+		}
+	}
+	
+	function closeTab(selector) {
+		if(selector!=null && selector!='') {
+			var tabIdx = getTabIndex(selector);
+			if(tabIdx != -1) {
+				$('#ks_tab_win').tabs('close', tabIdx);
+			} else {
+				$('#ks_tab_win').tabs('close', selector);
+			}
+		} else {
+		}
+	}
+	
+	function refreshTab(selector) {
+		if(selector!=null && selector!='') {
+			document.getElementById('ifrm'+selector+'').src = src;
 		}
 	}
 	

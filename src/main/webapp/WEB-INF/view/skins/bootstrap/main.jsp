@@ -31,7 +31,12 @@
 					<div class="dropdown profile-element">
 						<span>
 						<c:if test="${not empty currentUser.headIcon}">
-							<img id="headIcon" alt="image" class="img-circle" src="${ctx}/upload/headIcon/${currentUser.headIcon}" style="width: 60px;"/>
+							<c:if test="${ksfn:startsWith(currentUser.headIcon,'upload/')}">
+								<img id="headIcon" alt="image" class="img-circle" src="${ctx}/${currentUser.headIcon}" style="width: 60px;"/>
+							</c:if>
+							<c:if test="${!ksfn:startsWith(currentUser.headIcon,'upload/picture/')}">
+								<img id="headIcon" alt="image" class="img-circle" src="${ctx}/upload/headIcon/${currentUser.headIcon}" style="width: 60px;"/>
+							</c:if>
 						</c:if>
 						<c:if test="${empty currentUser.headIcon}">
 							<img id="headIcon" alt="image" class="img-circle" src="${ctx}/upload/headerIcon.png" style="width: 60px;"/>
@@ -52,7 +57,7 @@
 							<li><a href="javascript:logout();">安全退出</a></li>
 						</ul>
 					</div>
-					<div class="logo-element">Ks</div>
+					<div class="logo-element">M</div>
 				</li>
 				<!-- 生成菜单导航 -->
 				<c:forEach var="tree" items="${menuList}" varStatus="status">
@@ -164,7 +169,7 @@
 			</div>
 			<div class="footer">
 				<div class="pull-right">
-					&copy; 2014-2016 <a href="http://www.seeyoui.com/" target="_blank">kensite</a>
+					&copy; 2014-2016 <a href="http://www.manstro.com/" target="_blank">manstro</a>
 				</div>
 			</div>
 		</div>
