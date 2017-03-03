@@ -14,7 +14,7 @@
 	            area: ['750px', '470px'],
 	            fix: false, //不固定
 	            maxmin: false,
-	            content: '${ctx}/cms/filer/image?alowPath=upload',
+	            content: '${ctx}/cms/filer/image?alowPath=upload/cms',
 	            btn: ['保存', '取消'],
 	            success: function(layero, index){
 	                iframeBody = layer.getChildFrame('body', index);

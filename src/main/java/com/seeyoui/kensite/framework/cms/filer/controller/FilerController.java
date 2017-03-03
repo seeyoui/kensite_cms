@@ -185,8 +185,6 @@ public class FilerController extends BaseController {
 			result.put("message", "目标不存在");
 			return result;
 		} else {
-			System.out.println(sourse);
-			System.out.println(sourse.substring(0, sourse.lastIndexOf("/")+1)+name);
 			File targetF = new File(sourse.substring(0, sourse.lastIndexOf("/")+1)+name);
 			if(targetF.exists()) {
 				result.put("success", StringConstant.FALSE);
@@ -195,6 +193,64 @@ public class FilerController extends BaseController {
 				sourseF.renameTo(targetF);
 				result.put("success", StringConstant.TRUE);
 				result.put("message", "重命名成功");
+			}
+			return result;
+		}
+	}
+	
+	@RequestMapping(value = "/copyto")
+	@ResponseBody
+	public Object copyto(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String fromPath, String toPath) throws Exception {
+		String basePath = request.getSession().getServletContext().getRealPath("/");
+		basePath = basePath.replaceAll("\\\\", "/");
+		String sourse = basePath + fromPath;
+		String target = basePath + toPath;
+		Map<String, Object> result = new HashMap<String, Object>();
+		File sourseF = new File(sourse);
+		if(!sourseF.exists()) {
+			result.put("success", StringConstant.FALSE);
+			result.put("message", "目标不存在");
+			return result;
+		} else {
+			File targetF = new File(target);
+			if(targetF.exists()) {
+				result.put("success", StringConstant.FALSE);
+				result.put("message", "存在相同文件名");
+			} else {
+				//复制 粘贴
+				result.put("success", StringConstant.TRUE);
+				result.put("message", "复制成功");
+			}
+			return result;
+		}
+	}
+	
+	@RequestMapping(value = "/cuto")
+	@ResponseBody
+	public Object cuto(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String fromPath, String toPath) throws Exception {
+		String basePath = request.getSession().getServletContext().getRealPath("/");
+		basePath = basePath.replaceAll("\\\\", "/");
+		String sourse = basePath + fromPath;
+		String target = basePath + toPath;
+		Map<String, Object> result = new HashMap<String, Object>();
+		File sourseF = new File(sourse);
+		if(!sourseF.exists()) {
+			result.put("success", StringConstant.FALSE);
+			result.put("message", "目标不存在");
+			return result;
+		} else {
+			File targetF = new File(target);
+			if(targetF.exists()) {
+				result.put("success", StringConstant.FALSE);
+				result.put("message", "存在相同文件名");
+			} else {
+				//剪切 粘贴
+				result.put("success", StringConstant.TRUE);
+				result.put("message", "复制成功");
 			}
 			return result;
 		}

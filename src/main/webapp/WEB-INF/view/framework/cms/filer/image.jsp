@@ -160,13 +160,16 @@
 							<i class="layui-icon">&#xe654;</i>新建文件夹
 						</button>
 						<button class="layui-btn layui-btn-primary layui-btn-mini">
-							<i class="layui-icon">&#xe619;</i>上传图片
+							<i class="layui-icon">&#xe619;</i>上传
 						</button>
 						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="deleteFile()">
 							<i class="layui-icon">&#x1006;</i>删除
 						</button>
 						<button class="layui-btn layui-btn-primary layui-btn-mini">
-							<i class="layui-icon">&#xe603;</i>移动
+							<i class="layui-icon">&#xe621;</i>复制
+						</button>
+						<button class="layui-btn layui-btn-primary layui-btn-mini">
+							<i class="layui-icon">&#xe630;</i>剪切
 						</button>
 						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="rename()">
 							<i class="layui-icon">&#xe642;</i>重命名
@@ -501,6 +504,10 @@
 	
 	function rename() {
 		var currentFile = getSelectFile();
+		if(currentFile == null || currentFile.id == null || currentFile.id == '') {
+			layer.msg("请选择文件！", {offset: layerMsgOffset,icon: 5,shift: 8,time: layerMsgTime});
+			return;
+		}
 		layer.prompt(
 			{title: '请输入', formType: 0, value: currentFile.name},
 			function(fileName, index) {
