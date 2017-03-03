@@ -7,6 +7,7 @@ package com.seeyoui.kensite.bussiness.demo.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,7 @@ import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.DateUtils;
+import com.seeyoui.kensite.common.util.GeneratorUUID;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.excel.ExportExcel;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
@@ -47,6 +50,8 @@ public class DemoController extends BaseController {
 	private DemoService demoService;
 	@Autowired
 	private SysUserService sysUserService;
+	@Resource(name = "taskExecutor")
+    private TaskExecutor taskExecutor;
 	
 	/**
 	 * 展示列表页面
@@ -227,5 +232,54 @@ public class DemoController extends BaseController {
 		sysUser.setDepartmentId(departmentId);
 		List<SysUser> sysUserList = sysUserService.findAll(sysUser);
 		return sysUserList;
+	}
+	
+	@RequestMapping(value = "/thread")
+	@ResponseBody
+	public Object thread(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		try {
+			taskExecutor.execute(new Runnable() {
+				public void run() {
+					for(int i=1; i<10; i++) {
+						System.out.println(i);
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+			taskExecutor.execute(new Runnable() {
+				public void run() {
+					for(int i=100; i>90; i--) {
+						System.out.println(GeneratorUUID.getId());
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+			taskExecutor.execute(new Runnable() {
+				public void run() {
+					for(int i=1; i<=5; i++) {
+						int total = demoService.findTotal(new Demo());
+						System.out.println("总数"+total);
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "9987";
 	}
 }
