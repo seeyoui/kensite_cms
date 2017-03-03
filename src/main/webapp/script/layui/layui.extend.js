@@ -2,10 +2,20 @@ function renderErrMsg(errMsg) {
    	for(var item in errMsg){
    		if($("#msg-"+item) != null) {
 			//$("#msg-"+item).html(errMsg[item]);
-			layer.tips(errMsg[item], '#'+item, {
-				tips: [3, '#ea5532'],
-				tipsMore: true
-			});
+   			var tagName = document.getElementById(item).tagName;
+   			console.info(tagName=='SELECT');
+   			if(tagName=='SELECT') {
+   				console.info($('#'+item).next());
+   				layer.tips(errMsg[item], $('#'+item).next(), {
+   					tips: [3, '#ea5532'],
+   					tipsMore: true
+   				});
+   			} else {
+   				layer.tips(errMsg[item], '#'+item, {
+   					tips: [3, '#ea5532'],
+   					tipsMore: true
+   				});
+   			}
 		}
 	}
 }

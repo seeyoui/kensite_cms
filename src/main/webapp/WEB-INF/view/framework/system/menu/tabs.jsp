@@ -12,7 +12,7 @@
 <body>
 <div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 	<div id="ks_tab_win" class="easyui-tabs" data-options="tabPosition:'bottom',plain:true" style="width:100%;height:100%">
-		<div id="0" title="基本信息" style="overflow: auto;">
+		<div id="ifrm0" title="基本信息" style="overflow: auto;">
 			<c:if test="${empty url}">
 			<span style="font-size:32px;color:red">URL都不传闹哪样</span>
 			</c:if>
@@ -81,6 +81,7 @@
 	
 	function refreshTab(selector) {
 		if(selector!=null && selector!='') {
+			var src = document.getElementById('ifrm'+selector+'').src;
 			document.getElementById('ifrm'+selector+'').src = src;
 		}
 	}
