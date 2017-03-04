@@ -219,6 +219,57 @@ public class UploadfileService extends BaseService {
 	}
 	
 	/**
+	 * 数据新增
+	 * @param uploadfile
+	 * @throws CRUDException
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	public Uploadfile uploadReal(MultipartFile file, Uploadfile uploadfile, HttpServletRequest request) throws CRUDException {
+		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
+		if (!ctxPath.endsWith(File.separator)) {
+			ctxPath = ctxPath + File.separator;
+		}
+		FileUtils.createDirectory(ctxPath);
+		String url = uploadfile.getUrl();
+		if(url==null || "".equals(url)) {
+			url = "temp";
+		} else if(url.startsWith("upload/")) {
+			url = url.replace("upload/", "");
+		}
+		ctxPath = ctxPath + StringConstant.UPLOAD_FILE_URL + url;
+		if (!ctxPath.endsWith(File.separator)) {
+			ctxPath = ctxPath + File.separator;
+		}
+		FileUtils.createDirectory(ctxPath);
+		try {
+			if (file != null) {
+				String fileName = file.getOriginalFilename();
+				String suffix = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf("."), fileName.length()) : null;
+				String UUID = GeneratorUUID.getId();
+				File realFile = new File(ctxPath + fileName);    
+				Uploadfile uploadFile = new Uploadfile();
+	            try {
+	            	uploadFile.setId(UUID);
+	                uploadFile.setViewname(fileName);
+	                uploadFile.setRealname(fileName);
+	                String fileUrl = StringConstant.UPLOAD_FILE_URL + (url==null?"":url);
+	                uploadFile.setUrl(fileUrl.replaceAll("\\\\", "/"));
+	                uploadFile.setRealurl(ctxPath.replaceAll("\\\\", "/"));
+	                uploadFile.setSuffix(suffix);
+	                uploadFile.setFilesize(file.getSize()+"");
+					file.transferTo(realFile);
+	                return uploadFile;
+		        } catch (IOException e) {  
+		            e.printStackTrace();  
+		        }
+			}
+		} catch (Exception e) {
+		}
+        return null;
+	}
+	
+	/**
 	 * 数据删除
 	 * @param listId
 	 * @throws CRUDException

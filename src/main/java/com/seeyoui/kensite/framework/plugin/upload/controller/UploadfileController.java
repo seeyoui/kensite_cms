@@ -168,6 +168,26 @@ public class UploadfileController extends BaseController {
 	}
 
 	/**
+	 * 保存新增的数据
+	 * 
+	 * @param modelMap
+	 * @param uploadfile
+	 * @param file
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/uploadReal", method = RequestMethod.POST)
+	@ResponseBody
+	public Object uploadReal(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Uploadfile uploadfile, MultipartFile file)
+			throws Exception {
+		Uploadfile uf = uploadfileService
+				.uploadReal(file, uploadfile, request);
+		return uf;
+	}
+
+	/**
 	 * 检查文件区块
 	 * 
 	 * @param modelMap

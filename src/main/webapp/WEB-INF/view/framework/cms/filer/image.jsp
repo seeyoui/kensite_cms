@@ -159,7 +159,7 @@
 						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="createFolder()">
 							<i class="layui-icon">&#xe654;</i>新建文件夹
 						</button>
-						<button class="layui-btn layui-btn-primary layui-btn-mini">
+						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="uploadFile()">
 							<i class="layui-icon">&#xe619;</i>上传
 						</button>
 						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="deleteFile()">
@@ -189,15 +189,15 @@
 </body>
 <script type="text/javascript">
 
-	var folder = ${folderList};
-	var file = ${fileList};
+	var folderArr = ${folderList};
+	var fileArr = ${fileList};
 	var folderId = 0;
 	var rootId = 1;
 	
 	var layer, element;
 	var treeObj;
 	$(document).ready( $(function () {
-		treeObj = $.fn.zTree.init($("#treeDemo"), setting, folder);
+		treeObj = $.fn.zTree.init($("#treeDemo"), setting, folderArr);
 		layui.use(['element', 'layer'], function() {
 			element = layui.element();
 			layer = layui.layer;
@@ -213,7 +213,7 @@
 	}));
 	
 	function sortFile(sortBy) {
-		file.sort(function(a, b){
+		fileArr.sort(function(a, b){
 			if(a.size == b.size) {
 				if(a.name > b.name) {
 					return 1;
@@ -253,48 +253,48 @@
 		domHtml += '</div>';
 		domHtml += '</div>';
 		$('#explorer_right_bottom').html('');
-		for(var i=0; i<file.length; i++) {
-			if(file[i].pId == id) {
+		for(var i=0; i<fileArr.length; i++) {
+			if(fileArr[i].pId == id) {
 				if(name != null && name != '') {
-					if(file[i].name.indexOf(name) != -1) {
+					if(fileArr[i].name.indexOf(name) != -1) {
 						var innerHtmlStr = '';
-						if(file[i].isParent) {
+						if(fileArr[i].isParent) {
 							innerHtmlStr = domHtml;
 							innerHtmlStr = innerHtmlStr.replace('$$TYPE$$', 'folder');
-							innerHtmlStr = innerHtmlStr.replace('$$ID$$', file[i].id);
-							innerHtmlStr = innerHtmlStr.replace('$$PID$$', file[i].pId);
-							innerHtmlStr = innerHtmlStr.replace('$$NAME$$', file[i].name);
+							innerHtmlStr = innerHtmlStr.replace('$$ID$$', fileArr[i].id);
+							innerHtmlStr = innerHtmlStr.replace('$$PID$$', fileArr[i].pId);
+							innerHtmlStr = innerHtmlStr.replace('$$NAME$$', fileArr[i].name);
 							innerHtmlStr = innerHtmlStr.replace('$$IMG$$', folderImg);
-							innerHtmlStr = innerHtmlStr.replace('$$FILE$$', file[i].name);
+							innerHtmlStr = innerHtmlStr.replace('$$FILE$$', fileArr[i].name);
 						} else {
 							innerHtmlStr = domHtml;
 							innerHtmlStr = innerHtmlStr.replace('$$TYPE$$', 'file');
-							innerHtmlStr = innerHtmlStr.replace('$$ID$$', file[i].id);
-							innerHtmlStr = innerHtmlStr.replace('$$PID$$', file[i].pId);
-							innerHtmlStr = innerHtmlStr.replace('$$NAME$$', file[i].name);
-							innerHtmlStr = innerHtmlStr.replace('$$IMG$$', file[i].path);
-							innerHtmlStr = innerHtmlStr.replace('$$FILE$$', formatName(file[i].name));
+							innerHtmlStr = innerHtmlStr.replace('$$ID$$', fileArr[i].id);
+							innerHtmlStr = innerHtmlStr.replace('$$PID$$', fileArr[i].pId);
+							innerHtmlStr = innerHtmlStr.replace('$$NAME$$', fileArr[i].name);
+							innerHtmlStr = innerHtmlStr.replace('$$IMG$$', fileArr[i].path);
+							innerHtmlStr = innerHtmlStr.replace('$$FILE$$', formatName(fileArr[i].name));
 						}
 						$('#explorer_right_bottom').append(innerHtmlStr);
 					}
 				} else {
 					var innerHtmlStr = '';
-					if(file[i].isParent) {
+					if(fileArr[i].isParent) {
 						innerHtmlStr = domHtml;
 						innerHtmlStr = innerHtmlStr.replace('$$TYPE$$', 'folder');
-						innerHtmlStr = innerHtmlStr.replace('$$ID$$', file[i].id);
-						innerHtmlStr = innerHtmlStr.replace('$$PID$$', file[i].pId);
-						innerHtmlStr = innerHtmlStr.replace('$$NAME$$', file[i].name);
+						innerHtmlStr = innerHtmlStr.replace('$$ID$$', fileArr[i].id);
+						innerHtmlStr = innerHtmlStr.replace('$$PID$$', fileArr[i].pId);
+						innerHtmlStr = innerHtmlStr.replace('$$NAME$$', fileArr[i].name);
 						innerHtmlStr = innerHtmlStr.replace('$$IMG$$', folderImg);
-						innerHtmlStr = innerHtmlStr.replace('$$FILE$$', file[i].name);
+						innerHtmlStr = innerHtmlStr.replace('$$FILE$$', fileArr[i].name);
 					} else {
 						innerHtmlStr = domHtml;
 						innerHtmlStr = innerHtmlStr.replace('$$TYPE$$', 'file');
-						innerHtmlStr = innerHtmlStr.replace('$$ID$$', file[i].id);
-						innerHtmlStr = innerHtmlStr.replace('$$PID$$', file[i].pId);
-						innerHtmlStr = innerHtmlStr.replace('$$NAME$$', file[i].name);
-						innerHtmlStr = innerHtmlStr.replace('$$IMG$$', file[i].path);
-						innerHtmlStr = innerHtmlStr.replace('$$FILE$$', formatName(file[i].name));
+						innerHtmlStr = innerHtmlStr.replace('$$ID$$', fileArr[i].id);
+						innerHtmlStr = innerHtmlStr.replace('$$PID$$', fileArr[i].pId);
+						innerHtmlStr = innerHtmlStr.replace('$$NAME$$', fileArr[i].name);
+						innerHtmlStr = innerHtmlStr.replace('$$IMG$$', fileArr[i].path);
+						innerHtmlStr = innerHtmlStr.replace('$$FILE$$', formatName(fileArr[i].name));
 					}
 					$('#explorer_right_bottom').append(innerHtmlStr);
 				}
@@ -354,10 +354,10 @@
 	}
 	
 	function menuFolderLoop(id) {
-		for(var i=0; i<folder.length; i++) {
-			if(folder[i].id == id) {
-				menuFolder.push(folder[i]);
-				menuFolderLoop(folder[i].pId);
+		for(var i=0; i<folderArr.length; i++) {
+			if(folderArr[i].id == id) {
+				menuFolder.push(folderArr[i]);
+				menuFolderLoop(folderArr[i].pId);
 			}
 		}
 	}
@@ -382,17 +382,17 @@
 	
 	function getSelectFile() {
 		var fileId = $('div.select').data('id');
-		for(var i=0; i<file.length; i++) {
-			if(fileId == file[i].id) {
-				return file[i];
+		for(var i=0; i<fileArr.length; i++) {
+			if(fileId == fileArr[i].id) {
+				return fileArr[i];
 			}
 		}
 	}
 	
 	function getCurrentFolder() {
-		for(var i=0; i<folder.length; i++) {
-			if(folderId == folder[i].id) {
-				return folder[i];
+		for(var i=0; i<folderArr.length; i++) {
+			if(folderId == folderArr[i].id) {
+				return folderArr[i];
 			}
 		}
 	}
@@ -403,6 +403,10 @@
 		layer.prompt(
 			{title: '请输入文件夹名', formType: 0},
 			function(folderName, index) {
+				if(folderName.length>10) {
+					layer.msg('文件夹名称过长', {offset: layerMsgOffset,icon: 5,shift: 8,time: layerMsgTime});
+                    return;
+				}
 				$.ajax({
 					type: 'post',
 					url: '${ctx}/cms/filer/createFolder',
@@ -418,8 +422,8 @@
 					success: function(data, textStatus){
 						if (data.success==TRUE){
 							var f = {"isParent":true,"size":0,"name":folderName,"path":currentFolder.path+"/"+folderName,"pId":folderId,"id":largeNum--};
-							folder[folder.length] = f;
-							file[file.length] = f;
+							folderArr[folderArr.length] = f;
+							fileArr[fileArr.length] = f;
 							renderFile(folderId);
 							var node = treeObj.getNodeByParam("id", folderId, null);
 							treeObj.addNodes(node, -1, f);
@@ -447,6 +451,10 @@
 	}
 	function deleteFile() {
 		var currentFile = getSelectFile();
+		if(currentFile == null || currentFile.id == null || currentFile.id == '') {
+			layer.msg("请选择文件！", {offset: layerMsgOffset,icon: 5,shift: 8,time: layerMsgTime});
+			return;
+		}
 		var type = '';
 		if(currentFile.isParent) {
 			type = 'folder';
@@ -474,8 +482,8 @@
 				},
 				success: function(data, textStatus){
 					if (data.success==TRUE){
-						folder = deleteArrayItem(folder, currentFile.id);
-						file = deleteArrayItem(file, currentFile.id);
+						folderArr = deleteArrayItem(folderArr, currentFile.id);
+						fileArr = deleteArrayItem(fileArr, currentFile.id);
 						renderFile(folderId);
 						if(currentFile.isParent) {
 							var node = treeObj.getNodeByParam("id", currentFile.id, null);
@@ -525,14 +533,14 @@
 					},
 					success: function(data, textStatus){
 						if (data.success==TRUE){
-							for(var i=0; i<folder.length; i++) {
-								if(folder[i].id == currentFile.id) {
-									folder[i].name = fileName;
+							for(var i=0; i<folderArr.length; i++) {
+								if(folderArr[i].id == currentFile.id) {
+									folderArr[i].name = fileName;
 								}
 							}
-							for(var i=0; i<file.length; i++) {
-								if(file[i].id == currentFile.id) {
-									file[i].name = fileName;
+							for(var i=0; i<fileArr.length; i++) {
+								if(fileArr[i].id == currentFile.id) {
+									fileArr[i].name = fileName;
 								}
 							}
 							renderFile(folderId);
@@ -571,6 +579,54 @@
 			}
 		}
 		return result;
+	}
+	
+	function checkUploadFile(fileName) {
+		for(var i=0; i<fileArr.length; i++) {
+			if(fileName == fileArr[i].name) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	function uploadFile() {
+		var currentFolder = getCurrentFolder();
+		if(currentFolder==null || currentFolder.path=='') {
+			return;
+		}
+		layer.open({
+            type: 2,
+            title: null,
+            area: ['700px', '300px'],
+            fix: false, //不固定
+            maxmin: false,
+            closeBtn: 0,
+            shadeClose: true,
+            content: '${ctx}/cms/filer/multiuploader?alowPath='+currentFolder.path,
+            btn: null,
+            success: function(layero, index){
+                iframeBody = layer.getChildFrame('body', index);
+                iframeWin = window[layero.find('iframe')[0]['name']];
+            },
+            yes: function(index, layero) {
+                if(iframeWin != null) {
+                    iframeWin.submitInfo();
+                }
+            },
+            cancel: function(index){
+                layer.close(index);
+            }
+        });
+	}
+	
+	function afterUploadFile(file) {
+		var currentFolder = getCurrentFolder();
+		var f = {"size":file.size,"name":file.name,"path":currentFolder.path+"/"+file.name,"pId":currentFolder.id,"id":largeNum--};
+		fileArr[fileArr.length] = f;
+		console.info(folderId);
+		console.info(fileArr);
+		renderFile(folderId);
 	}
 	
 	function test() {
