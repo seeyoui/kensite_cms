@@ -2,3 +2,4 @@
 <script type="text/javascript" src="${ctx_script}/zTree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="${ctx_script}/zTree/js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="${ctx_script}/zTree/js/jquery.ztree.exedit.js"></script>
+<script type="text/javascript" src="${ctx_script}/zTree/js/jquery.ztree.exhide.js"></script>

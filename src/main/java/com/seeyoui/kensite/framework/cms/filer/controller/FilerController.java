@@ -27,6 +27,7 @@ import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.FileUtils;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.util.SessionUtil;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.cms.filer.util.FilerUtils;
 import com.seeyoui.kensite.framework.cms.guestbook.service.GuestbookService;
@@ -41,9 +42,6 @@ import com.seeyoui.kensite.framework.cms.guestbook.service.GuestbookService;
 @Controller
 @RequestMapping(value = "cms/filer")
 public class FilerController extends BaseController {
-	
-	@Autowired
-	private GuestbookService guestbookService;
 	
 	/**
 	 * 展示列表页面
@@ -71,6 +69,8 @@ public class FilerController extends BaseController {
 			m.put("isParent", true);
 			folderList.add(m);
 		}
+		SessionUtil.setSession("page", page);
+		SessionUtil.setSession("alowPath", alowPath);
 		modelMap.put("alowPath", alowPath);
 		modelMap.put("folderList", JSONArray.fromObject(folderList).toString());
 		modelMap.put("fileList", JSONArray.fromObject(fileList).toString());
@@ -182,7 +182,7 @@ public class FilerController extends BaseController {
 		File sourseF = new File(sourse);
 		if(!sourseF.exists()) {
 			result.put("success", StringConstant.FALSE);
-			result.put("message", "目标不存在");
+			result.put("message", "文件不存在");
 			return result;
 		} else {
 			File targetF = new File(sourse.substring(0, sourse.lastIndexOf("/")+1)+name);
@@ -207,6 +207,12 @@ public class FilerController extends BaseController {
 		basePath = basePath.replaceAll("\\\\", "/");
 		String sourse = basePath + fromPath;
 		String target = basePath + toPath;
+		if(StringUtils.isBlank(fromPath) || StringUtils.isBlank(toPath)) {
+			FileUtils.copyDirectory(sourse, target);
+			RequestResponseUtil.putResponseStr(session, response, request,
+					StringConstant.TRUE);
+			return null;
+		}
 		Map<String, Object> result = new HashMap<String, Object>();
 		File sourseF = new File(sourse);
 		if(!sourseF.exists()) {
@@ -215,13 +221,50 @@ public class FilerController extends BaseController {
 			return result;
 		} else {
 			File targetF = new File(target);
-			if(targetF.exists()) {
+			if(!targetF.exists() || !targetF.isDirectory()) {
 				result.put("success", StringConstant.FALSE);
-				result.put("message", "存在相同文件名");
+				result.put("message", "目标文件夹不存在");
 			} else {
-				//复制 粘贴
-				result.put("success", StringConstant.TRUE);
-				result.put("message", "复制成功");
+				if(sourseF.isDirectory()) {
+					String[] sourseArr = sourse.split("/");
+					target = target +"/" + sourseArr[sourseArr.length-1];
+					if(FileUtils.copyDirectory(sourse, target)) {
+						String alowPath = SessionUtil.getSession("alowPath").toString();
+						String page = SessionUtil.getSession("page").toString();
+						Map<String, List<Map<String, Object>>> fileMap = FilerUtils.getFolderInfo(basePath, alowPath);
+						List<Map<String, Object>> folderList = fileMap.get("folderList");
+						List<Map<String, Object>> fileList = fileMap.get("fileList");
+						Map<String, Object> m = new HashMap<String, Object>();
+						m.put("id", 1);
+						m.put("pId", 0);
+						m.put("path", alowPath);
+						m.put("size", 0);
+						m.put("open", true);
+						m.put("isParent", true);
+						if("image".equals(page)) {
+							m.put("name", "我的图库");
+						}
+						folderList.add(m);
+						result.put("folderList", folderList);
+						result.put("fileList", fileList);
+						result.put("success", StringConstant.TRUE);
+						result.put("message", "复制成功");
+					} else {
+						result.put("success", StringConstant.FALSE);
+						result.put("message", "复制失败");
+					}
+				}
+				if(sourseF.isFile()) {
+					String[] sourseArr = sourse.split("/");
+					target = target +"/" + sourseArr[sourseArr.length-1];
+					if(FileUtils.copyFile(sourse, target)) {
+						result.put("success", StringConstant.TRUE);
+						result.put("message", "复制成功");
+					} else {
+						result.put("success", StringConstant.FALSE);
+						result.put("message", "复制失败");
+					}
+				}
 			}
 			return result;
 		}
@@ -244,13 +287,52 @@ public class FilerController extends BaseController {
 			return result;
 		} else {
 			File targetF = new File(target);
-			if(targetF.exists()) {
+			if(!targetF.exists() || !targetF.isDirectory()) {
 				result.put("success", StringConstant.FALSE);
-				result.put("message", "存在相同文件名");
+				result.put("message", "目标文件夹不存在");
 			} else {
-				//剪切 粘贴
-				result.put("success", StringConstant.TRUE);
-				result.put("message", "复制成功");
+				if(sourseF.isDirectory()) {
+					String[] sourseArr = sourse.split("/");
+					target = target +"/" + sourseArr[sourseArr.length-1];
+					if(FileUtils.copyDirectory(sourse, target)) {
+						FileUtils.deleteDirectory(sourse);
+						String alowPath = SessionUtil.getSession("alowPath").toString();
+						String page = SessionUtil.getSession("page").toString();
+						Map<String, List<Map<String, Object>>> fileMap = FilerUtils.getFolderInfo(basePath, alowPath);
+						List<Map<String, Object>> folderList = fileMap.get("folderList");
+						List<Map<String, Object>> fileList = fileMap.get("fileList");
+						Map<String, Object> m = new HashMap<String, Object>();
+						m.put("id", 1);
+						m.put("pId", 0);
+						m.put("path", alowPath);
+						m.put("size", 0);
+						m.put("open", true);
+						m.put("isParent", true);
+						if("image".equals(page)) {
+							m.put("name", "我的图库");
+						}
+						folderList.add(m);
+						result.put("folderList", folderList);
+						result.put("fileList", fileList);
+						result.put("success", StringConstant.TRUE);
+						result.put("message", "剪切成功");
+					} else {
+						result.put("success", StringConstant.FALSE);
+						result.put("message", "剪切失败");
+					}
+				}
+				if(sourseF.isFile()) {
+					String[] sourseArr = sourse.split("/");
+					target = target +"/" + sourseArr[sourseArr.length-1];
+					if(FileUtils.copyFile(sourse, target)) {
+						FileUtils.deleteFile(sourse);
+						result.put("success", StringConstant.TRUE);
+						result.put("message", "剪切成功");
+					} else {
+						result.put("success", StringConstant.FALSE);
+						result.put("message", "剪切失败");
+					}
+				}
 			}
 			return result;
 		}

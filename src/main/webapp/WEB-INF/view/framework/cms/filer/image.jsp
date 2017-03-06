@@ -133,12 +133,54 @@
 		font-size: 11px;
 		color: #335;
 	}
+	
+	.tree_view {
+		background-color: #fff;
+		border: 1px solid #eee;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		top: 0;
+		width: 200px;
+		overflow: auto;
+	}
+	
+	.tree_view_shadow {
+		background-color: #fff;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		top: 0;
+		left: 0;
+		filter:alpha(opacity=50);  
+		-moz-opacity:0.5;  
+		-khtml-opacity: 0.5;  
+		opacity: 0.5;  
+	}
+	
+	.close_btn {
+		background: url(${ctx_script}/zTree/img/close.png) no-repeat scroll 0 0 transparent;
+		height: 16px;
+		margin: 0;
+		position: absolute;
+		right: 8px;
+		top: 5px;
+		vertical-align: top;
+		width: 16px;
+	}
+	
+	.ztree li span.button.paste{
+		margin: 0;
+		background: url(${ctx_script}/zTree/img/paste.png) no-repeat scroll 0 0 transparent;
+		vertical-align: top;
+		*vertical-align: middle
+	}
 </style>
 </head>
 <body style="height:100%;">
 <div id="img_explorer">
 	<div id="explorer_left">
-		<ul id="treeDemo" class="ztree"></ul>
+		<ul id="folderTree" class="ztree"></ul>
 	</div>
 	<div id="explorer_right">
 		<div id="explorer_right_top">
@@ -165,10 +207,10 @@
 						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="deleteFile()">
 							<i class="layui-icon">&#x1006;</i>删除
 						</button>
-						<button class="layui-btn layui-btn-primary layui-btn-mini">
+						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="move('copyto')">
 							<i class="layui-icon">&#xe621;</i>复制
 						</button>
-						<button class="layui-btn layui-btn-primary layui-btn-mini">
+						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="move('cuto')">
 							<i class="layui-icon">&#xe630;</i>剪切
 						</button>
 						<button class="layui-btn layui-btn-primary layui-btn-mini" onclick="rename()">
@@ -195,9 +237,11 @@
 	var rootId = 1;
 	
 	var layer, element;
-	var treeObj;
+	var folderTreeObj;
 	$(document).ready( $(function () {
-		treeObj = $.fn.zTree.init($("#treeDemo"), setting, folderArr);
+		folderTreeObj = $.fn.zTree.init($("#folderTree"), setting, folderArr);
+		selTreeObj = $.fn.zTree.init($("#selTree"), setting2, folderArr);
+		
 		layui.use(['element', 'layer'], function() {
 			element = layui.element();
 			layer = layui.layer;
@@ -207,6 +251,8 @@
 				renderFile(folderId, $('#query').val());
 			}
 		});
+		
+		$('.close_btn').bind('click', closeTreeView());
 		sortFile();
 		folderId = rootId;
 		renderFile(folderId, '');
@@ -225,6 +271,16 @@
 		});
 	}
 	
+	var IDMark_Switch = "_switch",
+	IDMark_Icon = "_ico",
+	IDMark_Span = "_span",
+	IDMark_Input = "_input",
+	IDMark_Check = "_check",
+	IDMark_Edit = "_edit",
+	IDMark_Remove = "_remove",
+	IDMark_Ul = "_ul",
+	IDMark_A = "_a";
+	
 	var setting = {
 		data: {
 			simpleData: {
@@ -235,6 +291,26 @@
 			onClick: clickFolder
 		}
 	};
+	
+	var setting2 = {
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		view: {
+			addDiyDom: addDiyDom
+		}
+	};
+	
+	function addDiyDom(treeId, treeNode) {
+		if(treeId == 'folderTree') return;
+		var aObj = $("#" + treeNode.tId + IDMark_A);
+		var editStr = "<span class='demoIcon' id='diyBtn_" +treeNode.id+ "' title='"+treeNode.name+"' onfocus='this.blur();'><span class='button paste'></span></span>";
+		aObj.append(editStr);
+		var btn = $("#diyBtn_"+treeNode.id);
+		if (btn) btn.bind("click", function(){paste(treeNode);});
+	}
 	
 	function clickFolder(event, treeId, treeNode) {
 		renderFile(treeNode.id);
@@ -363,8 +439,8 @@
 	}
 	
 	function selectTreeNode(id) {
-		var node = treeObj.getNodeByParam("id", id, null);
-		treeObj.selectNode(node);
+		var node = folderTreeObj.getNodeByParam("id", id, null);
+		folderTreeObj.selectNode(node);
 	}
 	
 	function formatName(name) {
@@ -425,8 +501,9 @@
 							folderArr[folderArr.length] = f;
 							fileArr[fileArr.length] = f;
 							renderFile(folderId);
-							var node = treeObj.getNodeByParam("id", folderId, null);
-							treeObj.addNodes(node, -1, f);
+							var node = folderTreeObj.getNodeByParam("id", folderId, null);
+							folderTreeObj.addNodes(node, -1, f);
+							selTreeObj.addNodes(node, -1, f);
 							selectTreeNode(folderId);
 							layer.close(index);
 							layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
@@ -486,8 +563,9 @@
 						fileArr = deleteArrayItem(fileArr, currentFile.id);
 						renderFile(folderId);
 						if(currentFile.isParent) {
-							var node = treeObj.getNodeByParam("id", currentFile.id, null);
-							treeObj.removeNode(node);
+							var node = folderTreeObj.getNodeByParam("id", currentFile.id, null);
+							folderTreeObj.removeNode(node);
+							selTreeObj.removeNode(node);
 						}
 						layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
 					} else {
@@ -535,19 +613,22 @@
 						if (data.success==TRUE){
 							for(var i=0; i<folderArr.length; i++) {
 								if(folderArr[i].id == currentFile.id) {
+									folderArr[i].path = folderArr[i].path.replace(folderArr[i].name, fileName);
 									folderArr[i].name = fileName;
 								}
 							}
 							for(var i=0; i<fileArr.length; i++) {
 								if(fileArr[i].id == currentFile.id) {
+									fileArr[i].path = fileArr[i].path.replace(fileArr[i].name, fileName);
 									fileArr[i].name = fileName;
 								}
 							}
 							renderFile(folderId);
 							if(currentFile.isParent) {
-								var node = treeObj.getNodeByParam("id", currentFile.id, null);
+								var node = folderTreeObj.getNodeByParam("id", currentFile.id, null);
 								node.name = fileName;
-								treeObj.updateNode(node);
+								folderTreeObj.updateNode(node);
+								selTreeObj.updateNode(node);
 							}
 							layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
 							layer.close(index);
@@ -624,9 +705,152 @@
 		var currentFolder = getCurrentFolder();
 		var f = {"size":file.size,"name":file.name,"path":currentFolder.path+"/"+file.name,"pId":currentFolder.id,"id":largeNum--};
 		fileArr[fileArr.length] = f;
-		console.info(folderId);
-		console.info(fileArr);
 		renderFile(folderId);
+	}
+	
+	function copyto(currentFile, targetFile) {
+		$.ajax({
+			type: 'post',
+			url: '${ctx}/cms/filer/copyto',
+			data: {
+				fromPath: currentFile.path,
+				toPath: targetFile.path
+			},
+			dataType: 'json',
+			timeout: layerLoadMaxTime,
+			beforeSend: function(XMLHttpRequest){
+				loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+			},
+			success: function(data, textStatus){
+				if (data.success==TRUE){
+					if(currentFile.isParent) {
+						folderArr = data.folderList;
+						fileArr = data.fileList;
+						folderTreeObj.destroy();
+						selTreeObj.destroy();
+						folderTreeObj = $.fn.zTree.init($("#folderTree"), setting, folderArr);
+						selTreeObj = $.fn.zTree.init($("#selTree"), setting2, folderArr);
+					} else {
+						var f = {"size":currentFile.size,"name":currentFile.name,"path":targetFile.path+"/"+currentFile.name,"pId":targetFile.id,"id":largeNum--};
+						fileArr[fileArr.length] = f;
+					}
+					layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
+				} else {
+                	layer.msg(data.message, {offset: layerMsgOffset,icon: 5,shift: 8,time: layerMsgTime});
+                }
+				closeTreeView();
+				layer.close(loadi);
+			},
+			error: function(request, errType) {
+				closeTreeView();
+				layer.close(loadi);
+				//"timeout", "error", "notmodified" 和 "parsererror"
+				if(errType == 'timeout') {
+					layer.msg('请求超时', {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+				}
+				if(errType == 'error') {
+					layer.msg('系统错误，请联系管理员', {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+				}
+			}
+		});
+	}
+
+	function cuto(currentFile, targetFile) {
+		$.ajax({
+			type: 'post',
+			url: '${ctx}/cms/filer/cuto',
+			data: {
+				fromPath: currentFile.path,
+				toPath: targetFile.path
+			},
+			dataType: 'json',
+			timeout: layerLoadMaxTime,
+			beforeSend: function(XMLHttpRequest){
+				loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+			},
+			success: function(data, textStatus){
+				if (data.success==TRUE){
+					if(currentFile.isParent) {
+						folderArr = data.folderList;
+						fileArr = data.fileList;
+						folderTreeObj.destroy();
+						selTreeObj.destroy();
+						folderTreeObj = $.fn.zTree.init($("#folderTree"), setting, folderArr);
+						selTreeObj = $.fn.zTree.init($("#selTree"), setting2, folderArr);
+					} else {
+						for(var i=0; i<folderArr.length; i++) {
+							if(folderArr[i].id == currentFile.id) {
+								folderArr[i].path = targetFile.path+"/"+currentFile.name;
+								folderArr[i].pId = targetFile.id;
+							}
+						}
+						for(var i=0; i<fileArr.length; i++) {
+							if(fileArr[i].id == currentFile.id) {
+								fileArr[i].path = targetFile.path+"/"+currentFile.name;
+								fileArr[i].pId = targetFile.id;
+							}
+						}
+					}
+					renderFile(folderId);
+					layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
+				} else {
+                	layer.msg(data.message, {offset: layerMsgOffset,icon: 5,shift: 8,time: layerMsgTime});
+                }
+				closeTreeView();
+				layer.close(loadi);
+			},
+			error: function(request, errType) {
+				closeTreeView();
+				layer.close(loadi);
+				//"timeout", "error", "notmodified" 和 "parsererror"
+				if(errType == 'timeout') {
+					layer.msg('请求超时', {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+				}
+				if(errType == 'error') {
+					layer.msg('系统错误，请联系管理员', {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+				}
+			}
+		});
+	}
+	
+	var moveType = '';
+	function move(type) {
+		var currentFile = getSelectFile();
+		if(currentFile == null || currentFile.id == null || currentFile.id == '') {
+			layer.msg("请选择文件！", {offset: layerMsgOffset,icon: 5,shift: 8,time: layerMsgTime});
+			return;
+		}
+		if(currentFile.isParent) {
+			var node = selTreeObj.getNodeByParam("id", currentFile.id, null);
+			selTreeObj.hideNode(node);
+		}
+		moveType = type;
+		$('#tree_view').show();
+		$('#tree_view_shadow').show();
+	}
+	
+	function paste(targetFile) {
+		var currentFile = getSelectFile();
+		if(currentFile.pId == targetFile.id) {
+			closeTreeView();
+			return;
+		}
+		if(moveType == 'copyto') {
+			copyto(currentFile, targetFile);
+		}
+		if(moveType == 'cuto') {
+			cuto(currentFile, targetFile);
+		}
+	}
+	
+	function closeTreeView() {
+		var currentFile = getSelectFile();
+		if(currentFile && currentFile.isParent) {
+			var node = selTreeObj.getNodeByParam("id", currentFile.id, null);
+			selTreeObj.showNode(node);
+		}
+		$('#tree_view').hide();
+		$('#tree_view_shadow').hide();
 	}
 	
 	function test() {
@@ -635,5 +859,11 @@
 </script>
 <div id="img_view" class="img_view" style="display: none;">
 	<img style="width: 350px;"/>
+</div>
+<div id="tree_view" class="tree_view" style="display: none;z-index: 9999;">
+	<a href="javascript:closeTreeView()"><span class="close_btn"></span></a>
+	<ul id="selTree" class="ztree"></ul>
+</div>
+<div id="tree_view_shadow" class="tree_view_shadow" style="display: none;z-index: 9998;">
 </div>
 </html>
