@@ -74,8 +74,8 @@
 		</div>
 		<script type="text/javascript">
 			var tableName = "${table.sqlName}";
-			$(document).ready(function(){
-				layui.use(['form', 'layedit', 'laydate'], function(){
+			$(document).ready(function() {
+				layui.use(['form', 'layedit', 'laydate'], function() {
 					var form = layui.form()
 					,layer = layui.layer
 					,layedit = layui.layedit
@@ -111,13 +111,13 @@
 				reloadData : function () {
 					$.${table.classNameFirstLower}.selectData();
 				},
-				newInfo : function (){
+				newInfo : function () {
 					$('#dataList').datagrid('clearSelections');
 					$.${table.classNameFirstLower}.layerOpen(url);
 				},
-				editInfo : function (){
+				editInfo : function () {
 					var row = $('#dataList').datagrid('getSelected');
-					if (row){
+					if (row) {
 						$.${table.classNameFirstLower}.layerOpen(url);
 					} else {
 						layer.msg("请先选择要修改的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
@@ -136,7 +136,7 @@
 						maxmin: false,
 						content: url,
 						btn: ['保存', '取消'],
-						success: function(layero, index){
+						success: function(layero, index) {
 							iframeBody = layer.getChildFrame('body', index);
 							iframeWin = window[layero.find('iframe')[0]['name']];
 						},
@@ -145,18 +145,18 @@
 								iframeWin.submitInfo();
 							}
 						},
-						cancel: function(index){
+						cancel: function(index) {
 							layer.close(index);
 						}
 					});
 				},
-				destroyInfo : function (){
+				destroyInfo : function () {
 					//var row = $('#dataList').datagrid('getSelected');
 					var rows = $('#dataList').datagrid('getSelections');
-					if (rows && rows.length>0){
+					if (rows && rows.length>0) {
 						layer.confirm('是否确认删除？', {
 							btn: ['确定','取消'] //按钮
-						}, function(){
+						}, function() {
 							var id = "";
 							//id = row.id;
 							for(var i=0; i<rows.length; i++) {
@@ -168,12 +168,12 @@
 								data: {id:id},
 								dataType: 'json',
 								timeout: layerLoadMaxTime,
-								beforeSend: function(XMLHttpRequest){
+								beforeSend: function(XMLHttpRequest) {
 									loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 								},
-								success: function(data, textStatus){
+								success: function(data, textStatus) {
 									layer.close(loadi);
-									if (data.success==TRUE){
+									if (data.success==TRUE) {
 										layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 										$.${table.classNameFirstLower}.reloadData();
 									} else {
@@ -191,7 +191,7 @@
 									}
 								}
 							});
-						}, function(){
+						}, function() {
 						});
 					} else {
 						layer.msg("请先选择要删除的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});

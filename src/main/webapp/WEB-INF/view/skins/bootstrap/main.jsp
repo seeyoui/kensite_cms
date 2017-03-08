@@ -169,7 +169,7 @@
 			</div>
 			<div class="footer">
 				<div class="pull-right">
-					&copy; 2014-2016 <a href="http://www.manstro.com/" target="_blank">manstro</a>
+					&copy; 2014-2016 <a href="http://www.seeyoui.com/" target="_blank">seeyoui</a>
 				</div>
 			</div>
 		</div>

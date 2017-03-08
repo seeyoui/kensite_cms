@@ -222,6 +222,20 @@
     			changeJdbcLength(record.value);
     		}
     	});
+    	$('#isEdit').combobox({
+    		onSelect: function(record){
+    			if(record.value == 'H') {
+	    			$('#isList').combobox('setValue', 'N');
+	    			$('#isQuery').combobox('setValue', 'N');
+	    			$('#isSort').combobox('setValue', 'N');
+    			} else {
+	    			$('#isList').combobox('setValue', 'Y');
+	    			$('#isQuery').combobox('setValue', 'Y');
+	    			$('#isSort').combobox('setValue', 'Y');
+    			}
+    		}
+    	});
+
 		$('#jdbcLength').textbox('readonly', true);
     });
     

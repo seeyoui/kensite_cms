@@ -25,8 +25,8 @@
 		</div>
 		<script type="text/javascript">
 			var loadi,url,index = parent.layer.getFrameIndex(window.name);
-			$(document).ready(function(){
-				layui.use(['form', 'layedit', 'laydate'], function(){
+			$(document).ready(function() {
+				layui.use(['form', 'layedit', 'laydate'], function() {
 				    var form = layui.form()
 				    ,layer = layui.layer
 				    ,layedit = layui.layedit
@@ -42,19 +42,19 @@
 				}
 			});
 			
-			function submitInfo(){
+			function submitInfo() {
 				$.ajax({
 					type: "post",
 					url: url,
 					data: $('#dataForm').serialize(),
 					dataType: 'json',
 					timeout: layerLoadMaxTime,
-					beforeSend: function(XMLHttpRequest){
+					beforeSend: function(XMLHttpRequest) {
 						loadi = parent.layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 					},
-					success: function(data, textStatus){
+					success: function(data, textStatus) {
 						parent.layer.close(loadi);
-						if (data.success==TRUE){
+						if (data.success==TRUE) {
 							parent.$.${table.classNameFirstLower}.reloadData();
 							parent.layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
 							parent.layer.close(index);
@@ -82,10 +82,10 @@
 					data: {},
 					dataType: 'json',
 					timeout: layerLoadMaxTime,
-					beforeSend: function(XMLHttpRequest){
+					beforeSend: function(XMLHttpRequest) {
 						loadi = parent.layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 					},
-					success: function(data, textStatus){
+					success: function(data, textStatus) {
 						parent.layer.close(loadi);
 						renderFormData(data);
 					},

@@ -25,7 +25,7 @@
 		</div>
 		<script type="text/javascript">
 			var loadi,url,index = parent.layer.getFrameIndex(window.name);
-			$(document).ready(function(){
+			$(document).ready(function() {
 				var row = parent.$('#dataList').datagrid('getSelected');
 				url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/save';
 				if(row != null) {
@@ -34,20 +34,20 @@
 				}
 			});
 			
-			function submitInfo(){
+			function submitInfo() {
 				$('#dataForm').form('submit',{
 					url: url,
-					onSubmit: function(param){
+					onSubmit: function(param) {
 						if($(this).form('validate')) {
 							loadi = parent.layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 						}
 						return $(this).form('validate');
 					},
-					success: function(data){
+					success: function(data) {
 						parent.layer.close(loadi);
 						cleanErrMsg();
 						var data = eval('(' + data + ')');
-						if (data.success==TRUE){
+						if (data.success==TRUE) {
 							parent.$.${table.classNameFirstLower}.reloadData();
 							parent.layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
 							parent.layer.close(index);

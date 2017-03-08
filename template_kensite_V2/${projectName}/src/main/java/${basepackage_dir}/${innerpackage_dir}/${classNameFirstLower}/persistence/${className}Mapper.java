@@ -68,6 +68,13 @@ public interface ${className}Mapper {
 	 * @param listId
 	 */
 	public void delete(List<String> listId);
+	
+	/**
+	 * 数据假删除
+	 * @param ${classNameLower}
+	 */
+	public void remove(${className} ${classNameLower});
+	
 	<#if (lucene=="Y") >
 	/**
 	 * 全文检索查询所有数据集合

@@ -105,6 +105,17 @@ public class ${className}Service extends BaseService {
 	public void delete(List<String> listId) throws CRUDException {
 		${classNameLower}Mapper.delete(listId);
 	}
+	
+	/**
+	 * 数据假删除
+	 * @param ${classNameLower}
+	 * @throws CRUDException
+	 */
+	public void remove(${className} ${classNameLower}) throws CRUDException{
+		${classNameLower}.preUpdate();
+		${classNameLower}Mapper.remove(${classNameLower});			
+	}
+	
 	<#if (lucene=="Y") >
 	/**
 	 * 全文检索查询所有数据集合

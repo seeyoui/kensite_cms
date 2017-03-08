@@ -247,6 +247,23 @@ public class ${className}Controller extends BaseController {
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
+	
+	/**
+	 * 假删除
+	 * @param modelMap
+	 * @param ${table.classNameFirstLower}
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/remove", method=RequestMethod.POST)
+	@ResponseBody
+	public String remove(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
+		${table.classNameFirstLower}Service.remove(${table.classNameFirstLower});
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
 
 	/**
 	 * 导出Excel数据
