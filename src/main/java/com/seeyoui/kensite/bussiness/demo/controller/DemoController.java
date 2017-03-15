@@ -4,8 +4,11 @@
  */
 package com.seeyoui.kensite.bussiness.demo.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +36,7 @@ import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.common.util.GeneratorUUID;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.excel.ExportExcel;
+import com.seeyoui.kensite.common.util.excel.ExportSqlExcel;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysUserService;
 /**
@@ -220,6 +224,52 @@ public class DemoController extends BaseController {
 		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
 		List<Demo> demoList = demoService.findAll(demo);
 		new ExportExcel(null, Demo.class).setDataList(demoList).write(response, fileName).dispose();
+		return null;
+	}
+	
+	/**
+	 * 按照sql导出excel
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/sqlexport")
+	public String sqlexport(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		String title = "平台开发JAVA WEB";
+		String sql = "select user_name,name,lead_name,sysdate create_date from sys_user where department_id='da12ca0b592a48fc94a654f1ed948180' order by user_name";
+		List<Map<String, String>> headList = new ArrayList<Map<String,String>>();
+		
+		Map<String, String> userName = new HashMap<String, String>();//帐号
+		userName.put("column", "USER_NAME");//大写列名
+		userName.put("title", "帐号");//中文标题
+		userName.put("align", "1");//水平居中方式（1：靠左；2：居中；3：靠右）
+		headList.add(userName);
+		
+		Map<String, String> name = new HashMap<String, String>();//名称
+		name.put("column", "NAME");//大写列名
+		name.put("title", "名称**备注");//中文标题
+		name.put("align", "2");//水平居中方式（1：靠左；2：居中；3：靠右）
+		headList.add(name);
+		
+		Map<String, String> leadName = new HashMap<String, String>();//主管
+		leadName.put("column", "LEAD_NAME");//大写列名
+		leadName.put("title", "主管");//中文标题
+		leadName.put("align", "3");//水平居中方式（1：靠左；2：居中；3：靠右）
+		headList.add(leadName);
+		
+		Map<String, String> createDate = new HashMap<String, String>();//日期
+		createDate.put("column", "CREATE_DATE");//大写列名
+		createDate.put("title", "日期**yyyy-MM-dd");//中文标题
+		createDate.put("align", "2");//水平居中方式（1：靠左；2：居中；3：靠右）
+		headList.add(createDate);
+		
+		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+		new ExportSqlExcel(title, sql, headList).write(response, fileName).dispose();
 		return null;
 	}
 	
