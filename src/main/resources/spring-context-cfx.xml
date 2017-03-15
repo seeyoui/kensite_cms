@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://cxf.apache.org/bindings/soap 
+		http://cxf.apache.org/schemas/configuration/soap.xsd 
+		http://cxf.apache.org/jaxws 
+		http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- 属性文件读入 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:kensite.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!--CXF配置
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+
+	<!-- 配置方式1 注意：serviceClass为接口类并非实现类
+	<jaxws:server serviceClass="com.seeyoui.kensite.webservice.cfx.WebserviceTest"
+		address="/webSerciceTest_service_jaxws"></jaxws:server> -->
+
+	<!--服务端发布的webservice
+		在spring中使用jaxws:endpoint元素来暴露Web Service
+		id：指在spring配置的bean的ID 
+		Implementor:指明具体的实现类
+		Address:指明这个web service的相对地址  -->
+	<!-- 配置方式2 注意：implementor为接口的具体实现类 -->
+	<jaxws:endpoint implementor="com.seeyoui.kensite.webservice.cfx.WebServiceTestImpl"
+		address="/webSerciceTest_endpoint"></jaxws:endpoint>
+</beans>

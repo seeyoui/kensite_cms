@@ -41,6 +41,7 @@
 		<lucene.version>5.3.1</lucene.version><!-- 4.0.0 -->
 		<drools.version>6.3.0.Final</drools.version>
 		<quartz.version>2.2.1</quartz.version>
+		<cxf.version>3.1.10</cxf.version>
 		
 		<!-- jdbc driver setting -->
 		<mysql.driver.version>5.1.30</mysql.driver.version>
@@ -67,12 +68,18 @@
 	<!-- 设定主仓库，按设定顺序进行查找。 -->
 	<repositories>
 	
+		<repository>
+			<id>kensite-repos</id>
+			<name>kensite ali Repository</name>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</repository>
+	
 		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
 		<repository>
 			<id>nexus-repos</id>
 			<name>Team Nexus Repository</name>
 			<url>http://192.168.11.36:8888/nexus/content/groups/public</url>
-		</repository> -->
+		</repository>
         
 		<repository>
 			<id>central-repos</id>
@@ -115,25 +122,33 @@
 			<name>Activiti Repository 2</name>
 			<url>https://app.camunda.com/nexus/content/groups/public</url>
 		</repository>
-		
+		 -->
+		 
 	</repositories>
 	
 	<!-- 设定插件仓库 -->
-	<pluginRepositories> 
+	<pluginRepositories>
+		
+		<pluginRepository>
+            <id>aliyun-repos</id>
+            <name>aliyun Releases</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </pluginRepository>
 	
 		<!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
 		<pluginRepository>
 			<id>nexus-repos</id>
 			<name>Team Nexus Repository</name>
 			<url>http://192.168.11.36:8888/nexus/content/groups/public</url>
-		</pluginRepository> -->
+		</pluginRepository>
 		
 		<pluginRepository>
             <id>oschina-repos</id>
             <name>Oschina Releases</name>
             <url>http://maven.oschina.net/content/groups/public</url>
         </pluginRepository>
-		
+		 -->
+		 
 	</pluginRepositories> 
 	
 	<!-- 依赖项定义 -->
@@ -267,6 +282,19 @@
 			<scope>runtime</scope>
 		</dependency>
 		<!-- PERSISTENCE end -->
+		
+		<!-- Apache CFX begin -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<!-- Apache CFX end -->
 		
 		<!-- WEB begin -->
 		<dependency>
