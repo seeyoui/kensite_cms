@@ -557,6 +557,30 @@
                                                             </div>
                                                             </div>
                                                         </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].boundaryGap=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">类目轴是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].boundaryGap=true;" data-cate="xAxis[0].boundaryGap" data-type="xAxis[0].boundaryGap.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].boundaryGap=false;" data-cate="xAxis[0].boundaryGap" data-type="xAxis[0].boundaryGap.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1216,6 +1240,7 @@
 &lt;ks:chart uuid="${chartEngine.id }"/>
 <script type="text/javascript">
 $(document).ready(function() {
+	//chart_${chartEngine.id }对象，可对图表做相应配置
 	var xwhere = "";
 	var ywhere = "";//" and name like 'zhangsan'"
 	var zwhere = "";
@@ -1257,7 +1282,7 @@ $(document).ready(function() {
 
 <div id="chartOpt" style="display: none;">
 <c:if test="${empty chartEngine.setOption}">
-chartOpt = {title: {text: '主标题文本',subtext: '副标题文本'},tooltip: {trigger: 'axis',show: true,formatter: ''},legend: {type: 'category',data: []},toolbox: {show: true,feature: {dataZoom: {show: true},mark: {show: false},dataView: {show: true,readOnly: true},magicType: {show: false,type: ['line', 'bar']},restore: {show: true},saveAsImage: {show: true}}},calculable: true,xAxis: [{postion: 'bottom',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true},type: 'category',data: []}],yAxis: [{type: 'value',postion: 'left',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true}}],series: []};
+chartOpt = {title: {text: '主标题文本',subtext: '副标题文本'},tooltip: {trigger: 'axis',show: true,formatter: ''},legend: {type: 'category',data: ['蒸发量','降水量']},toolbox: {show: true,feature: {dataZoom: {show: true},mark: {show: false},dataView: {show: true,readOnly: true},magicType: {show: false,type: ['line', 'bar']},restore: {show: true},saveAsImage: {show: true}}},calculable: true,xAxis: [{postion: 'bottom',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true},type: 'category',data: []}],yAxis: [{type: 'value',postion: 'left',axisLine: {show: true},axisLabel: {show: true},axisTick: {show: true},splitLine: {show: true},splitArea: {show: true}}],series: []};
 </c:if>
 
 <c:if test="${!empty chartEngine.setOption}">

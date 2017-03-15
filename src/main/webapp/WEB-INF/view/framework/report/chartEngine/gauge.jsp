@@ -865,6 +865,7 @@
 &lt;ks:chart uuid="${chartEngine.id }"/>
 <script type="text/javascript">
 $(document).ready(function() {
+	//chart_${chartEngine.id }对象，可对图表做相应配置
 	var xwhere = "";
 	var ywhere = "";//" and name like 'zhangsan'"
 	var zwhere = "";

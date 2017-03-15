@@ -128,6 +128,8 @@ define(function(require, exports, module) {
         	if(chartOpt != null) {
         		this.renderSeries();
         		this.renderTitle();
+        		this.renderX();
+        		this.renderY();
         		this.renderLegend();
         		this.renderTooltip();
         		this.renderToolbox();
@@ -191,6 +193,60 @@ define(function(require, exports, module) {
 			if(title.y != null) {
 				$('div[data-cate="title.y"]').removeClass('cpt-chkbtn-i-active');
 				$('div[data-type="title.y.'+title.y+'"]').addClass('cpt-chkbtn-i-active');
+			}
+        },
+        renderX: function() {
+        	var xAxis = chartOpt.xAxis[0];
+			if(xAxis.position != null) {
+				$('div[data-cate="xAxis[0].position"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="xAxis[0].position.'+xAxis.position+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(xAxis.axisLine.show != null) {
+				$('div[data-cate="xAxis[0].axisLine.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="xAxis[0].axisLine.show.'+xAxis.axisLine.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(xAxis.axisLabel.show != null) {
+				$('div[data-cate="xAxis[0].axisLabel.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="xAxis[0].axisLabel.show.'+xAxis.axisLabel.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(xAxis.axisTick.show != null) {
+				$('div[data-cate="xAxis[0].axisTick.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="xAxis[0].axisTick.show.'+xAxis.axisTick.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(xAxis.splitLine.show != null) {
+				$('div[data-cate="xAxis[0].splitLine.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="xAxis[0].splitLine.show.'+xAxis.splitLine.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(xAxis.splitArea.show != null) {
+				$('div[data-cate="xAxis[0].splitArea.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="xAxis[0].splitArea.show.'+xAxis.splitArea.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+        },
+        renderY: function() {
+        	var yAxis = chartOpt.yAxis[0];
+			if(yAxis.position != null) {
+				$('div[data-cate="yAxis[0].position"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="yAxis[0].position.'+yAxis.position+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(yAxis.axisLine.show != null) {
+				$('div[data-cate="yAxis[0].axisLine.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="yAxis[0].axisLine.show.'+yAxis.axisLine.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(yAxis.axisLabel.show != null) {
+				$('div[data-cate="yAxis[0].axisLabel.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="yAxis[0].axisLabel.show.'+yAxis.axisLabel.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(yAxis.axisTick.show != null) {
+				$('div[data-cate="yAxis[0].axisTick.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="yAxis[0].axisTick.show.'+yAxis.axisTick.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(yAxis.splitLine.show != null) {
+				$('div[data-cate="yAxis[0].splitLine.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="yAxis[0].splitLine.show.'+yAxis.splitLine.show+'"]').addClass('cpt-chkbtn-i-active');
+			}
+			if(yAxis.splitArea.show != null) {
+				$('div[data-cate="yAxis[0].splitArea.show"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="yAxis[0].splitArea.show.'+yAxis.splitArea.show+'"]').addClass('cpt-chkbtn-i-active');
 			}
         },
         renderLegend: function() {

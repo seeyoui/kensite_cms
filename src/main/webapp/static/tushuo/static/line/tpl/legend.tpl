@@ -170,6 +170,56 @@
                         </div>
                     </div>
                 </div>
+                <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                    <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="var ind=module.exports.getSeriesIndex('$$key$$');chartOpt.series[ind].smooth=true;">
+                        <em>
+                        <i class="dtmic-used"></i>
+                        </em>
+                        <span class="dtm-edtitm-title-con">显示平滑</span>
+                    </div>
+                    <div class="dtm-edtitm-con">
+                        <div class="cpt cpt-sltggt dtm-edtitm-ggt">
+                        <div class="cpt cpt-chkbtn">
+                            <div class="cpt-chkbtn-i" data-opt="var ind=module.exports.getSeriesIndex('$$key$$');chartOpt.series[ind].smooth=true;" data-value-index="0" data-cate="smooth" data-type="smooth.true">
+                            <i>
+                                <em></em>
+                            </i>
+                            <span>是</span></div>
+                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-opt="var ind=module.exports.getSeriesIndex('$$key$$');chartOpt.series[ind].smooth=false;" data-value-index="1" data-cate="smooth" data-type="smooth.false">
+                            <i>
+                                <em></em>
+                            </i>
+                            <span>否</span></div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div> -->
+                </div>
+                <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                    <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="var ind=module.exports.getSeriesIndex('$$key$$');if(chartOpt.series[ind].areaStyle==null){chartOpt.series[ind].areaStyle={normal: {}};}chartOpt.series[ind].areaStyle=null;">
+                        <em>
+                        <i class="dtmic-used"></i>
+                        </em>
+                        <span class="dtm-edtitm-title-con">显示填充</span>
+                    </div>
+                    <div class="dtm-edtitm-con">
+                        <div class="cpt cpt-sltggt dtm-edtitm-ggt">
+                        <div class="cpt cpt-chkbtn">
+                            <div class="cpt-chkbtn-i" data-opt="var ind=module.exports.getSeriesIndex('$$key$$');if(chartOpt.series[ind].areaStyle==null){chartOpt.series[ind].areaStyle={normal: {}};}chartOpt.series[ind].areaStyle.normal={};" data-value-index="0" data-cate="areaStyle" data-type="areaStyle.true">
+                            <i>
+                                <em></em>
+                            </i>
+                            <span>是</span></div>
+                            <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-opt="var ind=module.exports.getSeriesIndex('$$key$$');if(chartOpt.series[ind].areaStyle==null){chartOpt.series[ind].areaStyle=null;}chartOpt.series[ind].areaStyle=null;" data-value-index="1" data-cate="areaStyle" data-type="areaStyle.false">
+                            <i>
+                                <em></em>
+                            </i>
+                            <span>否</span></div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- <div class="dtm-edtitm-mask dtm-edtitm-tooltip"></div> -->
+                </div>
             </div>
         </div>
     </div>
