@@ -9,14 +9,10 @@
 	<%@ include file="/WEB-INF/view/taglib/exceldesign.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/jqueryui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/colorPicker.jsp" %>
-	<%@ include file="/WEB-INF/view/taglib/cssloader.jsp" %>
 	<style type="text/css">
 	.splitTHead {
 	    border-right: 1px solid #c1d3dc;
 	    padding: 5px;
-	}
-	.splitTHead span {
-	    font-size: 14px;
 	}
 	</style>
 </head>
@@ -97,6 +93,9 @@
 				<td class="splitTHead">
 					<a id="showgridline" title="显示网格线" href="javascript:showGridLine($('#showgridline').linkbutton('options').selected)" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-showgridline',iconAlign:'top',toggle:true,selected:true"></a>
 				</td>
+				<td class="splitTHead">
+					<a id="exportExcel" title="导出excel" href="javascript:exportExcel()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-showgridline',iconAlign:'top',toggle:true,selected:true"></a>
+				</td>
 			</tr>
 			<tr>
 				<td class="splitTHead">
@@ -119,8 +118,8 @@
 					<a id="rightAlign" title="右对齐" href="javascript:alignBx({'a_halign':'2'}, $('#rightAlign').linkbutton('options').selected)" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-rightAlign',iconAlign:'top',toggle:true,selected:false,group:'valign'"></a>
 				</td>
 				<td class="splitTHead">
-					<a id="mergeCell" title="合并单元格" href="javascript:mergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-MergenBx',iconAlign:'top',selected:false"></a>
-					<a id="unMergeCell" title="拆分单元格" href="javascript:unMergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-splitBx',iconAlign:'top',selected:false"></a>
+					<a id="mergeCell" title="合并单元格" href="javascript:mergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-MergenBx',iconAlign:'top',toggle:true,selected:false"></a>
+					<a id="unMergeCell" title="拆分单元格" href="javascript:unMergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-splitBx',iconAlign:'top',toggle:true,selected:false"></a>
 				</td>
 				<td class="splitTHead">
 					<input id="borderstyle" class="easyui-combobox" style="width:60px;height:26px" data-options="
@@ -158,53 +157,25 @@
 				</td>
 				<td class="splitTHead">
 					<a id="cleanAll" title="清除所有" href="javascript:cleanCell(3)" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-cleanAll',iconAlign:'top'"></a>
-					<a id="setting" title="单元格设置" href="javascript:getSheetData()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-settingBx',iconAlign:'top'"></a>
+					<a id="setting" title="单元格设置" href="javascript:setting()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-settingBx',iconAlign:'top'"></a>
 				</td>
 				<td class="splitTHead">
 					<a id="showtitle" title="显示行列头" href="javascript:showExcelHead($('#showtitle').linkbutton('options').selected);" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-showtitle',iconAlign:'top',toggle:true,selected:true"></a>
 				</td>
-			</tr>
-		</tbody>
-		</table>
-	</div>
-	<div style="position:absolute; top:0px; height:72px; left:730px; right:0px; background-color: rgb(245,245,245)">
-		<table cellpadding="0" cellspacing="0" style="table-layout:fixed;word-break:break-all;width:100%">
-		<tbody>
-			<tr>
-				<td class="splitTHead" style="width:120px;">
-					<span>单元格</span>
-					<input id="cellCode" name="cellCode" class="easyui-textbox" data-options="readonly:true,value:'A:1'" style="width:72px;height:26px;"/>
-				</td>
-				<td class="splitTHead" rowspan="2" style="width:100%;">
-					<a id="name" title="name" href="javascript:dataColClick('name')" class="easyui-linkbutton" data-options="toggle:true,selected:true,group:'dataCol'">name</a>
-					<a id="age" title="age" href="javascript:dataColClick('age')" class="easyui-linkbutton" data-options="toggle:true,group:'dataCol'">age</a>
-				</td>
-			</tr>
-			<tr>
 				<td class="splitTHead">
-					<span>扩展</span>
-					<a id="cellNone" title="不扩展" href="javascript:changeDirection('none')" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-none',iconAlign:'top',toggle:true,selected:true,group:'direction'"></a>
-					<a id="cellBottom" title="向下扩展" href="javascript:changeDirection('bottom')" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-bottom',iconAlign:'top',toggle:true,group:'direction'"></a>
-					<a id="cellRight" title="向右扩展" href="javascript:changeDirection('right')" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-right',iconAlign:'top',toggle:true,group:'direction'"></a>
 				</td>
-				<!-- <td class="splitTHead">
-					<span>数据</span>
-					<select id="cellCol" name="cellCol" class="easyui-combobox" data-options="panelHeight:70,editable:false,readonly:true" style="width:100px;height:26px;">
-						<option value=""></option>
-						<option value="name">name</option>
-						<option value="age">age</option>
-					</select>
-				</td> -->
 			</tr>
 		</tbody>
 		</table>
 	</div>
-	<div id="formulaBar" contenteditable="true" spellcheck="false" style="position:absolute; top:72px; height:20px; left:0px; right:0px; border: 1px solid #808080;"></div>
-	<div id="KSreport" style="position:absolute; top:92px; bottom:0px; left:0px; right:0px; border: 1px solid gray"></div>
-
+	<div id="KSreport" style="position:absolute; top:72px; bottom:0px; left:0px; right:0px; border: 1px solid gray"></div>
+	<div style="display:none;">
+		<form id="dataForm" method="post" action="${ctx}/ks/report/export">
+			<input type="hidden" id="spreadjs" name="spreadjs" value=""/>
+		</form>
+	</div>
 </body>
 <script type="text/javascript">
-	var cellArray = new Array();
 	$(document).ready( $(function () {
 		// SpreadJS 初始化
 		$("#KSreport").wijspread({
@@ -218,115 +189,31 @@
 			var spread = $("#KSreport").wijspread("spread");
 			spread.bind("SpreadsheetObjectLoaded", function () {
 				bindSpreadEvent();
-				bindReportEvent()
 				initSpread();
 			});
 		} else {
 			bindSpreadEvent();
-			bindReportEvent()
 			initSpread();
 		}
-		$('#cellType').combobox({
-			onChange: function(newValue, oldValue){
-				if(newValue == 'db') {
-				} else {
-				}
-			}
-		});
-		/*
-		$('#cellCol').combobox({
-			onChange: function(newValue, oldValue){
-				var sheet = getCurrentSheet();
-				var cellid = getSelectedCellid();
-				var row = cellid.row;
-				var col = cellid.col;
-				newValue = '@{'+newValue+'}';
-				sheet.setValue(row,col,newValue, $.wijmo.wijspread.SheetArea.viewport);
-			}
-		});
-		*/
-		hideLoader();
 	})
 	);
 	
 	function initSpread() {
 		var spread = $("#KSreport").wijspread("spread");
-        var fbx = new $.wijmo.wijspread.FormulaTextBox(document.getElementById('formulaBar'));
-        fbx.spread(spread);
 		var sheet = spread.getActiveSheet();
 		sheet.setName("KS Report");
 		sheet.setRowCount(30, $.wijmo.wijspread.SheetArea.viewport);
 		sheet.setColumnCount(20, $.wijmo.wijspread.SheetArea.viewport);
-		initCellArray(30, 20);
 	}
 	
 	function getSheetData() {
-		//setting();
-		console.info($("#KSreport").data('spread'));
 		console.info($("#KSreport").data('spread').toJSON( { includeBindingSource: true } ));
 	}
 	
-	function bindReportEvent() {
-		var sheet = getCurrentSheet();
-		//单元格点击事件
-		sheet.bind($.wijmo.wijspread.Events.CellClick, function (event, data) {
-			var cellid = getSelectedCellid();
-			var row = cellid.row;
-			var col = cellid.col;
-			var colCode = '';
-			if(parseInt(col/26) == 0) {
-				colCode = String.fromCharCode(("A".charCodeAt())+parseInt(col%26));
-			} else {
-				colCode = String.fromCharCode(("A".charCodeAt()-1)+parseInt(col/26))+String.fromCharCode(("A".charCodeAt())+parseInt(col%26));
-			}
-			$('#cellCode').textbox('setValue', colCode+':'+row);
-			var cellValue = sheet.getValue(row,col);
-			if(cellValue && cellValue.indexOf('@{')!=-1) {
-				cellValue = cellValue.replace('@{', '').replace('}', '');
-				$('#'+cellValue).linkbutton('select');
-			}
-			var direction = cellArray[row][col].direction;
-			if(direction == 'none') {
-				$('#cellNone').linkbutton('select');
-			} else if(direction == 'bottom') {
-				$('#cellBottom').linkbutton('select');
-			} else if(direction == 'right') {
-				$('#cellRight').linkbutton('select');
-			}
-		});
-	}
-	
-	function dataColClick(colName) {
-		var sheet = getCurrentSheet();
-		var cellid = getSelectedCellid();
-		var row = cellid.row;
-		var col = cellid.col;
-		colName = '@{'+colName+'}';
-		sheet.setValue(row,col,colName, $.wijmo.wijspread.SheetArea.viewport);
-	}
-	
-	function changeDirection(direction) {
-		var sheet = getCurrentSheet();
-		var cellid = getSelectedCellid();
-		var row = cellid.row;
-		var col = cellid.col;
-		if(!direction) {
-			direction = 'none';
-		}
-		cellArray[row][col] = {
-			direction : direction
-		};
-	}
-	
-	function initCellArray(rows, cols) {
-		for(var i=0; i<rows; i++) {
-			cellArray[i] = new Array();
-			for(var j=0; j<cols; j++) {
-				cellArray[i][j] = {
-					direction : 'none'
-				};
-			}
-		}
+	function exportExcel() {
+		var jsonObj = $("#KSreport").data('spread').toJSON( { includeBindingSource: true } );
+		$('#spreadjs').val(JSON.stringify(jsonObj));
+		$('#dataForm').submit();
 	}
 </script>
 </html>

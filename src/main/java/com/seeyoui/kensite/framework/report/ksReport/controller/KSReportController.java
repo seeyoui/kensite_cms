@@ -12,16 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.HtmlUtils;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.DBUtils;
+import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.common.util.excel.ExportSpreadjs;
 import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportBorder;
 import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportCell;
 import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportStyle;
@@ -53,6 +58,15 @@ public class KSReportController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String page) throws Exception {
 		return new ModelAndView("framework/report/ksReport/"+page, modelMap);
+	}
+	
+	@RequestMapping(value = "/export")
+	public String export(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String spreadjs) throws Exception {
+		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+		new ExportSpreadjs(spreadjs).write(response, fileName).dispose();
+		return null;
 	}
 	
 	/**
