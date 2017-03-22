@@ -176,7 +176,7 @@ public class SendMailUtil {
 
 	private static String getFilePath() {
 		String path = getAppPath(SendMailUtil.class);
-		path = path + File.separator + "mailtemplate" + File.separator;
+		path = path + File.separator + "template/mailtemplate" + File.separator;
 		path = path.replace("\\", "/");
 		return path;
 	}
@@ -249,7 +249,7 @@ public class SendMailUtil {
 
 	// private static File getFile(String path){
 	// File file =
-	// SendMail.class.getClassLoader().getResource("mailtemplate/test.ftl").getFile();
+	// SendMail.class.getClassLoader().getResource("template/mailtemplate/test.ftl").getFile();
 	// return file;
 	// }
 	//
@@ -273,10 +273,10 @@ public class SendMailUtil {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("subject", "测试标题");
 		map.put("content", "测试 内容");
-		String templatePath = "mailtemplate/test.ftl";
+		String templatePath = "template/mailtemplate/test.ftl";
 		sendFtlMail("test@163.com", "sendemail test!", templatePath, map);
 
-		// System.out.println(getFileName("mailtemplate/test.ftl"));
+		// System.out.println(getFileName("template/mailtemplate/test.ftl"));
 	}
 
 }

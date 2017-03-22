@@ -204,6 +204,7 @@
 		sheet.setName("KS Report");
 		sheet.setRowCount(30, $.wijmo.wijspread.SheetArea.viewport);
 		sheet.setColumnCount(20, $.wijmo.wijspread.SheetArea.viewport);
+		sheet.rowFilter(new $.wijmo.wijspread.HideRowFilter(new $.wijmo.wijspread.Range(-1, -1, -1, -1)));
 	}
 	
 	function getSheetData() {

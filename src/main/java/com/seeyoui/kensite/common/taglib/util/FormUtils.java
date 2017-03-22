@@ -845,10 +845,17 @@ public class FormUtils {
 			}
 			result.append("</script>");
 			result.append("<script type=\"text/javascript\">");
-			result.append("var "+column+" = UE.getEditor('"+column+"', {autoHeight: false});");
+//			result.append("var "+column+" = UE.getEditor('"+column+"', {initialFrameHeight: 100,scaleEnabled: true});");
+//			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+//				result.append(""+column+".ready(function() {"+column+".setHeight("+tableColumn.getSettings()+");});");
+//			}
+			result.append("var "+column+" = UE.getEditor('"+column+"', {");
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append(""+column+".ready(function() {"+column+".setHeight("+tableColumn.getSettings()+");});");
+				result.append("initialFrameHeight: "+tableColumn.getSettings());
+			} else {
+				result.append("initialFrameHeight: 100");
 			}
+			result.append(",scaleEnabled: true});");
 			result.append("</script>");
 		}
 		if(TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
