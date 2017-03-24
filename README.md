@@ -11,6 +11,9 @@ KenSite 提供了常用工具进行封装，包括日志工具、缓存工具、
 前端显示基于easyui，一键生成就可以直接使用包括新增修改删除等常规操作。
 如果你使用了KenSite基础框架，就可以很高效的快速开发出，优秀的信息管理系统。
 
+[详细介绍请点这里](http://www.seeyoui.com/2017/02/04/kensite-environment.html)
+[5分钟开发一个模块请点这里](http://www.seeyoui.com/2017/02/05/kensite-develop-base.html)
+
 ## Kensite_cms 内容发布系统简介
 
 Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站点，自带两个演示实例，一个是社区示例，一个是论坛示例。后台拥有站点、导航、文章、评论、收藏、留言板、标签云等模块，并支持标签模版，实现前端与后台业务分离，前端所有数据的展现均可通过Kensite cms 自定义标签实现，新增修改删除等操作通过ajax调用接口实现。
