@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.eshop.specSet.persistence.SpecSetMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.NAME AS "name",
+		T.CATE_ID AS "cateId",
+		T.OPTION_VALUE AS "optionValue",
+		T.SEQ AS "seq",
+		T.SHOP_ID AS "shopId"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%'||#{createUser}||'%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%'||#{updateUser}||'%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%'||#{remarks}||'%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%'||#{delFlag}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND T.NAME LIKE '%'||#{name}||'%'
+			</if>
+			<if test="cateId != null and cateId != ''">
+				AND T.CATE_ID LIKE '%'||#{cateId}||'%'
+			</if>
+			<if test="optionValue != null and optionValue != ''">
+				AND T.OPTION_VALUE LIKE '%'||#{optionValue}||'%'
+			</if>
+			<if test="seq != null and seq != ''">
+				AND T.SEQ = #{seq}
+			</if>
+			<if test="shopId != null and shopId != ''">
+				AND T.SHOP_ID LIKE '%'||#{shopId}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			${sort} ${order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.eshop.specSet.domain.SpecSet">
+		SELECT
+		<include refid="tableColumns" />
+		FROM ES_SPEC_SET T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findList" resultType="com.seeyoui.kensite.framework.eshop.specSet.domain.SpecSet">
+		select * from(select T.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM ES_SPEC_SET T
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) T WHERE rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.eshop.specSet.domain.SpecSet">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM ES_SPEC_SET T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM ES_SPEC_SET T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM ES_SPEC_SET T
+		<include refid="whereStr"/>
+		AND T.ID != #{id}
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.eshop.specSet.domain.SpecSet">
+		INSERT INTO ES_SPEC_SET (
+			
+			
+			
+			
+			
+			REMARKS,
+			
+			NAME,
+			CATE_ID,
+			OPTION_VALUE,
+			SEQ,
+			SHOP_ID,
+			CREATE_USER,
+			CREATE_DATE,
+			ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{remarks,jdbcType=VARCHAR},
+			
+			#{name,jdbcType=VARCHAR},
+			#{cateId,jdbcType=VARCHAR},
+			#{optionValue,jdbcType=VARCHAR},
+			#{seq,jdbcType=NUMERIC},
+			#{shopId,jdbcType=VARCHAR},
+			#{createUser.userName},
+			sysdate,
+			#{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="update" parameterType="com.seeyoui.kensite.framework.eshop.specSet.domain.SpecSet">
+		UPDATE ES_SPEC_SET
+		<set>
+			
+			
+			
+			
+			
+			<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+			
+			<if test="name !=null and name !=''">
+			NAME=#{name},
+			</if>
+			<if test="cateId !=null and cateId !=''">
+			CATE_ID=#{cateId},
+			</if>
+			<if test="optionValue !=null and optionValue !=''">
+			OPTION_VALUE=#{optionValue},
+			</if>
+			<if test="seq !=null and seq !=''">
+			SEQ=#{seq},
+			</if>
+			<if test="shopId !=null and shopId !=''">
+			SHOP_ID=#{shopId},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = sysdate,
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="delete">
+		DELETE FROM ES_SPEC_SET WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+	
+	<!-- 数据假删除 -->
+	<update id="remove" parameterType="com.seeyoui.kensite.framework.eshop.specSet.domain.SpecSet">
+		UPDATE ES_SPEC_SET
+		<set>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = sysdate,
+			DEL_FLAG = '1'
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+</mapper>

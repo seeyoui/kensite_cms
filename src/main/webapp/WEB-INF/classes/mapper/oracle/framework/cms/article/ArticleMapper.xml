@@ -287,6 +287,20 @@
 	</update>
 	
 	<!-- 数据修改 -->
+	<update id="updateContent" parameterType="com.seeyoui.kensite.framework.cms.article.domain.Article">
+		UPDATE CMS_ARTICLE
+		<set>
+			CONTENT = #{content},
+			CUSTOM_CONTENT_VIEW = #{customContentView},
+			VIEW_CONFIG = #{viewConfig},
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = sysdate,
+			ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据修改 -->
 	<update id="hits">
 		UPDATE CMS_ARTICLE
 		<set>

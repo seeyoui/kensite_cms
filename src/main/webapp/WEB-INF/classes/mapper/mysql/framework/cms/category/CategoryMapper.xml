@@ -15,6 +15,7 @@
 		T.NAME AS "name",
 		T.PARENT_ID AS "parentId",
 		T.HREF AS "href",
+		T.EXTENDS_INFO AS "extendsInfo",
 		T.TARGET AS "target",
 		T.DESCRIPTION AS "description",
 		T.KEYWORDS AS "keywords",
@@ -66,6 +67,9 @@
 			</if>
 			<if test="href != null and href != ''">
 				AND T.HREF LIKE '%${href}%'
+			</if>
+			<if test="extendsInfo != null and extendsInfo != ''">
+				AND T.EXTENDS_INFO LIKE '%${extendsInfo}%'
 			</if>
 			<if test="target != null and target != ''">
 				AND T.TARGET LIKE '%${target}%'
@@ -169,6 +173,7 @@
 			NAME,
 			PARENT_ID,
 			HREF,
+			EXTENDS_INFO,
 			TARGET,
 			DESCRIPTION,
 			KEYWORDS,
@@ -197,6 +202,7 @@
 			#{name,jdbcType=VARCHAR},
 			#{parentId,jdbcType=VARCHAR},
 			#{href,jdbcType=VARCHAR},
+			#{extendsInfo,jdbcType=VARCHAR},
 			#{target,jdbcType=VARCHAR},
 			#{description,jdbcType=VARCHAR},
 			#{keywords,jdbcType=VARCHAR},
@@ -243,6 +249,9 @@
 			</if>
 			<if test="href !=null and href !=''">
 			HREF=#{href},
+			</if>
+			<if test="extendsInfo !=null and extendsInfo !=''">
+			EXTENDS_INFO=#{extendsInfo},
 			</if>
 			<if test="target !=null and target !=''">
 			TARGET=#{target},
