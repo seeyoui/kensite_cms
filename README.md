@@ -65,6 +65,9 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 * 数据库连接池：Alibaba Druid 1.0
 * 缓存框架：Ehcache 2.6、Redis
 * 日志管理：SLF4J 1.7、Log4j
+* 全文检索：lucene
+* 验证码：patchca
+* WebService：CXF webservice
 * 工具类：Apache Commons、Jackson 2.2、Xstream 1.4、Dozer 5.3、POI 3.9
 
 2、前端
@@ -137,3 +140,5 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/4.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/5.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/6.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/7.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/8.png)
