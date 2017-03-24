@@ -37,6 +37,7 @@ import com.seeyoui.kensite.common.util.GeneratorUUID;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.excel.ExportExcel;
 import com.seeyoui.kensite.common.util.excel.ExportSqlExcel;
+import com.seeyoui.kensite.common.util.word.ExportWord;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysUserService;
 /**
@@ -270,6 +271,42 @@ public class DemoController extends BaseController {
 		
 		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
 		new ExportSqlExcel(title, sql, headList).write(response, fileName).dispose();
+		return null;
+	}
+	
+	/**
+	 * 按照sql导出excel
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/wordexport")
+	public String wordexport(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("tableName", "SYS_USER");
+		dataMap.put("tableComments", "系统用户表");
+		List<Map<String, Object>> columnList = new ArrayList<Map<String, Object>>();
+		Map<String, Object> col1 = new HashMap<String, Object>();
+		col1.put("columnName", "ID");
+		col1.put("dataType", "char(32)");
+		col1.put("nullable", "N");
+		col1.put("tableComments", "主键");
+		columnList.add(col1);
+		Map<String, Object> col2 = new HashMap<String, Object>();
+		col2.put("columnName", "USER_NAME");
+		col2.put("dataType", "varchar(100)");
+		col2.put("nullable", "Y");
+		col2.put("tableComments", "帐号");
+		columnList.add(col2);
+		dataMap.put("columnList", columnList);
+		
+		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".doc";
+		new ExportWord(dataMap, "table.ftl").write(response, fileName);
 		return null;
 	}
 	

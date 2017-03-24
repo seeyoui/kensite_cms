@@ -32,6 +32,7 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="exportWord()">导出</a>
 		        <br/>
 				名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				描述<input id="sel_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
@@ -671,6 +672,14 @@
     	    '@month当前月</br>'+
     	    '@day当前天</br>'
     	});
+    }
+    
+    function exportWord() {
+    	var row = $('#dataList').datagrid('getSelected');
+    	if(row == null) {
+    		return;
+    	}
+    	window.open("${ctx}/sys/mod/db/export?id="+row.id);
     }
     </script>
   </body>

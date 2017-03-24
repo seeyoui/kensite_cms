@@ -40,8 +40,10 @@
 					onSubmit: function(param) {
 						if($(this).form('validate')) {
 							loadi = parent.layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+							return true;
+						} else {
+							return false;
 						}
-						return $(this).form('validate');
 					},
 					success: function(data) {
 						parent.layer.close(loadi);
