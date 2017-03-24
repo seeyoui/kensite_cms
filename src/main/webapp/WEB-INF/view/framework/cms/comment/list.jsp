@@ -104,9 +104,8 @@
 		    		}
 		    	});
 				$('#dataList').datagrid({
-		    		url:'${ctx}/cms/comment/list/data?basicId=${basicId}',
+		    		url:'${ctx}/cms/comment/list/data',
 		    		queryParams: {
-		    			auditState: $('#sel_auditState').combobox('getValue'),
 		    			siteId: $('#sel_siteId').val(),
 		    			categoryId: $('#sel_categoryId').val()
 		    		}
