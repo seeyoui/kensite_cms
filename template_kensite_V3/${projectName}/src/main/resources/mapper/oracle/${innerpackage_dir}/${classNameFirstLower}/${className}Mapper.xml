@@ -6,12 +6,12 @@
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
 <#if (colname=="id") ><#else>
-<#if dbtype=="number" >
+<#if (dbtype=="number"||dbtype=="decimal") >
 AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
-<#elseif (dbtype=="varchar2"||dbtype=="char")>
+<#elseif (dbtype=="varchar2"||dbtype=="char"||dbtype=="nvarchar2"||dbtype=="varchar")>
 AND T.${column.sqlName} LIKE '%'||${"#{"+column.columnNameLower+"}"}||'%'
-<#elseif (dbtype=="clob")>
-<#elseif (dbtype=="date")>
+<#elseif (dbtype=="clob"||dbtype=="text")>
+<#elseif (dbtype=="date"||dbtype=="datetime")>
 AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
 </#if>
 </#if>
@@ -35,15 +35,15 @@ ${column.sqlName},
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
 <#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser"||colname=="delflag") ><#else>
-<#if (dbtype=="number"&&column.decimalDigits==0) >
+<#if ((dbtype=="number"||dbtype=="decimal")&&column.decimalDigits==0) >
 ${"#{"+column.columnNameLower+",jdbcType=NUMERIC}"},
-<#elseif (dbtype=="number"&&column.decimalDigits!=0)>
+<#elseif ((dbtype=="number"||dbtype=="decimal")&&column.decimalDigits!=0)>
 ${"#{"+column.columnNameLower+",jdbcType=NUMERIC}"},
-<#elseif (dbtype=="varchar2"||dbtype=="char")>
+<#elseif (dbtype=="varchar2"||dbtype=="char"||dbtype=="nvarchar2"||dbtype=="varchar")>
 ${"#{"+column.columnNameLower+",jdbcType=VARCHAR}"},
-<#elseif (dbtype=="clob")>
+<#elseif (dbtype=="clob"||dbtype=="text")>
 ${"#{"+column.columnNameLower+",jdbcType=CLOB}"},
-<#elseif (dbtype=="date")>
+<#elseif (dbtype=="date"||dbtype=="datetime")>
 ${"#{"+column.columnNameLower+",jdbcType=TIMESTAMP}"},
 </#if>
 </#if>

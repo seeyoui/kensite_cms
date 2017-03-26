@@ -6,17 +6,17 @@
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if dbtype=="number" >
+<#if (dbtype=="number"||dbtype=="decimal") >
 	<#if column.decimalDigits==0>
 	String
 	<#else>
 	String
 	</#if>
-<#elseif (dbtype=="varchar2"||dbtype=="char"||dbtype=="nvarchar2")>
+<#elseif (dbtype=="varchar2"||dbtype=="char"||dbtype=="nvarchar2"||dbtype=="varchar")>
 String
-<#elseif (dbtype=="clob")>
+<#elseif (dbtype=="clob"||dbtype=="text")>
 String
-<#elseif (dbtype=="date")>
+<#elseif (dbtype=="date"||dbtype=="datetime")>
 java.util.Date
 </#if>
 </#assign>
@@ -38,7 +38,7 @@ public class ${className} extends DataEntity<${className}> {
 
 	<#list table.columns as column>
 	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>
-	<#if (column.sqlTypeName?lower_case=="date")>
+	<#if (column.sqlTypeName?lower_case=="date"||column.sqlTypeName?lower_case=="datetime")>
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	</#if>
 	@ExcelField(title="${column.columnAlias}", type=1, align=2, sort=${column_index}, mod="${table.sqlName}|${column.sqlName}")
