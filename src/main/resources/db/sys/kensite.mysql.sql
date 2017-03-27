@@ -2224,13 +2224,12 @@ select basic_id,type,count(1) cou from cms_collections group by basic_id,type;
 create or replace view v_cms_article_comment as
 select basic_id,avg(score) score,count(1) cou from cms_comment where audit_state='N' group by basic_id;
 
-create or replace view v_cms_article_pre_next as
-select id,lead(id) over (order by seq,create_date) as nextId,lag(id) over (order by seq,create_date) as perId from cms_article;
+create or replace view v_cms_article_tags_sub as
+select a.id,CONCAT(t.id,':',t.name) name from cms_article a left join cms_tagcloud t on a.tag_id like CONCAT('%',t.id,'%') where a.tag_id is not null;
 
 create or replace view v_cms_article_tags as
-select id,wm_concat(name) tag from (
-select a.id,CONCAT(t.id,':',t.name) name from cms_article a left join cms_tagcloud t on a.tag_id like CONCAT('%',t.id,'%') where a.tag_id is not null
-) group by id;
+select id,group_concat(name) tag from v_cms_article_tags_sub group by id;
 
 create or replace view v_cms_tag_article as
-select a.id,t.id tag_id,t.name name from cms_article a left join cms_tagcloud t on a.tag_id like '%'||t.id||'%' where a.tag_id is not null;
+select a.id,t.id tag_id,t.name name from cms_article a left join cms_tagcloud t on a.tag_id like CONCAT('%',t.id,'%') where a.tag_id is not null;
+
