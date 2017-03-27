@@ -29,6 +29,7 @@ import com.seeyoui.kensite.common.base.domain.Page;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.DBUtils;
 import com.seeyoui.kensite.common.util.DateUtils;
+import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.common.util.excel.ExportExcel;
@@ -93,21 +94,43 @@ public class ChartEngineController extends BaseController {
 		ChartEngine chartEngine = chartEngineService.findOne(id);
 		modelMap.put("chartEngine", chartEngine);
 		if("pie".equals(page) || "line".equals(page) || "bar".equals(page) || "gauge".equals(page)) {
-			String sql = "select view_name from user_views where view_name like 'REPORT%'";
+			String jdbcType = Global.getConfig("jdbc.type");
+			String sql = "";
+			if("oracle".equals(jdbcType)) {
+				sql = "select upper(view_name) view_name from user_views where view_name like 'REPORT%'";
+			}
+			if("mysql".equals(jdbcType)) {
+				sql = "select upper(table_name) view_name from information_schema.tables where table_type='view' and table_name like 'REPORT%'";
+			}
 			List<Map<Object, Object>> viewList = DBUtils.executeQuery(sql, true);
 			modelMap.put("viewList", viewList);
 			if(StringUtils.isNotBlank(chartEngine.getZsource())) {
-				sql = "select column_name from user_tab_columns where table_name = '"+chartEngine.getZsource()+"'";
+				if("oracle".equals(jdbcType)) {
+					sql = "select upper(column_name) column_name from user_tab_columns where table_name = '"+chartEngine.getZsource()+"'";
+				}
+				if("mysql".equals(jdbcType)) {
+					sql = "select upper(column_name) column_name from information_schema.columns where table_name = '"+chartEngine.getZsource()+"'";
+				}
 				List<Map<Object, Object>> zList = DBUtils.executeQuery(sql, true);
 				modelMap.put("zList", zList);
 			}
 			if(StringUtils.isNotBlank(chartEngine.getXsource())) {
-				sql = "select column_name from user_tab_columns where table_name = '"+chartEngine.getXsource()+"'";
+				if("oracle".equals(jdbcType)) {
+					sql = "select upper(column_name) column_name from user_tab_columns where table_name = '"+chartEngine.getXsource()+"'";
+				}
+				if("mysql".equals(jdbcType)) {
+					sql = "select upper(column_name) column_name from information_schema.columns where table_name = '"+chartEngine.getXsource()+"'";
+				}
 				List<Map<Object, Object>> xList = DBUtils.executeQuery(sql, true);
 				modelMap.put("xList", xList);
 			}
 			if(StringUtils.isNotBlank(chartEngine.getYsource())) {
-				sql = "select column_name from user_tab_columns where table_name = '"+chartEngine.getYsource()+"'";
+				if("oracle".equals(jdbcType)) {
+					sql = "select upper(column_name) column_name from user_tab_columns where table_name = '"+chartEngine.getYsource()+"'";
+				}
+				if("mysql".equals(jdbcType)) {
+					sql = "select upper(column_name) column_name from information_schema.columns where table_name = '"+chartEngine.getYsource()+"'";
+				}
 				List<Map<Object, Object>> yList = DBUtils.executeQuery(sql, true);
 				modelMap.put("yList", yList);
 			}
@@ -286,7 +309,14 @@ public class ChartEngineController extends BaseController {
 	public Object viewCol(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String viewName) throws Exception {
-		String sql = "select column_name from user_tab_columns where table_name = '"+viewName+"'";
+		String jdbcType = Global.getConfig("jdbc.type");
+		String sql = "";
+		if("oracle".equals(jdbcType)) {
+			sql = "select upper(column_name) column_name from user_tab_columns where table_name = '"+viewName+"'";
+		}
+		if("mysql".equals(jdbcType)) {
+			sql = "select upper(column_name) column_name from information_schema.columns where table_name = '"+viewName+"'";
+		}
 		List<Map<Object, Object>> colList = DBUtils.executeQuery(sql, true);
 		return colList;
 	}

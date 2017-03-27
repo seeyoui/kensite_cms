@@ -10,7 +10,7 @@
 		T.UPDATE_USER AS "updateUser",
 		T.REMARKS AS "remarks",
 		T.DEL_FLAG AS "delFlag",
-		T.DESCRIBE AS "describe",
+		T.DESCRIBES AS "describe",
 		T.TYPE AS "type",
 		T.SET_OPTION AS "setOption",
 		T.Z_SOURCE AS "zsource",
@@ -53,7 +53,7 @@
 				AND T.DEL_FLAG LIKE '%${delFlag}%'
 			</if>
 			<if test="describe != null and describe != ''">
-				AND T.DESCRIBE LIKE '%${describe}%'
+				AND T.DESCRIBES LIKE '%${describe}%'
 			</if>
 			<if test="type != null and type != ''">
 				AND T.TYPE LIKE '%${type}%'
@@ -164,7 +164,7 @@
 			
 			REMARKS,
 			DEL_FLAG,
-			DESCRIBE,
+			DESCRIBES,
 			TYPE,
 			SET_OPTION,
 			Z_SOURCE,
@@ -230,7 +230,7 @@
 			DEL_FLAG=#{delFlag},
 			</if>
 			<if test="describe !=null and describe !=''">
-			DESCRIBE=#{describe},
+			DESCRIBES=#{describe},
 			</if>
 			<if test="type !=null and type !=''">
 			TYPE=#{type},
