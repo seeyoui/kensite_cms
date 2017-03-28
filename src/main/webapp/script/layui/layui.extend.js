@@ -2,20 +2,10 @@ function renderErrMsg(errMsg) {
    	for(var item in errMsg){
    		if($("#msg-"+item) != null) {
 			//$("#msg-"+item).html(errMsg[item]);
-   			var tagName = document.getElementById(item).tagName;
-   			console.info(tagName=='SELECT');
-   			if(tagName=='SELECT') {
-   				console.info($('#'+item).next());
-   				layer.tips(errMsg[item], $('#'+item).next(), {
-   					tips: [3, '#ea5532'],
-   					tipsMore: true
-   				});
-   			} else {
-   				layer.tips(errMsg[item], '#'+item, {
-   					tips: [3, '#ea5532'],
-   					tipsMore: true
-   				});
-   			}
+			layer.tips(errMsg[item], '#'+item, {
+				tips: [3, '#ea5532'],
+				tipsMore: true
+			});
 		}
 	}
 }
@@ -44,8 +34,6 @@ function renderFormData(obj) {
 						if($(this).val()==arr[i]){
 							$(this).attr('checked',true);
 							//$(this).checked = true;
-						}else{
-							$(this).attr('checked',false);
 						}
 					}
 				}else{
@@ -65,11 +53,14 @@ function renderFormData(obj) {
         var str=this.serialize();
         $(array).each(function(){
             if(serializeObj[this.name]){
+            	/*
                 if($.isArray(serializeObj[this.name])){
                     serializeObj[this.name].push(this.value);
                 }else{
                     serializeObj[this.name]=[serializeObj[this.name],this.value];
                 }
+                */
+            	serializeObj[this.name]=serializeObj[this.name]+','+this.value;
             }else{
                 serializeObj[this.name]=this.value; 
             }

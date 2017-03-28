@@ -62,9 +62,15 @@
 						</div>
 					</div>
 					<div class="toolbar-right">
+					<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:insert"> --%>
 						<button class="layui-btn layui-btn-normal" onclick="$.${table.classNameFirstLower}.newInfo()"><i class="layui-icon">&#xe61f;</i></button>
+					<%-- </shiro:hasPermission> --%>
+					<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:update"> --%>
 						<button class="layui-btn layui-btn-normal" onclick="$.${table.classNameFirstLower}.editInfo()"><i class="layui-icon">&#xe642;</i></button>
+					<%-- </shiro:hasPermission> --%>
+					<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:delete"> --%>
 						<button class="layui-btn layui-btn-normal" onclick="$.${table.classNameFirstLower}.destroyInfo()"><i class="layui-icon">&#xe640;</i></button>
+					<%-- </shiro:hasPermission> --%>
 					</div>
 				</div>
 			</div>

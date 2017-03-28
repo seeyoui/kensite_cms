@@ -11,7 +11,7 @@ TREE_ID VARCHAR(100) COMMENT '下拉树',
 EXPRESSION VARCHAR(100) COMMENT '表达式',
 USER_NAME VARCHAR(100) COMMENT '用户名',
 USER_SEX VARCHAR(100) COMMENT '用户性别',
-USER_AGE INTEGER(10) COMMENT '用户年龄',
+USER_AGE DECIMAL(10) COMMENT '用户年龄',
 USER_BIRTHDAY DATETIME COMMENT '出生日期',
 USER_ICON VARCHAR(1000) COMMENT '用户头像',
 USER_SUMMARY TEXT COMMENT '用户简介',
@@ -31,7 +31,7 @@ UPDATE_USER VARCHAR(50) COMMENT '修改用户',
 DEL_FLAG CHAR(1) COMMENT '删除标记',
 NAME VARCHAR(100) not null  COMMENT '名称',
 PARENT_ID CHAR(32) not null  COMMENT '模块',
-SEQUENCE INTEGER(10) COMMENT '排序'
+SEQUENCE DECIMAL(10) COMMENT '排序'
 ) COMMENT = '接口目录';
 ALTER TABLE BO_INTERFACE_CATALOG ADD CONSTRAINT BO_INTERFACE_CATALOG_ID PRIMARY KEY (ID);
 
@@ -50,7 +50,7 @@ PARAMETER VARCHAR(4000) COMMENT '参数',
 RETURN_VALUE VARCHAR(4000) COMMENT '返回值',
 EXCLUDES VARCHAR(4000) COMMENT '不返回字段',
 CATALOG_ID CHAR(32) COMMENT '接口目录',
-SEQUENCE INTEGER(10) COMMENT '排序',
+SEQUENCE DECIMAL(10) COMMENT '排序',
 TYPE VARCHAR(100) COMMENT '类型'
 ) COMMENT = '接口描述';
 ALTER TABLE BO_INTERFACE_DESC ADD CONSTRAINT BO_INTERFACE_DESC_ID PRIMARY KEY (ID);
@@ -70,8 +70,8 @@ TITLE VARCHAR(100) not null  COMMENT '标题',
 SUB_TITLE VARCHAR(100) COMMENT '副标题',
 KEYWORDS VARCHAR(100) COMMENT '关键字',
 DESCRIPTION VARCHAR(500) COMMENT '描述',
-SEQ INTEGER(10) COMMENT '权重',
-HITS INTEGER(10) COMMENT '点击数',
+SEQ DECIMAL(10) COMMENT '权重',
+HITS DECIMAL(10) COMMENT '点击数',
 CONTENT TEXT COMMENT '文章内容',
 COPYFROM VARCHAR(500) COMMENT '文章来源',
 CUSTOM_CONTENT_VIEW VARCHAR(500) COMMENT '自定义内容视图',
@@ -98,7 +98,7 @@ HREF VARCHAR(500) COMMENT '链接',
 TARGET VARCHAR(100) COMMENT '目标',
 DESCRIPTION VARCHAR(500) COMMENT '描述',
 KEYWORDS VARCHAR(500) COMMENT '关键字',
-SEQ INTEGER(10) not null  COMMENT '权重',
+SEQ DECIMAL(10) not null  COMMENT '权重',
 IN_MENU CHAR(1) COMMENT '是否导航显示',
 IN_LIST CHAR(1) COMMENT '是否分类列表',
 IS_COMMENT CHAR(1) COMMENT '是否允许评论',
@@ -139,7 +139,7 @@ DEL_FLAG CHAR(1) COMMENT '删除标记',
 SITE_ID CHAR(32) not null  COMMENT '所属站点',
 CATEGORY_ID CHAR(32) COMMENT '所属栏目',
 BASIC_ID CHAR(32) not null  COMMENT '所属主体',
-SCORE INTEGER(10) COMMENT '等级',
+SCORE DECIMAL(10) COMMENT '等级',
 CONTENT VARCHAR(500) COMMENT '评价内容',
 USER_ID CHAR(32) COMMENT '用户ID',
 USER_NAME VARCHAR(100) COMMENT '评价人',
@@ -232,6 +232,34 @@ END_AT DATETIME COMMENT '任务结束时间'
 ) COMMENT = '定时任务计划配置';
 ALTER TABLE JOB_QUARTZ_CONF ADD CONSTRAINT JOB_QUARTZ_CONF_ID PRIMARY KEY (ID);
 
+DROP TABLE IF EXISTS KS_CHART_ENGINE;
+CREATE TABLE KS_CHART_ENGINE (
+ID CHAR(32) not null  COMMENT '主键',
+CREATE_DATE DATETIME COMMENT '创建日期',
+CREATE_USER VARCHAR(50) COMMENT '创建用户',
+UPDATE_DATE DATETIME COMMENT '修改日期',
+UPDATE_USER VARCHAR(50) COMMENT '修改用户',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记',
+DESCRIBES VARCHAR(100) not null  COMMENT '描述',
+TYPE VARCHAR(100) not null  COMMENT '类型',
+SET_OPTION TEXT COMMENT '配置项',
+Z_SOURCE VARCHAR(100) COMMENT '系列源',
+Z_KEY VARCHAR(100) COMMENT '系列键',
+Z_VALUE VARCHAR(100) COMMENT '系列值',
+X_SOURCE VARCHAR(100) COMMENT 'X轴源',
+X_KEY VARCHAR(100) COMMENT 'X轴键',
+X_Z_KEY VARCHAR(100) COMMENT 'X轴系列键',
+X_VALUE VARCHAR(100) COMMENT 'X轴值',
+Y_SOURCE VARCHAR(100) COMMENT 'Y轴源',
+Y_Z_KEY VARCHAR(100) COMMENT 'Y轴系列键',
+Y_X_KEY VARCHAR(100) COMMENT 'Y轴X轴键',
+Y_VALUE VARCHAR(100) COMMENT 'Y轴值',
+FUNC TEXT COMMENT '扩展函数',
+OPERATION VARCHAR(100) COMMENT '运算'
+) COMMENT = '统计图表';
+ALTER TABLE KS_CHART_ENGINE ADD CONSTRAINT KS_CHART_ENGINE_ID PRIMARY KEY (ID);
+
 DROP TABLE IF EXISTS MOD_TABLE;
 CREATE TABLE MOD_TABLE (
 ID CHAR(32) not null  COMMENT '主键',
@@ -272,8 +300,8 @@ DEL_FLAG CHAR(1) COMMENT '删除标记（0：正常；1：删除）',
 HTML_INNER VARCHAR(4000) COMMENT '代码扩展',
 IS_LIST CHAR(1) COMMENT '是否列表字段',
 IS_QUERY CHAR(1) COMMENT '是否查询字段',
-LIST_WIDTH DOUBLE(10,2) COMMENT '列表显示宽度',
-QUERY_WIDTH DOUBLE(10,2) COMMENT '查询框宽度',
+LIST_WIDTH DECIMAL(10,2) COMMENT '列表显示宽度',
+QUERY_WIDTH DECIMAL(10,2) COMMENT '查询框宽度',
 IS_SORT CHAR(1) COMMENT '是否列表排序'
 ) COMMENT = '业务表字段';
 ALTER TABLE MOD_TABLE_COLUMN ADD CONSTRAINT MOD_TABLE_COLUMN_ID PRIMARY KEY (ID);
@@ -282,7 +310,7 @@ DROP TABLE IF EXISTS SYS_DEPARTMENT;
 CREATE TABLE SYS_DEPARTMENT (
 ID CHAR(32) not null  COMMENT '主键',
 PARENT_ID CHAR(32) COMMENT '外键',
-SEQUENCE INTEGER(10) COMMENT '排序',
+SEQUENCE DECIMAL(10) COMMENT '排序',
 NAME VARCHAR(50) COMMENT '部门名称',
 CODE VARCHAR(100) COMMENT '部门编号'
 ) COMMENT = '部门';
@@ -295,7 +323,7 @@ VALUE VARCHAR(50) COMMENT '数据值',
 LABEL VARCHAR(50) COMMENT '标签名',
 CATEGORY VARCHAR(50) COMMENT '分类',
 DESCRIPTION VARCHAR(50) COMMENT '描述',
-SEQUENCE INTEGER(10) COMMENT '排序',
+SEQUENCE DECIMAL(10) COMMENT '排序',
 PARENT_ID CHAR(32) COMMENT '父主键'
 ) COMMENT = '系统字典';
 ALTER TABLE SYS_DICT ADD CONSTRAINT SYS_DICT_ID PRIMARY KEY (ID);
@@ -313,7 +341,7 @@ REQUEST_URI VARCHAR(255) COMMENT '操作的URI',
 METHOD VARCHAR(5) COMMENT '操作的方式',
 PARAMS TEXT COMMENT '操作提交的数据',
 EXCEPTION TEXT COMMENT '异常信息',
-SPEND_TIME INTEGER(10) COMMENT '耗费时间'
+SPEND_TIME DECIMAL(10) COMMENT '耗费时间'
 ) COMMENT = '日志表';
 ALTER TABLE SYS_LOG ADD CONSTRAINT SYS_C0034914 PRIMARY KEY (ID);
 
@@ -323,7 +351,7 @@ ID CHAR(32) not null  COMMENT '主键',
 PARENT_ID CHAR(32) COMMENT '外键',
 NAME VARCHAR(50) COMMENT '名称',
 URL VARCHAR(500) COMMENT 'URL',
-SEQUENCE INTEGER(10) COMMENT '排序',
+SEQUENCE DECIMAL(10) COMMENT '排序',
 ICON VARCHAR(50) COMMENT '图标',
 TARGET VARCHAR(50) COMMENT '打开方式'
 ) COMMENT = '导航菜单';
@@ -347,7 +375,7 @@ ALTER TABLE SYS_MODULE_PERMISSION ADD CONSTRAINT SYS_MODULE_PERMISSION_ID PRIMAR
 DROP TABLE IF EXISTS SYS_PERMISSION;
 CREATE TABLE SYS_PERMISSION (
 ID VARCHAR(50) not null  COMMENT '主键',
-SEQUENCE INTEGER(10) COMMENT '排序',
+SEQUENCE DECIMAL(10) COMMENT '排序',
 NAME VARCHAR(50) COMMENT '权限名'
 ) COMMENT = '权限';
 ALTER TABLE SYS_PERMISSION ADD CONSTRAINT SYS_PERMISSION_ID PRIMARY KEY (ID);
@@ -434,10 +462,10 @@ INSERT INTO CMS_ARTICLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMA
 VALUES ('094c596c78ab452ba9ea567b57661844',str_to_date('2016-07-21 19:41:17', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-21 20:21:26', '%Y-%m-%d %H:%i:%s'),null,null,null,'c8ed8ae6aedf403e989c9c895b1a282c','ad361ae87c034a20ae0985b761919289','祥和的小镇','向往中的居住地','祥和,静谧','感觉像电影中的上海滩，街上人来人往，匆匆忙忙，但城市却依然安静矗立。',5,2,null,null,null,null,'upload/cms/article/1a4faca2c9f94adfb3e180b1a66ca827.jpg',null);
 
 INSERT INTO CMS_ARTICLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,SITE_ID,CATEGORY_ID,TITLE,SUB_TITLE,KEYWORDS,DESCRIPTION,SEQ,HITS,CONTENT,COPYFROM,CUSTOM_CONTENT_VIEW,VIEW_CONFIG,POSTER,TAG_ID) 
-VALUES ('1ea68b089f8341c7bea94be5895afddc',str_to_date('2016-07-21 19:44:52', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-27 14:41:16', '%Y-%m-%d %H:%i:%s'),'system',null,null,'c8ed8ae6aedf403e989c9c895b1a282c','ad361ae87c034a20ae0985b761919289','旷野农场','旷野中一座小农场','农场','旷野中，地平线上一座孤独的城堡，这里是那么让人神往。',0,4,'',null,null,null,'upload/cms/article/5ba8c6475e3841d2bc7a2dd023f189f8.jpg','3915f15857a745ccb3fd1bc89ff9b6ab,101a966c760d4293a6fed341f981d5ee');
+VALUES ('1ea68b089f8341c7bea94be5895afddc',str_to_date('2016-07-21 19:44:52', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-27 14:41:16', '%Y-%m-%d %H:%i:%s'),'system',null,null,'c8ed8ae6aedf403e989c9c895b1a282c','ad361ae87c034a20ae0985b761919289','旷野农场','旷野中一座小农场','农场','旷野中，地平线上一座孤独的城堡，这里是那么让人神往。',0,4,null,null,null,null,'upload/cms/article/5ba8c6475e3841d2bc7a2dd023f189f8.jpg','3915f15857a745ccb3fd1bc89ff9b6ab,101a966c760d4293a6fed341f981d5ee');
 
 INSERT INTO CMS_ARTICLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,SITE_ID,CATEGORY_ID,TITLE,SUB_TITLE,KEYWORDS,DESCRIPTION,SEQ,HITS,CONTENT,COPYFROM,CUSTOM_CONTENT_VIEW,VIEW_CONFIG,POSTER,TAG_ID) 
-VALUES ('80440e73dc1d4aa6acf24a1d7289c59d',str_to_date('2016-07-21 19:42:17', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 14:58:49', '%Y-%m-%d %H:%i:%s'),'system',null,null,'c8ed8ae6aedf403e989c9c895b1a282c','3d37818ae48748e19c9f4b3af3d0834d','被真格与罗辑思维看中','如何应对自媒体的焦虑和挣扎','真格','被真格与罗辑思维同样看中的胡辛束，如何应对自媒体的焦虑和挣扎',0,10,'',null,null,null,'upload/cms/article/86260056f19549b0bfd68120b246c461.jpg',null);
+VALUES ('80440e73dc1d4aa6acf24a1d7289c59d',str_to_date('2016-07-21 19:42:17', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 14:58:49', '%Y-%m-%d %H:%i:%s'),'system',null,null,'c8ed8ae6aedf403e989c9c895b1a282c','3d37818ae48748e19c9f4b3af3d0834d','被真格与罗辑思维看中','如何应对自媒体的焦虑和挣扎','真格','被真格与罗辑思维同样看中的胡辛束，如何应对自媒体的焦虑和挣扎',0,10,null,null,null,null,'upload/cms/article/86260056f19549b0bfd68120b246c461.jpg',null);
 
 INSERT INTO CMS_ARTICLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,SITE_ID,CATEGORY_ID,TITLE,SUB_TITLE,KEYWORDS,DESCRIPTION,SEQ,HITS,CONTENT,COPYFROM,CUSTOM_CONTENT_VIEW,VIEW_CONFIG,POSTER,TAG_ID) 
 VALUES ('094c596c78ab452ba9ea567b57661811',str_to_date('2016-07-21 19:41:17', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-21 20:21:26', '%Y-%m-%d %H:%i:%s'),null,null,'0','c8ed8ae6aedf403e989c9c895b1a282c','afcecbdc21c144e399d393672321adaa','祥和的小镇','向往中的居住地','祥和,静谧','感觉像电影中的上海滩，街上人来人往，匆匆忙忙，但城市却依然安静矗立。',5,null,null,null,null,null,'upload/cms/article/1a4faca2c9f94adfb3e180b1a66ca827.jpg',null);
@@ -608,10 +636,10 @@ INSERT INTO CMS_GUESTBOOK (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,RE
 VALUES ('64c7a9cec4144477bcc0daa982041f38',str_to_date('2016-07-30 14:04:43', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-30 15:38:00', '%Y-%m-%d %H:%i:%s'),'system',null,null,null,'捧哏比逗哏有意思','于谦','yuqian@163.com',null,null,null,'3a657ea8ddc745a698d51aeea2183f4d',str_to_date('2016-07-30 15:38:16', '%Y-%m-%d %H:%i:%s'),'是的呢，郭德纲可不这么认为','3efc39d838e645dfa62d3ada11370979');
 
 INSERT INTO CMS_SITE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW) 
-VALUES ('3efc39d838e645dfa62d3ada11370979',str_to_date('2016-07-19 13:16:00', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-28 13:31:53', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KEN博客','KEN博客','upload/none.jpg','kensite',null,'seeyoui,博客,kensite,学习','default','&copy; 2014-2016 kensite',null);
+VALUES ('3efc39d838e645dfa62d3ada11370979',str_to_date('2016-07-19 13:16:00', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-28 13:31:53', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KEN博客','KEN博客','upload/none.jpg','kensite',null,'seeyoui,博客,kensite,学习','default','2014-2016 kensite',null);
 
 INSERT INTO CMS_SITE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW) 
-VALUES ('c8ed8ae6aedf403e989c9c895b1a282c',str_to_date('2016-07-15 16:13:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:51:46', '%Y-%m-%d %H:%i:%s'),null,null,null,'嗨社区','嗨社区','upload/cms/logo/975df8ba43b841f3b312af1287b44ddb.png','community','这是一个很有棒的社区','智慧、社区、seeyoui','default','&copy; 2014-2016 kensite',null);
+VALUES ('c8ed8ae6aedf403e989c9c895b1a282c',str_to_date('2016-07-15 16:13:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:51:46', '%Y-%m-%d %H:%i:%s'),null,null,null,'嗨社区','嗨社区','upload/cms/logo/975df8ba43b841f3b312af1287b44ddb.png','community','这是一个很有棒的社区','智慧、社区、seeyoui','default','2014-2016 kensite',null);
 
 INSERT INTO CMS_TAGCLOUD (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,SITE_ID,NAME) 
 VALUES ('d765fb9e851e41fcbef5d4042834b2e2',str_to_date('2016-07-28 16:09:21', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-28 16:09:21', '%Y-%m-%d %H:%i:%s'),null,null,null,'3efc39d838e645dfa62d3ada11370979','技术文章');
@@ -636,6 +664,18 @@ VALUES ('e4039577137f40c98d6490b40e4ee452',str_to_date('2016-04-08 15:21:18', '%
 
 INSERT INTO JOB_QUARTZ_CONF (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,JOB_NAME,ALIAS_NAME,JOB_GROUP,JOB_TRIGGER,CRON_EXPRESSION,IS_SYNC,DESCRIPTION,STATUS,JOB_CLASS,START_AT,END_AT) 
 VALUES ('eb4be21a761a4d239e5f9536f78af6a8',str_to_date('2016-04-11 09:21:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-11 09:21:28', '%Y-%m-%d %H:%i:%s'),'system',null,null,'demoJob2','示例任务2','com_job','triggerdemoJob2','0/5 * * * * ?',null,null,'PAUSED','com.seeyoui.kensite.framework.quartz.job.SimpleJob1',null,null);
+
+INSERT INTO KS_CHART_ENGINE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,DESCRIBES,TYPE,SET_OPTION,Z_SOURCE,Z_KEY,Z_VALUE,X_SOURCE,X_KEY,X_Z_KEY,X_VALUE,Y_SOURCE,Y_Z_KEY,Y_X_KEY,Y_VALUE,FUNC,OPERATION) 
+VALUES ('48bfc30cc071476695d375506a63ea4a',str_to_date('2017-02-06 10:01:32', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-02-07 09:54:15', '%Y-%m-%d %H:%i:%s'),'system',null,null,'柱状图示例','bar','{"title":{"text":"主标题文本","subtext":"副标题文本"},"tooltip":{"trigger":"axis","show":true,"formatter":""},"legend":{"type":"category","data":[]},"toolbox":{"show":true,"feature":{"dataZoom": {show: true},"mark":{"show":true},"dataView":{"show":true,"readOnly":true},"magicType":{"show":false,"type":["line","bar"]},"restore":{"show":true},"saveAsImage":{"show":true}}},"calculable":true,"xAxis":[{"postion":"bottom","axisLine":{"show":true},"axisLabel":{"show":true},"axisTick":{"show":true},"splitLine":{"show":true},"splitArea":{"show":true},"type":"category","data":[]}],"yAxis":[{"type":"value","postion":"left","axisLine":{"show":true},"axisLabel":{"show":true},"axisTick":{"show":true},"splitLine":{"show":true},"splitArea":{"show":true}}],"series":[{"data":[],"name":"","zkey":"c8ed8ae6aedf403e989c9c895b1a282c","type":"bar","stack":null},{"data":[],"name":"","zkey":"3efc39d838e645dfa62d3ada11370979","type":"bar","stack":null}]}','REPORT_STATIC_WEATHER','ID','NAME','REPORT_STATIC_MONTH','ID',null,'NAME','REPORT_DEMO_MONTH_WEATHER','WEATHER_ID','MONTH_ID','VALUE',null,'sum');
+
+INSERT INTO KS_CHART_ENGINE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,DESCRIBES,TYPE,SET_OPTION,Z_SOURCE,Z_KEY,Z_VALUE,X_SOURCE,X_KEY,X_Z_KEY,X_VALUE,Y_SOURCE,Y_Z_KEY,Y_X_KEY,Y_VALUE,FUNC,OPERATION) 
+VALUES ('33b7ca20cbea488e83e92e2ea0c44283',str_to_date('2017-02-07 10:08:35', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-03-13 14:42:52', '%Y-%m-%d %H:%i:%s'),'system',null,null,'折线图示例','line','{"title":{"text":"主标题文本","subtext":"副标题文本"},"tooltip":{"trigger":"axis","show":true,"formatter":""},"legend":{"type":"category","data":[]},"toolbox":{"show":true,"feature":{"dataZoom":{"show":true},"mark":{"show":true},"dataView":{"show":true,"readOnly":true},"magicType":{"show":false,"type":["line","bar"]},"restore":{"show":true},"saveAsImage":{"show":true}}},"calculable":true,"xAxis":[{"postion":"bottom","axisLine":{"show":true},"axisLabel":{"show":true},"axisTick":{"show":true},"splitLine":{"show":true},"splitArea":{"show":false},"type":"category","data":[],"boundaryGap":false}],"yAxis":[{"type":"value","postion":"left","axisLine":{"show":true},"axisLabel":{"show":true},"axisTick":{"show":true},"splitLine":{"show":true},"splitArea":{"show":true}}],"series":[{"data":[],"name":"","zkey":"zf","type":"line","stack":null,"smooth":true,"areaStyle":null},{"data":[],"name":"","zkey":"js","type":"line","stack":null,"areaStyle":{"normal":{}}}]}','REPORT_STATIC_WEATHER','ID','NAME','REPORT_STATIC_MONTH','ID',null,'NAME','REPORT_DEMO_MONTH_WEATHER','WEATHER_ID','MONTH_ID','VALUE',null,'sum');
+
+INSERT INTO KS_CHART_ENGINE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,DESCRIBES,TYPE,SET_OPTION,Z_SOURCE,Z_KEY,Z_VALUE,X_SOURCE,X_KEY,X_Z_KEY,X_VALUE,Y_SOURCE,Y_Z_KEY,Y_X_KEY,Y_VALUE,FUNC,OPERATION) 
+VALUES ('178dba98ab5a42db920a3ff05342e33f',str_to_date('2017-02-07 12:59:57', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-02-08 08:51:44', '%Y-%m-%d %H:%i:%s'),'system',null,null,'仪表盘示例','gauge','{"title":{"show":true,"text":"主标题文本","subtext":"副标题文本"},"legend":{"data":[]},"tooltip":{"show":true,"formatter":"{a} <br>{b} : {c} ({d}%)"},"toolbox":{"show":true,"feature":{"mark":{"show":true},"dataZoom":{"show":false},"dataView":{"show":true},"magicType":{"show":true},"restore":{"show":true},"saveAsImage":{"show":true}}},"series":[{"data":[],"name":"","zkey":"c8ed8ae6aedf403e989c9c895b1a282c","type":"gauge","center":["25%","50%"],"radius":"75%","startAngle":225,"endAngle":-45,"clockwise":true,"min":0,"max":100,"splitNumber":10,"axisLine":{"show":true,"lineStyle":{"color":[[0.2,"#91c7ae"],[0.9,"#63869e"],[1,"#c23531"]],"width":30}},"splitLine":{"show":true},"axisTick":{"show":true},"pointer":{"show":true,"length":"80%","width":8},"title":{"show":false,"offsetCenter":["0%","-40%"]}},{"data":[],"name":"","zkey":"3efc39d838e645dfa62d3ada11370979","type":"gauge","center":["75%","50%"],"radius":"50%","startAngle":225,"endAngle":0,"clockwise":true,"min":0,"max":10,"splitNumber":5,"axisLine":{"show":true,"lineStyle":{"color":[[0.2,"#91c7ae"],[0.8,"#63869e"],[1,"#c23531"]],"width":20}},"splitLine":{"show":true},"axisTick":{"show":true},"pointer":{"show":true,"length":"50%","width":4},"title":{"show":true,"offsetCenter":["0%","-30%"]}}]}','REPORT_CMS_SITE','ID','NAME','REPORT_CMS_CATEGORY','ID',null,'NAME','REPORT_CMS_ARTICLE','SITE_ID','CATEGORY_ID','HITS',null,'count');
+
+INSERT INTO KS_CHART_ENGINE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,REMARKS,DEL_FLAG,DESCRIBES,TYPE,SET_OPTION,Z_SOURCE,Z_KEY,Z_VALUE,X_SOURCE,X_KEY,X_Z_KEY,X_VALUE,Y_SOURCE,Y_Z_KEY,Y_X_KEY,Y_VALUE,FUNC,OPERATION) 
+VALUES ('b0022b5378434294a2584181deaf460b',str_to_date('2017-01-20 10:15:12', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-02-07 13:00:08', '%Y-%m-%d %H:%i:%s'),'system',null,null,'饼图示例','pie','{"title":{"show":true,"text":"站点类别文章总数","subtext":"","x":"center","y":"top"},"legend":{"data":[],"show":true,"y":"bottom","x":"center","orient":"horizontal"},"tooltip":{"show":true,"formatter":"{a} <br>{b} : {c} ({d}%)"},"toolbox":{"show":true,"feature":{"mark":{"show":true},"dataZoom":{"show":false},"dataView":{"show":false},"magicType":{"show":true},"restore":{"show":true},"saveAsImage":{"show":true}}},"series":[{"data":[],"name":"","type":"pie","zkey":"c8ed8ae6aedf403e989c9c895b1a282c","center":["80%","50%"],"radius":["0%","45%"],"startAngle":120,"selectedMode":"single","roseType":false},{"data":[],"name":"","type":"pie","zkey":"3efc39d838e645dfa62d3ada11370979","center":["30%","50%"],"radius":["0%","45%"],"startAngle":150,"selectedMode":"multiple","roseType":false}]}','REPORT_CMS_SITE','ID','NAME','REPORT_CMS_CATEGORY','ID','SITE_ID','NAME','REPORT_CMS_ARTICLE','SITE_ID','CATEGORY_ID','HITS',null,'sum');
 
 INSERT INTO MOD_TABLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,NAME,COMMENTS,PARENT_TABLE,PARENT_TABLE_FK,REMARKS,DEL_FLAG,CATEGORY) 
 VALUES ('bc6a7192b80e41ae95595de19bd908e1',str_to_date('2016-07-27 11:16:18', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 11:19:17', '%Y-%m-%d %H:%i:%s'),'system','CMS_TAGCLOUD','内容发布标签云',null,null,null,null,null);
@@ -670,290 +710,44 @@ VALUES ('4e0c28492c38454f8355e3400619559a',str_to_date('2016-07-15 10:58:33', '%
 INSERT INTO MOD_TABLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,NAME,COMMENTS,PARENT_TABLE,PARENT_TABLE_FK,REMARKS,DEL_FLAG,CATEGORY) 
 VALUES ('1f0fecd2ddf1475682a277a7d5d3f147',str_to_date('2016-07-15 10:59:09', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COLLECTIONS','内容发布收藏',null,null,null,null,null);
 
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('df8c60d6725c4b3b895d8bac1a8061b1',str_to_date('2016-07-20 14:25:14', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','POSTER','海报','VARCHAR2','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('ed0f98c63e7c4bfc8e6740861bd117eb',str_to_date('2016-07-15 11:01:27', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_SITE','LOGO','站点LOGO','VARCHAR2','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('e9bacaa3041947f0b2601f642309ce37',str_to_date('2016-07-15 11:04:28', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_SITE','THEME','主题','VARCHAR2','100','Y','Y','combobox','default',null,'default:默认主题',null,null,null,'Y','Y',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('6e739980d2f34a50a3cf45fc6e00b774',str_to_date('2016-07-15 13:22:23', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','TARGET','目标','VARCHAR2','100','Y','Y','combobox',null,null,'blank|self',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('ab644111ef9f4ac49fba3a9288bb19c0',str_to_date('2016-07-15 13:33:04', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:53:47', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','KEYWORDS','关键字','VARCHAR2','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','Y','Y',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('36836c9f671e46b3a5b9af67a73bfc50',str_to_date('2016-07-15 13:33:48', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','SEQ','权重','NUMBER','10','N','Y','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('f15eda3182c3492f970647f92d54f8bd',str_to_date('2016-07-15 13:37:17', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:24:00', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','IN_MENU','是否导航显示','CHAR','1','Y','Y','combobox','Y',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('6864f17bd3f64f58a69da42f5e36025f',str_to_date('2016-07-15 13:38:49', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:24:06', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','IN_LIST','是否分类列表','CHAR','1','Y','Y','combobox','Y',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('18b2251936a74f938a760dcc05bcbfac',str_to_date('2016-07-15 13:42:38', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:24:15', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','IS_COMMENT','是否允许评论','CHAR','1','Y','Y','combobox','Y',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('5be7ed6c7cab4554806ddcd323ffd3e7',str_to_date('2016-07-15 13:47:16', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:51', '%Y-%m-%d %H:%i:%s'),null,'CMS_CATEGORY','VIEW_CONFIG','视图配置','CLOB',null,'Y','H','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('7aa8976dfdb6458bb38af80ba65f763d',str_to_date('2016-07-15 13:50:51', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 11:15:36', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','CATEGORY_ID','所属栏目','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('0c73ef61195744968bf919d3975357c0',str_to_date('2016-07-15 13:52:02', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-20 14:40:38', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','SUB_TITLE','副标题','VARCHAR2','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('44f0dd8ecc414e9cb3a786234c0a3c53',str_to_date('2016-07-15 13:53:54', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-20 14:40:44', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','KEYWORDS','关键字','VARCHAR2','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('8b3c5381b6f84d318b18a0d699642a6e',str_to_date('2016-07-15 13:54:54', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 13:37:17', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','DESCRIPTION','描述','VARCHAR2','500','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('06142609f4774711bb829984f69ed2b6',str_to_date('2016-07-15 13:55:36', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','SEQ','权重','NUMBER','10','Y','Y','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('7f76fef668de481abf0af6fc1c0d41a8',str_to_date('2016-07-15 13:56:46', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','HITS','点击数','NUMBER','10','Y','H','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'Y','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('971cd0698aac4dab858df57a065ca814',str_to_date('2016-07-15 13:57:21', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','CONTENT','文章内容','CLOB',null,'Y','Y','htmldesign',null,null,'100',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('8d0d4c0512bc48d58cfde5b9e6266352',str_to_date('2016-07-15 13:58:33', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','COPYFROM','文章来源','VARCHAR2','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('3ca035fd27034fb18be66814c977c8c1',str_to_date('2016-07-15 14:04:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:45:17', '%Y-%m-%d %H:%i:%s'),null,'CMS_ARTICLE','CUSTOM_CONTENT_VIEW','自定义内容视图','VARCHAR2','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('a3201c65204b4ccba15f4957a90d9737',str_to_date('2016-07-15 14:08:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 14:16:23', '%Y-%m-%d %H:%i:%s'),'system','CMS_COLLECTIONS','CATEGORY_ID','所属栏目','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('bd858d73dbb84a1cb78c857b551c6cf7',str_to_date('2016-07-15 14:19:31', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COLLECTIONS','CATEGORY','分类','VARCHAR2','100','Y','Y','combobox',null,null,'article:文章',null,null,null,'Y','Y',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('e05cefd25ae449af9b913f144bb4fe91',str_to_date('2016-07-15 14:24:53', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','SITE_ID','所属站点','CHAR','32','N','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('8e15b67525eb4a608c97ee440340e502',str_to_date('2016-07-15 14:25:22', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','CATEGORY_ID','所属栏目','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('9dcb10c7fa9948e5b0e5e63be987050c',str_to_date('2016-07-15 14:26:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','SCORE','等级','NUMBER','10','Y','Y','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'Y','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('c9a3b1dae17f4f3c818aca09b905029f',str_to_date('2016-07-15 14:29:24', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 13:56:46', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','USER_ID','用户ID','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('74c9a802ef2647a8aa9506293a59609d',str_to_date('2016-07-15 14:31:38', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','AUDIT_USER_NAME','审核人','VARCHAR2','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('6b53b693e0234b0a9c7211f6c3187a97',str_to_date('2016-07-15 14:32:16', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 14:32:27', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','AUDIT_DATE','审核时间','DATE',null,'Y','N','datebox','@date',null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('098af13e29ec4d9bbe5b891b1bdf40a0',str_to_date('2016-07-15 12:32:26', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','SITE_ID','所属站点','CHAR','32','Y','H','combobox',null,null,'SQL>select id,name from cms_site|id|name',null,null,null,'N','N',100,100,'Y');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('d09ba07e75514f9a8b2b42c2dd58f8ef',str_to_date('2016-07-30 13:20:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:21:15', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','SITE_ID','站点','CHAR','32','Y','H','combobox',null,null,'SQL>select id,name from cms_site|id|name',null,null,null,'N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('30128baeb34448d5a7dfa57d42963e48',str_to_date('2016-04-08 15:00:46', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 15:00:46', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','END_AT','任务结束时间','DATE',null,'Y','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd HH:mm:ss\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('336c76921fef477a9dc8f96f5d2a08ac',str_to_date('2016-06-01 19:43:41', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 21:04:32', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TEAM_LEAGUER','TEAM_ID','团队','CHAR','32','Y','N','combobox',null,null,'SQL>select id,name from plan_team|id|name',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('7ec60367e8bf4525bd2a71560aa32502',str_to_date('2016-06-01 19:49:21', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:40:08', '%Y-%m-%d %H:%i:%s'),'system','PLAN_PROJECT','LEADER','负责人','CHAR','32','Y','Y','combobox',null,null,'SQL>select id,name from sys_user|id|name',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('131720933c8c4966b6b5165eefc27671',str_to_date('2016-06-01 20:05:46', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:53:27', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','SEQUENCE','优先级','NUMBER','10','N','Y','combobox','3',null,'DICT>3088229ba0824493a1b18fd2e39e2762',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('75150353f8794e008347967ac538dc52',str_to_date('2016-06-06 20:12:36', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-07 15:48:46', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','DELAY_FINISH_DATE','延期后完成日期','DATE',null,'N','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('bee813e18cfc46e19e953db99f75c25f',str_to_date('2016-06-02 08:23:40', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:23:40', '%Y-%m-%d %H:%i:%s'),null,'PLAN_PROJECT','TEAM_ID','团队','CHAR','32','Y','Y','combobox',null,null,'SQL>select id,name from plan_team|id|name',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('48fd9585e88b44f391c66f0f371ba879',str_to_date('2016-04-08 10:57:02', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:57:02', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','ALIAS_NAME','任务别名','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('4304e011e36c4d77ba24e3e33d0a5f2d',str_to_date('2016-04-08 11:02:19', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 11:02:19', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','IS_SYNC','是否异步','VARCHAR2','100','Y','Y','combobox',null,null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('d7e3f2e196254d2e9b29c11ba5723210',str_to_date('2016-04-08 11:03:12', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-11 09:04:31', '%Y-%m-%d %H:%i:%s'),'system','JOB_QUARTZ_CONF','DESCRIPTION','任务描述','VARCHAR2','2000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:407px"','Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('26930a9575b34242a937479a1c8609f5',str_to_date('2016-06-01 19:44:09', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:50:58', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TEAM_LEAGUER','USER_ID','成员','CHAR','32','Y','Y','combobox',null,null,'SQL>select id,name from sys_user|id|name',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('f10e683e8e8047edab630b8c79d185a6',str_to_date('2016-06-01 19:44:54', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:44:54', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TEAM','NAME','名称','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('eeb9bddd5f80459d9dcf45454ee66db8',str_to_date('2016-06-06 20:11:55', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-07 15:48:24', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','DELAY_DATE','延期前完成日期','DATE',null,'N','H','datebox','@date',null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('937a67dac2b448e296b534aa01faf2cb',str_to_date('2016-06-06 20:14:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-07 15:51:29', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','DELAY_REASON','延期原因','VARCHAR2','500','N','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:200px;"','Y','Y',500,200,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('7741802c16a04786aa3b5eab6eade145',str_to_date('2016-06-06 20:15:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-06 20:33:14', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','TASK_ID','任务','CHAR','32','N','H','combobox',null,null,'SQL>select id,describe from plan_task|id|describe',null,null,null,'N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('f7ee01da7e3e4c64a974a648be3c1cca',str_to_date('2016-06-23 16:21:33', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-24 10:06:55', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','USER_INFO','选择框','VARCHAR2','100','Y','Y','selectButton',null,null,'SQL>select * from bo_demo|{"total":4,"rows":[{"field":"user_name","title":"姓名","width":"100","fieldTo":"userName"},{"field":"user_sex","title":"性别","width":"50","fieldTo":"userSex"},{"field":"user_age","title":"年龄","width":"0","fieldTo":"userAge"},{"field":"user_birthday","title":"出生日期","width":"100","fieldTo":"userBirthday"}]}',null,null,null,'N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('ff70bbc60fdd4431a9ec0b4a590ebb2e',str_to_date('2016-04-08 10:59:38', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:59:38', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','JOB_TRIGGER','任务触发器','VARCHAR2','1000','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('99446c4dac2542a892fe46474f506894',str_to_date('2016-04-08 11:00:45', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 11:00:45', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','CRON_EXPRESSION','cron表达式','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('4037d4b0d6714eb4bfdfb6fb072d0cd6',str_to_date('2016-04-08 13:46:14', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-11 09:04:23', '%Y-%m-%d %H:%i:%s'),'system','JOB_QUARTZ_CONF','JOB_CLASS','任务主体','VARCHAR2','500','N','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:407px"','Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('8e9be7361a4e4dc8adb404c05dafb0e5',str_to_date('2016-04-08 15:00:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 15:00:13', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','START_AT','任务开始时间','DATE',null,'Y','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd HH:mm:ss\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('63236d6f777743fa9cf9d2e602a38bf4',str_to_date('2015-12-09 08:35:10', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 08:35:10', '%Y-%m-%d %H:%i:%s'),null,'BO_INTERFACE_CATALOG','NAME','名称','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,'0',null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('0505d3fed10e4320a991af5a9648be6a',str_to_date('2015-12-09 08:35:58', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:26:54', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_CATALOG','PARENT_ID','模块','CHAR','32','N','N','combobox',null,null,'SQL>select id,name from bo_interface_catalog|id|name',null,'0',null,'N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('565206a7f53740d7a071c59703fdaec5',str_to_date('2015-12-09 08:39:06', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-18 21:53:24', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','METHOD','提交方式','VARCHAR2','100','Y','Y','combobox','POST',null,'POST|GET',null,'0',null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('0dd83d7c6d7a41f9a438a74765da63d9',str_to_date('2015-12-09 08:40:51', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:50:39', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','RETURN_VALUE','返回值','VARCHAR2','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,'0','style="height:80px;width:407px"','N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('0336e66696f04a10bb1658b7a89f285a',str_to_date('2015-12-09 08:42:29', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:50:18', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','EXCLUDES','不返回字段','VARCHAR2','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,'0','style="height:50px;width:407px"','N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('07c616a8e1b24c44889ba75ea8971720',str_to_date('2015-12-09 10:26:34', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:26:34', '%Y-%m-%d %H:%i:%s'),null,'BO_INTERFACE_DESC','CATALOG_ID','接口目录','CHAR','32','Y','Y','textbox',null,null,'prompt:\'\'',null,'0',null,'N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('5f8d0f542fd94896a743de65ac96fa90',str_to_date('2015-12-17 08:49:42', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-18 21:53:54', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','TYPE','类型','VARCHAR2','100','Y','Y','combobox','PT',null,'PT:普通传参|JSON:JSON参数',null,'0',null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('4115dddc16694eda85cef57d9d411f08',str_to_date('2015-12-10 11:31:56', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-15 10:51:19', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_CATALOG','SEQUENCE','排序','NUMBER','10','Y','Y','numberbox','10',null,'max:999999,min:0,precision:0',null,'0',null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('15a966ed45bd4768ad493dd8560e5305',str_to_date('2015-12-10 11:33:07', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-15 10:51:29', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','SEQUENCE','排序','NUMBER','10','Y','Y','numberbox',null,null,'max:999999,min:0,precision:0',null,'0',null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('24619d3b780441aeb2433e7f8da3d856',str_to_date('2015-12-09 08:37:31', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 08:37:31', '%Y-%m-%d %H:%i:%s'),null,'BO_INTERFACE_DESC','NAME','名称','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,'0',null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('2c942d5ca0474336ba35a628022f641f',str_to_date('2015-12-09 08:38:03', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 11:32:37', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','URL','接口地址','VARCHAR2','1000','N','Y','textbox','/',null,'prompt:\'\'',null,'0','style="width:407px"','Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('0cdb87c8b0124689b78bddcf8e3fc035',str_to_date('2015-12-09 08:39:59', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:50:28', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','PARAMETER','参数','VARCHAR2','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,'0','style="height:50px;width:407px"','N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('72da80dbed37413fbd7f5694d7e23461',str_to_date('2016-06-01 19:50:10', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:50:10', '%Y-%m-%d %H:%i:%s'),null,'PLAN_PROJECT','DESCRIBE','描述','VARCHAR2','1000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;"','N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('95cb519707f045799ec05e355e65a578',str_to_date('2016-06-01 20:01:26', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:41:52', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','USER_ID','完成人','CHAR','32','N','Y','combobox',null,null,'SQL>select id,name from sys_user|id|name',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('84c87ee9d20d49ca8d8c0b678f5d7d5c',str_to_date('2016-06-01 20:03:40', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:03:40', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TASK','END_DATE','结束日期','DATE',null,'N','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('188a5e4b1460438186bbf476661790c7',str_to_date('2016-06-01 20:04:47', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:04:47', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TASK','FINISH_DATE','完成日期','DATE',null,'Y','N','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('a76eb904839c43258752add4242e2190',str_to_date('2016-06-01 20:09:04', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:41:10', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','PROJECT_ID','项目','CHAR','32','N','Y','combobox',null,null,'SQL>select id,name from plan_project|id|name',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('c8bc51ec3d9346de8d49278434129eab',str_to_date('2016-06-12 09:05:41', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:05:41', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_SEX','用户性别','VARCHAR2','100','Y','Y','combobox',null,null,'DICT>f5814ca746a145bc844669a70d984a9c',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('7ec6a14f6c284812a7e27f47ebac4392',str_to_date('2016-06-12 09:08:34', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:08:34', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_BIRTHDAY','出生日期','DATE',null,'Y','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('0cd0beab2ee64b07a99fa0e49832f14c',str_to_date('2016-06-12 09:11:02', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:11:02', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_SUMMARY','用户简介','CLOB',null,'Y','Y','htmldesign',null,null,'100',null,null,'style="width:100px;"','N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('f7c32c721a6a45d79c6d8667a8df189c',str_to_date('2016-01-21 11:12:00', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-14 14:34:03', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','EXPRESSION','表达式','VARCHAR2','100','Y','Y','textarea','@userId在@dateTime登录',null,'multiline:true,prompt:\'@userId==@userName==@name==@departmentId==@departmentName==@year\'',null,null,'style="height:50px;width:400px"','N','N',100,100,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('9892bceec41347d3abb187937821a26b',str_to_date('2016-03-16 14:12:08', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 15:46:45', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','USER_NAME','用户名','VARCHAR2',null,'Y','N','textbox','@name',null,null,null,null,null,'N','Y',100,100,'Y');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('910a75da82c341119044dd45e09330bf',str_to_date('2015-12-28 15:34:04', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 15:42:40', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','TREE_ID','下拉树','VARCHAR2',null,'Y','H','combobox',null,null,null,null,null,null,'N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('8389a7f8037543b9afb22653ff711980',str_to_date('2016-06-01 19:47:37', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:47:37', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TEAM','DESCRIBE','描述','VARCHAR2','1000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;"','N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('b8a5fa64c2e446cc8320966bc160f351',str_to_date('2016-06-01 19:48:15', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:48:15', '%Y-%m-%d %H:%i:%s'),null,'PLAN_PROJECT','NAME','名称','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('079bf63e21ef4ec88bd4c6e68fa76399',str_to_date('2016-06-01 19:56:57', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:32:52', '%Y-%m-%d %H:%i:%s'),'system','PLAN_PROJECT','STATUS','状态','VARCHAR2','100','Y','H','combobox',null,null,'DICT>ed8d0e6d0eb74b8e9ca809990ec8422f',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('75c8c37fbbf348799843a70f666826b9',str_to_date('2016-06-01 19:59:21', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:43:24', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','DESCRIBE','描述','VARCHAR2','100','N','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:407px;"','Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('376c352c18d649519119022f71f20eb6',str_to_date('2016-06-01 20:02:31', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:02:31', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TASK','START_DATE','开始日期','DATE',null,'N','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('56d7456d94ae452eb0c0e3c2c3a79235',str_to_date('2016-06-01 20:07:58', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:43:30', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','EXPLAIN','说明','VARCHAR2','500','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:407px;"','N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('a4fddc4232de4fa5bfc4c4ebe9052765',str_to_date('2016-06-12 09:07:27', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:07:27', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_AGE','用户年龄','NUMBER','10','Y','N','numberbox',null,null,'max:150,min:0,precision:0',null,null,null,'Y','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('3e9ccd61a2074e41941f223d5987d8ca',str_to_date('2016-04-08 10:51:27', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:51:27', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','JOB_NAME','任务名','VARCHAR2','100','N','Y','textbox',null,'loginName','prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('b72e399ce1fa400f83db4cb3f24f9eac',str_to_date('2016-04-08 10:58:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:58:28', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','JOB_GROUP','任务分组','VARCHAR2','100','N','Y','combobox','com_job',null,'DICT>0d71cae660dd4c76912a946cc83326ba',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('ba5de47aaeb24cb79b1a5a1f552d519d',str_to_date('2016-04-08 11:09:50', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-11 08:57:26', '%Y-%m-%d %H:%i:%s'),'system','JOB_QUARTZ_CONF','STATUS','任务状态','VARCHAR2','100','Y','H','combobox',null,null,'DICT>43c35fe923dd4e80b060f247c780ab69',null,null,null,'Y','Y',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('e2f612bdbece4abdbf8f91175fea3617',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_ICON','用户头像','VARCHAR2','1000','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',null,null,'N');
-
-INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('bcc3a4dbe79d47aa81d53e40457b3c81',str_to_date('2016-06-12 09:55:41', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:51', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','DEPARTMENT_ID','所在部门','CHAR',null,'Y','Y','combobox',null,null,null,null,null,null,'N','N',null,null,'N');
+INSERT INTO MOD_TABLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,NAME,COMMENTS,PARENT_TABLE,PARENT_TABLE_FK,REMARKS,DEL_FLAG,CATEGORY) 
+VALUES ('9ab52931d2114421bd746599bd8429f0',str_to_date('2017-01-20 09:40:11', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','统计图表',null,null,null,null,'普通表');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('3519bed99b8942b2bc2be40a2de7217b',str_to_date('2016-06-12 09:56:28', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:10', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','MANAGER_ID','上级领导','CHAR',null,'Y','Y','combobox',null,null,null,null,null,null,'N','N',null,null,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('71f52f9233bf445dbd2721ffd675da30',str_to_date('2016-07-15 11:02:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 16:23:15', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','DESCRIPTION','描述','VARCHAR2','1000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:430px;"','Y','N',100,100,'N');
+VALUES ('71f52f9233bf445dbd2721ffd675da30',str_to_date('2016-07-15 11:02:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 16:23:15', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','DESCRIPTION','描述','VARCHAR','1000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:430px;"','Y','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('26eb3088c51d41f5938c8f6843ca96a9',str_to_date('2016-07-15 11:05:00', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 16:23:01', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','COPYRIGHT','版权信息','VARCHAR2','1000','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:430px;"','Y','N',100,100,'N');
+VALUES ('26eb3088c51d41f5938c8f6843ca96a9',str_to_date('2016-07-15 11:05:00', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 16:23:01', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','COPYRIGHT','版权信息','VARCHAR','1000','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:430px;"','Y','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('21ca31f8afa34c9dab80382d561b1534',str_to_date('2016-07-15 11:06:32', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:09', '%Y-%m-%d %H:%i:%s'),null,'CMS_SITE','CUSTOM_VIEW','自定义首页视图','VARCHAR2','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:430px;"','N','N',100,100,'N');
+VALUES ('21ca31f8afa34c9dab80382d561b1534',str_to_date('2016-07-15 11:06:32', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:09', '%Y-%m-%d %H:%i:%s'),null,'CMS_SITE','CUSTOM_VIEW','自定义首页视图','VARCHAR','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:430px;"','N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('5a531e2efeb0492db972c175a9018a60',str_to_date('2016-07-15 11:13:21', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 16:24:02', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','PARENT_ID','父级栏目','CHAR','32','N','Y','combotree',null,null,'URL>/cms/category/list/tree|id|name|parent_id',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('91148fb3baae425d808bb3ae2a33e029',str_to_date('2016-07-15 13:32:22', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:53:40', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','DESCRIPTION','描述','VARCHAR2','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
+VALUES ('91148fb3baae425d808bb3ae2a33e029',str_to_date('2016-07-15 13:32:22', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:53:40', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','DESCRIPTION','描述','VARCHAR','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('1407231520fa43668fcb1fe9f1f9a824',str_to_date('2016-07-15 13:43:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:24:21', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','IS_AUDIT','是否需要审核','CHAR','1','Y','Y','combobox','Y',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('75126d924ef447f7be99c9946476ebc3',str_to_date('2016-07-15 13:44:57', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:36', '%Y-%m-%d %H:%i:%s'),null,'CMS_CATEGORY','CUSTOM_LIST_VIEW','列表视图','VARCHAR2','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
+VALUES ('75126d924ef447f7be99c9946476ebc3',str_to_date('2016-07-15 13:44:57', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:36', '%Y-%m-%d %H:%i:%s'),null,'CMS_CATEGORY','CUSTOM_LIST_VIEW','列表视图','VARCHAR','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('62380c2b41f64caa8b2af05e8ee3d4cc',str_to_date('2016-07-15 13:45:31', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:45', '%Y-%m-%d %H:%i:%s'),null,'CMS_CATEGORY','CUSTOM_CONTENT_VIEW','内容视图','VARCHAR2','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
+VALUES ('62380c2b41f64caa8b2af05e8ee3d4cc',str_to_date('2016-07-15 13:45:31', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:45', '%Y-%m-%d %H:%i:%s'),null,'CMS_CATEGORY','CUSTOM_CONTENT_VIEW','内容视图','VARCHAR','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('b9af6e429fbe478ba73f4f336d240fad',str_to_date('2016-07-27 13:09:54', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_TAGCLOUD','SITE_ID','站点','CHAR','32','N','N','combobox',null,null,'SQL>select id,name from cms_site|id|name',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('071c890a03114bcba8fab53778e6f952',str_to_date('2016-07-15 13:51:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 17:10:44', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','TITLE','标题','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+VALUES ('071c890a03114bcba8fab53778e6f952',str_to_date('2016-07-15 13:51:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 17:10:44', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','TITLE','标题','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('dc2f5d994919485c9bbab8bf8d640fd3',str_to_date('2016-07-15 14:05:52', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:45:26', '%Y-%m-%d %H:%i:%s'),null,'CMS_ARTICLE','VIEW_CONFIG','视图配置','CLOB',null,'Y','H','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
+VALUES ('dc2f5d994919485c9bbab8bf8d640fd3',str_to_date('2016-07-15 14:05:52', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:45:26', '%Y-%m-%d %H:%i:%s'),null,'CMS_ARTICLE','VIEW_CONFIG','视图配置','TEXT',null,'Y','H','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('8d29ac8fd75a48c78b40680021dc649a',str_to_date('2016-07-15 14:07:56', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 13:28:45', '%Y-%m-%d %H:%i:%s'),'system','CMS_COLLECTIONS','SITE_ID','所属站点','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
@@ -968,82 +762,379 @@ INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER
 VALUES ('cd13dc70da344a3985154ddfb1f132b6',str_to_date('2016-07-15 14:25:55', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','BASIC_ID','所属主体','CHAR','32','N','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('5ced7f720cde417397920ff2ede001f3',str_to_date('2016-07-15 14:28:43', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','CONTENT','评价内容','VARCHAR2','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+VALUES ('5ced7f720cde417397920ff2ede001f3',str_to_date('2016-07-15 14:28:43', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','CONTENT','评价内容','VARCHAR','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('31e7cf26f1d448ce8a56e880646775d4',str_to_date('2016-07-15 14:29:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 14:02:53', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','USER_NAME','评价人','VARCHAR2','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('31e7cf26f1d448ce8a56e880646775d4',str_to_date('2016-07-15 14:29:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 14:02:53', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','USER_NAME','评价人','VARCHAR','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('615d37f937a642a787da17408020a611',str_to_date('2016-07-15 14:33:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 14:11:16', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','AUDIT_STATE','是否屏蔽','VARCHAR2','100','Y','N','combobox','F',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','Y',100,100,'N');
+VALUES ('615d37f937a642a787da17408020a611',str_to_date('2016-07-15 14:33:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 14:11:16', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','AUDIT_STATE','是否屏蔽','VARCHAR','100','Y','N','combobox','F',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('d758dc55a9754bf09ddba9f4ceafd1bd',str_to_date('2016-07-27 13:10:42', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_TAGCLOUD','NAME','标签','VARCHAR2','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'Y');
+VALUES ('d758dc55a9754bf09ddba9f4ceafd1bd',str_to_date('2016-07-27 13:10:42', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_TAGCLOUD','NAME','标签','VARCHAR','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'Y');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('c6d78d57ff0a45da8fe5480b22cd8337',str_to_date('2016-07-27 14:16:04', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','TAG_ID','标签','VARCHAR2','4000','Y','Y','checkbox',null,null,'SQL>select id,name from cms_tagcloud where id=\'1\'|id|name',null,null,null,'N','N',100,100,'N');
+VALUES ('c6d78d57ff0a45da8fe5480b22cd8337',str_to_date('2016-07-27 14:16:04', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','TAG_ID','标签','VARCHAR','4000','Y','Y','checkbox',null,null,'SQL>select id,name from cms_tagcloud where id=\'1\'|id|name',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('7abdff25cd9c4f3a8ed248aaa66b6510',str_to_date('2016-07-28 09:56:20', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','EXTENDS_INFO','扩展内容','VARCHAR2','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('7abdff25cd9c4f3a8ed248aaa66b6510',str_to_date('2016-07-28 09:56:20', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','EXTENDS_INFO','扩展内容','VARCHAR','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('525c461573f14f1a9a20f3410d4c8286',str_to_date('2016-07-30 11:23:56', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:21:07', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','CONTENT','留言内容','VARCHAR2',null,'Y','N','textarea',null,null,null,null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
+VALUES ('525c461573f14f1a9a20f3410d4c8286',str_to_date('2016-07-30 11:23:56', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:21:07', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','CONTENT','留言内容','VARCHAR',null,'Y','N','textarea',null,null,null,null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('bcc3eb63dab9420e90c6d0bf18ff8eb8',str_to_date('2016-07-30 11:29:06', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:18:52', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','NAME','姓名','VARCHAR2',null,'Y','N','textbox',null,null,null,null,null,null,'Y','Y',100,100,'Y');
+VALUES ('bcc3eb63dab9420e90c6d0bf18ff8eb8',str_to_date('2016-07-30 11:29:06', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:18:52', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','NAME','姓名','VARCHAR',null,'Y','N','textbox',null,null,null,null,null,null,'Y','Y',100,100,'Y');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('23a9f019815c45b498d4dbc29dd53323',str_to_date('2016-07-30 11:29:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:18:53', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','EMAIL','邮箱','VARCHAR2',null,'Y','N','textbox',null,null,null,null,null,null,'Y','Y',100,100,'Y');
+VALUES ('23a9f019815c45b498d4dbc29dd53323',str_to_date('2016-07-30 11:29:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:18:53', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','EMAIL','邮箱','VARCHAR',null,'Y','N','textbox',null,null,null,null,null,null,'Y','Y',100,100,'Y');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('c9dba233b77445158e4458a34e535a97',str_to_date('2016-07-30 11:29:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:18:55', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','PHONE','电话','VARCHAR2',null,'Y','N','textbox',null,null,null,null,null,null,'Y','Y',100,100,'N');
+VALUES ('c9dba233b77445158e4458a34e535a97',str_to_date('2016-07-30 11:29:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:18:55', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','PHONE','电话','VARCHAR',null,'Y','N','textbox',null,null,null,null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('4036a3cc1e55447e9af9e306e72fe28d',str_to_date('2016-07-30 11:30:14', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:22:20', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','WORKUNIT','单位','VARCHAR2',null,'Y','N','textbox',null,null,null,null,null,'style="width:405px;"','Y','Y',100,100,'N');
+VALUES ('4036a3cc1e55447e9af9e306e72fe28d',str_to_date('2016-07-30 11:30:14', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:22:20', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','WORKUNIT','单位','VARCHAR',null,'Y','N','textbox',null,null,null,null,null,'style="width:405px;"','Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('c431d7debb59416f8141c2a357882f15',str_to_date('2016-07-30 11:30:40', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:19:08', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','IP','IP','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',100,100,'Y');
+VALUES ('c431d7debb59416f8141c2a357882f15',str_to_date('2016-07-30 11:30:40', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:19:08', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','IP','IP','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',100,100,'Y');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('b3fc6c1a8edc433f9d85666c340753ec',str_to_date('2016-07-30 11:31:49', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:34:46', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','REUSERID','回复人','CHAR',null,'Y','N','combobox','@userId',null,'SQL>select id,name from sys_user|id|name',null,null,null,'Y','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('e4a76bbed5064e949b528617a95f5c1e',str_to_date('2016-07-30 11:33:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:19:48', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','RECONTENT','回复内容','VARCHAR2','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
+VALUES ('e4a76bbed5064e949b528617a95f5c1e',str_to_date('2016-07-30 11:33:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:19:48', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','RECONTENT','回复内容','VARCHAR','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('3877ac3f482a4b62b8be5834e039bb1f',str_to_date('2016-07-15 11:00:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 15:51:21', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','NAME','站点名称','VARCHAR2',null,'N','Y','textbox',null,null,null,null,null,null,'Y','Y',100,100,'N');
+VALUES ('3877ac3f482a4b62b8be5834e039bb1f',str_to_date('2016-07-15 11:00:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 15:51:21', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','NAME','站点名称','VARCHAR',null,'N','Y','textbox',null,null,null,null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('d7e451e51a4747e4af67c1d717dc8f2a',str_to_date('2016-07-15 11:00:44', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_SITE','TITLE','站点标题','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+VALUES ('d7e451e51a4747e4af67c1d717dc8f2a',str_to_date('2016-07-15 11:00:44', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_SITE','TITLE','站点标题','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('621c2e763fc94876957f02826b67c79f',str_to_date('2016-07-15 11:01:56', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-20 10:14:36', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','DOMAIN','站点域名','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+VALUES ('621c2e763fc94876957f02826b67c79f',str_to_date('2016-07-15 11:01:56', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-20 10:14:36', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','DOMAIN','站点域名','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('887670a0d3424d16a6fb1b5fdb55b674',str_to_date('2016-07-15 11:03:26', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 16:23:09', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','KEYWORDS','关键字','VARCHAR2','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:430px;"','Y','Y',100,100,'N');
+VALUES ('887670a0d3424d16a6fb1b5fdb55b674',str_to_date('2016-07-15 11:03:26', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 16:23:09', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','KEYWORDS','关键字','VARCHAR','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:430px;"','Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('cd7ca48a6d3c4c92baf3de7376e52831',str_to_date('2016-07-15 11:09:02', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 17:14:38', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','SITE_ID','站点','CHAR','32','N','N','combobox',null,null,'SQL>select id,name from cms_site|id|name',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('c14d50e26d564b9990941ecaff1d16e7',str_to_date('2016-07-15 11:11:51', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','MODULE','栏目模块','VARCHAR2','100','Y','Y','combobox',null,null,'PT:普通栏目|CD:菜单栏目|BT:标题栏目|XN:虚拟栏目',null,null,null,'Y','Y',100,100,'N');
+VALUES ('c14d50e26d564b9990941ecaff1d16e7',str_to_date('2016-07-15 11:11:51', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','MODULE','栏目模块','VARCHAR','100','Y','Y','combobox',null,null,'PT:普通栏目|CD:菜单栏目|BT:标题栏目|XN:虚拟栏目',null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('417331e76b1742bc88f61642f8148bb0',str_to_date('2016-07-15 11:12:21', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','NAME','栏目名称','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+VALUES ('417331e76b1742bc88f61642f8148bb0',str_to_date('2016-07-15 11:12:21', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','NAME','栏目名称','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('4f7153fb643a4bbe9257c2166aa742a5',str_to_date('2016-07-15 13:21:25', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','HREF','链接','VARCHAR2','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('4f7153fb643a4bbe9257c2166aa742a5',str_to_date('2016-07-15 13:21:25', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','HREF','链接','VARCHAR','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('7b02aa5a310c43638f8ac7205608e215',str_to_date('2016-07-15 14:30:30', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 14:46:48', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','IP','IP','VARCHAR2','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',100,100,'N');
+VALUES ('7b02aa5a310c43638f8ac7205608e215',str_to_date('2016-07-15 14:30:30', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 14:46:48', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','IP','IP','VARCHAR','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('96492d6ed5e54815af2a3d152a992e7a',str_to_date('2016-07-15 14:31:15', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','AUDIT_USER_ID','审核用户ID','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('e792125246b8481789935b073b65a981',str_to_date('2016-07-30 11:22:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:54:37', '%Y-%m-%d %H:%i:%s'),null,'CMS_GUESTBOOK','TYPE','留言分类','VARCHAR2','100','Y','H','combobox',null,null,'PT:普通|JY:建议',null,null,null,'N','N',100,100,'N');
+VALUES ('e792125246b8481789935b073b65a981',str_to_date('2016-07-30 11:22:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:54:37', '%Y-%m-%d %H:%i:%s'),null,'CMS_GUESTBOOK','TYPE','留言分类','VARCHAR','100','Y','H','combobox',null,null,'PT:普通|JY:建议',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('f2fc1d34da4f48cca2f8505920298541',str_to_date('2016-07-30 11:32:26', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 16:29:11', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','REDATE','回复时间','DATE',null,'Y','N','datebox','@date',null,null,null,null,null,'N','N',100,100,'N');
+VALUES ('f2fc1d34da4f48cca2f8505920298541',str_to_date('2016-07-30 11:32:26', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 16:29:11', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','REDATE','回复时间','DATETIME',null,'Y','N','datebox','@date',null,null,null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('df8c60d6725c4b3b895d8bac1a8061b1',str_to_date('2016-07-20 14:25:14', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','POSTER','海报','VARCHAR','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('ed0f98c63e7c4bfc8e6740861bd117eb',str_to_date('2016-07-15 11:01:27', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_SITE','LOGO','站点LOGO','VARCHAR','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('e9bacaa3041947f0b2601f642309ce37',str_to_date('2016-07-15 11:04:28', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_SITE','THEME','主题','VARCHAR','100','Y','Y','combobox','default',null,'default:默认主题',null,null,null,'Y','Y',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('6e739980d2f34a50a3cf45fc6e00b774',str_to_date('2016-07-15 13:22:23', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','TARGET','目标','VARCHAR','100','Y','Y','combobox',null,null,'blank|self',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('ab644111ef9f4ac49fba3a9288bb19c0',str_to_date('2016-07-15 13:33:04', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:53:47', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','KEYWORDS','关键字','VARCHAR','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','Y','Y',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('36836c9f671e46b3a5b9af67a73bfc50',str_to_date('2016-07-15 13:33:48', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_CATEGORY','SEQ','权重','DECIMAL','10','N','Y','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('f15eda3182c3492f970647f92d54f8bd',str_to_date('2016-07-15 13:37:17', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:24:00', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','IN_MENU','是否导航显示','CHAR','1','Y','Y','combobox','Y',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('6864f17bd3f64f58a69da42f5e36025f',str_to_date('2016-07-15 13:38:49', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:24:06', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','IN_LIST','是否分类列表','CHAR','1','Y','Y','combobox','Y',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('18b2251936a74f938a760dcc05bcbfac',str_to_date('2016-07-15 13:42:38', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 09:24:15', '%Y-%m-%d %H:%i:%s'),'system','CMS_CATEGORY','IS_COMMENT','是否允许评论','CHAR','1','Y','Y','combobox','Y',null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('5be7ed6c7cab4554806ddcd323ffd3e7',str_to_date('2016-07-15 13:47:16', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:46:51', '%Y-%m-%d %H:%i:%s'),null,'CMS_CATEGORY','VIEW_CONFIG','视图配置','TEXT',null,'Y','H','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('7aa8976dfdb6458bb38af80ba65f763d',str_to_date('2016-07-15 13:50:51', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-18 11:15:36', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','CATEGORY_ID','所属栏目','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('0c73ef61195744968bf919d3975357c0',str_to_date('2016-07-15 13:52:02', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-20 14:40:38', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','SUB_TITLE','副标题','VARCHAR','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('44f0dd8ecc414e9cb3a786234c0a3c53',str_to_date('2016-07-15 13:53:54', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-20 14:40:44', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','KEYWORDS','关键字','VARCHAR','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('8b3c5381b6f84d318b18a0d699642a6e',str_to_date('2016-07-15 13:54:54', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 13:37:17', '%Y-%m-%d %H:%i:%s'),'system','CMS_ARTICLE','DESCRIPTION','描述','VARCHAR','500','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:405px;"','N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('06142609f4774711bb829984f69ed2b6',str_to_date('2016-07-15 13:55:36', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','SEQ','权重','DECIMAL','10','Y','Y','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('7f76fef668de481abf0af6fc1c0d41a8',str_to_date('2016-07-15 13:56:46', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','HITS','点击数','DECIMAL','10','Y','H','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'Y','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('971cd0698aac4dab858df57a065ca814',str_to_date('2016-07-15 13:57:21', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','CONTENT','文章内容','TEXT',null,'Y','Y','htmldesign',null,null,'100',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('8d0d4c0512bc48d58cfde5b9e6266352',str_to_date('2016-07-15 13:58:33', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','COPYFROM','文章来源','VARCHAR','500','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('3ca035fd27034fb18be66814c977c8c1',str_to_date('2016-07-15 14:04:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-22 15:45:17', '%Y-%m-%d %H:%i:%s'),null,'CMS_ARTICLE','CUSTOM_CONTENT_VIEW','自定义内容视图','VARCHAR','500','Y','H','textbox',null,null,'prompt:\'\'',null,null,'style="width:405px;"','N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('a3201c65204b4ccba15f4957a90d9737',str_to_date('2016-07-15 14:08:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 14:16:23', '%Y-%m-%d %H:%i:%s'),'system','CMS_COLLECTIONS','CATEGORY_ID','所属栏目','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('bd858d73dbb84a1cb78c857b551c6cf7',str_to_date('2016-07-15 14:19:31', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COLLECTIONS','CATEGORY','分类','VARCHAR','100','Y','Y','combobox',null,null,'article:文章',null,null,null,'Y','Y',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('e05cefd25ae449af9b913f144bb4fe91',str_to_date('2016-07-15 14:24:53', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','SITE_ID','所属站点','CHAR','32','N','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('8e15b67525eb4a608c97ee440340e502',str_to_date('2016-07-15 14:25:22', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','CATEGORY_ID','所属栏目','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('9dcb10c7fa9948e5b0e5e63be987050c',str_to_date('2016-07-15 14:26:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','SCORE','等级','DECIMAL','10','Y','Y','numberbox','0',null,'max:999999,min:0,precision:0',null,null,null,'Y','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('c9a3b1dae17f4f3c818aca09b905029f',str_to_date('2016-07-15 14:29:24', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 13:56:46', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','USER_ID','用户ID','CHAR','32','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('74c9a802ef2647a8aa9506293a59609d',str_to_date('2016-07-15 14:31:38', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_COMMENT','AUDIT_USER_NAME','审核人','VARCHAR','100','Y','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('6b53b693e0234b0a9c7211f6c3187a97',str_to_date('2016-07-15 14:32:16', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 14:32:27', '%Y-%m-%d %H:%i:%s'),'system','CMS_COMMENT','AUDIT_DATE','审核时间','DATETIME',null,'Y','N','datebox','@date',null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('098af13e29ec4d9bbe5b891b1bdf40a0',str_to_date('2016-07-15 12:32:26', '%Y-%m-%d %H:%i:%s'),'system',null,null,'CMS_ARTICLE','SITE_ID','所属站点','CHAR','32','Y','H','combobox',null,null,'SQL>select id,name from cms_site|id|name',null,null,null,'N','N',100,100,'Y');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('d09ba07e75514f9a8b2b42c2dd58f8ef',str_to_date('2016-07-30 13:20:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-30 15:21:15', '%Y-%m-%d %H:%i:%s'),'system','CMS_GUESTBOOK','SITE_ID','站点','CHAR','32','Y','H','combobox',null,null,'SQL>select id,name from cms_site|id|name',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('30128baeb34448d5a7dfa57d42963e48',str_to_date('2016-04-08 15:00:46', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 15:00:46', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','END_AT','任务结束时间','DATETIME',null,'Y','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd HH:mm:ss\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('336c76921fef477a9dc8f96f5d2a08ac',str_to_date('2016-06-01 19:43:41', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 21:04:32', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TEAM_LEAGUER','TEAM_ID','团队','CHAR','32','Y','N','combobox',null,null,'SQL>select id,name from plan_team|id|name',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('7ec60367e8bf4525bd2a71560aa32502',str_to_date('2016-06-01 19:49:21', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:40:08', '%Y-%m-%d %H:%i:%s'),'system','PLAN_PROJECT','LEADER','负责人','CHAR','32','Y','Y','combobox',null,null,'SQL>select id,name from sys_user|id|name',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('131720933c8c4966b6b5165eefc27671',str_to_date('2016-06-01 20:05:46', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:53:27', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','SEQUENCE','优先级','DECIMAL','10','N','Y','combobox','3',null,'DICT>3088229ba0824493a1b18fd2e39e2762',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('75150353f8794e008347967ac538dc52',str_to_date('2016-06-06 20:12:36', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-07 15:48:46', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','DELAY_FINISH_DATE','延期后完成日期','DATETIME',null,'N','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('bee813e18cfc46e19e953db99f75c25f',str_to_date('2016-06-02 08:23:40', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:23:40', '%Y-%m-%d %H:%i:%s'),null,'PLAN_PROJECT','TEAM_ID','团队','CHAR','32','Y','Y','combobox',null,null,'SQL>select id,name from plan_team|id|name',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('48fd9585e88b44f391c66f0f371ba879',str_to_date('2016-04-08 10:57:02', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:57:02', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','ALIAS_NAME','任务别名','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('4304e011e36c4d77ba24e3e33d0a5f2d',str_to_date('2016-04-08 11:02:19', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 11:02:19', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','IS_SYNC','是否异步','VARCHAR','100','Y','Y','combobox',null,null,'DICT>0469a2108e854bbc83d5afa7b3367676',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('d7e3f2e196254d2e9b29c11ba5723210',str_to_date('2016-04-08 11:03:12', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-11 09:04:31', '%Y-%m-%d %H:%i:%s'),'system','JOB_QUARTZ_CONF','DESCRIPTION','任务描述','VARCHAR','2000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:407px"','Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('26930a9575b34242a937479a1c8609f5',str_to_date('2016-06-01 19:44:09', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:50:58', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TEAM_LEAGUER','USER_ID','成员','CHAR','32','Y','Y','combobox',null,null,'SQL>select id,name from sys_user|id|name',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('f10e683e8e8047edab630b8c79d185a6',str_to_date('2016-06-01 19:44:54', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:44:54', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TEAM','NAME','名称','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('eeb9bddd5f80459d9dcf45454ee66db8',str_to_date('2016-06-06 20:11:55', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-07 15:48:24', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','DELAY_DATE','延期前完成日期','DATETIME',null,'N','H','datebox','@date',null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('937a67dac2b448e296b534aa01faf2cb',str_to_date('2016-06-06 20:14:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-07 15:51:29', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','DELAY_REASON','延期原因','VARCHAR','500','N','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:200px;"','Y','Y',500,200,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('7741802c16a04786aa3b5eab6eade145',str_to_date('2016-06-06 20:15:44', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-06 20:33:14', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK_DELAY','TASK_ID','任务','CHAR','32','N','H','combobox',null,null,'SQL>select id,describe from plan_task|id|describe',null,null,null,'N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('f7ee01da7e3e4c64a974a648be3c1cca',str_to_date('2016-06-23 16:21:33', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-24 10:06:55', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','USER_INFO','选择框','VARCHAR','100','Y','Y','selectButton',null,null,'SQL>select * from bo_demo|{"total":4,"rows":[{"field":"user_name","title":"姓名","width":"100","fieldTo":"userName"},{"field":"user_sex","title":"性别","width":"50","fieldTo":"userSex"},{"field":"user_age","title":"年龄","width":"0","fieldTo":"userAge"},{"field":"user_birthday","title":"出生日期","width":"100","fieldTo":"userBirthday"}]}',null,null,null,'N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('ff70bbc60fdd4431a9ec0b4a590ebb2e',str_to_date('2016-04-08 10:59:38', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:59:38', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','JOB_TRIGGER','任务触发器','VARCHAR','1000','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('99446c4dac2542a892fe46474f506894',str_to_date('2016-04-08 11:00:45', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 11:00:45', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','CRON_EXPRESSION','cron表达式','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('4037d4b0d6714eb4bfdfb6fb072d0cd6',str_to_date('2016-04-08 13:46:14', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-11 09:04:23', '%Y-%m-%d %H:%i:%s'),'system','JOB_QUARTZ_CONF','JOB_CLASS','任务主体','VARCHAR','500','N','Y','textbox',null,null,'prompt:\'\'',null,null,'style="width:407px"','Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('8e9be7361a4e4dc8adb404c05dafb0e5',str_to_date('2016-04-08 15:00:13', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 15:00:13', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','START_AT','任务开始时间','DATETIME',null,'Y','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd HH:mm:ss\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('63236d6f777743fa9cf9d2e602a38bf4',str_to_date('2015-12-09 08:35:10', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 08:35:10', '%Y-%m-%d %H:%i:%s'),null,'BO_INTERFACE_CATALOG','NAME','名称','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,'0',null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('0505d3fed10e4320a991af5a9648be6a',str_to_date('2015-12-09 08:35:58', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:26:54', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_CATALOG','PARENT_ID','模块','CHAR','32','N','N','combobox',null,null,'SQL>select id,name from bo_interface_catalog|id|name',null,'0',null,'N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('565206a7f53740d7a071c59703fdaec5',str_to_date('2015-12-09 08:39:06', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-18 21:53:24', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','METHOD','提交方式','VARCHAR','100','Y','Y','combobox','POST',null,'POST|GET',null,'0',null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('0dd83d7c6d7a41f9a438a74765da63d9',str_to_date('2015-12-09 08:40:51', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:50:39', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','RETURN_VALUE','返回值','VARCHAR','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,'0','style="height:80px;width:407px"','N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('0336e66696f04a10bb1658b7a89f285a',str_to_date('2015-12-09 08:42:29', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:50:18', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','EXCLUDES','不返回字段','VARCHAR','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,'0','style="height:50px;width:407px"','N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('07c616a8e1b24c44889ba75ea8971720',str_to_date('2015-12-09 10:26:34', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:26:34', '%Y-%m-%d %H:%i:%s'),null,'BO_INTERFACE_DESC','CATALOG_ID','接口目录','CHAR','32','Y','Y','textbox',null,null,'prompt:\'\'',null,'0',null,'N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('5f8d0f542fd94896a743de65ac96fa90',str_to_date('2015-12-17 08:49:42', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-18 21:53:54', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','TYPE','类型','VARCHAR','100','Y','Y','combobox','PT',null,'PT:普通传参|JSON:JSON参数',null,'0',null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('4115dddc16694eda85cef57d9d411f08',str_to_date('2015-12-10 11:31:56', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-15 10:51:19', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_CATALOG','SEQUENCE','排序','DECIMAL','10','Y','Y','numberbox','10',null,'max:999999,min:0,precision:0',null,'0',null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('15a966ed45bd4768ad493dd8560e5305',str_to_date('2015-12-10 11:33:07', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-15 10:51:29', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','SEQUENCE','排序','DECIMAL','10','Y','Y','numberbox',null,null,'max:999999,min:0,precision:0',null,'0',null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('24619d3b780441aeb2433e7f8da3d856',str_to_date('2015-12-09 08:37:31', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 08:37:31', '%Y-%m-%d %H:%i:%s'),null,'BO_INTERFACE_DESC','NAME','名称','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,'0',null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('2c942d5ca0474336ba35a628022f641f',str_to_date('2015-12-09 08:38:03', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 11:32:37', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','URL','接口地址','VARCHAR','1000','N','Y','textbox','/',null,'prompt:\'\'',null,'0','style="width:407px"','Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('0cdb87c8b0124689b78bddcf8e3fc035',str_to_date('2015-12-09 08:39:59', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-09 10:50:28', '%Y-%m-%d %H:%i:%s'),'system','BO_INTERFACE_DESC','PARAMETER','参数','VARCHAR','4000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,'0','style="height:50px;width:407px"','N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('72da80dbed37413fbd7f5694d7e23461',str_to_date('2016-06-01 19:50:10', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:50:10', '%Y-%m-%d %H:%i:%s'),null,'PLAN_PROJECT','DESCRIBES','描述','VARCHAR','1000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;"','N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('95cb519707f045799ec05e355e65a578',str_to_date('2016-06-01 20:01:26', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:41:52', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','USER_ID','完成人','CHAR','32','N','Y','combobox',null,null,'SQL>select id,name from sys_user|id|name',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('84c87ee9d20d49ca8d8c0b678f5d7d5c',str_to_date('2016-06-01 20:03:40', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:03:40', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TASK','END_DATE','结束日期','DATETIME',null,'N','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('188a5e4b1460438186bbf476661790c7',str_to_date('2016-06-01 20:04:47', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:04:47', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TASK','FINISH_DATE','完成日期','DATETIME',null,'Y','N','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('a76eb904839c43258752add4242e2190',str_to_date('2016-06-01 20:09:04', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:41:10', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','PROJECT_ID','项目','CHAR','32','N','Y','combobox',null,null,'SQL>select id,name from plan_project|id|name',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('c8bc51ec3d9346de8d49278434129eab',str_to_date('2016-06-12 09:05:41', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:05:41', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_SEX','用户性别','VARCHAR','100','Y','Y','combobox',null,null,'DICT>f5814ca746a145bc844669a70d984a9c',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('7ec6a14f6c284812a7e27f47ebac4392',str_to_date('2016-06-12 09:08:34', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:08:34', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_BIRTHDAY','出生日期','DATETIME',null,'Y','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('0cd0beab2ee64b07a99fa0e49832f14c',str_to_date('2016-06-12 09:11:02', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:11:02', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_SUMMARY','用户简介','TEXT',null,'Y','Y','htmldesign',null,null,'100',null,null,'style="width:100px;"','N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('f7c32c721a6a45d79c6d8667a8df189c',str_to_date('2016-01-21 11:12:00', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-14 14:34:03', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','EXPRESSION','表达式','VARCHAR','100','Y','Y','textarea','@userId在@dateTime登录',null,'multiline:true,prompt:\'@userId==@userName==@name==@departmentId==@departmentName==@year\'',null,null,'style="height:50px;width:400px"','N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('9892bceec41347d3abb187937821a26b',str_to_date('2016-03-16 14:12:08', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 15:46:45', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','USER_NAME','用户名','VARCHAR',null,'Y','N','textbox','@name',null,null,null,null,null,'N','Y',100,100,'Y');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('910a75da82c341119044dd45e09330bf',str_to_date('2015-12-28 15:34:04', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-19 15:42:40', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','TREE_ID','下拉树','VARCHAR',null,'Y','H','combobox',null,null,null,null,null,null,'N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('8389a7f8037543b9afb22653ff711980',str_to_date('2016-06-01 19:47:37', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:47:37', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TEAM','DESCRIBES','描述','VARCHAR','1000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;"','N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('b8a5fa64c2e446cc8320966bc160f351',str_to_date('2016-06-01 19:48:15', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 19:48:15', '%Y-%m-%d %H:%i:%s'),null,'PLAN_PROJECT','NAME','名称','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('079bf63e21ef4ec88bd4c6e68fa76399',str_to_date('2016-06-01 19:56:57', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:32:52', '%Y-%m-%d %H:%i:%s'),'system','PLAN_PROJECT','STATUS','状态','VARCHAR','100','Y','H','combobox',null,null,'DICT>ed8d0e6d0eb74b8e9ca809990ec8422f',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('75c8c37fbbf348799843a70f666826b9',str_to_date('2016-06-01 19:59:21', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:43:24', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','DESCRIBES','描述','VARCHAR','100','N','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:407px;"','Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('376c352c18d649519119022f71f20eb6',str_to_date('2016-06-01 20:02:31', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-01 20:02:31', '%Y-%m-%d %H:%i:%s'),null,'PLAN_TASK','START_DATE','开始日期','DATETIME',null,'N','Y','datebox',null,null,'dateFmt:\'yyyy-MM-dd\',maxDate:\'\',minDate:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('56d7456d94ae452eb0c0e3c2c3a79235',str_to_date('2016-06-01 20:07:58', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-02 08:43:30', '%Y-%m-%d %H:%i:%s'),'system','PLAN_TASK','EXPLAIN','说明','VARCHAR','500','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:407px;"','N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('a4fddc4232de4fa5bfc4c4ebe9052765',str_to_date('2016-06-12 09:07:27', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:07:27', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_AGE','用户年龄','DECIMAL','10','Y','N','numberbox',null,null,'max:150,min:0,precision:0',null,null,null,'Y','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('3e9ccd61a2074e41941f223d5987d8ca',str_to_date('2016-04-08 10:51:27', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:51:27', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','JOB_NAME','任务名','VARCHAR','100','N','Y','textbox',null,'loginName','prompt:\'\'',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('b72e399ce1fa400f83db4cb3f24f9eac',str_to_date('2016-04-08 10:58:28', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-08 10:58:28', '%Y-%m-%d %H:%i:%s'),null,'JOB_QUARTZ_CONF','JOB_GROUP','任务分组','VARCHAR','100','N','Y','combobox','com_job',null,'DICT>0d71cae660dd4c76912a946cc83326ba',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('ba5de47aaeb24cb79b1a5a1f552d519d',str_to_date('2016-04-08 11:09:50', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-04-11 08:57:26', '%Y-%m-%d %H:%i:%s'),'system','JOB_QUARTZ_CONF','STATUS','任务状态','VARCHAR','100','Y','H','combobox',null,null,'DICT>43c35fe923dd4e80b060f247c780ab69',null,null,null,'Y','Y',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('e2f612bdbece4abdbf8f91175fea3617',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_ICON','用户头像','VARCHAR','1000','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('bcc3a4dbe79d47aa81d53e40457b3c81',str_to_date('2016-06-12 09:55:41', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:51', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','DEPARTMENT_ID','所在部门','CHAR',null,'Y','Y','combobox',null,null,null,null,null,null,'N','N',null,null,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('bae2b6bc6c5346a8b98c33d66f1f2337',str_to_date('2017-01-20 09:44:09', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-01-20 09:50:07', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','DESCRIBES','描述','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'Y');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('9f776e453a56487295e4d0bc1ed3622a',str_to_date('2017-01-20 09:44:39', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-02-07 12:59:35', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','TYPE','类型','VARCHAR2','100','N','Y','combobox',null,null,'line:折线图|bar:柱状图|pie:饼状图|gauge:仪表盘',null,null,null,'Y','Y',100,100,'Y');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('46d4fc6875ed4dbd86932924249dede5',str_to_date('2017-01-20 09:45:57', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','SET_OPTION','配置项','CLOB',null,'Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('65d8b8d27e014ac7a8da3ac6bce9227a',str_to_date('2017-01-20 09:47:35', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Z_SOURCE','系列源','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('810aa879a9f44dbda5b67c30911deb24',str_to_date('2017-01-20 09:48:23', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-01-20 09:49:25', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','Z_KEY','系列键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('23de3448d0f345f38c9cf70850357ca0',str_to_date('2017-01-20 09:49:15', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Z_VALUE','系列值','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('36dabdacffb845ce9908c16debd97f27',str_to_date('2017-01-20 09:49:54', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_SOURCE','X轴源','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('51d792c66b554702a6a9c91f113e9bf6',str_to_date('2017-01-20 09:50:49', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_KEY','X轴键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('909421a413274482861d35c686fe071c',str_to_date('2017-01-20 09:51:31', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_Z_KEY','X轴系列键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('52f05cc8b4b34d148f0dcf5bc3ea3f58',str_to_date('2017-01-20 09:51:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_VALUE','X轴值','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('4cde119f731b458a840d0de23c7563d2',str_to_date('2017-01-20 09:52:27', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_SOURCE','Y轴源','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('3004842553cd469b85b11e2777a068ed',str_to_date('2017-01-20 09:52:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_Z_KEY','Y轴系列键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('56b47e495aad4a87b7135b413be37104',str_to_date('2017-01-20 09:53:24', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_X_KEY','Y轴X轴键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('99059676f533449286f0b5ec163ce936',str_to_date('2017-01-20 09:53:47', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_VALUE','Y轴值','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('b375f754410d437ea7f2873ab75d3698',str_to_date('2017-01-20 09:54:17', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','FUNC','扩展函数','CLOB',null,'Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
+VALUES ('14a3aa6049df4ce683a3ab68c131ae76',str_to_date('2017-02-03 13:08:33', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','OPERATION','运算','VARCHAR2','100','Y','Y','combobox',null,null,'count:总数|sum:求和|avg:平均值',null,null,null,'Y','Y',100,100,'Y');
 
 INSERT INTO SYS_DEPARTMENT (ID,PARENT_ID,SEQUENCE,NAME,CODE) 
 VALUES ('dad8faf2f3eb4d279ef04decb91ca4c0','00000000000000000000000000000000',0,'超级系统管理员','001');
@@ -1280,16 +1371,16 @@ INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID)
 VALUES ('707e7b2585cd468484094fdf94d9e3be','CHAR','CHAR','jdbcType','CHAR',1,'838ebfaff94a42c5abd718e811f4da5f');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('286369a2800540d38d0a39c72b5d209a','VARCHAR2','VARCHAR2','jdbcType','VARCHAR2',5,'838ebfaff94a42c5abd718e811f4da5f');
+VALUES ('286369a2800540d38d0a39c72b5d209a','VARCHAR','VARCHAR','jdbcType','VARCHAR',5,'838ebfaff94a42c5abd718e811f4da5f');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('5e24d786442940c7b164fae2d8264821','NUMBER','NUMBER','jdbcType','NUMBER',10,'838ebfaff94a42c5abd718e811f4da5f');
+VALUES ('5e24d786442940c7b164fae2d8264821','DECIMAL','DECIMAL','jdbcType','DECIMAL',10,'838ebfaff94a42c5abd718e811f4da5f');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('13956f4e6bca40a2a45670e9593904ba','DATE','DATE','jdbcType','DATE',15,'838ebfaff94a42c5abd718e811f4da5f');
+VALUES ('13956f4e6bca40a2a45670e9593904ba','DATETIME','DATETIME','jdbcType','DATETIME',15,'838ebfaff94a42c5abd718e811f4da5f');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('d9a81aa07d14446d8a2b3aee1db88f80','CLOB','CLOB','jdbcType','CLOB',20,'838ebfaff94a42c5abd718e811f4da5f');
+VALUES ('d9a81aa07d14446d8a2b3aee1db88f80','TEXT','TEXT','jdbcType','TEXT',20,'838ebfaff94a42c5abd718e811f4da5f');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
 VALUES ('0b36e6e0de4d40bea6bb078a38bbed22','<=','小于等于','query','排序方式小于等于',15,'b23f0094a5c54035aac65c3a6e8bbc13');
@@ -1302,6 +1393,18 @@ VALUES ('b56c8a3b28ce496c84668ac05991e1ed','delay_finish','延期完成','plan_t
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
 VALUES ('6a12255ab2ce4f168e23096040eec120','sys_job','系统任务','quartz_category','系统任务计划',0,'0d71cae660dd4c76912a946cc83326ba');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('4f45bf65739c4268b580198001e4265b','oracle_operation','ORACLE运算','root',null,30,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('cdf35199de2349958465970f01575d3c','count','计数','oracle_operation',null,0,'4f45bf65739c4268b580198001e4265b');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('e62ca0c84d6b4df3a866c8cc3bad6ecd','sum','求和','oracle_operation',null,5,'4f45bf65739c4268b580198001e4265b');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('11a156a7683241d68f8d07b3bfa9a213','avg','平均值','oracle_operation',null,10,'4f45bf65739c4268b580198001e4265b');
 
 INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
 VALUES ('3fb5c9ba43654841889c278e9beca6b6','d63fb68c3af44a5a9bc93afc3edba378','演示','/bussiness/demo/list',999,'fa fa-file-o','_blank');
@@ -1372,6 +1475,9 @@ VALUES ('2a2a2bb7d0134d378efb4ad675d0b99d','d63fb68c3af44a5a9bc93afc3edba378','�
 INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
 VALUES ('063f50746a034e9b853677d9b91a490a','d63fb68c3af44a5a9bc93afc3edba378','留言板','/cms/guestbook/list',30,'fa fa-comments','_blank');
 
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('4b82b6dfd7484855bd224f3e674b05d9','b48d762c01c54dce95c31fb42204d126','统计图表','/ks/chartEngine/list',20,'fa fa-area-chart','_blank');
+
 INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
 VALUES ('d94881a8dc854298bfac029147b38e26','系统皮肤','skins');
 
@@ -1422,6 +1528,39 @@ VALUES ('349ed3e79dbe406b9034ef73bb8056d3','数据字典-列','sys:userTabColumn
 
 INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
 VALUES ('3019e17df75c4ec28ac613472fb6b79f','系统数据库建模','sys:db');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','view');
 
 INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
 VALUES ('0cc19fd4409a4d8b832a02584b15e45f','build');
@@ -1906,39 +2045,6 @@ VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','create');
 INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
 VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','delete');
 
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','deploy');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','download');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','drop');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','export');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','import');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','insert');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','print');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','select');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','update');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','upload');
-
-INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
-VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','view');
-
 INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
 VALUES ('send',15,'发送');
 
@@ -2061,6 +2167,9 @@ VALUES ('d3f34652eb03447b9cc8bb7375df675d','d63fb68c3af44a5a9bc93afc3edba378');
 
 INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
 VALUES ('d3f34652eb03447b9cc8bb7375df675d','f9253401654549a7ab86d53edf2c0d5b');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','4b82b6dfd7484855bd224f3e674b05d9');
 
 INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
 VALUES ('d3f34652eb03447b9cc8bb7375df675d','0cc19fd4409a4d8b832a02584b15e45f');
@@ -2206,17 +2315,115 @@ VALUES ('355222f869db4f4fb8a22e6888aabe48','233e1814d0484ae6ad600a84ae8b2a1b');
 INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
 VALUES ('3a657ea8ddc745a698d51aeea2183f4d','d3f34652eb03447b9cc8bb7375df675d');
 
-create or replace view v_cms_article_collections as
-select basic_id,type,count(1) cou from cms_collections group by basic_id,type;
+CREATE OR REPLACE VIEW V_CMS_ARTICLE_COLLECTIONS AS
+SELECT BASIC_ID,TYPE,COUNT(1) COU FROM CMS_COLLECTIONS GROUP BY BASIC_ID,TYPE;
 
-create or replace view v_cms_article_comment as
-select basic_id,avg(score) score,count(1) cou from cms_comment where audit_state='N' group by basic_id;
+CREATE OR REPLACE VIEW V_CMS_ARTICLE_COMMENT AS
+SELECT BASIC_ID,AVG(SCORE) SCORE,COUNT(1) COU FROM CMS_COMMENT WHERE AUDIT_STATE='N' GROUP BY BASIC_ID;
 
-create or replace view v_cms_article_tags_sub as
-select a.id,concat(t.id,':',t.name) name from cms_article a left join cms_tagcloud t on a.tag_id like concat('%',t.id,'%') where a.tag_id is not null
+CREATE OR REPLACE VIEW V_CMS_ARTICLE_TAGS_SUB AS
+SELECT A.ID,CONCAT(T.ID,':',T.NAME) NAME FROM CMS_ARTICLE A LEFT JOIN CMS_TAGCLOUD T ON A.TAG_ID LIKE CONCAT('%',T.ID,'%') WHERE A.TAG_ID IS NOT NULL;
 
-create or replace view v_cms_article_tags as
-select id,group_concat(name) tag from v_cms_article_tags_sub group by id;
+CREATE OR REPLACE VIEW V_CMS_ARTICLE_TAGS AS
+SELECT ID,GROUP_CONCAT(NAME) TAG FROM V_CMS_ARTICLE_TAGS_SUB GROUP BY ID;
 
-create or replace view v_cms_tag_article as
-select a.id,t.id tag_id,t.name name from cms_article a left join cms_tagcloud t on a.tag_id like concat('%',t.id,'%') where a.tag_id is not null;
+CREATE OR REPLACE VIEW V_CMS_TAG_ARTICLE AS
+SELECT A.ID,T.ID TAG_ID,T.NAME NAME FROM CMS_ARTICLE A LEFT JOIN CMS_TAGCLOUD T ON A.TAG_ID LIKE CONCAT('%',T.ID,'%') WHERE A.TAG_ID IS NOT NULL;
+
+
+CREATE OR REPLACE VIEW REPORT_CMS_ARTICLE AS
+SELECT SITE_ID,CATEGORY_ID,IFNULL(HITS,0) HITS FROM CMS_ARTICLE;
+
+CREATE OR REPLACE VIEW REPORT_CMS_CATEGORY AS
+SELECT ID,SITE_ID,NAME FROM CMS_CATEGORY;
+
+CREATE OR REPLACE VIEW REPORT_CMS_SITE AS
+SELECT ID,NAME FROM CMS_SITE ORDER BY CREATE_DATE ASC;
+
+CREATE OR REPLACE VIEW REPORT_DEMO_MONTH_WEATHER AS
+SELECT 'ZF' WEATHER_ID,'01' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'02' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'03' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'04' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'05' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'06' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'07' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'08' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'09' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'10' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'11' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'ZF' WEATHER_ID,'12' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'01' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'02' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'03' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'04' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'05' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'06' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'07' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'08' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'09' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'10' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'11' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL
+UNION ALL
+SELECT 'JS' WEATHER_ID,'12' MONTH_ID,FLOOR(RAND()*100) VALUE FROM DUAL;
+
+CREATE OR REPLACE VIEW REPORT_STATIC_MONTH AS
+SELECT '01' ID,'一月' NAME FROM DUAL
+UNION ALL
+SELECT '02' ID,'二月' NAME FROM DUAL
+UNION ALL
+SELECT '03' ID,'三月' NAME FROM DUAL
+UNION ALL
+SELECT '04' ID,'四月' NAME FROM DUAL
+UNION ALL
+SELECT '05' ID,'五月' NAME FROM DUAL
+UNION ALL
+SELECT '06' ID,'六月' NAME FROM DUAL
+UNION ALL
+SELECT '07' ID,'七月' NAME FROM DUAL
+UNION ALL
+SELECT '08' ID,'八月' NAME FROM DUAL
+UNION ALL
+SELECT '09' ID,'九月' NAME FROM DUAL
+UNION ALL
+SELECT '10' ID,'十月' NAME FROM DUAL
+UNION ALL
+SELECT '11' ID,'十一月' NAME FROM DUAL
+UNION ALL
+SELECT '12' ID,'十二月' NAME FROM DUAL;
+
+CREATE OR REPLACE VIEW REPORT_STATIC_WEATHER AS
+SELECT 'ZF' ID,'蒸发量' NAME FROM DUAL
+UNION ALL
+SELECT 'JS' ID,'降水量' NAME FROM DUAL;
+
+CREATE OR REPLACE VIEW REPORT_YEAR_SEASON AS
+SELECT 'SPRING' ID,'春天' NAME FROM DUAL 
+UNION ALL 
+SELECT 'SUMMER' ID,'夏天' NAME FROM DUAL 
+UNION ALL 
+SELECT 'AUTUMN' ID,'秋天' NAME FROM DUAL 
+UNION ALL 
+SELECT 'WINTER' ID,'冬天' NAME FROM DUAL;

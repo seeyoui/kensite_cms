@@ -13,9 +13,6 @@ public class TagCacheUtils {
 	private static TableColumnMapper tableColumnMapper = SpringContextHolder.getBean(TableColumnMapper.class);
 	
 	public static TableColumn getTableColumn(TableColumn tableColumn){
-		if(tableColumn.getName().equals("AREA_ID")) {
-			System.out.println("==");
-		}
 		TableColumn tc = null;
 		TableColumn tbc = null;
 		if (tableColumn!=null){

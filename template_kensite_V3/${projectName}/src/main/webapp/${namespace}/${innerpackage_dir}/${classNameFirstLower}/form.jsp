@@ -25,21 +25,22 @@
 		</div>
 		<script type="text/javascript">
 			var loadi,url,index = parent.layer.getFrameIndex(window.name);
+			var form, layer, layedit, laydate;
 			$(document).ready(function() {
 				layui.use(['form', 'layedit', 'laydate'], function() {
-				    var form = layui.form()
+				    form = layui.form()
 				    ,layer = layui.layer
 				    ,layedit = layui.layedit
 				    ,laydate = layui.laydate;
+					var row = parent.$('#dataList').datagrid('getSelected');
+					url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/save';
+					if(row != null) {//row对象不为空可认定是修改
+						loadData(row.id);
+						url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/update';
+					} else {//反之则为新建
+						//新建初始化字段示例
+					}
 				});
-				var row = parent.$('#dataList').datagrid('getSelected');
-				url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/save';
-				if(row != null) {//row对象不为空可认定是修改
-					loadData(row.id);
-					url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/update';
-				} else {//反之则为新建
-					//新建初始化字段示例
-				}
 			});
 			
 			function submitInfo() {
@@ -88,6 +89,7 @@
 					success: function(data, textStatus) {
 						parent.layer.close(loadi);
 						renderFormData(data);
+						form.render();
 					},
 					error: function(request, errType) {
 						parent.layer.close(loadi);

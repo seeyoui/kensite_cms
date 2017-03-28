@@ -35,7 +35,7 @@ import ${basepackage}.common.util.RequestResponseUtil;
 import ${basepackage}.common.util.excel.ExportExcel;
 
 import org.apache.lucene.index.Term;
-
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.seeyoui.kensite.common.base.domain.Page;
 import com.seeyoui.kensite.framework.luence.domain.LuceneDocument;
 import com.seeyoui.kensite.framework.luence.util.LuceneUtils;
@@ -58,6 +58,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:view")
 	@RequestMapping(value = "/{page}")
 	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -72,6 +73,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
 	@RequestMapping(value = "/data/{id}")
 	@ResponseBody
 	public Object data(HttpSession session,
@@ -88,6 +90,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:view")
 	@RequestMapping(value = "/form/{page}/{id}")
 	public ModelAndView form(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -104,6 +107,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
 	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listData(HttpSession session,
@@ -124,6 +128,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:view")
 	@RequestMapping(value = "/list/page", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listPage(HttpSession session,
@@ -145,6 +150,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
 	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listAll(HttpSession session,
@@ -161,6 +167,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:insert")
 	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
 	public String save(HttpSession session,
@@ -195,6 +202,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:update")
 	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
 	public String update(HttpSession session,
@@ -230,6 +238,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
@@ -255,6 +264,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:delete")
 	@RequestMapping(value = "/remove", method=RequestMethod.POST)
 	@ResponseBody
 	public String remove(HttpSession session,
@@ -272,6 +282,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:export")
 	@RequestMapping(value = "/export")
 	public String export(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
