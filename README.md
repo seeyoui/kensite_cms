@@ -131,6 +131,7 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 ## 如何交流、反馈？
 
 * QQ： 2624030701
+* QQ群：102066064（期待你的加入...）
 * E-mail：seeyouiken@163.com
 * GitHub：<https://github.com/seeyoui/kensite_cms>
 * 开源中国：<http://git.oschina.net/seeyoui/kensite_cms>
