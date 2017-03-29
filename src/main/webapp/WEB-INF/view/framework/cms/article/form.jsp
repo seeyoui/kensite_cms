@@ -70,9 +70,9 @@
 					<ks:formTag table="CMS_ARTICLE" column="HITS"/>
 					<ks:formTag table="CMS_ARTICLE" column="COPYFROM"/>
 				</div>
-				<div class="fitem">
+				<%-- <div class="fitem">
 					<ks:formTag table="CMS_ARTICLE" column="CONTENT"/>
-				</div>
+				</div> --%>
 				<div class="fitem">
 					<ks:formTag table="CMS_ARTICLE" column="CUSTOM_CONTENT_VIEW"/>
 				</div>
