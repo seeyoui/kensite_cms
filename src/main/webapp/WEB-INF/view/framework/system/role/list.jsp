@@ -43,9 +43,8 @@
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
-		        <div class="ftitle">模块权限维护</div>
 		        <form id="moduleDataForm" method="post">
-					<div class="easyui-panel" title="模块权限" style="width:300px;height:300px;">
+					<div class="easyui-panel" title="模块权限" style="width:300px;height:340px;">
 	            		<ul id="moduleTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
 					</div>
 				</form>
@@ -202,6 +201,54 @@
 							layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 						}
 						layer.close(loadi);
+					}
+				});
+			}
+	    }
+        
+        function moduleShiro() {
+        	getModuleTreeJson();
+        	$('#moduleWin').window('open');
+        }
+        
+        function getModuleTreeJson() {
+        	var row = $('#dataList').datagrid('getSelected');
+            if (row){
+            	var roleId = row.id;
+	    		$.ajax({
+					type: "POST",
+					url: "${ctx}/sysRoleModule/tree",
+					data: "roleId="+roleId,
+					dataType: "json",
+					success: function(data){
+						$("#moduleTree").tree("loadData",data);
+					}
+				});
+			}
+	    }
+	    
+	    function saveRoleModuleInfo() {
+	    	var treeObj = $('#moduleTree');
+	    	var moduleId = getChecked(treeObj);
+	    	var row = $('#dataList').datagrid('getSelected');
+	    	var roleId = row.id;
+	    	if (moduleId!=null){
+				$.ajax({
+					type: "post",
+					url: "${ctx}/sysRoleModule/save",
+					data: {roleId:roleId,moduleId:moduleId},
+					dataType: 'json',
+					beforeSend: function(XMLHttpRequest){
+						loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+					},
+					success: function(data, textStatus){
+						if (data.success==TRUE){
+							layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+						} else {
+							layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+						}
+						layer.close(loadi);
+						$('#moduleWin').window('close');
 					}
 				});
 			}
