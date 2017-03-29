@@ -289,7 +289,7 @@
 			CUSTOM_CONTENT_VIEW = #{customContentView},
 			VIEW_CONFIG = #{viewConfig},
 			UPDATE_USER = #{updateUser.userName},
-			UPDATE_DATE = sysdate,
+			UPDATE_DATE = now(),
 			ID = #{id}
 		</set>
 		WHERE ID = #{id}
