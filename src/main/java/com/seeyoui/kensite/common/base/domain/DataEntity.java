@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.seeyoui.kensite.common.util.GeneratorUUID;
+import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
@@ -126,7 +127,18 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 
 	@JsonIgnore
 	public String getSort() {
-		return StringUtils.toUnderScoreCase(sort);
+		String jdbcType = Global.getConfig("jdbc.type");
+		if("mysql".equals(jdbcType)) {
+			if(StringUtils.isNoneBlank(this.sort) && this.sort.toLowerCase().indexOf("nvl") != -1) {
+				this.sort = this.sort.replace("nvl", "ifnull");
+			}
+		}
+		if("oracle".equals(jdbcType)) {
+			if(StringUtils.isNoneBlank(this.sort) && this.sort.toLowerCase().indexOf("ifnull") != -1) {
+				this.sort = this.sort.replace("ifnull", "nvl");
+			}
+		}
+		return StringUtils.toUnderScoreCase(this.sort);
 	}
 
 	public void setSort(String sort) {
