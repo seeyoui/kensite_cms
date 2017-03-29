@@ -32,8 +32,8 @@
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysRole:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-chart_organisation" plain="true" onclick="moduleShiro()">模块权限</a> -->
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-text_list_bullets" plain="true" onclick="menuShiro()">菜单权限</a>
+		        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-chart_organisation" plain="true" onclick="moduleShiro()">模块权限</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-text_list_bullets" plain="true" onclick="menuShiro()">菜单权限</a> -->
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysRole:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
