@@ -33,13 +33,13 @@
 		    </table>
 		    <div id="toolbar">
 		    	<shiro:hasPermission name="uploadfile:insert">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="uploadfile:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="uploadfile:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 
 文件原名<input id="sel_viewname" name="sel_viewname" class="easyui-textbox" data-options=""/>
@@ -49,9 +49,9 @@ WEB访问路径<input id="sel_url" name="sel_url" class="easyui-textbox" data-op
 后缀名<input id="sel_suffix" name="sel_suffix" class="easyui-textbox" data-options=""/>
 文件大小<input id="sel_filesize" name="sel_filesize" class="easyui-textbox" data-options=""/>
 
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="系统附件表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		    <div id="dataWin" class="easyui-window" title="系统附件表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:290px;padding:10px;">
 		        <div class="ftitle">系统附件表信息维护</div>
 		        <form id="dataForm" method="post">
 							<div class="fitem">
@@ -81,8 +81,8 @@ WEB访问路径<input id="sel_url" name="sel_url" class="easyui-textbox" data-op
 				</form>
 				
 			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 	    </div>

@@ -43,8 +43,8 @@
 				        </thead>
 				    </table>
 				    <div id="tb_content" style="height:auto">
-				        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-4131',plain:true" onclick="appendContent()"></a>
-				        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-4333',plain:true" onclick="removeContent()"></a>
+				        <a href="javascript:void(0)" class="easyui-linkbutton default" data-options="iconCls:'icon-4131',plain:true" onclick="appendContent()"></a>
+				        <a href="javascript:void(0)" class="easyui-linkbutton default" data-options="iconCls:'icon-4333',plain:true" onclick="removeContent()"></a>
 				    </div>
 				</div>
 				<input id="id" name="id" type="hidden"/>

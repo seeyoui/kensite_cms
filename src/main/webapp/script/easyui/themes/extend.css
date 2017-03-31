@@ -1,3 +1,10 @@
 #dataForm .err-msg {
 	color: #cc3f44
 }
+.toolbar-title {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.toolbar-operate {
+	float: left;
+}

@@ -32,11 +32,11 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.dataSource.newInfo()">新建</a> -->
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.dataSource.newInfo('sql')">SQL数据源</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.dataSource.newInfo('st')">静态数据源</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.dataSource.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.dataSource.destroyInfo()">删除</a>
+					<!-- <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.dataSource.newInfo()">新建</a> -->
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.dataSource.newInfo('sql')">SQL数据源</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.dataSource.newInfo('st')">静态数据源</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.dataSource.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.dataSource.destroyInfo()">删除</a>
 					<ks:queryTag table="KS_DATA_SOURCE" column="REMARKS"/>
 					<ks:queryTag table="KS_DATA_SOURCE" column="NAME"/>
 					<ks:queryTag table="KS_DATA_SOURCE" column="CODE_NUM"/>
@@ -44,7 +44,7 @@
 					<ks:queryTag table="KS_DATA_SOURCE" column="DESCRIBE"/>
 					<ks:queryTag table="KS_DATA_SOURCE" column="CONTENT"/>
 					<ks:queryTag table="KS_DATA_SOURCE" column="VIEW_SQL"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.dataSource.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.dataSource.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

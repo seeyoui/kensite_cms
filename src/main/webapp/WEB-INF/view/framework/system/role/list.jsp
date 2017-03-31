@@ -28,30 +28,29 @@
 		    </table>
 		    <div id="toolbar">
 		    	<shiro:hasPermission name="sysRole:insert">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysRole:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-chart_organisation" plain="true" onclick="moduleShiro()">模块权限</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-text_list_bullets" plain="true" onclick="menuShiro()">菜单权限</a> -->
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <!-- <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-chart_organisation" plain="true" onclick="moduleShiro()">模块权限</a> -->
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysRole:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				角色名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				权限<input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">角色名</span><input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">权限</span><input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
+		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:430px;padding:10px;">
 		        <form id="moduleDataForm" method="post">
 					<div class="easyui-panel" title="模块权限" style="width:300px;height:340px;">
 	            		<ul id="moduleTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
 					</div>
 				</form>
 				
-			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoleModuleInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#moduleWin').window('close')" style="width:90px">取消</a>
+			    <div id="dataWin-buttons" style="margin-top: 5px;">
+			        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-ok" onclick="saveRoleModuleInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-cancel" onclick="javascript:$('#moduleWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 	    </div>

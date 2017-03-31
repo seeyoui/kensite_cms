@@ -28,31 +28,30 @@
 		    </table>
 		    <div id="toolbar">
 		    	<shiro:hasPermission name="sysModule:insert">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysModule:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-chart_organisation" plain="true" onclick="permissionInfo()">模块操作</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-chart_organisation" plain="true" onclick="permissionInfo()">模块操作</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysModule:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				模块名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				权限<input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">模块名称</span><input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">权限</span><input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="permissionWin" class="easyui-window" title="模块操作维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
-		        <div class="ftitle">模块操作维护</div>
 		        <form id="permissionDataForm" method="post">
-					<div class="easyui-panel" title="操作" style="width:300px;height:300px;">
+					<div class="easyui-panel" title="操作" style="width:300px;height:310px;">
 	            		<ul id="permissionTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
 					</div>
 				    <input id="roleid" name="roleid" type="hidden"/>
 				</form>
 				
-			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveModulePermissionInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#permissionWin').window('close')" style="width:90px">取消</a>
+			    <div id="dataWin-buttons" style="margin-top: 5px;">
+			        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-ok" onclick="saveModulePermissionInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-cancel" onclick="javascript:$('#permissionWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 	    </div>

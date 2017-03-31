@@ -48,10 +48,10 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.category.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.category.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.category.destroyInfo()">删除</a>
-					<!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.category.exportExcel()">导出</a> -->
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.category.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.category.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.category.destroyInfo()">删除</a>
+					<!-- <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.category.exportExcel()">导出</a> -->
 					<ks:queryTag table="CMS_CATEGORY" column="REMARKS"/>
 					<ks:queryTag table="CMS_CATEGORY" column="SITE_ID"/>
 					<ks:queryTag table="CMS_CATEGORY" column="MODULE"/>
@@ -70,7 +70,7 @@
 					<ks:queryTag table="CMS_CATEGORY" column="VIEW_CONFIG"/>
 					<input id="sel_parentId" name="sel_parentId" type="hidden" value='${ksfn:getConst("ROOT_ID_32")}'/>
 					<input id="sel_nodeTId" name="sel_nodeTId" type="hidden" value=''/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.category.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.category.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

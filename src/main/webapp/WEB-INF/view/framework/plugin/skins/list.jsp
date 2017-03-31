@@ -29,17 +29,17 @@
 		    </table>
 		    <div id="toolbar">
 		    	<shiro:hasPermission name="skins:insert">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="skins:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="skins:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 
-				说明<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">说明</span><input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
     </div>
@@ -85,8 +85,8 @@
             url = '${ctx}/sys/skins/form';
         	layer.open({
         	    type: 2,
-        	    title: '部门基本信息',
-        	    area: ['300px', '220px'],
+        	    title: '皮肤基本信息',
+        	    area: ['310px', '250px'],
         	    fix: false, //不固定
         	    maxmin: false,
         	    content: url,

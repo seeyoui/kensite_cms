@@ -46,9 +46,9 @@
 			<input type="text" id="userName" name="userName" placeholder="帐号"/>
 			<i class="icon-user icon-large"></i>
 		</p>
-			<p class="field">
-				<input type="password" id="password" name="password" placeholder="密码"/>
-				<i class="icon-lock icon-large"></i>
+		<p class="field">
+			<input type="password" id="password" name="password" placeholder="密码"/>
+			<i class="icon-lock icon-large"></i>
 		</p>
 		<input id="rememberMe" name="rememberMe" type="hidden" value="" />
 		<p class="submit">

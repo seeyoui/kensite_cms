@@ -29,14 +29,14 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="exportWord()">导出</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-remove" plain="true" onclick="exportWord()">导出</a>
 		        <br/>
-				名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				描述<input id="sel_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">名称</span><input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">描述</span><input id="sel_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
 		<div style="position:absolute;top:0px;right:0px;left:450px;bottom:0px;">
@@ -64,19 +64,18 @@
 		        </thead>
 		    </table>
 		    <div id="subtoolbar">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newSubInfo()">新建</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editSubInfo()">修改</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroySubInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newSubInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editSubInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroySubInfo()">删除</a>
 		        <br/>
-				列名<input id="sel_sub_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				注释<input id="sel_sub_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
-				类型<input id="sel_jdbcType" name="sel_jdbcType" class="easyui-textbox" data-options=""/>
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectSubData()">查询</a>
+				<span class="toolbar-title">列名</span><input id="sel_sub_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">注释</span><input id="sel_sub_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">类型</span><input id="sel_jdbcType" name="sel_jdbcType" class="easyui-textbox" data-options=""/>
+				<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectSubData()">查询</a>
 		    </div>
 	    </div>
     </div>
-    <div id="dataWin" class="easyui-window" title="业务表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-        <div class="ftitle">业务表信息维护</div>
+    <div id="dataWin" class="easyui-window" title="业务表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:280px;padding:10px;">
         <form id="dataForm" method="post">
 			<div class="fitem">
                 <label>名称</label>
@@ -106,12 +105,11 @@
 		</form>
 		
 	    <div id="dataWin-buttons">
-	        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
-	        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
 	    </div>
     </div>
-    <div id="dataSubWin" class="easyui-window" title="业务表字段信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:800px;height:280px;padding:10px;">
-        <div class="ftitle">业务表字段信息维护</div>
+    <div id="dataSubWin" class="easyui-window" title="业务表字段信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:800px;height:310px;padding:10px;">
         <form id="dataSubForm" method="post">
 			<div class="fitem">
                 <label>列名</label>
@@ -183,8 +181,8 @@
 		</form>
 		
 	    <div id="dataWin-buttons">
-	        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveSubInfo()" style="width:90px">保存</a>
-	        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataSubWin').window('close')" style="width:90px">取消</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-ok" onclick="saveSubInfo()" style="width:90px">保存</a>
+	        <a href="javascript:void(0)" class="easyui-linkbutton default" iconCls="icon-cancel" onclick="javascript:$('#dataSubWin').window('close')" style="width:90px">取消</a>
 	    </div>
     </div>
     <script type="text/javascript">

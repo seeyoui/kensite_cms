@@ -52,7 +52,7 @@
 					<ks:queryTag table="CMS_COMMENT" column="AUDIT_USER_NAME"/>
 					<ks:queryTag table="CMS_COMMENT" column="AUDIT_DATE"/>
 					<ks:queryTag table="CMS_COMMENT" column="AUDIT_STATE"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.comment.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.comment.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

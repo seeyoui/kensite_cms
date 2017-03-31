@@ -35,18 +35,18 @@
 		    </table>
 		    <div id="toolbar">
 		    	<shiro:hasPermission name="sysMenu:insert">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysMenu:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysMenu:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 				<input id="sel_parentId" name="sel_parentId" type="hidden" value='${ksfn:getConst("ROOT_ID_32")}'/>
-				名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				URL<input id="sel_url" name="sel_url" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">名称</span><input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">URL</span><input id="sel_url" name="sel_url" class="easyui-textbox" data-options=""/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
     </div>

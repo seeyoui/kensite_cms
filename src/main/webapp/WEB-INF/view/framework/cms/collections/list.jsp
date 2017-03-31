@@ -31,17 +31,17 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.collections.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.collections.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.collections.destroyInfo()">删除</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.collections.exportExcel()">导出</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.collections.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.collections.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.collections.destroyInfo()">删除</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.collections.exportExcel()">导出</a>
 					<ks:queryTag table="CMS_COLLECTIONS" column="REMARKS"/>
 					<ks:queryTag table="CMS_COLLECTIONS" column="SITE_ID"/>
 					<ks:queryTag table="CMS_COLLECTIONS" column="CATEGORY_ID"/>
 					<ks:queryTag table="CMS_COLLECTIONS" column="BASIC_ID"/>
 					<ks:queryTag table="CMS_COLLECTIONS" column="TYPE"/>
 					<ks:queryTag table="CMS_COLLECTIONS" column="CATEGORY"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.collections.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.collections.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

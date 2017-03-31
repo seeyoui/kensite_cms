@@ -36,10 +36,10 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.site.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.site.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.site.destroyInfo()">删除</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.site.exportExcel()">导出</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.site.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.site.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.site.destroyInfo()">删除</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.site.exportExcel()">导出</a>
 					<ks:queryTag table="CMS_SITE" column="REMARKS"/>
 					<ks:queryTag table="CMS_SITE" column="NAME"/>
 					<ks:queryTag table="CMS_SITE" column="TITLE"/>
@@ -50,7 +50,7 @@
 					<ks:queryTag table="CMS_SITE" column="THEME"/>
 					<ks:queryTag table="CMS_SITE" column="COPYRIGHT"/>
 					<ks:queryTag table="CMS_SITE" column="CUSTOM_VIEW"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.site.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.site.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

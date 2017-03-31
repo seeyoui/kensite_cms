@@ -31,18 +31,18 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.connCenter.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.connCenter.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.connCenter.destroyInfo()">删除</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-connect" plain="true" onclick="$.connCenter.conn()">测试连接</a>
-					<!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.connCenter.exportExcel()">导出</a> -->
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.connCenter.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.connCenter.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.connCenter.destroyInfo()">删除</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-connect" plain="true" onclick="$.connCenter.conn()">测试连接</a>
+					<!-- <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.connCenter.exportExcel()">导出</a> -->
 					<ks:queryTag table="KS_CONN_CENTER" column="REMARKS"/>
 					<ks:queryTag table="KS_CONN_CENTER" column="NAME"/>
 					<ks:queryTag table="KS_CONN_CENTER" column="DRIVER"/>
 					<ks:queryTag table="KS_CONN_CENTER" column="URL"/>
 					<ks:queryTag table="KS_CONN_CENTER" column="USERNAME"/>
 					<ks:queryTag table="KS_CONN_CENTER" column="PASSWORD"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.connCenter.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.connCenter.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

@@ -29,7 +29,7 @@
 					<ks:formTag table="CMS_TAG_DESC" column="ATTRIBUTE"/>
 				</div> --%>
 				<div class="fitem">
-			    	<div style="position:absolute;top:140px;left:0px;right:0px;height:200px">
+			    	<div style="position:absolute;top:150px;left:0px;right:0px;height:200px">
 		                <table id="dg_attr" class="easyui-datagrid" title="属性" style="width:100%;height:100%"
 				            data-options="fitColumns: true,singleSelect: true,toolbar: '#tb_attr',onClickCell: onClickCellAttr">
 					        <thead>
@@ -48,9 +48,9 @@
 			</form>
 		</div>
 	    <div id="tb_attr" style="height:auto">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-4131',plain:true" onclick="appendAttr()"></a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-4333',plain:true" onclick="removeAttr()"></a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-28013',plain:true" onclick="appendInitAttr()"></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton default" data-options="iconCls:'icon-4131',plain:true" onclick="appendAttr()"></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton default" data-options="iconCls:'icon-4333',plain:true" onclick="removeAttr()"></a>
+        <a href="javascript:void(0)" class="easyui-linkbutton default" data-options="iconCls:'icon-28013',plain:true" onclick="appendInitAttr()"></a>
 	    </div>
 		<script type="text/javascript">
 			var loadi,url,index = parent.layer.getFrameIndex(window.name);

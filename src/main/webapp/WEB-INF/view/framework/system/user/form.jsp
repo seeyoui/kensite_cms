@@ -14,16 +14,16 @@
  	<div style="position:absolute;top:10px;left:20px;right:20px;bottom:10px;">
         <form id="dataForm" method="post">
 			<div class="fitem">
+                <label>部门</label>
+                <input id="deptTree" name="departmentId" class="easyui-combotree" data-options="required:true,tipPosition:'top'" url="${ctx}/sysDepartment/tree"/>
+            </div>
+			<div class="fitem">
                 <label>账号</label>
                 <input id="userName" name="userName" class="easyui-textbox" data-options="required:true,tipPosition:'top'"/>
             </div>
 			<div class="fitem">
                 <label>用户名</label>
                 <input id="name" name="name" class="easyui-textbox" data-options="required:true,tipPosition:'top'"/>
-            </div>
-			<div class="fitem">
-                <label>部门</label>
-                <input id="deptTree" name="departmentId" class="easyui-combotree" data-options="required:true,tipPosition:'top'" url="${ctx}/sysDepartment/tree"/>
             </div>
           	<div class="fitem">
 				<label>用户密码:</label>

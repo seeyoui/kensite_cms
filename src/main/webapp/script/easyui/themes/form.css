@@ -16,14 +16,14 @@ form{
     display:inline-block;
     width:80px;
 }
-/*
+
 .fitem input{
     width:160px;
 }
-*/
+
 
 .date-input{
-	height:22px;
+	height:32px;
 	border:1px solid #ddd;
 }
 

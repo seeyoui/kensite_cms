@@ -31,17 +31,21 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.tagDesc.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.tagDesc.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.tagDesc.destroyInfo()">删除</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.tagDesc.exportExcel()">导出</a>
-					<ks:queryTag table="CMS_TAG_DESC" column="REMARKS"/>
-					<ks:queryTag table="CMS_TAG_DESC" column="NAME"/>
-					<ks:queryTag table="CMS_TAG_DESC" column="TAG_NAME"/>
-					<ks:queryTag table="CMS_TAG_DESC" column="CATEGORY"/>
-					<ks:queryTag table="CMS_TAG_DESC" column="DESCRIBE"/>
-					<ks:queryTag table="CMS_TAG_DESC" column="ATTRIBUTE"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.tagDesc.selectData()">查询</a>
+					<div class="toolbar-operate">
+						<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.tagDesc.newInfo()">新建</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.tagDesc.editInfo()">修改</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.tagDesc.destroyInfo()">删除</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.tagDesc.exportExcel()">导出</a>
+					</div>
+					<div class="toolbar-search">
+						<ks:queryTag table="CMS_TAG_DESC" column="REMARKS"/>
+						<ks:queryTag table="CMS_TAG_DESC" column="NAME"/>
+						<ks:queryTag table="CMS_TAG_DESC" column="TAG_NAME"/>
+						<ks:queryTag table="CMS_TAG_DESC" column="CATEGORY"/>
+						<ks:queryTag table="CMS_TAG_DESC" column="DESCRIBE"/>
+						<ks:queryTag table="CMS_TAG_DESC" column="ATTRIBUTE"/>
+						<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.tagDesc.selectData()">查询</a>
+					</div>
 				</div>
 			</div>
 		</div>

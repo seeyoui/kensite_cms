@@ -78,7 +78,7 @@
 					<ks:queryTag table="CMS_COMMENT" column="AUDIT_STATE"/>
 					<input id="sel_categoryId" name="sel_categoryId" type="hidden" value=''/>
 					<input id="sel_siteId" name="sel_siteId" type="hidden" value='${ksfn:getConst("ROOT_ID_32")}'/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.comment.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.comment.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

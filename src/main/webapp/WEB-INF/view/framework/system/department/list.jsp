@@ -32,18 +32,18 @@
 		    </table>
 		    <div id="toolbar">
 		    	<shiro:hasPermission name="sysDepartment:insert">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysDepartment:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysDepartment:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 				<input id="sel_parentId" name="sel_parentId" type="hidden" value='${ksfn:getConst("ROOT_ID_32")}'/>
-				部门名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				部门编号<input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">部门名称</span><input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">部门编号</span><input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
     </div>
@@ -107,7 +107,7 @@
         	layer.open({
         	    type: 2,
         	    title: '部门基本信息',
-        	    area: ['300px', '390px'],
+        	    area: ['310px', '390px'],
         	    fix: false, //不固定
         	    maxmin: false,
         	    content: url,

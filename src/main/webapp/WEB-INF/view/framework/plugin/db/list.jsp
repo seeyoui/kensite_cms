@@ -29,11 +29,11 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-				表名<input id="sel_tableName" name="sel_tableName" class="easyui-textbox" data-options="" style="width:100px;"/>
-				类型<input id="sel_tableType" name="sel_tableType"  class="easyui-combobox" data-options="panelHeight: 'auto',valueField: 'value',textField: 'text'" style="width:80px;"/>
-				注释<input id="sel_tab_comments" name="sel_tab_comments" class="easyui-textbox" data-options="" style="width:100px;"/>
-				表空间<input id="sel_tablespaceName" name="sel_tablespaceName" class="easyui-textbox" data-options="" style="width:100px;"/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">表名</span><input id="sel_tableName" name="sel_tableName" class="easyui-textbox" data-options="" style="width:100px;"/>
+				<span class="toolbar-title">类型</span><input id="sel_tableType" name="sel_tableType"  class="easyui-combobox" data-options="panelHeight: 'auto',valueField: 'value',textField: 'text'" style="width:80px;"/>
+				<span class="toolbar-title">注释</span><input id="sel_tab_comments" name="sel_tab_comments" class="easyui-textbox" data-options="" style="width:100px;"/>
+				<span class="toolbar-title">表空间</span><input id="sel_tablespaceName" name="sel_tablespaceName" class="easyui-textbox" data-options="" style="width:100px;"/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
 		<div style="position:absolute;top:0px;right:0px;left:600px;bottom:0px;">
@@ -62,12 +62,12 @@
 		        </thead>
 		    </table>
 		    <div id="subtoolbar">
-				列名<input id="sel_columnName" name="sel_columnName" class="easyui-textbox" data-options="" style="width:100px;"/>
-				类型<input id="sel_dataType" name="sel_dataType" class="easyui-textbox" data-options="" style="width:100px;"/>
-				是否可为空<input id="sel_nullable" name="sel_nullable" class="easyui-combobox" data-options="panelHeight: 'auto',valueField: 'value',textField: 'text'" style="width:40px;"/>
-				注释<input id="sel_col_comments" name="sel_col_comments" class="easyui-textbox" data-options="" style="width:100px;"/>
-				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectSubData()">查询</a>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="expertExcel()">导出</a>
+				<span class="toolbar-title">列名</span><input id="sel_columnName" name="sel_columnName" class="easyui-textbox" data-options="" style="width:100px;"/>
+				<span class="toolbar-title">类型</span><input id="sel_dataType" name="sel_dataType" class="easyui-textbox" data-options="" style="width:100px;"/>
+				<span class="toolbar-title">是否可为空</span><input id="sel_nullable" name="sel_nullable" class="easyui-combobox" data-options="panelHeight: 'auto',valueField: 'value',textField: 'text'" style="width:40px;"/>
+				<span class="toolbar-title">注释</span><input id="sel_col_comments" name="sel_col_comments" class="easyui-textbox" data-options="" style="width:100px;"/>
+				<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectSubData()">查询</a>
+			    <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="expertExcel()">导出</a>
 		    </div>
 	    </div>
     </div>

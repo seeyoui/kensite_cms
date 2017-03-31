@@ -66,11 +66,11 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.article.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.article.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.article.destroyInfo()">删除</a>
-					<!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.article.exportExcel()">导出</a> -->
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-16099" plain="true" onclick="$.article.showCommon()">管理评价</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.article.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.article.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.article.destroyInfo()">删除</a>
+					<!-- <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.article.exportExcel()">导出</a> -->
+					<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-16099" plain="true" onclick="$.article.showCommon()">管理评价</a>
 					<ks:queryTag table="CMS_ARTICLE" column="REMARKS"/>
 					<ks:queryTag table="CMS_ARTICLE" column="SITE_ID"/>
 					<ks:queryTag table="CMS_ARTICLE" column="TITLE"/>
@@ -86,7 +86,7 @@
 					<ks:queryTag table="CMS_ARTICLE" column="VIEW_CONFIG"/>
 					<input id="sel_categoryId" name="sel_categoryId" type="hidden" value=''/>
 					<input id="sel_siteId" name="sel_siteId" type="hidden" value='${ksfn:getConst("ROOT_ID_32")}'/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.article.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.article.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

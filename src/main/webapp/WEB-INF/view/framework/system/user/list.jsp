@@ -24,25 +24,23 @@
 					    <th field="userName" width="100px">账号</th>
 					    <th field="name" width="100px">用户名</th>
 					    <th field="state" width="100px" formatter="formatState">状态</th>
+						<th field="operate" width="100px" data-options="formatter:rowformater">操作</th>
 		            </tr>
 		        </thead>
 		    </table>
 		    <div id="toolbar">
 		    	<shiro:hasPermission name="sysUser:insert">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysUser:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-arrow_refresh" plain="true" onclick="initPassword()">初始化密码</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-lock" plain="true" onclick="updateState(0)">冻结账号</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-key" plain="true" onclick="updateState(1)">激活账号</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysUser:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				账号<input id="sel_userName" name="sel_userName" class="easyui-textbox" data-options=""/>
-				用户名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+				<span class="toolbar-title">账号</span><input id="sel_userName" name="sel_userName" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">用户名</span><input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
 	    <div style="position:absolute;top:0px;width:300px;right:0px;bottom:0px;">
@@ -83,6 +81,25 @@
     		    name:sel_name
         	});
         }
+        
+	    //生成操作栏
+	    function rowformater(value, row, index) {
+			var button = "";
+			button = button
+				+ '<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="initPassword(\''
+				+ row.id + '\')">初始化密码</a> |';	
+			if (row.state=='1') {
+				button = button
+					+ '<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="updateState(\''
+					+ row.id + '\', \''+row.userName+'\', 0)">冻结</a> |';
+			}
+			if (row.state=='0') {
+				button = button
+					+ '<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="updateState(\''
+					+ row.id + '\', \''+row.userName+'\', 1)">激活</a> |';
+			}
+			return button;
+		}
         
         function formatState(val,row){
 	    	if(val==1){
@@ -166,7 +183,7 @@
         	layer.open({
         	    type: 2,
         	    title: '用户基本信息',
-        	    area: ['300px', '390px'],
+        	    area: ['310px', '390px'],
         	    fix: false, //不固定
         	    maxmin: false,
         	    content: url,
@@ -215,60 +232,54 @@
             }
         }
         
-        function initPassword(){
-            var row = $('#dataList').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('确认','你确定初始化该记录的密码为123456吗？',function(r){
-                    if (r){
-                    	$.ajax({
-							type: "post",
-							url: "${ctx}/sysUser/initPassword",
-							data: {id : row.id},
-							dataType: 'json',
-							beforeSend: function(XMLHttpRequest){
-								loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
-							},
-							success: function(data, textStatus){
-								if (data.success==TRUE){
-			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-			                    } else {
-				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-			                    }
-			                    layer.close(loadi);
-								reloadData();
+        function initPassword(id){
+			$.messager.confirm('确认','你确定初始化该记录的密码为123456吗？',function(r){
+				if (r){
+					$.ajax({
+						type: "post",
+						url: "${ctx}/sysUser/initPassword",
+						data: {id : id},
+						dataType: 'json',
+						beforeSend: function(XMLHttpRequest){
+							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+						},
+						success: function(data, textStatus){
+							if (data.success==TRUE){
+								layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+							} else {
+								layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 							}
-						});
-                    }
-                });
-            }
+							layer.close(loadi);
+							reloadData();
+						}
+					});
+				}
+			});
         }
         
-        function updateState(state){
-            var row = $('#dataList').datagrid('getSelected');
-            if (row){
-                $.messager.confirm('确认','你确定改变该记录的登录状态吗？',function(r){
-                    if (r){
-                    	$.ajax({
-							type: "post",
-							url: "${ctx}/sysUser/updateState",
-							data: {id : row.id, userName : row.userName, state : state},
-							dataType: 'json',
-							beforeSend: function(XMLHttpRequest){
-								loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
-							},
-							success: function(data, textStatus){
-								if (data.success==TRUE){
-			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-			                    } else {
-				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-			                    }
-			                    layer.close(loadi);
-								reloadData();
+        function updateState(id, userName, state){
+			$.messager.confirm('确认','你确定改变该记录的登录状态吗？',function(r){
+				if (r){
+					$.ajax({
+						type: "post",
+						url: "${ctx}/sysUser/updateState",
+						data: {id : id, userName : userName, state : state},
+						dataType: 'json',
+						beforeSend: function(XMLHttpRequest){
+							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+						},
+						success: function(data, textStatus){
+							if (data.success==TRUE){
+								layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+							} else {
+								layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 							}
-						});
-                    }
-                });
-            }
+							layer.close(loadi);
+							reloadData();
+						}
+					});
+				}
+			});
         }
     </script>
   </body>

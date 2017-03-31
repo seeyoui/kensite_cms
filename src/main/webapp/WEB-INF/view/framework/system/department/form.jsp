@@ -13,6 +13,10 @@
   <body>
  	<div style="position:absolute;top:10px;left:20px;right:20px;bottom:10px;">
         <form id="dataForm" method="post">
+            <div class="fitem">
+                <label>上级部门</label>
+                <input id="parentId" name="parentId" class="easyui-combotree" data-options="required:true,tipPosition:'top',idFiled:'id',textField:'name',parentField:'parentId'" style="width:160px;" url="${ctx}/sysDepartment/list/all"/>
+            </div>
 			<div class="fitem">
                 <label>部门名称</label>
                 <input id="name" name="name" class="easyui-textbox" data-options="required:true,tipPosition:'top'"/>
@@ -21,10 +25,6 @@
                 <label>部门编号</label>
                 <input id="code" name="code" class="easyui-textbox" data-options="required:true,tipPosition:'top'"/>
                 <span id="msg-code" class="err-msg"></span>
-            </div>
-            <div class="fitem">
-                <label>上级部门</label>
-                <input id="parentId" name="parentId" class="easyui-combotree" data-options="required:true,tipPosition:'top',idFiled:'id',textField:'name',parentField:'parentId'" style="width:160px;" url="${ctx}/sysDepartment/list/all"/>
             </div>
             <div class="fitem">
                 <label>排序</label>

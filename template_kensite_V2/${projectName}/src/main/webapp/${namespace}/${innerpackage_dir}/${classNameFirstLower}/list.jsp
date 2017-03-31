@@ -33,24 +33,28 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-				<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:insert"> --%>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.${table.classNameFirstLower}.newInfo()">新建</a>
-				<%-- </shiro:hasPermission> --%>
-				<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:update"> --%>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.${table.classNameFirstLower}.editInfo()">修改</a>
-				<%-- </shiro:hasPermission> --%>
-				<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:delete"> --%>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.${table.classNameFirstLower}.destroyInfo()">删除</a>
-				<%-- </shiro:hasPermission> --%>
-				<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:export"> --%>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.${table.classNameFirstLower}.exportExcel()">导出</a>
-				<%-- </shiro:hasPermission> --%>
-					<#list table.columns as column>
-					<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="delflag") ><#else>
-					<ks:queryTag table="${table.sqlName}" column="${column.sqlName}"/>
-					</#if>
-					</#list>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.${table.classNameFirstLower}.selectData()">查询</a>
+					<div class="toolbar-operate">
+					<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:insert"> --%>
+						<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.${table.classNameFirstLower}.newInfo()">新建</a>
+					<%-- </shiro:hasPermission> --%>
+					<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:update"> --%>
+						<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.${table.classNameFirstLower}.editInfo()">修改</a>
+					<%-- </shiro:hasPermission> --%>
+					<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:delete"> --%>
+						<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.${table.classNameFirstLower}.destroyInfo()">删除</a>
+					<%-- </shiro:hasPermission> --%>
+					<%-- <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:export"> --%>
+						<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.${table.classNameFirstLower}.exportExcel()">导出</a>
+					<%-- </shiro:hasPermission> --%>
+					</div>
+					<div class="toolbar-search">
+						<#list table.columns as column>
+						<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="delflag") ><#else>
+						<ks:queryTag table="${table.sqlName}" column="${column.sqlName}"/>
+						</#if>
+						</#list>
+						<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.${table.classNameFirstLower}.selectData()">查询</a>
+					</div>
 				</div>
 			</div>
 		</div>

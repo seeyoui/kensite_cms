@@ -41,14 +41,14 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.tagcloud.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.tagcloud.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.tagcloud.destroyInfo()">删除</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.tagcloud.exportExcel()">导出</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.tagcloud.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.tagcloud.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.tagcloud.destroyInfo()">删除</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.tagcloud.exportExcel()">导出</a>
 					<ks:queryTag table="CMS_TAGCLOUD" column="REMARKS"/>
 					<ks:queryTag table="CMS_TAGCLOUD" column="NAME"/>
 					<input id="sel_siteId" name="sel_siteId" type="hidden" value='${ksfn:getConst("ROOT_ID_32")}'/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.tagcloud.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.tagcloud.selectData()">查询</a>
 				</div>
 			</div>
 		</div>
@@ -77,6 +77,10 @@
 					$.tagcloud.selectData();
 				},
 				newInfo : function (){
+					if($('#sel_siteId').val() == '' || $('#sel_siteId').val() == '${ksfn:getConst("ROOT_ID_32")}') {
+						layer.msg("请先选择站点！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+						return;
+					}
 					$('#dataList').datagrid('clearSelections');
 					$.tagcloud.layerOpen(url);
 				},

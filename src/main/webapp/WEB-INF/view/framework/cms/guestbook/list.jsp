@@ -50,10 +50,10 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.guestbook.newInfo()">新建</a> -->
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.guestbook.editInfo()">回复</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.guestbook.destroyInfo()">删除</a>
-					<!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.guestbook.exportExcel()">导出</a> -->
+					<!-- <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.guestbook.newInfo()">新建</a> -->
+					<a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-edit" plain="true" onclick="$.guestbook.editInfo()">回复</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.guestbook.destroyInfo()">删除</a>
+					<!-- <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.guestbook.exportExcel()">导出</a> -->
 					<ks:queryTag table="CMS_GUESTBOOK" column="REMARKS"/>
 					<ks:queryTag table="CMS_GUESTBOOK" column="TYPE"/>
 					<ks:queryTag table="CMS_GUESTBOOK" column="CONTENT"/>
@@ -66,7 +66,7 @@
 					<ks:queryTag table="CMS_GUESTBOOK" column="REDATE"/>
 					<ks:queryTag table="CMS_GUESTBOOK" column="RECONTENT"/>
 					<input id="sel_siteId" name="sel_siteId" type="hidden" value='${ksfn:getConst("ROOT_ID_32")}'/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.guestbook.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.guestbook.selectData()">查询</a>
 				</div>
 			</div>
 		</div>
@@ -122,7 +122,7 @@
 					layer.open({
 						type: 2,
 						title: '内容发布留言板基本信息',
-						area: ['550px', '450px'],
+						area: ['550px', '480px'],
 						fix: false, //不固定
 						maxmin: false,
 						content: url,

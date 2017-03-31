@@ -42,9 +42,9 @@
 					</thead>
 				</table>
 				<div id="toolbar">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.chartEngine.newInfo()">新建</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.chartEngine.editInfo()">修改</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.chartEngine.destroyInfo()">删除</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.chartEngine.newInfo()">新建</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.chartEngine.editInfo()">修改</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.chartEngine.destroyInfo()">删除</a>
 					<ks:queryTag table="KS_CHART_ENGINE" column="REMARKS"/>
 					<ks:queryTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
 					<ks:queryTag table="KS_CHART_ENGINE" column="TYPE"/>
@@ -61,7 +61,7 @@
 					<ks:queryTag table="KS_CHART_ENGINE" column="Y_X_KEY"/>
 					<ks:queryTag table="KS_CHART_ENGINE" column="Y_VALUE"/>
 					<ks:queryTag table="KS_CHART_ENGINE" column="FUNC"/>
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.chartEngine.selectData()">查询</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.chartEngine.selectData()">查询</a>
 				</div>
 			</div>
 		</div>

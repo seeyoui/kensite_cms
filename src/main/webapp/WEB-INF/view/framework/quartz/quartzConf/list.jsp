@@ -36,17 +36,17 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.quartzConf.newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="$.quartzConf.newInfo()">新建</a>
 		    	<shiro:hasPermission name="quartz:quartzConf:insert">
 		        </shiro:hasPermission>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.quartzConf.editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.quartzConf.editInfo()">修改</a>
 		        <shiro:hasPermission name="quartz:quartzConf:update">
 		        </shiro:hasPermission>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.quartzConf.destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.quartzConf.destroyInfo()">删除</a>
 		        <shiro:hasPermission name="quartz:quartzConf:delete">
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="quartz:quartzConf:export">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.quartzConf.exportExcel()">导出</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-export" plain="true" onclick="$.quartzConf.exportExcel()">导出</a>
 		        </shiro:hasPermission>
 		    	<ks:queryTag table="JOB_QUARTZ_CONF" column="REMARKS"/>
 		    	<ks:queryTag table="JOB_QUARTZ_CONF" column="JOB_NAME"/>
@@ -60,7 +60,7 @@
 		    	<ks:queryTag table="JOB_QUARTZ_CONF" column="JOB_CLASS"/>
 		    	<ks:queryTag table="JOB_QUARTZ_CONF" column="START_AT"/>
 		    	<ks:queryTag table="JOB_QUARTZ_CONF" column="END_AT"/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.quartzConf.selectData()">查询</a>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="$.quartzConf.selectData()">查询</a>
 		    </div>
 	    </div>
     </div>
@@ -110,7 +110,7 @@
 	        	layer.open({
 	        	    type: 2,
 	        	    title: '定时任务计划配置基本信息',
-	        	    area: ['550px', '350px'],
+	        	    area: ['550px', '440px'],
 	        	    fix: false, //不固定
 	        	    maxmin: false,
 	        	    content: url,
@@ -173,7 +173,6 @@
 	        }
         }
         
-
 	    //生成操作栏
 	    function rowformater(value, row, index) {
 			var button = "";

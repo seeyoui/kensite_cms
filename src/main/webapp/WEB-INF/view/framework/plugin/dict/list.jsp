@@ -31,16 +31,16 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 
-				数据值<input id="sel_value" name="sel_value" class="easyui-textbox" data-options=""/>
-				标签名<input id="sel_label" name="sel_label" class="easyui-textbox" data-options=""/>
-				分类<input id="sel_category" name="sel_category" class="easyui-textbox" data-options=""/>
-				描述<input id="sel_description" name="sel_description" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">数据值</span><input id="sel_value" name="sel_value" class="easyui-textbox" data-options=""/>
+				<span class="toolbar-title">标签名</span><input id="sel_label" name="sel_label" class="easyui-textbox" data-options=""/>
+				<!-- <span class="toolbar-title">分类</span><input id="sel_category" name="sel_category" class="easyui-textbox" data-options=""/> -->
+				<span class="toolbar-title">描述</span><input id="sel_description" name="sel_description" class="easyui-textbox" data-options=""/>
 				<input id="sel_parentId" name="sel_parentId" type="hidden" value=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+			    <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
     </div>
@@ -100,7 +100,7 @@
         	layer.open({
         	    type: 2,
         	    title: '系统字典基本信息',
-        	    area: ['310px', '340px'],
+        	    area: ['310px', '345px'],
         	    fix: false, //不固定
         	    maxmin: false,
         	    content: url,
