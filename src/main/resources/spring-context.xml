@@ -104,6 +104,9 @@
 		<property name="basePackage" value="com.seeyoui.kensite" />
 	</bean>
 	
+	<!-- swagger config -->
+	<bean class="com.seeyoui.kensite.common.swagger.MySwaggerConfig"/>
+	
 	<!-- 拦截器配置 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -112,6 +115,9 @@
 			<mvc:exclude-mapping path="/bootstrap/**"/>
 			<mvc:exclude-mapping path="/script/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/swagger/**"/>
+			<mvc:exclude-mapping path="/ws/**"/>
+			<mvc:exclude-mapping path="/api-docs/**"/>
 			<mvc:exclude-mapping path="/ks/chart/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/portal/**"/>

@@ -480,6 +480,13 @@
 			<artifactId>ant</artifactId>
 			<version>1.9.5</version>
 		</dependency>
+
+		<!-- swagger -->
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>0.9.5</version>
+		</dependency>
 		
 		<!-- google java lib -->
 		<dependency>

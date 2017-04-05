@@ -54,6 +54,8 @@
 	<mvc:resources mapping="/upload/**" location="/upload/"/>
 	<mvc:resources mapping="/portal/**" location="/portal/"/>
 	<mvc:resources mapping="/WEB-INF/**" location="/WEB-INF/"/>
+	<mvc:resources mapping="/swagger/**" location="/swagger/"/>
+	<mvc:resources mapping="/api-docs/**" location="/api-docs/"/>
 	
 	<!-- 上传文件拦截，设置最大上传文件大小   10M=10*1024*1024(B)=10485760 bytes -->  
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
