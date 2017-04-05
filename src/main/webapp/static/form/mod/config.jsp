@@ -7,8 +7,21 @@
   <head>    
     <title>数据建模</title>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
-	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+	<%-- <%@ include file="/WEB-INF/view/taglib/easyui.jsp" %> --%>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
+	<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/metro/easyui.css"/>
+	<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/icon.css"/>
+	<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/icon-extends.css"/>
+	<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/form.css"/>
+	<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/page.css"/>
+	<link rel="stylesheet" type="text/css" href="${ctx_script}/easyui/themes/extend.css"/>
+	
+	<script type="text/javascript" src="${ctx_script}/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="${ctx_script}/easyui/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="${ctx_script}/easyui/jquery.easyui.extend.js"></script>
+	<script type="text/javascript" src="${ctx_script}/easyui/datagrid-groupview.js"></script>
+	<script type="text/javascript" src="${ctx_script}/easyui/datagrid-filter.js"></script>
+	<script type="text/javascript" src="${ctx_script}/My97DatePicker/WdatePicker.js"></script>
 	<style>
 		.fitem label {
 		    display: inline-block;
@@ -60,7 +73,7 @@
 				</div>
 				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="prompt:'/xxx/list/all'" style="width:200px;"/>
 					</div>
 					<div class="fitem">
 						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
@@ -93,7 +106,7 @@
 				</div>
 				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="prompt:'/xxx/list/all'" style="width:200px;"/>
 					</div>
 					<div class="fitem">
 						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
@@ -126,7 +139,7 @@
 				</div>
 				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="prompt:'/xxx/list/all'" style="width:200px;"/>
 					</div>
 					<div class="fitem">
 						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
@@ -181,7 +194,7 @@
 				</div>
 				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="prompt:'/xxx/list/all'" style="width:200px;"/>
 					</div>
 					<div class="fitem">
 						id&nbsp;<input id="idStr" class="easyui-textbox" data-options="" style="width:63px;"/>
