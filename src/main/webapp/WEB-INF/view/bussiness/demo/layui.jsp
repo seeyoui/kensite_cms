@@ -7,6 +7,7 @@
 		<title>演示</title>
 		<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 		<%@ include file="/WEB-INF/view/taglib/layui.jsp" %>
+		<%@ include file="/WEB-INF/view/taglib/uedit.jsp" %>
 		<style type="text/css">
 		</style>
 	</head>

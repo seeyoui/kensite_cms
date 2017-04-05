@@ -15,8 +15,8 @@ USER_AGE DECIMAL(10) COMMENT '用户年龄',
 USER_BIRTHDAY DATETIME COMMENT '出生日期',
 USER_ICON VARCHAR(1000) COMMENT '用户头像',
 USER_SUMMARY TEXT COMMENT '用户简介',
-DEPARTMENT_ID CHAR(32) COMMENT '所在部门',
-MANAGER_ID CHAR(32) COMMENT '上级领导',
+DEPARTMENT_ID VARCHAR(100) COMMENT '所在部门',
+MANAGER_ID VARCHAR(100) COMMENT '上级领导',
 USER_INFO VARCHAR(100) COMMENT '选择框'
 ) COMMENT = '演示';
 ALTER TABLE BO_DEMO ADD CONSTRAINT BO_DEMO_ID PRIMARY KEY (ID);
@@ -714,7 +714,7 @@ INSERT INTO MOD_TABLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,NAME,C
 VALUES ('9ab52931d2114421bd746599bd8429f0',str_to_date('2017-01-20 09:40:11', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','统计图表',null,null,null,null,'普通表');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('3519bed99b8942b2bc2be40a2de7217b',str_to_date('2016-06-12 09:56:28', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:10', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','MANAGER_ID','上级领导','CHAR',null,'Y','Y','combobox',null,null,null,null,null,null,'N','N',null,null,'N');
+VALUES ('3519bed99b8942b2bc2be40a2de7217b',str_to_date('2016-06-12 09:56:28', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:10', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','MANAGER_ID','上级领导','VARCHAR','1000','Y','Y','textbox',null,null,null,null,null,null,'N','N',null,null,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('71f52f9233bf445dbd2721ffd675da30',str_to_date('2016-07-15 11:02:48', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-07-15 16:23:15', '%Y-%m-%d %H:%i:%s'),'system','CMS_SITE','DESCRIPTION','描述','VARCHAR','1000','Y','Y','textarea',null,null,'multiline:true,prompt:\'\'',null,null,'style="height:100px;width:430px;"','Y','N',100,100,'N');
@@ -1086,7 +1086,7 @@ INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER
 VALUES ('e2f612bdbece4abdbf8f91175fea3617',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_ICON','用户头像','VARCHAR','1000','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',null,null,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('bcc3a4dbe79d47aa81d53e40457b3c81',str_to_date('2016-06-12 09:55:41', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:51', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','DEPARTMENT_ID','所在部门','CHAR',null,'Y','Y','combobox',null,null,null,null,null,null,'N','N',null,null,'N');
+VALUES ('bcc3a4dbe79d47aa81d53e40457b3c81',str_to_date('2016-06-12 09:55:41', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:51', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','DEPARTMENT_ID','所在部门','VARCHAR2','100','Y','Y','textbox',null,null,null,null,null,null,'N','N',null,null,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('bae2b6bc6c5346a8b98c33d66f1f2337',str_to_date('2017-01-20 09:44:09', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-01-20 09:50:07', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','DESCRIBES','描述','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'Y');
