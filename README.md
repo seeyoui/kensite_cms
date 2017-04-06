@@ -155,3 +155,4 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/6.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/7.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/8.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/9.png)
