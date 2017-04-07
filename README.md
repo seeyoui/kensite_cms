@@ -1,4 +1,4 @@
-# kensite_cms内容发布系统完整开源版J2EE代码
+# kensite快速开发框架完整开源版J2EE代码
 
 ## 平台简介
 
