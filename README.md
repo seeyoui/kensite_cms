@@ -136,6 +136,8 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 * GitHub：<https://github.com/seeyoui/kensite_cms>
 * 开源中国：<http://git.oschina.net/seeyoui/kensite_cms>
 
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/qq.jpg)
+
 ## 版权声明
 
 本软件使用 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) 协议，请严格遵照协议内容：
