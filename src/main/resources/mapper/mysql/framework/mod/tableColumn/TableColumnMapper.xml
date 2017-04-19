@@ -277,6 +277,29 @@
 	</update>
 	
 	<!-- 数据修改 -->
+	<update id="changeState" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		UPDATE MOD_TABLE_COLUMN
+		<set>
+	    	<if test="isEdit !=null and isEdit !=''">
+			IS_EDIT=#{isEdit},
+			</if>
+	    	<if test="isList !=null and isList !=''">
+			IS_LIST=#{isList},
+			</if>
+	    	<if test="isQuery !=null and isQuery !=''">
+			IS_QUERY=#{isQuery},
+			</if>
+	    	<if test="isSort !=null and isSort !=''">
+			IS_SORT=#{isSort},
+			</if>
+		    UPDATE_USER = #{updateUser.userName},
+		    UPDATE_DATE = now(),
+		    ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据修改 -->
 	<update id="rename" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		UPDATE MOD_TABLE_COLUMN
 		<set>
