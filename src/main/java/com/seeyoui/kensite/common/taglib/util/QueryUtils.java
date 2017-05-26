@@ -157,7 +157,11 @@ public class QueryUtils {
 					String value = settingsArr[1];
 					String label = settingsArr[2];
 					result.append("valueField: '"+StringUtils.toCamelCase(value)+"',textField: '"+StringUtils.toCamelCase(label)+"',");
-					result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					if(StringUtils.isNotBlank(Global.getConfig("productName"))) {
+						result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					} else {
+						result.append("url:'"+url+"'");
+					}
 				} else  {
 					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
@@ -242,7 +246,11 @@ public class QueryUtils {
 					String text = settingsArr[2];
 					String parent = settingsArr[3];
 					result.append("idField: '"+StringUtils.toCamelCase(id)+"',textField: '"+StringUtils.toCamelCase(text)+"',parentField: '"+StringUtils.toCamelCase(parent)+"',");
-					result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					if(StringUtils.isNotBlank(Global.getConfig("productName"))) {
+						result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					} else {
+						result.append("url:'"+url+"'");
+					}
 				} else {
 					result.append("idField: 'id',textField: 'text',parentField: 'pid',");
 					result.append("data: [");

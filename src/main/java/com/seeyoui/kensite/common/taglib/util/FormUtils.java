@@ -209,7 +209,11 @@ public class FormUtils {
 					String value = settingsArr[1];
 					String label = settingsArr[2];
 					result.append("valueField: '"+value+"',textField: '"+label+"',");
-					result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					if(StringUtils.isNotBlank(Global.getConfig("productName"))) {
+						result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					} else {
+						result.append("url:'"+url+"'");
+					}
 				} else {
 					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
@@ -317,7 +321,11 @@ public class FormUtils {
 					String text = settingsArr[2];
 					String parent = settingsArr[3];
 					result.append("idField: '"+StringUtils.toCamelCase(id)+"',textField: '"+StringUtils.toCamelCase(text)+"',parentField: '"+StringUtils.toCamelCase(parent)+"',");
-					result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					if(StringUtils.isNotBlank(Global.getConfig("productName"))) {
+						result.append("url:'/"+Global.getConfig("productName")+url+"'");
+					} else {
+						result.append("url:'"+url+"'");
+					}
 				} else {
 					result.append("idField: 'id',textField: 'text',parentField: 'pid',");
 					result.append("data: [");
@@ -432,7 +440,11 @@ public class FormUtils {
 					result.append("iconWidth: 22,icons: [{iconCls:'icon-search',handler: function(e){");
 					result.append("var sqlStr = '"+URLEncoder.encode(sql, "UTF-8")+"';");
 					result.append("var mapperStr = '"+URLEncoder.encode(mapper, "UTF-8")+"';");
-					result.append("var url = '/"+Global.getConfig("productName")+"/static/form/mod/sqlMapper.jsp?sqlStr='+sqlStr+'&mapperStr='+mapperStr;layerOpenSqlMapper(url);}}]");
+					if(StringUtils.isNotBlank(Global.getConfig("productName"))) {
+						result.append("var url = '/"+Global.getConfig("productName")+"/static/form/mod/sqlMapper.jsp?sqlStr='+sqlStr+'&mapperStr='+mapperStr;layerOpenSqlMapper(url);}}]");
+					} else {
+						result.append("var url = '/static/form/mod/sqlMapper.jsp?sqlStr='+sqlStr+'&mapperStr='+mapperStr;layerOpenSqlMapper(url);}}]");
+					}
 				}
 			}
 			result.append("\" ");
