@@ -557,6 +557,30 @@
                                                             </div>
                                                             </div>
                                                         </div>
+                                                        <div class="dtm-edtcom-row cpt cpt-ggt-edtitm dtm-edtitm">
+                                                            <div class="dtm-edtitm-title dtm-edtitm-tooltip" data-dsp="chartOpt.xAxis[0].boundaryGap=true;">
+                                                                <em>
+                                                                    <i class="dtmic-used"></i>
+                                                                </em>
+                                                                <span class="dtm-edtitm-title-con">类目轴是否显示</span>
+                                                            </div>
+                                                            <div class="dtm-edtitm-con">
+                                                            <div class="cpt cpt-boolggt dtm-edtitm-ggt">
+                                                                <div class="cpt cpt-chkbtn">
+                                                                <div class="cpt-chkbtn-i cpt-chkbtn-i-active" data-value-index="0" data-opt="chartOpt.xAxis[0].boundaryGap=true;" data-cate="xAxis[0].boundaryGap" data-type="xAxis[0].boundaryGap.true">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>是</span></div>
+                                                                <div class="cpt-chkbtn-i" data-value-index="1" data-opt="chartOpt.xAxis[0].boundaryGap=false;" data-cate="xAxis[0].boundaryGap" data-type="xAxis[0].boundaryGap.false">
+                                                                    <i>
+                                                                    <em></em>
+                                                                    </i>
+                                                                    <span>否</span></div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

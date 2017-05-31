@@ -221,6 +221,10 @@ define(function(require, exports, module) {
 				$('div[data-cate="xAxis[0].splitArea.show"]').removeClass('cpt-chkbtn-i-active');
 				$('div[data-type="xAxis[0].splitArea.show.'+xAxis.splitArea.show+'"]').addClass('cpt-chkbtn-i-active');
 			}
+			if(xAxis.boundaryGap != null) {
+				$('div[data-cate="xAxis[0].boundaryGap"]').removeClass('cpt-chkbtn-i-active');
+				$('div[data-type="xAxis[0].boundaryGap.'+xAxis.boundaryGap+'"]').addClass('cpt-chkbtn-i-active');
+			}
         },
         renderY: function() {
         	var yAxis = chartOpt.yAxis[0];
