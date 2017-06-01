@@ -10,7 +10,7 @@
 		T.UPDATE_USER AS "updateUser",
 		T.REMARKS AS "remarks",
 		T.DEL_FLAG AS "delFlag",
-		T.DESCRIBES AS "describe",
+		T.DESCRIBES AS "describes",
 		T.TYPE AS "type",
 		T.SET_OPTION AS "setOption",
 		T.Z_SOURCE AS "zsource",
@@ -52,8 +52,8 @@
 			<if test="delFlag != null and delFlag != ''">
 				AND T.DEL_FLAG LIKE '%${delFlag}%'
 			</if>
-			<if test="describe != null and describe != ''">
-				AND T.DESCRIBES LIKE '%${describe}%'
+			<if test="describes != null and describes != ''">
+				AND T.DESCRIBES LIKE '%${describes}%'
 			</if>
 			<if test="type != null and type != ''">
 				AND T.TYPE LIKE '%${type}%'
@@ -192,7 +192,7 @@
 			
 			#{remarks,jdbcType=VARCHAR},
 			#{delFlag,jdbcType=VARCHAR},
-			#{describe,jdbcType=VARCHAR},
+			#{describes,jdbcType=VARCHAR},
 			#{type,jdbcType=VARCHAR},
 			#{setOption,jdbcType=CLOB},
 			#{zsource,jdbcType=VARCHAR},
@@ -229,8 +229,8 @@
 			<if test="delFlag !=null and delFlag !=''">
 			DEL_FLAG=#{delFlag},
 			</if>
-			<if test="describe !=null and describe !=''">
-			DESCRIBES=#{describe},
+			<if test="describes !=null and describes !=''">
+			DESCRIBES=#{describes},
 			</if>
 			<if test="type !=null and type !=''">
 			TYPE=#{type},

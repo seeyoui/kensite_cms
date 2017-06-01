@@ -23,8 +23,8 @@ import com.seeyoui.kensite.common.util.excel.annotation.ExcelField;
 public class ChartEngine extends DataEntity<ChartEngine> {
 	private static final long serialVersionUID = 1L;
 
-	@ExcelField(title="描述", type=1, align=2, sort=7, mod="KS_CHART_ENGINE|DESCRIBE")
-	private String describe;//描述
+	@ExcelField(title="描述", type=1, align=2, sort=7, mod="KS_CHART_ENGINE|DESCRIBES")
+	private String describes;//描述
 	@ExcelField(title="类型", type=1, align=2, sort=8, mod="KS_CHART_ENGINE|TYPE")
 	private String type;//类型
 	@ExcelField(title="配置项", type=1, align=2, sort=9, mod="KS_CHART_ENGINE|SET_OPTION")
@@ -60,12 +60,12 @@ public class ChartEngine extends DataEntity<ChartEngine> {
 	private String ywhere;
 	private String zwhere;
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
+	public void setDescribes(String describes) {
+		this.describes = describes;
 	}
 
-	public String getDescribe() {
-		return this.describe;
+	public String getDescribes() {
+		return this.describes;
 	}
 	public void setType(String type) {
 		this.type = type;

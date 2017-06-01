@@ -22,7 +22,7 @@
 							<th data-options="field:'ck',checkbox:true"></th>
 							<th data-options="field:'id'">UUID</th>
 							<ks:listTag table="KS_CHART_ENGINE" column="REMARKS"/>
-							<ks:listTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
+							<ks:listTag table="KS_CHART_ENGINE" column="DESCRIBES"/>
 							<ks:listTag table="KS_CHART_ENGINE" column="TYPE"/>
 							<ks:listTag table="KS_CHART_ENGINE" column="SET_OPTION"/>
 							<ks:listTag table="KS_CHART_ENGINE" column="Z_SOURCE"/>
@@ -46,7 +46,7 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="$.chartEngine.editInfo()">修改</a>
 					<a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="$.chartEngine.destroyInfo()">删除</a>
 					<ks:queryTag table="KS_CHART_ENGINE" column="REMARKS"/>
-					<ks:queryTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
+					<ks:queryTag table="KS_CHART_ENGINE" column="DESCRIBES"/>
 					<ks:queryTag table="KS_CHART_ENGINE" column="TYPE"/>
 					<ks:queryTag table="KS_CHART_ENGINE" column="SET_OPTION"/>
 					<ks:queryTag table="KS_CHART_ENGINE" column="Z_SOURCE"/>
@@ -75,7 +75,7 @@
 		   		selectData : function () {
 					$('#dataList').datagrid('load',{
 						<ks:queryJsTag table="KS_CHART_ENGINE" column="REMARKS"/>
-						<ks:queryJsTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
+						<ks:queryJsTag table="KS_CHART_ENGINE" column="DESCRIBES"/>
 						<ks:queryJsTag table="KS_CHART_ENGINE" column="TYPE"/>
 						<ks:queryJsTag table="KS_CHART_ENGINE" column="SET_OPTION"/>
 						<ks:queryJsTag table="KS_CHART_ENGINE" column="Z_SOURCE"/>

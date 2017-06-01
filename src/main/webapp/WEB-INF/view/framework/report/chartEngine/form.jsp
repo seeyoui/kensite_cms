@@ -17,7 +17,7 @@
 					<ks:formTag table="KS_CHART_ENGINE" column="REMARKS"/>
 				</div>
 				<div class="fitem">
-					<ks:formTag table="KS_CHART_ENGINE" column="DESCRIBE"/>
+					<ks:formTag table="KS_CHART_ENGINE" column="DESCRIBES"/>
 				</div>
 				<div class="fitem">
 					<ks:formTag table="KS_CHART_ENGINE" column="TYPE"/>
