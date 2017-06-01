@@ -241,7 +241,7 @@ UPDATE_DATE DATETIME COMMENT '修改日期',
 UPDATE_USER VARCHAR(50) COMMENT '修改用户',
 REMARKS VARCHAR(255) COMMENT '备注信息',
 DEL_FLAG CHAR(1) COMMENT '删除标记',
-DESCRIBES VARCHAR(100) not null  COMMENT '描述',
+DESCRIBES VARCHAR(100) COMMENT '描述',
 TYPE VARCHAR(100) not null  COMMENT '类型',
 SET_OPTION TEXT COMMENT '配置项',
 Z_SOURCE VARCHAR(100) COMMENT '系列源',
@@ -1086,55 +1086,55 @@ INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER
 VALUES ('e2f612bdbece4abdbf8f91175fea3617',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-06-12 09:09:15', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','USER_ICON','用户头像','VARCHAR','1000','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',null,null,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('bcc3a4dbe79d47aa81d53e40457b3c81',str_to_date('2016-06-12 09:55:41', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:51', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','DEPARTMENT_ID','所在部门','VARCHAR2','100','Y','Y','textbox',null,null,null,null,null,null,'N','N',null,null,'N');
+VALUES ('bcc3a4dbe79d47aa81d53e40457b3c81',str_to_date('2016-06-12 09:55:41', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2016-07-19 15:43:51', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','DEPARTMENT_ID','所在部门','VARCHAR','100','Y','Y','textbox',null,null,null,null,null,null,'N','N',null,null,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('bae2b6bc6c5346a8b98c33d66f1f2337',str_to_date('2017-01-20 09:44:09', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-01-20 09:50:07', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','DESCRIBES','描述','VARCHAR2','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'Y');
+VALUES ('bae2b6bc6c5346a8b98c33d66f1f2337',str_to_date('2017-01-20 09:44:09', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-01-20 09:50:07', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','DESCRIBES','描述','VARCHAR','100','N','Y','textbox',null,null,'prompt:\'\'',null,null,null,'Y','Y',100,100,'Y');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('9f776e453a56487295e4d0bc1ed3622a',str_to_date('2017-01-20 09:44:39', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-02-07 12:59:35', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','TYPE','类型','VARCHAR2','100','N','Y','combobox',null,null,'line:折线图|bar:柱状图|pie:饼状图|gauge:仪表盘',null,null,null,'Y','Y',100,100,'Y');
+VALUES ('9f776e453a56487295e4d0bc1ed3622a',str_to_date('2017-01-20 09:44:39', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-02-07 12:59:35', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','TYPE','类型','VARCHAR','100','N','Y','combobox',null,null,'line:折线图|bar:柱状图|pie:饼状图|gauge:仪表盘',null,null,null,'Y','Y',100,100,'Y');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('46d4fc6875ed4dbd86932924249dede5',str_to_date('2017-01-20 09:45:57', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','SET_OPTION','配置项','CLOB',null,'Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('65d8b8d27e014ac7a8da3ac6bce9227a',str_to_date('2017-01-20 09:47:35', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Z_SOURCE','系列源','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('65d8b8d27e014ac7a8da3ac6bce9227a',str_to_date('2017-01-20 09:47:35', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Z_SOURCE','系列源','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('810aa879a9f44dbda5b67c30911deb24',str_to_date('2017-01-20 09:48:23', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-01-20 09:49:25', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','Z_KEY','系列键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('810aa879a9f44dbda5b67c30911deb24',str_to_date('2017-01-20 09:48:23', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2017-01-20 09:49:25', '%Y-%m-%d %H:%i:%s'),'system','KS_CHART_ENGINE','Z_KEY','系列键','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('23de3448d0f345f38c9cf70850357ca0',str_to_date('2017-01-20 09:49:15', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Z_VALUE','系列值','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('23de3448d0f345f38c9cf70850357ca0',str_to_date('2017-01-20 09:49:15', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Z_VALUE','系列值','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('36dabdacffb845ce9908c16debd97f27',str_to_date('2017-01-20 09:49:54', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_SOURCE','X轴源','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('36dabdacffb845ce9908c16debd97f27',str_to_date('2017-01-20 09:49:54', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_SOURCE','X轴源','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('51d792c66b554702a6a9c91f113e9bf6',str_to_date('2017-01-20 09:50:49', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_KEY','X轴键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('51d792c66b554702a6a9c91f113e9bf6',str_to_date('2017-01-20 09:50:49', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_KEY','X轴键','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('909421a413274482861d35c686fe071c',str_to_date('2017-01-20 09:51:31', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_Z_KEY','X轴系列键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('909421a413274482861d35c686fe071c',str_to_date('2017-01-20 09:51:31', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_Z_KEY','X轴系列键','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('52f05cc8b4b34d148f0dcf5bc3ea3f58',str_to_date('2017-01-20 09:51:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_VALUE','X轴值','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('52f05cc8b4b34d148f0dcf5bc3ea3f58',str_to_date('2017-01-20 09:51:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','X_VALUE','X轴值','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('4cde119f731b458a840d0de23c7563d2',str_to_date('2017-01-20 09:52:27', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_SOURCE','Y轴源','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('4cde119f731b458a840d0de23c7563d2',str_to_date('2017-01-20 09:52:27', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_SOURCE','Y轴源','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('3004842553cd469b85b11e2777a068ed',str_to_date('2017-01-20 09:52:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_Z_KEY','Y轴系列键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('3004842553cd469b85b11e2777a068ed',str_to_date('2017-01-20 09:52:58', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_Z_KEY','Y轴系列键','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('56b47e495aad4a87b7135b413be37104',str_to_date('2017-01-20 09:53:24', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_X_KEY','Y轴X轴键','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('56b47e495aad4a87b7135b413be37104',str_to_date('2017-01-20 09:53:24', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_X_KEY','Y轴X轴键','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('99059676f533449286f0b5ec163ce936',str_to_date('2017-01-20 09:53:47', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_VALUE','Y轴值','VARCHAR2','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
+VALUES ('99059676f533449286f0b5ec163ce936',str_to_date('2017-01-20 09:53:47', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','Y_VALUE','Y轴值','VARCHAR','100','Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
 VALUES ('b375f754410d437ea7f2873ab75d3698',str_to_date('2017-01-20 09:54:17', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','FUNC','扩展函数','CLOB',null,'Y','H','textbox',null,null,'prompt:\'\'',null,null,null,'N','N',100,100,'N');
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH,IS_SORT) 
-VALUES ('14a3aa6049df4ce683a3ab68c131ae76',str_to_date('2017-02-03 13:08:33', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','OPERATION','运算','VARCHAR2','100','Y','Y','combobox',null,null,'count:总数|sum:求和|avg:平均值',null,null,null,'Y','Y',100,100,'Y');
+VALUES ('14a3aa6049df4ce683a3ab68c131ae76',str_to_date('2017-02-03 13:08:33', '%Y-%m-%d %H:%i:%s'),'system',null,null,'KS_CHART_ENGINE','OPERATION','运算','VARCHAR','100','Y','Y','combobox',null,null,'count:总数|sum:求和|avg:平均值',null,null,null,'Y','Y',100,100,'Y');
 
 INSERT INTO SYS_DEPARTMENT (ID,PARENT_ID,SEQUENCE,NAME,CODE) 
 VALUES ('dad8faf2f3eb4d279ef04decb91ca4c0','00000000000000000000000000000000',0,'超级系统管理员','001');
