@@ -126,7 +126,7 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 
 ## 常见问题
 
-1. 快速启动：详细说明请参考src\main\webapp\DOC\doc\doc.html，这里一步一步的详细的介绍了如何搭建kensite平台及平台所需环境，以及如何启动等。
+1. 快速启动：详细说明请参考**[平台环境搭建](http://www.seeyoui.com/2017/02/04/kensite-environment.html)**，这里一步一步的详细的介绍了如何搭建kensite平台及平台所需环境，以及如何启动等。
 
 ## 更新记录
 
