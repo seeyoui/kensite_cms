@@ -43,7 +43,7 @@ function mineUpload(uploadObj, ctx , funcName) {
 	}
 	$(uploadObj).uploadify({
 	    'swf' : ctx+'/script/uploadify/uploadify.swf',
-	    'uploader' : ctx+'/sys/uploadfile/upload.do?url='+url,
+	    'uploader' : ctx+'/sys/uploadfile/upload?url='+url,
         'debug' : false,//开启调试
 	    'buttonText' : buttonText,//按钮显示文本
 	    'method' : method,
@@ -64,10 +64,10 @@ function mineUpload(uploadObj, ctx , funcName) {
         'onSelectError' : function(file, errorCode, errorMsg){
             switch(errorCode) {
                 case -100:
-                    errorMsg = "上传的文件数量已经超出系统限制的"+$('#uploadify').uploadify('settings','queueSizeLimit')+"个文件！";
+                    errorMsg = "上传的文件数量已经超出系统限制的"+$(uploadObj).uploadify('settings','queueSizeLimit')+"个文件！";
                     break;
                 case -110:
-                    errorMsg = "文件 ["+file.name+"] 大小超出系统限制的"+$('#uploadify').uploadify('settings','fileSizeLimit')+"大小！";
+                    errorMsg = "文件 ["+file.name+"] 大小超出系统限制的"+$(uploadObj).uploadify('settings','fileSizeLimit')+"大小！";
                     break;
                 case -120:
                     errorMsg = "文件 ["+file.name+"] 大小异常！";
@@ -84,21 +84,9 @@ function mineUpload(uploadObj, ctx , funcName) {
         },
         //上传到服务器，服务器返回相应信息到data里
 	    'onUploadSuccess' : function(file, uf, response) {
-	    	//for(var item in file){
-	    	//	alert(item+"的值="+file[item]);
-	    	//}
-	    	//file.id
-	    	//file.type文件扩展名
-	    	//file.size文件大小
-	    	//file.name文件名称
-	    	//uuid后台返回的字符串
-            //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + uuid);
-	    	//alert(uuid);
-	    	console.info(file);
-	    	console.info(uf);
 	    	uf = eval("("+uf+")");
 	    	var res = "上传成功";
-	    	eval( funcName + "(file, uf, res)" );
+	    	eval( funcName + "(file, uf, response)" );
         }
     });
 }
