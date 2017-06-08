@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.oa.leave.persistence.LeaveMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+		T.ID AS "id",
+		T.CREATE_DATE AS "createDate",
+		T.CREATE_USER AS "createUser.userName",
+		T.UPDATE_DATE AS "updateDate",
+		T.UPDATE_USER AS "updateUser.userName",
+		T.REMARKS AS "remarks",
+		T.DEL_FLAG AS "delFlag",
+		T.BIND_ID AS "bindId",
+		T.REASON AS "reason",
+		T.START_TIME AS "startTime",
+		T.END_TIME AS "endTime",
+		T.LEAVE_TYPE AS "leaveType",
+		U.USER_NAME AS "createUser.userName",
+		U.NAME AS "createUser.name",
+		D.ID AS "sysDepartment.id",
+		D.NAME as "sysDepartment.name"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser.userName != ''">
+				AND T.CREATE_USER LIKE '%'||#{createUser.userName}||'%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser.userName != ''">
+				AND T.UPDATE_USER LIKE '%'||#{updateUser.userName}||'%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%'||#{remarks}||'%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%'||#{delFlag}||'%'
+			</if>
+			<if test="bindId != null and bindId != ''">
+				AND T.BIND_ID LIKE '%'||#{bindId}||'%'
+			</if>
+			<if test="reason != null and reason != ''">
+				AND T.REASON LIKE '%'||#{reason}||'%'
+			</if>
+			<if test="leaveType != null and leaveType != ''">
+				AND T.LEAVE_TYPE LIKE '%'||#{leaveType}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			${sort} ${order},
+		</if>
+		T.CREATE_DATE DESC 
+	</sql>
+	<sql id="joinOn">
+		LEFT JOIN SYS_USER U ON U.USER_NAME = T.CREATE_USER
+		LEFT JOIN SYS_DEPARTMENT D ON D.ID = U.DEPARTMENT_ID
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findLeaveById" resultType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
+		SELECT
+		<include refid="tableColumns" />
+		FROM OA_LEAVE t
+		<include refid="joinOn"/>
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findLeaveList" resultType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
+		select * from(select T.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM OA_LEAVE T
+			<include refid="joinOn"/>
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) T WHERE rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findLeaveListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(1) total
+		FROM OA_LEAVE T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveLeave" parameterType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
+		INSERT INTO OA_LEAVE (
+	    	CREATE_DATE,
+	    	CREATE_USER,
+	    	REASON,
+	    	START_TIME,
+	    	END_TIME,
+	    	LEAVE_TYPE,
+		    ID
+		)
+		VALUES (
+			sysdate,
+			#{createUser.userName,jdbcType=VARCHAR},
+			#{reason,jdbcType=VARCHAR},
+			#{startTime,jdbcType=TIMESTAMP},
+			#{endTime,jdbcType=TIMESTAMP},
+			#{leaveType,jdbcType=VARCHAR},
+		    #{id,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="updateLeave" parameterType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
+		UPDATE OA_LEAVE
+		<set>
+	    	<if test="reason !=null and reason !=''">
+			REASON=#{reason},
+			</if>
+	    	<if test="startTime !=null and startTime !=''">
+			START_TIME=#{startTime},
+			</if>
+	    	<if test="endTime !=null and endTime !=''">
+			END_TIME=#{endTime},
+			</if>
+	    	<if test="leaveType !=null and leaveType !=''">
+			LEAVE_TYPE=#{leaveType},
+			</if>
+			UPDATE_USER = #{updateUser.userName},
+			UPDATE_DATE = sysdate,
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据修改 -->
+	<update id="updateBindid" parameterType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
+		UPDATE OA_LEAVE
+		SET BIND_ID=#{bindId}
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteLeave">
+		DELETE FROM OA_LEAVE WHERE ID IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

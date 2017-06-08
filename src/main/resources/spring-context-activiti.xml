@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/cache
+						http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+						
+	<!-- 属性文件读入 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:kensite.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- activiti主键生成规则 -->
+	<bean id="uuidGenerator" class="com.seeyoui.kensite.common.util.GeneratorUUID"/>
+	
+	<!-- Activiti begin -->
+	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="deploymentResources" value="classpath*:/act/deployments/**/*.bar"/>
+		<property name="databaseSchemaUpdate" value="false" /><!-- false|true|create-drop -->
+		<property name="jobExecutorActivate" value="false" />
+		<property name="history" value="full" /><!-- none:不适用history表存储历史数据|audit -->
+		<property name="processDefinitionCacheLimit" value="10"/>
+
+		<!-- UUID作为主键生成策略 -->
+		<property name="idGenerator" ref="uuidGenerator" />
+		
+		<!-- 生成流程图的字体 -->
+		<property name="activityFontName" value="宋体"/>
+		<property name="labelFontName" value="宋体"/>
+		
+		<!-- 自定义用户权限 -->
+		<property name="customSessionFactories"> 
+			<list>
+				<bean class="com.seeyoui.kensite.framework.act.service.ext.ActUserEntityServiceFactory"/>
+				<bean class="com.seeyoui.kensite.framework.act.service.ext.ActGroupEntityServiceFactory"/>
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+		<property name="processEngineConfiguration" ref="processEngineConfiguration" />
+	</bean>
+	
+	<bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService" />
+	<bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService" />
+	<bean id="formService" factory-bean="processEngine" factory-method="getFormService" />
+	<bean id="identityService" factory-bean="processEngine" factory-method="getIdentityService" />
+	<bean id="taskService" factory-bean="processEngine" factory-method="getTaskService" />
+	<bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService" />
+	<bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
+	<!-- Activiti end -->
+</beans>

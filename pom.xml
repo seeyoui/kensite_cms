@@ -5,7 +5,7 @@
 	
 	<groupId>com.seeyoui.kensite</groupId>
 	<artifactId>kensite</artifactId>
-	<version>2.5.1</version>
+	<version>3.0.0</version>
 	<packaging>war</packaging>
 	
 	<name>Kensite</name>
@@ -23,6 +23,7 @@
 		<ehcache.version>2.6.9</ehcache.version>
 		<ehcache-web.version>2.0.4</ehcache-web.version>
 		<shiro.version>1.2.3</shiro.version>
+		<activiti.version>5.21.0</activiti.version>
 		
 		<!-- tools version setting -->
 		<slf4j.version>1.7.7</slf4j.version>
@@ -411,6 +412,48 @@
 			<version>${shiro.version}</version>
 		</dependency>
 		<!-- SECURITY end -->
+		
+		<!-- Activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-explorer</artifactId>
+			<version>${activiti.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>vaadin</artifactId>
+					<groupId>com.vaadin</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>dcharts-widget</artifactId>
+					<groupId>org.vaadin.addons</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>activiti-simple-workflow</artifactId>
+					<groupId>org.activiti</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-modeler</artifactId>
+            <version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-diagram-rest</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<!-- Activiti end -->
 		
 		<!-- LOGGING begin -->
 		<dependency>

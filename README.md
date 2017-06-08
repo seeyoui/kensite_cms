@@ -27,9 +27,9 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 
 此项目之前一直都是放在github上的，本来是只是想换个项目托管的地方，看到有个自荐功能，就点了一下，没想到获得了大家的关注，在此特别感谢大家的支持。
 
-其次还要感谢一下框架搭建过程中参考和借鉴过的框架和博客，由于时间有点久了，可能会有遗漏，我会尽可能回忆一下放上来的，如果您看到框架中用到了您的代码也可以联系我。
-
 在此特别得提一下对此框架帮助最大的**jeesite**，框架搭建之初，从此框架上面学习到了很多很多，kensite的命名也是为了向其致敬，后来慢慢加入了很多自己的东西进去，才敢拿出来献丑。~·~
+
+感谢 **咖啡兔** 的kft-activiti-demo，在此上面学习到了框架集成流程引擎的方法和操作流程流转的设计思路。
 
 除此之外的我会抽时间整理一下，都罗列在此的。
 
@@ -50,7 +50,8 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 14. web通信：集成websocket，前端自带一个聊天室。
 15. 导出功能：excel导出与word导出。
 16. 统计图表设计器：可视化配置echarts统计图表，支持柱状图、折线图、饼图、仪表等可视化配置，不需要编码。
-17. 还有很多，请在使用中自行发现吧。
+17. 流程建模：可视化流程设计器在线设计流程，可通过少量代码实现任意业务审批流程的签收、通过、驳回、跟踪等操作。
+18. 还有很多，请在使用中自行发现吧。
 
 ## 为何选择KenSite
 
@@ -73,6 +74,7 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 * 视图框架：Spring MVC 4.0
 * 服务端验证：Hibernate Validator 5.1
 * 定时任务计划：Quartz
+* 流程引擎：activiti 5.21.0
 * 持久层框架：MyBatis 3.2
 * 数据库连接池：Alibaba Druid 1.0
 * 缓存框架：Ehcache 2.6、Redis
@@ -130,6 +132,15 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 
 ## 更新记录
 
+### V3.0.0  2017‎年‎06‎月‎08日 ‏20:50:24 星期四
+
+1. 框架初步集成activiti流程引擎，实现可视化流程编辑，流程签收、通过、驳回、跟踪等操作
+2. 编写请假流程demo演示案例，演示如何自定义流程表单和数据信息列表、如何添加流程操作按钮、如何进行签收和办理操作
+3. 由于是初步集成，功能还不怎么强大，需要小伙伴们有一定的代码开发功底，具备的小伙伴就可以参考请假流程demo实现自己任意的审批流程了
+4. 流程引擎将继续发展，接下来将规范流程前后台代码，封装更多activiti的api方法，提供流程节点挂接表单(表单暂时还需要手动编写，以后会考虑加入表单设计器)
+5. 想要先睹为快的小伙伴自行获取最新代码，执行db文件夹下对应数据库的sys和act的初始化sql语句，再启动项目就可以了，演示帐号是 **ken** 用户
+6. 对于早就下载了的小伙伴，升级的方式就是执行db文件夹下对应数据库的upgrade升级sql语句和act的初始化sql语句，再启动项目就可以了，演示帐号是 **ken** 用户
+
 ### 重要说明  2017‎年‎06‎月‎01日 ‏11:50:24 星期四
 
 1. 开发框架是我一个人利用业余时间做的，也是我一个人在维护，时间有限更新会慢一点，不过我会坚持做下去，把我的想法都实现出来，也针对QQ群里大家反馈的修改意见进行更新，如果你有好的意见或建议，请联系我，QQ、邮件都可以
@@ -176,4 +187,8 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/6.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/7.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/8.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/10.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/11.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/12.png)
+![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/13.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/9.png)
