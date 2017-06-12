@@ -46,12 +46,12 @@ public class LogController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sys:log:view")
+//	@RequiresPermissions("sys:log:view")
 	@RequestMapping(value = "/{page}")
 	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String page) throws Exception {
-		return new ModelAndView("framework/plugin/"+page, modelMap);
+		return new ModelAndView("framework/plugin/log/"+page, modelMap);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class LogController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sys:log:select")
+//	@RequiresPermissions("sys:log:select")
 	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listData(HttpSession session,
