@@ -466,6 +466,7 @@ public class ActTaskService extends BaseService {
 		}
 		
 		// 提交任务
+//		taskService.setAssignee(taskId, "userId");//指定完成人ID
 		taskService.complete(taskId, vars);
 	}
 

@@ -106,6 +106,9 @@ public class TableColumnService extends BaseService {
 				modifyStr += " not null";
 			}
 		}
+		if("mysql".equals(Global.getConfig("jdbc.type")) && StringUtils.isNoneBlank(tableColumn.getComments())) {
+			modifyStr += " COMMENT '"+tableColumn.getComments()+"'";
+		}
 		tableColumn.setModifyStr(modifyStr);
 		dbMapper.addColumn(tableColumn);
 		dbMapper.commentColumn(tableColumn);
@@ -186,7 +189,7 @@ public class TableColumnService extends BaseService {
 					modifyStr += " not null";
 				}
 			}
-			if(StringUtils.isNotBlank(tableColumn.getComments()) && !tableColumn.getComments().equals(tableColumnOld.getComments())) {
+			if(StringUtils.isNotBlank(tableColumn.getComments())) {
 				modifyStr += " comment '"+tableColumn.getComments()+"'";
 			}
 			if(StringUtils.isNotBlank(modifyStr)) {

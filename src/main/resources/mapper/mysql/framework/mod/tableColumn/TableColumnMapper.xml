@@ -317,5 +317,10 @@
 			open="(" separator="," close=")">
 			#{listId}
 		</foreach>
+		OR TABLE_NAME IN
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
 	</delete>
 </mapper>

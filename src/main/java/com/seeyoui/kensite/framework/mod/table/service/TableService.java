@@ -3,6 +3,7 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.mod.table.service;  
  
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,6 +151,7 @@ public class TableService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void delete(List<String> listId) throws CRUDException {
+		List<String> tableName = new ArrayList<String>();
 		for(String id : listId) {
 			Table table = tableMapper.findOne(id);
 			TableColumn column = new TableColumn();
@@ -157,7 +159,9 @@ public class TableService extends BaseService {
 			column.setName("ID");
 			dbMapper.dropPrimaryKey(column);
 			dbMapper.dropTable(table);
+			tableName.add(table.getName());
 		}
+		tableColumnMapper.delete(tableName);
 		tableMapper.delete(listId);
 	}
 	
