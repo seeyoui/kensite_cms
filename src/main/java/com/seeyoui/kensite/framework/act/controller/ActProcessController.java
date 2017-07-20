@@ -104,6 +104,29 @@ public class ActProcessController extends BaseController {
 		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
 		return null;
 	}
+	
+	/**
+	 * 已结束的实例列表
+	 */
+	@RequestMapping(value = "history")
+	public ModelAndView historyList(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		return new ModelAndView("framework/act/actProcessHistoryList", modelMap);
+	}
+	
+	@RequestMapping(value = "list/history", method=RequestMethod.POST)
+	@ResponseBody
+	public String listHistory(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String category, String procDefKey, Pager pager) throws Exception{
+		EasyUIDataGrid eudg = actProcessService.historyList(pager, category, procDefKey);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		JSONObject jsonObj = JSONObject.fromObject(eudg, jsonConfig);
+		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
+		return null;
+	}
 
 	/**
 	 * 读取资源，通过部署ID

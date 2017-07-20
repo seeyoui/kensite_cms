@@ -1,30 +1,42 @@
 package com.seeyoui.kensite.framework.act.controller;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
+import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.domain.Page;
+import com.seeyoui.kensite.common.base.domain.Pager;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.act.domain.Act;
 import com.seeyoui.kensite.framework.act.service.ActTaskService;
 import com.seeyoui.kensite.framework.act.util.ActUtils;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 @Controller
-@RequestMapping(value = "act/task")
+@RequestMapping(value = "actTask")
 public class ActTaskController extends BaseController {
 
 	@Autowired
@@ -37,9 +49,33 @@ public class ActTaskController extends BaseController {
 	 */
 	@RequestMapping(value = {"todo", ""})
 	public String todoList(Act act, HttpServletResponse response, Model model) throws Exception {
-		List<Act> list = actTaskService.todoList(act);
-		model.addAttribute("list", list);
-		return "modules/act/actTaskTodoList";
+//		List<Act> list = actTaskService.todoList(act);
+//		model.addAttribute("list", list);
+		return "framework/act/actTaskTodoList";
+	}
+	
+	/**
+	 * 获取列表展示数据
+	 * @param modelMap
+	 * @param actModel
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/list/todo")
+	@ResponseBody
+	public Object listTodo(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Act act, Pager pager) throws Exception{
+		List<HashMap<String,String>> list = actTaskService.todoList(act);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
+		int total = list.size();
+		eudg.setTotal(String.valueOf(total));
+		eudg.setRows(list.subList(pager.getFirstResult(), total>pager.getMaxResults()?pager.getMaxResults():total));
+//		JsonConfig jsonConfig = new JsonConfig();
+//		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+//		JSONObject jsonObj = JSONObject.fromObject(eudg, jsonConfig);
+//		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
+		return eudg;
 	}
 	
 	/**
@@ -53,7 +89,30 @@ public class ActTaskController extends BaseController {
 //		Page<Act> page = new Page<Act>(request, response);
 //		page = actTaskService.historicList(page, act);
 //		model.addAttribute("page", page);
-		return "modules/act/actTaskHistoricList";
+		return "framework/act/actTaskHistoricList";
+	}
+	
+	/**
+	 * 获取列表展示数据
+	 * @param modelMap
+	 * @param actModel
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/list/historic")
+	@ResponseBody
+	public Object listHistoric(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Act act, Pager pager) throws Exception{
+		List<HashMap<String,String>> list = actTaskService.historicList(pager, act);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
+		eudg.setTotal(String.valueOf(pager.getTotal()));
+		eudg.setRows(list);
+//		JsonConfig jsonConfig = new JsonConfig();
+//		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+//		JSONObject jsonObj = JSONObject.fromObject(eudg, jsonConfig);
+//		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
+		return eudg;
 	}
 
 	/**
@@ -68,7 +127,7 @@ public class ActTaskController extends BaseController {
 			List<Act> histoicFlowList = actTaskService.histoicFlowList(act.getProcInsId(), startAct, endAct);
 			model.addAttribute("histoicFlowList", histoicFlowList);
 		}
-		return "modules/act/actTaskHistoricFlow";
+		return "framework/act/actTaskHistoricFlow";
 	}
 	
 	/**
@@ -81,7 +140,26 @@ public class ActTaskController extends BaseController {
 //	    page = actTaskService.processList(page, category);
 //		model.addAttribute("page", page);
 //		model.addAttribute("category", category);
-		return "modules/act/actTaskProcessList";
+		return "framework/act/actTaskProcessList";
+	}
+	
+	/**
+	 * 获取列表展示数据
+	 * @param modelMap
+	 * @param actModel
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/list/process")
+	@ResponseBody
+	public Object listProcess(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Act act, String category, Pager pager) throws Exception{
+		List<Object[]> list = actTaskService.processList(pager, category);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
+		eudg.setTotal(String.valueOf(pager.getTotal()));
+		eudg.setRows(list);
+		return eudg;
 	}
 	
 	/**
@@ -102,7 +180,14 @@ public class ActTaskController extends BaseController {
 		if (act.getProcInsId() != null){
 			act.setProcIns(actTaskService.getProcIns(act.getProcInsId()));
 		}
+		if (act.getProcInsId() != null){
+			if(actTaskService.getProcIns(act.getProcInsId())!=null){
+				act.setProcIns(actTaskService.getProcIns(act.getProcInsId()));
+			}else{
+//				act.setFinishedProcIns(actTaskService.getFinishedProcIns(act.getProcInsId()));
+			}
 		
+		}
 		return "redirect:" + ActUtils.getFormUrl(formKey, act);
 	}
 	
@@ -234,7 +319,7 @@ public class ActTaskController extends BaseController {
 		model.addAttribute("procDefId", procDefId);
 		model.addAttribute("proInstId", proInstId);
 		model.addAttribute("actImpls", actImpls);
-		return "modules/act/actTaskMap";
+		return "framework/act/actTaskMap";
 	}*/
 	
 	/**

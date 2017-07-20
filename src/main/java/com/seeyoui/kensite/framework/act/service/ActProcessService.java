@@ -18,8 +18,10 @@ import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.ActivitiException;
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
+import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
@@ -29,7 +31,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,6 +49,8 @@ public class ActProcessService extends BaseService {
 	private RepositoryService repositoryService;
 	@Autowired
 	private RuntimeService runtimeService;
+	@Autowired
+	private HistoryService historyService;
 
 	/**
 	 * 流程定义列表
@@ -124,6 +127,28 @@ public class ActProcessService extends BaseService {
 			procInsList.add(actProcessInstance);
 		}
 		eudg.setRows(procInsList);
+		return eudg;
+	}
+	
+	/**
+	 * 已结束的流程
+	 */
+	public EasyUIDataGrid historyList(Pager pager, String procInsId, String procDefKey) {
+
+		HistoricProcessInstanceQuery query=historyService.createHistoricProcessInstanceQuery().finished()
+		.orderByProcessInstanceEndTime().desc();
+
+	    if (StringUtils.isNotBlank(procInsId)){
+	    	query.processInstanceId(procInsId);
+	    }
+	    
+	    if (StringUtils.isNotBlank(procDefKey)){
+	    	query.processDefinitionKey(procDefKey);
+	    }
+	    
+	    EasyUIDataGrid eudg = new EasyUIDataGrid();
+		eudg.setTotal(String.valueOf(query.count()));
+		eudg.setRows(query.listPage((pager.getPage() - 1) * pager.getRows(),pager.getRows()));
 		return eudg;
 	}
 

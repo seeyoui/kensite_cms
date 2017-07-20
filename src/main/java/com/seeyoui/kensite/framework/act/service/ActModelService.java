@@ -107,7 +107,7 @@ public class ActModelService extends BaseService {
 			if (!StringUtils.endsWith(processName, ".bpmn20.xml")){
 				processName += ".bpmn20.xml";
 			}
-//			System.out.println("========="+processName+"============"+modelData.getName());
+			System.out.println("========="+processName+"============"+modelData.getName());
 			ByteArrayInputStream in = new ByteArrayInputStream(bpmnBytes);
 			Deployment deployment = repositoryService.createDeployment().name(modelData.getName())
 					.addInputStream(processName, in).deploy();
@@ -117,7 +117,7 @@ public class ActModelService extends BaseService {
 			List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).list();
 			for (ProcessDefinition processDefinition : list) {
 				repositoryService.setProcessDefinitionCategory(processDefinition.getId(), modelData.getCategory());
-				message = "部署成功，流程ID=" + processDefinition.getId();
+				message = "部署成功，流程ID=" + processDefinition.getId() + processDefinition.getName();
 			}
 			if (list.size() == 0){
 				message = "部署失败，没有流程。";

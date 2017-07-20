@@ -122,7 +122,6 @@
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/portal/**"/>
 			<mvc:exclude-mapping path="/login/**"/>
-			<mvc:exclude-mapping path="/act/**"/>
 			<mvc:exclude-mapping path="/cms/**"/>
 			<mvc:exclude-mapping path="/sys/**"/>
 			<mvc:exclude-mapping path="/"/>
@@ -134,6 +133,10 @@
 			<mvc:exclude-mapping path="/bootstrap/**"/>
 			<mvc:exclude-mapping path="/script/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/swagger/**"/>
+			<mvc:exclude-mapping path="/ws/**"/>
+			<mvc:exclude-mapping path="/api-docs/**"/>
+			<mvc:exclude-mapping path="/ks/chart/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/portal/**"/>
 			<mvc:exclude-mapping path="/sys/**"/>

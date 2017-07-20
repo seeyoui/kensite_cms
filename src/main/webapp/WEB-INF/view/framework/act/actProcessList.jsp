@@ -22,7 +22,7 @@
 		            <tr>
 					    <th field="id" width="100px">流程ID</th>
 					    <th field="deploymentId" width="100px">部署ID</th>
-					    <th field="category" width="100px">流程分类</th>
+					    <th field="category" width="100px" formatter="formatCategory">流程分类</th>
 					    <th field="key" width="100px">流程标识</th>
 					    <th field="name" width="100px">流程名称</th>
 					    <th field="version" width="50px" align="right">流程版本</th>
@@ -59,6 +59,15 @@
                 return '激活中';
             }
         }
+		var categoryDict = ${ksfn:toJson(ksfn:getDictList('act_type'))};
+	    function formatCategory(value, row, index) {
+    		for(var i=0; i<categoryDict.length; i++) {
+    			if(value == categoryDict[i].value) {
+    				return categoryDict[i].label;
+    			}
+    		}
+	    	return '';
+	    }
     	
 	    $(document).ready(function(){
 	    });
@@ -121,7 +130,7 @@
 							beforeSend: function(XMLHttpRequest){
 							},
 							success: function(data, textStatus){
-			                    layer.msg(data, {time: layerMsgTime});
+			                    layer.msg(data, {icon: 6,time: layerMsgTime});
 								reloadData();
 							}
 						});

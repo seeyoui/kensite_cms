@@ -128,62 +128,6 @@
 					<div class="navbar-header">
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
-						<li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-envelope"></i> <span class="label label-warning">9</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                           		<li class="m-t-xs">
-                                    <div class="dropdown-messages-box">
-                                        <a  href="javascript:void(0)" class="pull-left">
-                                            <img alt="image" class="img-circle" src="${ctx}/upload/headerIcon.png">
-                                        </a>
-                                        <div class="media-body">
-                                            <small class="pull-right">5天前</small>
-                                            <strong>张三</strong>
-                                            <a class="J_menuItem" href="${ctx}/iim/mailBox/detail?id=1">邮件标题</a>
-                                            <br>
-                                            <a class="J_menuItem" href="${ctx}/iim/mailBox/detail?id=1">
-                                            	邮件内容
-                                            </a>
-                                            <br>
-                                            <small class="text-muted">
-                                            2017-06-01 11:11:11</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                            	 <%-- <c:forEach items="${mailPage.list}" var="mailBox">
-	                                <li class="m-t-xs">
-	                                    <div class="dropdown-messages-box">
-	                                        <a  href="#" onclick='top.openTab("${ctx}/iim/contact/index?name=${mailBox.sender.name }","通讯录", false)' class="pull-left">
-	                                            <img alt="image" class="img-circle" src="${mailBox.sender.photo }">
-	                                        </a>
-	                                        <div class="media-body">
-	                                            <small class="pull-right">${ksfn:getTime(mailBox.sendtime)}前</small>
-	                                            <strong>${mailBox.sender.name }</strong>
-	                                            <a class="J_menuItem" href="${ctx}/iim/mailBox/detail?id=${mailBox.id}"> ${ksfn:abbr(mailBox.mail.title,50)}</a>
-	                                            <br>
-	                                            <a class="J_menuItem" href="${ctx}/iim/mailBox/detail?id=${mailBox.id}">
-	                                             ${mailBox.mail.overview}
-	                                            </a>
-	                                            <br>
-	                                            <small class="text-muted">
-	                                            <fmt:formatDate value="${mailBox.sendtime}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
-	                                        </div>
-	                                    </div>
-	                                </li>
-	                                <li class="divider"></li>
-                                </c:forEach> --%>
-                                <li>
-                                    <div class="text-center link-block">
-                                        <a class="J_menuItem" href="${ctx}/iim/mailBox/list?orderBy=sendtime desc">
-                                            <i class="fa fa-envelope"></i> <strong> 查看所有邮件</strong>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
 						<li class="hidden-xs">
 							<a href="javascript:logout();">
 								<i class="fa fa fa-sign-out"></i>退出

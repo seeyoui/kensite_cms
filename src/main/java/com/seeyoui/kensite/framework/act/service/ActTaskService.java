@@ -18,6 +18,7 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricProcessInstanceQuery;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.history.HistoricTaskInstanceQuery;
 import org.activiti.engine.impl.RepositoryServiceImpl;
@@ -33,6 +34,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
@@ -45,8 +47,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.seeyoui.kensite.common.base.domain.Page;
+import com.seeyoui.kensite.common.base.domain.Pager;
 import com.seeyoui.kensite.common.base.service.BaseService;
+import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.act.domain.Act;
 import com.seeyoui.kensite.framework.act.util.ActUtils;
@@ -82,10 +85,10 @@ public class ActTaskService extends BaseService {
 	 * @param procDefKey 流程定义标识
 	 * @return
 	 */
-	public List<Act> todoList(Act act){
+	public List<HashMap<String,String>> todoList(Act act){
 		String userId = UserUtils.getUser().getUserName();//ObjectUtils.toString(UserUtils.getUser().getId());
 		
-		List<Act> result = new ArrayList<Act>();
+		List<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
 		
 		// =============== 已经签收的任务  ===============
 		TaskQuery todoTaskQuery = taskService.createTaskQuery().taskAssignee(userId).active()
@@ -105,16 +108,39 @@ public class ActTaskService extends BaseService {
 		// 查询列表
 		List<Task> todoList = todoTaskQuery.list();
 		for (Task task : todoList) {
-			Act e = new Act();
-			e.setTask(task);
-			e.setVars(task.getProcessVariables());
-//			e.setTaskVars(task.getTaskLocalVariables());
-//			System.out.println(task.getId()+"  =  "+task.getProcessVariables() + "  ========== " + task.getTaskLocalVariables());
-			e.setProcDef(ProcessDefCache.get(task.getProcessDefinitionId()));
-//			e.setProcIns(runtimeService.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId()).singleResult());
-//			e.setProcExecUrl(ActUtils.getProcExeUrl(task.getProcessDefinitionId()));
-			e.setStatus("todo");
-			result.add(e);
+			HashMap map = new HashMap();
+			map.put("task.assignee",task.getAssignee());
+			map.put("task.id", task.getId());
+			map.put("task.createTime", DateUtils.formatDateTime(task.getCreateTime()));
+			map.put("task.name", task.getName());
+			map.put("task.executionId",task.getExecutionId());
+			map.put("task.processDefinitionId", task.getProcessDefinitionId());
+			map.put("task.processInstanceId", task.getProcessInstanceId());
+			map.put("task.taskDefinitionKey", task.getTaskDefinitionKey());
+			String applyUserId = "";
+			if(task.getProcessVariables()!=null && task.getProcessVariables().get("applyUserId")!=null && StringUtils.isNotBlank(task.getProcessVariables().get("applyUserId").toString())) {
+				applyUserId = task.getProcessVariables().get("applyUserId").toString();
+				applyUserId = UserUtils.getByLoginName(applyUserId).getName();
+			} else {
+				applyUserId = "";
+			}
+			map.put("vars.applyUserId", applyUserId);
+			String title = "";
+			String procName = ProcessDefCache.get(task.getProcessDefinitionId()).getName();
+			if(task.getProcessVariables()!=null && task.getProcessVariables().get("title")!=null && StringUtils.isNotBlank(task.getProcessVariables().get("title").toString())) {
+				title = task.getProcessVariables().get("title").toString();
+			} else {
+				if(StringUtils.isNoneBlank(applyUserId)) {
+					title = applyUserId+"的"+procName;
+				} else {
+					title = procName;
+				}
+			}
+			map.put("vars.title", title);
+			map.put("procDef.name", ProcessDefCache.get(task.getProcessDefinitionId()).getName());
+			map.put("procDef.version", ProcessDefCache.get(task.getProcessDefinitionId()).getVersion());
+			map.put("status","todo");
+			result.add(map);
 		}
 		
 		// =============== 等待签收的任务  ===============
@@ -135,16 +161,39 @@ public class ActTaskService extends BaseService {
 		// 查询列表
 		List<Task> toClaimList = toClaimQuery.list();
 		for (Task task : toClaimList) {
-			Act e = new Act();
-			e.setTask(task);
-			e.setVars(task.getProcessVariables());
-//			e.setTaskVars(task.getTaskLocalVariables());
-//			System.out.println(task.getId()+"  =  "+task.getProcessVariables() + "  ========== " + task.getTaskLocalVariables());
-			e.setProcDef(ProcessDefCache.get(task.getProcessDefinitionId()));
-//			e.setProcIns(runtimeService.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId()).singleResult());
-//			e.setProcExecUrl(ActUtils.getProcExeUrl(task.getProcessDefinitionId()));
-			e.setStatus("claim");
-			result.add(e);
+			HashMap map = new HashMap();
+			map.put("task.assignee",task.getAssignee());
+			map.put("task.id", task.getId());
+			map.put("task.name", task.getName());
+			map.put("task.createTime", DateUtils.formatDateTime(task.getCreateTime()));
+			map.put("task.executionId",task.getExecutionId());
+			map.put("task.processInstanceId", task.getProcessInstanceId());
+			map.put("task.processDefinitionId", task.getProcessDefinitionId());
+			map.put("task.taskDefinitionKey", task.getTaskDefinitionKey());
+			String applyUserId = "";
+			if(task.getProcessVariables()!=null && task.getProcessVariables().get("applyUserId")!=null && StringUtils.isNotBlank(task.getProcessVariables().get("applyUserId").toString())) {
+				applyUserId = task.getProcessVariables().get("applyUserId").toString();
+				applyUserId = UserUtils.getByLoginName(applyUserId).getName();
+			} else {
+				applyUserId = "";
+			}
+			map.put("vars.applyUserId", applyUserId);
+			String title = "";
+			String procName = ProcessDefCache.get(task.getProcessDefinitionId()).getName();
+			if(task.getProcessVariables()!=null && task.getProcessVariables().get("title")!=null && StringUtils.isNotBlank(task.getProcessVariables().get("title").toString())) {
+				title = task.getProcessVariables().get("title").toString();
+			} else {
+				if(StringUtils.isNoneBlank(applyUserId)) {
+					title = applyUserId+"的"+procName;
+				} else {
+					title = procName;
+				}
+			}
+			map.put("vars.title", title);
+			map.put("procDef.name", ProcessDefCache.get(task.getProcessDefinitionId()).getName());
+			map.put("procDef.version", ProcessDefCache.get(task.getProcessDefinitionId()).getVersion());
+			map.put("status", "claim");
+			result.add(map);
 		}
 		return result;
 	}
@@ -155,9 +204,9 @@ public class ActTaskService extends BaseService {
 	 * @param procDefKey 流程定义标识
 	 * @return
 	 */
-	public Page<Act> historicList(Page<Act> page, Act act){
+	public List<HashMap<String,String>> historicList(Pager pager, Act act){
 		String userId = UserUtils.getUser().getUserName();//ObjectUtils.toString(UserUtils.getUser().getId());
-
+		List<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
 		HistoricTaskInstanceQuery histTaskQuery = historyService.createHistoricTaskInstanceQuery().taskAssignee(userId).finished()
 				.includeProcessVariables().orderByHistoricTaskInstanceEndTime().desc();
 		
@@ -173,10 +222,9 @@ public class ActTaskService extends BaseService {
 		}
 		
 		// 查询总数
-		page.setTotal(histTaskQuery.count());
-		
+		pager.setTotal(histTaskQuery.count());
 		// 查询列表
-		List<HistoricTaskInstance> histList = histTaskQuery.listPage(page.getFirst(), page.getRows());
+		List<HistoricTaskInstance> histList = histTaskQuery.listPage(pager.getFirstResult(), pager.getMaxResults());
 		for (HistoricTaskInstance histTask : histList) {
 			Act e = new Act();
 			e.setHistTask(histTask);
@@ -187,9 +235,41 @@ public class ActTaskService extends BaseService {
 //			e.setProcIns(runtimeService.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId()).singleResult());
 //			e.setProcExecUrl(ActUtils.getProcExeUrl(task.getProcessDefinitionId()));
 			e.setStatus("finish");
-//			page.getList().add(e);//=====================
+			HashMap map = new HashMap();
+			map.put("task.assignee",histTask.getAssignee());
+			map.put("task.id", histTask.getId());
+			map.put("task.name", histTask.getName());
+			map.put("task.createTime", DateUtils.formatDateTime(histTask.getCreateTime()));
+			map.put("task.executionId",histTask.getExecutionId());
+			map.put("task.processInstanceId", histTask.getProcessInstanceId());
+			map.put("task.processDefinitionId", histTask.getProcessDefinitionId());
+			map.put("task.taskDefinitionKey", histTask.getTaskDefinitionKey());
+			String applyUserId = "";
+			if(histTask.getProcessVariables()!=null && histTask.getProcessVariables().get("applyUserId")!=null && StringUtils.isNotBlank(histTask.getProcessVariables().get("applyUserId").toString())) {
+				applyUserId = histTask.getProcessVariables().get("applyUserId").toString();
+				applyUserId = UserUtils.getByLoginName(applyUserId).getName();
+			} else {
+				applyUserId = "";
+			}
+			map.put("vars.applyUserId", applyUserId);
+			String title = "";
+			String procName = ProcessDefCache.get(histTask.getProcessDefinitionId()).getName();
+			if(histTask.getProcessVariables()!=null && histTask.getProcessVariables().get("title")!=null && StringUtils.isNotBlank(histTask.getProcessVariables().get("title").toString())) {
+				title = histTask.getProcessVariables().get("title").toString();
+			} else {
+				if(StringUtils.isNoneBlank(applyUserId)) {
+					title = applyUserId+"的"+procName;
+				} else {
+					title = procName;
+				}
+			}
+			map.put("vars.title", title);
+			map.put("procDef.name", ProcessDefCache.get(histTask.getProcessDefinitionId()).getName());
+			map.put("procDef.version", ProcessDefCache.get(histTask.getProcessDefinitionId()).getVersion());
+			map.put("status", "finish");
+			result.add(map);
 		}
-		return page;
+		return result;
 	}
 	
 	/**
@@ -287,7 +367,7 @@ public class ActTaskService extends BaseService {
 	 * 获取流程列表
 	 * @param category 流程分类
 	 */
-	public Page<Object[]> processList(Page<Object[]> page, String category) {
+	public List<Object[]> processList(Pager pager, String category) {
 		/*
 		 * 保存两个对象，一个是ProcessDefinition（流程定义），一个是Deployment（流程部署）
 		 */
@@ -298,15 +378,15 @@ public class ActTaskService extends BaseService {
 	    	processDefinitionQuery.processDefinitionCategory(category);
 		}
 	    
-	    page.setTotal(processDefinitionQuery.count());
-	    
-	    List<ProcessDefinition> processDefinitionList = processDefinitionQuery.listPage(page.getFirst(), page.getRows());
+	    pager.setTotal(processDefinitionQuery.count());
+	    List<Object[]> list = new ArrayList<Object[]>();
+	    List<ProcessDefinition> processDefinitionList = processDefinitionQuery.listPage(pager.getFirstResult(), pager.getMaxResults());
 	    for (ProcessDefinition processDefinition : processDefinitionList) {
-	      String deploymentId = processDefinition.getDeploymentId();
-	      Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(deploymentId).singleResult();
-//	      page.getList().add(new Object[]{processDefinition, deployment});//=====================
+			String deploymentId = processDefinition.getDeploymentId();
+			Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(deploymentId).singleResult();
+			list.add(new Object[]{processDefinition, deployment});
 	    }
-		return page;
+		return list;
 	}
 	
 	/**
@@ -341,6 +421,50 @@ public class ActTaskService extends BaseService {
 	 */
 	public ProcessInstance getProcIns(String procInsId) {
 		return runtimeService.createProcessInstanceQuery().processInstanceId(procInsId).singleResult();
+	}
+	/**
+	 * 获取已经结束流程实例对象
+	 * @param procInsId
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public HistoricProcessInstance getFinishedProcIns(String procInsId) {
+		return historyService.createHistoricProcessInstanceQuery().processInstanceId(procInsId).singleResult();
+	}
+	
+	
+	/**
+	 * 获取正在运行的流程实例对象
+	 * @param procInsId
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public List<ProcessInstance> getRunngingProcIns(String procDefKey,  SysUser user, int[] pageParams) {
+		ProcessInstanceQuery query = runtimeService.createProcessInstanceQuery().processDefinitionKey(procDefKey).active().orderByProcessInstanceId().desc();
+		List<ProcessInstance> list = new ArrayList<ProcessInstance>();
+		if (UserUtils.getSubject().hasRole("sys")){
+			list = query.listPage(pageParams[0], pageParams[1]);
+        } else {
+        	list = query.involvedUser(user.getUserName()).listPage(pageParams[0], pageParams[1]);
+        }
+		return list;
+	}
+	
+	/**
+	 * 获取已经结束的流程实例对象
+	 * @param procInsId
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public List<HistoricProcessInstance> getFinishedProcIns(String procDefKey, SysUser user, int[] pageParams) {
+		HistoricProcessInstanceQuery query = historyService.createHistoricProcessInstanceQuery().processDefinitionKey(procDefKey).finished().orderByProcessInstanceEndTime().desc();
+		List<HistoricProcessInstance> list = new ArrayList<HistoricProcessInstance>();
+		if (UserUtils.getSubject().hasRole("sys")){
+			list = query.listPage(pageParams[0], pageParams[1]);
+        } else {
+        	list = query.involvedUser(user.getUserName()).listPage(pageParams[0], pageParams[1]);
+        }
+		return list;
 	}
 
 	/**

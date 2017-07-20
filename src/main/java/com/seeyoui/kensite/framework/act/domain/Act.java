@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -40,6 +41,7 @@ public class Act {
 	private Task task; 			// 任务对象
 	private ProcessDefinition procDef; 	// 流程定义对象
 	private ProcessInstance procIns;	// 流程实例对象
+	private HistoricProcessInstance hisProcIns;	// 历史流程实例对象
 	private HistoricTaskInstance histTask; // 历史任务
 	private HistoricActivityInstance histIns;	//历史活动任务
 
@@ -136,10 +138,12 @@ public class Act {
 
 	public void setProcIns(ProcessInstance procIns) {
 		this.procIns = procIns;
-		if (procIns != null && procIns.getBusinessKey() != null){
+		if (procIns != null && procIns.getBusinessKey() != null&& procIns.getBusinessKey().contains(":")){
 			String[] ss = procIns.getBusinessKey().split(":");
 			setBusinessTable(ss[0]);
 			setBusinessId(ss[1]);
+		}else if (procIns != null && procIns.getBusinessKey() != null){
+			setBusinessId(procIns.getBusinessKey());
 		}
 	}
 
@@ -166,7 +170,15 @@ public class Act {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public HistoricProcessInstance getHisProcIns() {
+		return hisProcIns;
+	}
 
+	public void setHisProcIns(HistoricProcessInstance hisProcIns) {
+		this.hisProcIns = hisProcIns;
+	}
+	
 	@JsonIgnore
 	public HistoricTaskInstance getHistTask() {
 		return histTask;

@@ -31,8 +31,7 @@
 		    <div id="toolbar">
 		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="openWin()">删除流程实例</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="流程实例删除" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-		        <div class="ftitle">删除原因</div>
+		    <div id="dataWin" class="easyui-window" title="流程实例删除" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:140px;padding:10px;">
 		        <form id="dataForm" method="post" enctype="multipart/form-data">
 					<div class="fitem">
 		                <label>原因</label>
@@ -93,7 +92,7 @@
 							},
 							success: function(data, textStatus){
 								$('#dataWin').window('close'); 
-			                    layer.msg(data, {time: layerMsgTime});
+			                    layer.msg(data, {icon: 6,time: layerMsgTime});
 								reloadData();
 							}
 						});

@@ -7,14 +7,15 @@ public class Pager implements Serializable {
 	private int page;
 	private int rows;
 	private int row;
+	private long total;
 	public int getPage() {
-		return page;
+		return this.page <= 0 ? 1 : this.page;
 	}
 	public void setPage(int page) {
 		this.page = page;
 	}
 	public int getRows() {
-		return rows;
+		return this.rows <= 0 ? 20 : this.rows;
 	}
 	public void setRows(int rows) {
 		this.rows = rows;
@@ -22,5 +23,20 @@ public class Pager implements Serializable {
 	public int getRow() {
 		return (this.page-1)*this.rows;
 	}
-	
+	public long getTotal() {
+		return total;
+	}
+	public void setTotal(long total) {
+		this.total = total;
+	}
+	public int getFirstResult(){
+		int firstResult = (getPage() - 1) * getRows();
+		if (firstResult >= getPage() || firstResult<0) {
+			firstResult = 0;
+		}
+		return firstResult;
+	}
+	public int getMaxResults(){
+		return getRows();
+	}
 }

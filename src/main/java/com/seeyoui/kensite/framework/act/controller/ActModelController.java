@@ -39,6 +39,16 @@ public class ActModelController extends BaseController {
 	}
 	
 	/**
+	 * 流程模型表单
+	 */
+	@RequestMapping(value = "form")
+	public ModelAndView form(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		return new ModelAndView("framework/act/actModelForm", modelMap);
+	}
+	
+	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param actModel
@@ -78,8 +88,8 @@ public class ActModelController extends BaseController {
 			String name, String key, String description, String category) throws Exception{
 		try {
 			org.activiti.engine.repository.Model modelData = actModelService.create(name, key, description, category);
-			response.sendRedirect(request.getContextPath() + "/act/modeler.jsp?moduleId=" + modelData.getId());
-//			RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+//			response.sendRedirect(request.getContextPath() + "/act/modeler.jsp?moduleId=" + modelData.getId());
+			RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("创建模型失败：", e);

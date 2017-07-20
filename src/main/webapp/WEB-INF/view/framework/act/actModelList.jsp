@@ -21,7 +21,7 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>模型ID</th>
-					    <th field="category" width="100px">流程分类</th>
+					    <th field="category" width="100px" formatter="formatCategory">流程分类</th>
 					    <th field="key" width="100px">模型标识</th>
 					    <th field="name" width="100px">模型名称</th>
 					    <th field="version" width="50px" align="right">版本号</th>
@@ -32,34 +32,11 @@
 		    </table>
 		    <div id="toolbar">
 		        <a href="javascript:void(0)" class="easyui-linkbutton info" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">在线设计</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-edit" plain="true" onclick="deploy()">部署</a>
-		    </div>
-		    <div id="dataWin" class="easyui-window" title="流程模型信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-		        <form id="dataForm" method="post" enctype="multipart/form-data">
-					<div class="fitem">
-		                <label>流程分类</label>
-		                <input id="category" name="category" class="easyui-textbox" data-options="required:true"/>
-		            </div>
-					<div class="fitem">
-		                <label>模型标识</label>
-		                <input id="key" name="key" class="easyui-textbox" data-options="required:true"/>
-		            </div>
-					<div class="fitem">
-		                <label>模型名称</label>
-		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
-		            </div>
-					<div class="fitem">
-		                <label>描述</label>
-		                <input id="description" name="description" class="easyui-textbox" data-options="required:true"/>
-		            </div>
-				</form>
-				
-			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
-			    </div>
+		        <input id="sel_category" name="sel_category" class="easyui-combobox" data-options="valueField:'value',textField:'label',editable:false,panelHeight:'auto',icons: [{iconCls:'icon-clear',handler: function(e){$(e.data.target).combobox('clear');}}],url:'${ctx}/sys/dict/cache/json?category=act_type'">
+		        <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
     </div>
@@ -67,21 +44,30 @@
 	    $(document).ready(function() {
 	    });
 	    
+		var categoryDict = ${ksfn:toJson(ksfn:getDictList('act_type'))};
+	    function formatCategory(value, row, index) {
+    		for(var i=0; i<categoryDict.length; i++) {
+    			if(value == categoryDict[i].value) {
+    				return categoryDict[i].label;
+    			}
+    		}
+	    	return '';
+	    }
+	    
 	    function selectData() {
-		    var sel_name = $("#sel_name").val();
+		    var sel_category = $('#sel_category').combobox('getValue');
         	$('#dataList').datagrid('load',{
-    		    name:sel_name
+    		    category: sel_category
         	});
         }
 	    
 	    function reloadData() {
         	selectData();
         }
-        var url;
+		var url, loadi;
+		var iframeWin = null, iframeBody=null;
         function newInfo() {
-            $('#dataWin').window('open');
-            $('#dataForm').form('clear');
-            url = '${ctx}/actModel/save';
+            layerOpen();
         }
         function editInfo() {
             var row = $('#dataList').datagrid('getSelected');
@@ -89,27 +75,29 @@
                 window.open('${ctx}/act/modeler.jsp?modelId='+row.id);
             }    	
         }
-        var loadi;
-        function saveInfo() {
-            $('#dataForm').form('submit',{
-                url: url,
-                onSubmit: function(param) {
-                	if($(this).form('validate')) {
-                		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
-                	}
-                    return $(this).form('validate');
-                },
-                success: function(info) {
-                    if (info==TRUE) {
-                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-                    } else {
-	                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-                    }
-                	layer.close(loadi);
-                	$('#dataWin').window('close'); 
-                	reloadData();
-                }
-            });
+        function layerOpen() {
+        	url = '${ctx}/actModel/form';
+			layer.open({
+				type: 2,
+				title: '内容发布文章基本信息',
+				area: ['400px', '260px'],
+				fix: false, //不固定
+				maxmin: false,
+				content: url,
+				btn: ['保存', '取消'],
+				success: function(layero, index){
+					iframeBody = layer.getChildFrame('body', index);
+					iframeWin = window[layero.find('iframe')[0]['name']];
+				},
+				yes: function(index, layero) {
+					if(iframeWin != null) {
+						iframeWin.submitInfo();
+					}
+				},
+				cancel: function(index){
+					layer.close(index);
+				}
+			});
         }
         function deploy() {
         	var row = $('#dataList').datagrid('getSelected');
@@ -127,7 +115,7 @@
 						},
 						success: function(data, textStatus) {
 		                	layer.close(loadi);
-		                    layer.msg(data, {time: layerMsgTime});
+		                    layer.msg(data, {icon: 6,time: layerMsgTime});
 							reloadData();
 						}
 					});
