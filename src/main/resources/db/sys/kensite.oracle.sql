@@ -2707,6 +2707,9 @@ VALUES ('3a657ea8ddc745a698d51aeea2183f4d','d3f34652eb03447b9cc8bb7375df675d');
 INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
 VALUES ('355222f869db4f4fb8a22e6888aabe48', 'bdba2cb597f74e5c83080c82f2e28b49');
 
+INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
+VALUES ('11522a6173804d5ea075ca052c76e20c', '5a0f766da4dd48a0aea154e9b5f736cc');
+
 create or replace view report_cms_article as
 select site_id,category_id,nvl(hits,0) hits from cms_article;
 
