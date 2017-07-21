@@ -27,6 +27,7 @@
 					    <th field="version" width="50px" align="right">版本号</th>
 					    <th field="createTime" width="100px" formatter="formatDateTimeCol">创建时间</th>
 					    <th field="lastUpdateTime" width="100px" formatter="formatDateTimeCol">最后更新时间</th>
+					    <th field="operate" width="200px" formatter="formatOperate">操作</th>
 		            </tr>
 		        </thead>
 		    </table>
@@ -35,6 +36,7 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton warning" iconCls="icon-edit" plain="true" onclick="editInfo()">在线设计</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton error" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-edit" plain="true" onclick="deploy()">部署</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton primary" iconCls="icon-edit" plain="true" onclick="export()">导出</a>
 		        <input id="sel_category" name="sel_category" class="easyui-combobox" data-options="valueField:'value',textField:'label',editable:false,panelHeight:'auto',icons: [{iconCls:'icon-clear',handler: function(e){$(e.data.target).combobox('clear');}}],url:'${ctx}/sys/dict/cache/json?category=act_type'">
 		        <a href="javascript:void(0)" class="easyui-linkbutton success" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
@@ -53,6 +55,14 @@
     		}
 	    	return '';
 	    }
+	    function formatOperate(value, row, index) {
+	    	return [
+				'<a href="javascript:editInfo(\''+row.id+'\')">【在线设计】</a>',
+				'<a href="javascript:deploy(\''+row.id+'\')">【部署】</a>',
+				'<a href="${ctx}/actModel/export?id='+row.id+'" target="_blank">【导出】</a>',
+				'<a href="javascript:destroyInfo(\''+row.id+'\')">【删除】</a>'
+				].join('');
+	    }
 	    
 	    function selectData() {
 		    var sel_category = $('#sel_category').combobox('getValue');
@@ -69,17 +79,22 @@
         function newInfo() {
             layerOpen();
         }
-        function editInfo() {
-            var row = $('#dataList').datagrid('getSelected');
-            if (row) {
-                window.open('${ctx}/act/modeler.jsp?modelId='+row.id);
-            }    	
+        function editInfo(id) {
+        	if(!id) {
+                var row = $('#dataList').datagrid('getSelected');
+                if (row) {
+                    id = row.id;
+                }
+        	}
+        	if(id) {
+        		window.open('${ctx}/act/modeler.jsp?modelId='+id);
+        	}
         }
         function layerOpen() {
         	url = '${ctx}/actModel/form';
 			layer.open({
 				type: 2,
-				title: '流程模型基本信息',
+				title: '内容发布文章基本信息',
 				area: ['400px', '260px'],
 				fix: false, //不固定
 				maxmin: false,
@@ -99,16 +114,21 @@
 				}
 			});
         }
-        function deploy() {
-        	var row = $('#dataList').datagrid('getSelected');
-            if (row) {
-            	layer.confirm('你确定部署该记录吗？', {
+        function deploy(id) {
+        	if(!id) {
+                var row = $('#dataList').datagrid('getSelected');
+                if (row) {
+                    id = row.id;
+                }
+        	}
+        	if(id) {
+        		layer.confirm('你确定部署该记录吗？', {
 					btn: ['确定','取消'] //按钮
 				}, function() {
 					$.ajax({
 						type: "post",
 						url: "${ctx}/actModel/deploy",
-						data: {id:row.id},
+						data: {id : id},
 						dataType: 'text',
 						beforeSend: function(XMLHttpRequest) {
 							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
@@ -121,18 +141,23 @@
 					});
 				}, function() {
 				});
-            }
+        	}
         }
-        function destroyInfo() {
-            var row = $('#dataList').datagrid('getSelected');
-            if (row) {
-            	layer.confirm('你确定删除该记录吗？', {
+        function destroyInfo(id) {
+        	if(!id) {
+                var row = $('#dataList').datagrid('getSelected');
+                if (row) {
+                    id = row.id;
+                }
+        	}
+        	if(id) {
+        		layer.confirm('你确定删除该记录吗？', {
 					btn: ['确定','取消'] //按钮
 				}, function() {
 					$.ajax({
 						type: "post",
 						url: "${ctx}/actModel/delete",
-						data: {id : row.id},
+						data: {id : id},
 						dataType: 'text',
 						beforeSend: function(XMLHttpRequest) {
 							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
@@ -149,7 +174,7 @@
 					});
 				}, function() {
 				});
-            }
+        	}
         }
     </script>
   </body>

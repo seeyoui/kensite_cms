@@ -145,6 +145,7 @@ public class ActModelService extends BaseService {
 			ByteArrayInputStream in = new ByteArrayInputStream(bpmnBytes);
 			IOUtils.copy(in, response.getOutputStream());
 			String filename = bpmnModel.getMainProcess().getId() + ".bpmn20.xml";
+			System.out.println(filename);
 			response.setHeader("Content-Disposition", "attachment; filename=" + filename);
 			response.flushBuffer();
 		} catch (Exception e) {
