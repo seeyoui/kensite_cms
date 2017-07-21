@@ -5,6 +5,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="ks" uri="/WEB-INF/taglib/componentTag.tld" %>
 <%@ taglib prefix="ksfn" uri="/WEB-INF/tlds/fns.tld" %>
+<%@ taglib prefix="act" tagdir="/WEB-INF/tags/act" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="ctx_bootstrap" value="${pageContext.request.contextPath}/bootstrap"/>
 <c:set var="ctx_script" value="${pageContext.request.contextPath}/script"/>
