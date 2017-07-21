@@ -9,9 +9,9 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.seeyoui.kensite.common.base.domain.DataEntity;
+import com.seeyoui.kensite.common.base.domain.ActEntity;
 
-public class Leave extends DataEntity<Leave> {
+public class Leave extends ActEntity<Leave> {
 	
 	private static final long serialVersionUID = 1L;
 	
