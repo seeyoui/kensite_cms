@@ -211,5 +211,13 @@
     <function-signature>long pastDays(java.util.Date)</function-signature>
     <example>${ksfn:pastDays(date)}</example>  
   </function>
+  <!-- JsonMapper -->
+  <function>
+    <description>对象转换JSON字符串</description>
+    <name>toJson</name>
+    <function-class>com.seeyoui.kensite.common.base.persistence.JsonMapper</function-class>
+    <function-signature>java.lang.String toJsonString(java.lang.Object)</function-signature>
+    <example>${ksfn:toJson(object)}</example>  
+  </function>
   
 </taglib>
