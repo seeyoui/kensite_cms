@@ -79,7 +79,7 @@
         	url = '${ctx}/actModel/form';
 			layer.open({
 				type: 2,
-				title: '内容发布文章基本信息',
+				title: '流程模型基本信息',
 				area: ['400px', '260px'],
 				fix: false, //不固定
 				maxmin: false,

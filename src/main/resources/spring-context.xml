@@ -111,6 +111,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/act/**"/>
 			<mvc:exclude-mapping path="/assets/**"/>
 			<mvc:exclude-mapping path="/bootstrap/**"/>
 			<mvc:exclude-mapping path="/script/**"/>
