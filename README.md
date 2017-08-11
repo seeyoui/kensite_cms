@@ -187,7 +187,7 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 4. 如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。
 3. Apache Licence也是对商业应用友好的许可。使用者也可以在需要的时候修改代码来满足需要并作为开源或商业产品发布/销售
 
-#系统美图
+# 系统美图
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/1.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/2.png)
 ![输入图片说明](https://github.com/seeyoui/kensite_cms/raw/master/picture/3.png)
