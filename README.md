@@ -95,7 +95,7 @@ Kensite cms 内容发布系统是基于Kensite开发平台搭建，支持多站�
 * 上传空间：uploadify
 * 树结构控件：jQuery zTree
 * 日期控件： My97DatePicker
-* web excel插件：spreadjs
+* web excel插件：handsontable
 * 统计图表：echarts
 
 4、平台
