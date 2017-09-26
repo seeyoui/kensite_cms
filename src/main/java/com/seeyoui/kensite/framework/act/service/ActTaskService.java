@@ -273,6 +273,57 @@ public class ActTaskService extends BaseService {
 	}
 	
 	/**
+	 * 获取已完成流程
+	 * @param page
+	 * @param procDefKey 流程定义标识
+	 * @return
+	 */
+	public List<HashMap<String,String>> finishedList(Pager pager, String finished){
+		String userId = UserUtils.getUser().getUserName();//ObjectUtils.toString(UserUtils.getUser().getId());
+		List<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
+		HistoricProcessInstanceQuery historicProcessInstanceQuery = historyService.createHistoricProcessInstanceQuery().variableValueEquals("applyUserId", userId).orderByProcessInstanceStartTime().desc();
+		if(StringUtils.isNoneBlank(finished) && "finished".equals(finished)) {
+			historicProcessInstanceQuery = historicProcessInstanceQuery.finished();
+		}
+		if(StringUtils.isNoneBlank(finished) && "unfinished".equals(finished)) {
+			historicProcessInstanceQuery = historicProcessInstanceQuery.unfinished();
+		}
+		pager.setTotal(historicProcessInstanceQuery.count());
+		// 查询列表
+		List<HistoricProcessInstance> hpiList = historicProcessInstanceQuery.listPage(pager.getFirstResult(), pager.getMaxResults());
+		for(HistoricProcessInstance hpi : hpiList) {
+			HashMap map = new HashMap();
+			map.put("processName",hpi.getProcessDefinitionName());
+			map.put("startTime",DateUtils.formatDateTime(hpi.getStartTime()));
+			map.put("endTime",hpi.getEndTime()==null?"":DateUtils.formatDateTime(hpi.getEndTime()));
+			map.put("processDefinitionId",hpi.getProcessDefinitionId());
+			List<Task> taskList = taskService.createTaskQuery().processInstanceBusinessKey(hpi.getBusinessKey()).active().list();//.taskAssignee(userId)
+			List<HistoricTaskInstance> hisTaskList = historyService.createHistoricTaskInstanceQuery().processInstanceBusinessKey(hpi.getBusinessKey()).list();
+			if(taskList.size() > 0) {
+				for(Task task : taskList) {
+					map.put("task.id",task.getId());
+					map.put("task.name",task.getName());
+					map.put("task.assignee",task.getAssignee());
+					map.put("task.taskDefinitionKey", task.getTaskDefinitionKey());
+					map.put("task.processInstanceId", task.getProcessInstanceId());
+					map.put("task.processDefinitionId", task.getProcessDefinitionId());
+				}
+			} else {
+				for(HistoricTaskInstance task : hisTaskList) {
+					map.put("task.id",task.getId());
+					map.put("task.name",task.getName());
+					map.put("task.assignee",task.getAssignee());
+					map.put("task.taskDefinitionKey", task.getTaskDefinitionKey());
+					map.put("task.processInstanceId", task.getProcessInstanceId());
+					map.put("task.processDefinitionId", task.getProcessDefinitionId());
+				}
+			}
+			result.add(map);
+		}
+		return result;
+	}
+	
+	/**
 	 * 获取流转历史列表
 	 * @param procInsId 流程实例
 	 * @param startAct 开始活动节点名称

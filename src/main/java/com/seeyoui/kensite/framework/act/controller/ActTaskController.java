@@ -91,6 +91,43 @@ public class ActTaskController extends BaseController {
 //		model.addAttribute("page", page);
 		return "framework/act/actTaskHistoricList";
 	}
+
+	/**
+	 * 获取发起流程列表
+	 * @param page
+	 * @param procDefKey 流程定义标识
+	 * @return
+	 */
+	@RequestMapping(value = "/created")
+	public String createBy(Act act, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+//		Page<Act> page = new Page<Act>(request, response);
+//		page = actTaskService.historicList(page, act);
+//		model.addAttribute("page", page);
+		return "framework/act/actCreatedList";
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @param act
+	 * @param pager
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/list/created")
+	@ResponseBody
+	public Object test(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Act act, Pager pager, String finished) throws Exception{
+		List<HashMap<String,String>> list = actTaskService.finishedList(pager, finished);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
+		eudg.setTotal(String.valueOf(pager.getTotal()));
+		eudg.setRows(list);
+		return eudg;
+	}
 	
 	/**
 	 * 获取列表展示数据
