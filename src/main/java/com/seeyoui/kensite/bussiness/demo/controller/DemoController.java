@@ -18,8 +18,10 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,7 @@ import com.seeyoui.kensite.bussiness.demo.service.DemoService;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.dao.Dao;
 import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.common.util.GeneratorUUID;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
@@ -57,6 +60,14 @@ public class DemoController extends BaseController {
 	private SysUserService sysUserService;
 	@Resource(name = "taskExecutor")
     private TaskExecutor taskExecutor;
+	
+	@RequestMapping(value = "/test")
+	@ResponseBody
+	public String test(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		return demoService.test()+"";
+	}
 	
 	/**
 	 * 展示列表页面
