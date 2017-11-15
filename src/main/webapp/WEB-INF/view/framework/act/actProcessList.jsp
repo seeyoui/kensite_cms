@@ -24,7 +24,7 @@
 					    <th field="deploymentId" width="100px">部署ID</th>
 					    <th field="category" width="100px" formatter="formatCategory">流程分类</th>
 					    <th field="key" width="100px">流程标识</th>
-					    <th field="name" width="100px">流程名称</th>
+					    <th field="name" width="100px" formatter="formatName">流程名称</th>
 					    <th field="version" width="50px" align="right">流程版本</th>
 					    <th field="resourceName" width="100px" formatter="formatProcessXml">流程XML</th>
 					    <th field="diagramResourceName" width="100px" formatter="formatProcessImg">流程图片</th>
@@ -67,6 +67,10 @@
     			}
     		}
 	    	return '';
+	    }
+	    function formatName(value, row, index) {
+    		if(value) return value;
+	    	return row.resourceName.replace('.bpmn20.xml', '');
 	    }
     	
 	    $(document).ready(function(){

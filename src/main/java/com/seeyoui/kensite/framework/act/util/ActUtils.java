@@ -100,7 +100,7 @@ public class ActUtils {
 	 */
 	public static String getFormUrl(String formKey, Act act){
 		
-		StringBuilder formUrl = new StringBuilder();
+StringBuilder formUrl = new StringBuilder();
 		
 		String formServerUrl = Global.getConfig("activiti.form.server.url");
 		if (StringUtils.isBlank(formServerUrl)){
@@ -117,7 +117,7 @@ public class ActUtils {
 			e.printStackTrace();
 		}
 		formUrl.append("&act.taskDefKey=").append(act.getTaskDefKey() != null ? act.getTaskDefKey() : "");
-		formUrl.append("&act.procInsId=").append(act.getProcInsId() != null ? act.getProcInsId() : "");
+		formUrl.append("&act.procInsId=").append(act.getProcInsId() != null ? act.getProcInsId() : act.getHisProcIns() != null ? act.getHisProcIns() : "");
 		formUrl.append("&act.procDefId=").append(act.getProcDefId() != null ? act.getProcDefId() : "");
 		formUrl.append("&act.status=").append(act.getStatus() != null ? act.getStatus() : "");
 		formUrl.append("&id=").append(act.getBusinessId() != null ? act.getBusinessId() : "");

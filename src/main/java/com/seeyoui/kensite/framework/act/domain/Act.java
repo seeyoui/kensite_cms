@@ -177,6 +177,13 @@ public class Act {
 
 	public void setHisProcIns(HistoricProcessInstance hisProcIns) {
 		this.hisProcIns = hisProcIns;
+		if (hisProcIns != null && hisProcIns.getBusinessKey() != null&& hisProcIns.getBusinessKey().contains(":")){
+			String[] ss = hisProcIns.getBusinessKey().split(":");
+			setBusinessTable(ss[0]);
+			setBusinessId(ss[1]);
+		}else if (hisProcIns != null && hisProcIns.getBusinessKey() != null){
+			setBusinessId(hisProcIns.getBusinessKey());
+		}
 	}
 	
 	@JsonIgnore
@@ -245,6 +252,8 @@ public class Act {
 	public String getProcInsId() {
 		if (procInsId == null && task != null){
 			procInsId = task.getProcessInstanceId();
+		} else if(procInsId == null && histTask != null) {
+			procInsId = histTask.getProcessInstanceId();
 		}
 		return procInsId;
 	}
@@ -359,6 +368,9 @@ public class Act {
 	 * @return
 	 */
 	public boolean isTodoTask(){
+		if("finish".equals(status)) {
+			return false;
+		}
 		return "todo".equals(status) || "claim".equals(status);
 	}
 	
@@ -367,7 +379,10 @@ public class Act {
 	 * @return
 	 */
 	public boolean isFinishTask(){
-		return "finish".equals(status) || StringUtils.isBlank(taskId);
+		if("todo".equals(status) || "claim".equals(status)) {
+			return false;
+		}
+		return StringUtils.isNotBlank(status) && ("finish".equals(status) || StringUtils.isBlank(taskId));
 	}
 
 	public void preInsert() {

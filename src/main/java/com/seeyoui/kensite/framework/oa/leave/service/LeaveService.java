@@ -6,6 +6,7 @@ import org.activiti.engine.IdentityService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,9 @@ public class LeaveService extends BaseService {
 		if(task!=null) {
 			leave.setTask(task);
 			leave.getAct().setTask(task);
+		} else {
+			HistoricTaskInstance histTask  = historyService.createHistoricTaskInstanceQuery().processInstanceId(leave.getBindId()).orderByHistoricTaskInstanceEndTime().desc().list().get(0);
+			leave.getAct().setHistTask(histTask);
 		}
 		return leave;
 	}

@@ -86,7 +86,7 @@
 													</div>
 													</c:if>
 													</c:if>
-													<c:if test="${not empty leave.task}">
+													<c:if test="${not empty leave.act.procInsId}">
 													<act:histoicFlow procInsId="${leave.act.procInsId}"/>
 													</c:if>
 												</div>

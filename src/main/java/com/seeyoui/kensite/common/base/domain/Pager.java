@@ -31,12 +31,12 @@ public class Pager implements Serializable {
 	}
 	public int getFirstResult(){
 		int firstResult = (getPage() - 1) * getRows();
-		if (firstResult >= getPage() || firstResult<0) {
+		if (firstResult >= getTotal() || firstResult<0) {
 			firstResult = 0;
 		}
 		return firstResult;
 	}
 	public int getMaxResults(){
-		return getRows();
+		return getFirstResult()+getRows();
 	}
 }
