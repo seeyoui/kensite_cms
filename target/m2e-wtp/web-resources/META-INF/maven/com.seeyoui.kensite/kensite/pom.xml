@@ -5,7 +5,7 @@
 	
 	<groupId>com.seeyoui.kensite</groupId>
 	<artifactId>kensite</artifactId>
-	<version>2.5.0</version>
+	<version>3.1.0</version>
 	<packaging>war</packaging>
 	
 	<name>Kensite</name>
@@ -23,6 +23,7 @@
 		<ehcache.version>2.6.9</ehcache.version>
 		<ehcache-web.version>2.0.4</ehcache-web.version>
 		<shiro.version>1.2.3</shiro.version>
+		<activiti.version>5.21.0</activiti.version>
 		
 		<!-- tools version setting -->
 		<slf4j.version>1.7.7</slf4j.version>
@@ -52,7 +53,7 @@
 		<jdk.version>1.7</jdk.version>
 		<tomcat.version>2.2</tomcat.version>
 		<jetty.version>7.6.14.v20131031</jetty.version>
-		<webserver.port>8080</webserver.port>
+		<webserver.port>8088</webserver.port>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<downloadSources>true</downloadSources>
 		
@@ -412,6 +413,48 @@
 		</dependency>
 		<!-- SECURITY end -->
 		
+		<!-- Activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-explorer</artifactId>
+			<version>${activiti.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>vaadin</artifactId>
+					<groupId>com.vaadin</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>dcharts-widget</artifactId>
+					<groupId>org.vaadin.addons</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>activiti-simple-workflow</artifactId>
+					<groupId>org.activiti</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-modeler</artifactId>
+            <version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-diagram-rest</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<!-- Activiti end -->
+		
 		<!-- LOGGING begin -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -479,6 +522,13 @@
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant</artifactId>
 			<version>1.9.5</version>
+		</dependency>
+
+		<!-- swagger -->
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>0.9.5</version>
 		</dependency>
 		
 		<!-- google java lib -->
@@ -718,6 +768,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.googlecode.aviator</groupId>
+		    <artifactId>aviator</artifactId>
+		    <version>3.1.0</version>
 		</dependency>
 		
 		<!-- TEST begin -->

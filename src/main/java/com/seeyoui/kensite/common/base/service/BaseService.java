@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.seeyoui.kensite.common.dao.Dao;
-
 /**
  * Service基类
  * @author ken
@@ -20,10 +18,6 @@ public abstract class BaseService {
 	 * 日志对象
 	 */
 	protected Logger logger = LoggerFactory.getLogger(getClass());
-	
-	@Autowired
-	@Qualifier("dao")
-	protected Dao dao;
 
 	/**
 	 * 数据范围过滤

@@ -6,7 +6,7 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 	<script type="text/javascript">
-		//window.location.href="${ctx}/sys/chat/chatRoom";
+		//window.location.href="${ctx}/ks/smart/list/1";
 		/*$(document).ready( $(function () {
 			layer.open({
 	            type: 2,
@@ -34,5 +34,7 @@
 	</script>
 </head>
 <body>
+	<a href="${ctx}/ks/smart/list/1" target="_blank">smart list</a><br/>
+	
 </body>
 </html>

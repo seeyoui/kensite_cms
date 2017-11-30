@@ -79,12 +79,6 @@
         </property>  
     </bean>  
 	
-	<bean id="dao" class="com.seeyoui.kensite.common.dao.simple.SmartDao">  
-        <property name="dataSource">  
-            <ref bean="dataSource"/>  
-        </property>  
-    </bean>  
-	
 	<!-- 创建SqlSessionFactory，同时指定数据源==org.mybatis.spring.SqlSessionFactoryBean== -->
 	<bean id="sqlSessionFactory" class="com.seeyoui.kensite.framework.system.mybatis.PackagesSqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

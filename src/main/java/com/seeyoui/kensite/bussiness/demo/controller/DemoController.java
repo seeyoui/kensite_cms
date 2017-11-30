@@ -34,7 +34,6 @@ import com.seeyoui.kensite.bussiness.demo.service.DemoService;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.common.dao.Dao;
 import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.common.util.GeneratorUUID;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
@@ -60,14 +59,6 @@ public class DemoController extends BaseController {
 	private SysUserService sysUserService;
 	@Resource(name = "taskExecutor")
     private TaskExecutor taskExecutor;
-	
-	@RequestMapping(value = "/test")
-	@ResponseBody
-	public String test(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return demoService.test()+"";
-	}
 	
 	/**
 	 * 展示列表页面

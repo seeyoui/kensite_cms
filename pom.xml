@@ -53,7 +53,7 @@
 		<jdk.version>1.7</jdk.version>
 		<tomcat.version>2.2</tomcat.version>
 		<jetty.version>7.6.14.v20131031</jetty.version>
-		<webserver.port>8080</webserver.port>
+		<webserver.port>8088</webserver.port>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<downloadSources>true</downloadSources>
 		
@@ -768,6 +768,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.googlecode.aviator</groupId>
+		    <artifactId>aviator</artifactId>
+		    <version>3.1.0</version>
 		</dependency>
 		
 		<!-- TEST begin -->

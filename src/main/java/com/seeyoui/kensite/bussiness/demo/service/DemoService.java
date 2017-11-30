@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import com.seeyoui.kensite.bussiness.demo.domain.Demo;
 import com.seeyoui.kensite.bussiness.demo.persistence.DemoMapper;
 import com.seeyoui.kensite.common.base.service.BaseService;
-import com.seeyoui.kensite.common.dao.Condition;
-import com.seeyoui.kensite.common.dao.SqlFieldMetaData;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.GeneratorUUID;
 
@@ -110,30 +108,4 @@ public class DemoService extends BaseService {
 		demoMapper.delete(listId);
 	}
 	
-	public List<SqlFieldMetaData> test() {
-		System.out.println(dao);
-		String sql = "select * from sys_user";
-		long count = 0;
-		try {
-			count = dao.sqlCount(sql);
-			sql = "select * from sys_user";
-			Condition condition = new Condition();
-			condition.like("user_name", "sys");
-			List<Map<String, Object>>  list = dao.sqlQuery(sql, condition);
-			for(Map<String, Object> map : list) {
-				System.out.println(map.get("user_name").toString());
-			}
-			sql = "insert into bo_demo(id) values(:id)";
-			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("id", GeneratorUUID.getId());
-			dao.sqlExecute(sql, params);
-	
-			sql = "select * from bo_demo";
-			List<SqlFieldMetaData> metaList = dao.sqlQueryMetaData(sql, condition);
-			return metaList;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
 }
